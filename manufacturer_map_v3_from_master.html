@@ -104,11 +104,13 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
   color:var(--muted);margin-bottom:8px;display:block}
 
 /* カテゴリフィルタ */
-.cat-chips{display:flex;flex-wrap:wrap;gap:4px}
-.cat-chip{padding:3px 8px;border-radius:3px;border:1px solid;
-  font-size:10px;cursor:pointer;transition:.15s;white-space:nowrap;background:transparent}
-.cat-chip:hover{opacity:.8}
-.cat-chip.off{opacity:.3}
+.cat-chips{display:flex;flex-wrap:wrap;gap:5px}
+.cat-chip{padding:5px 11px;border-radius:14px;border:1px solid;
+  font-size:10px;cursor:pointer;transition:.18s;white-space:nowrap;background:transparent;
+  user-select:none;-webkit-tap-highlight-color:transparent}
+.cat-chip:hover{opacity:.85;transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.cat-chip:active{transform:scale(.94);opacity:1}
+.cat-chip.off{opacity:.22}
 
 /* 都道府県 */
 .pref-select{width:100%;background:rgba(0,0,0,0.3);border:1px solid var(--border2);
@@ -263,15 +265,15 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
 .equip-table{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:4px}
 .equip-table th{background:var(--panel2);color:var(--muted);font-family:'Share Tech Mono',monospace;
   font-size:8px;letter-spacing:1.5px;padding:5px 8px;text-align:left;border-bottom:1px solid var(--border)}
-.equip-table td{padding:6px 8px;border-bottom:1px solid rgba(30,45,74,.6);
-  vertical-align:top;color:var(--text);line-height:1.4}
+/* PATCH:equip-table-td-css */.equip-table td{padding:8px 10px;border-bottom:1px solid rgba(30,45,74,.6);
+  vertical-align:top;color:var(--text);line-height:1.6;font-size:12px}
 .equip-table tr:last-child td{border-bottom:none}
 .equip-table tr:hover td{background:rgba(0,212,255,.04)}
 .e-cat{font-size:9px;padding:1px 5px;border-radius:2px;
   background:rgba(0,212,255,.12);color:var(--accent);white-space:nowrap}
-.e-model{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);
-  margin-top:2px;white-space:pre-line}
-.e-size{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted2)}
+/* PATCH:e-model-css */.e-model{font-size:11px;color:#b0bec5;margin-top:3px;white-space:pre-wrap;line-height:1.6}
+/* PATCH:e-size-css */.e-size{font-size:11px;color:#00d4ff;font-weight:600}
+.dim-hl{color:#00d4ff;font-weight:700}
 
 .no-equip{text-align:center;padding:20px;color:var(--muted);font-size:11px;line-height:1.7}
 .no-equip-icon{font-size:24px;margin-bottom:8px}
@@ -1108,19 +1110,30 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   .selector-modal{width:98vw}
 }
 /* PATCH:ui-css */
+/* ── 選定ボトムシート ── */
+/* selection-open-btn hover */
+#selection-open-btn:hover{background:rgba(0,212,255,.12);transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,212,255,.3)}
+
 .cert-chip {
-  padding: 3px 10px;
-  border-radius: 12px;
-  border: 1px solid #aaa;
-  background: #f5f5f5;
+  padding: 5px 12px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--panel2);
+  color: var(--muted);
   font-size: 11px;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s;
+  transition: all .18s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
+.cert-chip:hover { border-color: var(--border2); color: var(--text); transform: translateY(-1px); }
+.cert-chip:active { transform: scale(.94); }
 .cert-chip.active {
-  background: #1a73e8;
-  color: #fff;
-  border-color: #1a73e8;
+  background: rgba(0,212,255,.12);
+  color: var(--accent);
+  border-color: var(--accent);
+  font-weight: 700;
+  box-shadow: 0 0 8px rgba(0,212,255,.2);
 }
 .card-size { font-size:11px; color:#888; margin-top:2px; }
 .cert-badge { display:inline-block; background:#1a73e8; color:#fff; border-radius:10px; padding:2px 8px; font-size:11px; margin:2px; }
@@ -1285,6 +1298,27 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     <div class="corner corner-br"></div>
     <div id="map"></div>
     <div class="map-legend" id="map-legend"></div>
+  <!-- PATCH:selection-panel-html -->
+  <!-- 選定ボタン（マップ右上に配置） -->
+  <button id="selection-open-btn" onclick="openSelectionPanel()"
+    style="position:absolute;top:14px;right:14px;z-index:800;background:rgba(15,22,40,.92);border:1px solid #00d4ff;color:#00d4ff;padding:8px 16px;border-radius:6px;font-size:12px;cursor:pointer;font-family:'Share Tech Mono',monospace;letter-spacing:1px;transition:.2s;box-shadow:0 0 12px rgba(0,212,255,.2);backdrop-filter:blur(4px);">
+    🔍 メーカーを選ぶ
+  </button>
+  <div id="selection-panel" style="position:absolute;bottom:0;left:0;right:0;z-index:900;background:#0f1628;border-top:2px solid #00d4ff;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);max-height:60vh;display:flex;flex-direction:column;box-shadow:0 -8px 32px rgba(0,0,0,.6);">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid #1e2d4a;">
+      <span style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:#8899aa;">STEP <span id="sel-step-num">1</span> / 3</span>
+      <span id="sel-step-title" style="font-size:13px;font-weight:700;color:#e8f4fd;">工程カテゴリを選ぶ</span>
+      <button onclick="closeSelectionPanel()" style="background:none;border:none;color:#8899aa;font-size:18px;cursor:pointer;">×</button>
+    </div>
+    <div id="sel-body" style="flex:1;overflow-y:auto;padding:16px 20px;"></div>
+    <div style="padding:12px 20px;border-top:1px solid #1e2d4a;display:flex;align-items:center;justify-content:space-between;">
+      <button id="sel-back-btn" onclick="selBack()" style="background:none;border:1px solid #1e2d4a;color:#8899aa;padding:8px 20px;border-radius:4px;font-size:12px;cursor:pointer;display:none;">← 戻る</button>
+      <div style="flex:1"></div>
+      <button id="sel-next-btn" onclick="selNext()" style="background:rgba(0,212,255,.12);border:1px solid #00d4ff;color:#00d4ff;padding:8px 24px;border-radius:4px;font-size:12px;cursor:pointer;font-family:'Share Tech Mono',monospace;letter-spacing:1px;">次へ →</button>
+      <button id="sel-apply-btn" onclick="applySelection()" style="display:none;background:rgba(0,212,255,.2);border:1px solid #00d4ff;color:#00d4ff;padding:8px 24px;border-radius:4px;font-size:13px;cursor:pointer;font-family:'Share Tech Mono',monospace;letter-spacing:1px;font-weight:700;">この条件で探す</button>
+    </div>
+  </div>
+
   </div>
 
   <!-- 右ドロワー -->
@@ -3647,6 +3681,174 @@ function toggleCertChip(el) {
   applyFilters();
 }
 
+// PATCH:selection-panel-js
+// ================================================================
+// 選定パネル（ボトムシート）
+// ================================================================
+let selState = { step: 1, cat: null, sizeKw: '', certs: [] };
+
+function openSelectionPanel() {
+  selState = { step: 1, cat: null, sizeKw: '', certs: [] };
+  window.selSizeKw = '';
+  window.selCerts = [];
+  renderSelStep();
+  document.getElementById('selection-panel').style.transform = 'translateY(0)';
+}
+function closeSelectionPanel() {
+  document.getElementById('selection-panel').style.transform = 'translateY(100%)';
+}
+
+function renderSelStep() {
+  const s = selState.step;
+  document.getElementById('sel-step-num').textContent = s;
+  const backBtn = document.getElementById('sel-back-btn');
+  const nextBtn = document.getElementById('sel-next-btn');
+  const applyBtn = document.getElementById('sel-apply-btn');
+  if(backBtn) backBtn.style.display = s > 1 ? 'block' : 'none';
+  if(nextBtn) nextBtn.style.display = s < 3 ? 'block' : 'none';
+  if(applyBtn) applyBtn.style.display = s === 3 ? 'block' : 'none';
+  const titles = ['工程カテゴリを選ぶ', 'サイズ・設備条件', '品質・認定条件'];
+  const titleEl = document.getElementById('sel-step-title');
+  if(titleEl) titleEl.textContent = titles[s - 1];
+  const body = document.getElementById('sel-body');
+  if(!body) return;
+  if (s === 1) renderSelStep1(body);
+  else if (s === 2) renderSelStep2(body);
+  else renderSelStep3(body);
+}
+
+function renderSelStep1(body) {
+  const counts = {};
+  (companies || []).forEach(function(c) {
+    (c.cats || []).forEach(function(k) { counts[k] = (counts[k] || 0) + 1; });
+  });
+  var html = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;">';
+  Object.entries(CATEGORIES).forEach(function(entry) {
+    var key = entry[0], cat = entry[1];
+    var cnt = counts[key] || 0;
+    if (!cnt) return;
+    var sel = selState.cat === key;
+    var rgb = hexToRgb(cat.color);
+    var bg = sel ? ('rgba(' + rgb + ',.25)') : 'rgba(0,0,0,.3)';
+    var border = sel ? cat.color : '#1e2d4a';
+    var shadow = sel ? ('box-shadow:0 0 12px ' + cat.color + '44;') : '';
+    var nameColor = sel ? cat.color : '#e8f4fd';
+    html += '<div onclick="selCat(\'' + key + '\')" style="'      + 'background:' + bg + ';'      + 'border:2px solid ' + border + ';'      + 'border-radius:6px;padding:12px 10px;cursor:pointer;text-align:center;transition:.15s;' + shadow + '">'      + '<div style="font-size:13px;font-weight:700;color:' + nameColor + ';margin-bottom:4px;">' + cat.label + '</div>'      + '<div style="font-size:10px;color:#8899aa;font-family:\'Share Tech Mono\',monospace;">' + cnt + '社</div>'      + '</div>';
+  });
+  html += '</div>';
+  body.innerHTML = html;
+}
+
+function selCat(key) {
+  selState.cat = (selState.cat === key) ? null : key;
+  renderSelStep1(document.getElementById('sel-body'));
+}
+
+function renderSelStep2(body) {
+  var val = selState.sizeKw || '';
+  body.innerHTML = '<div style="margin-bottom:16px;">'
+    + '<div style="font-size:11px;color:#8899aa;margin-bottom:8px;font-family:\'Share Tech Mono\',monospace;letter-spacing:1px;">設備・サイズキーワード</div>'
+    + '<input id="sel-size-inp" type="text" value="' + val.replace(/"/g,'&quot;') + '"'
+    + ' placeholder="例: 1000mm / φ500 / 真空浸炭 / EBW"'
+    + ' autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"'
+    + ' style="width:100%;background:rgba(0,0,0,.4);border:1px solid #1e2d4a;color:#e8f4fd;padding:10px 14px;border-radius:4px;font-size:13px;box-sizing:border-box;outline:none;-webkit-appearance:none;"'
+    + ' oninput="selState.sizeKw=this.value"'
+    + ' onfocus="this.style.borderColor=\'#00d4ff\'"'
+    + ' onblur="this.style.borderColor=\'#1e2d4a\'"'
+    + ' onkeydown="if(event.key===\'Enter\'&&!event.isComposing){event.preventDefault();selNext();}">'
+    + '<div style="font-size:10px;color:#556677;margin-top:6px;">設備情報テキストをキーワード検索します。空欄でスキップ。Enterで次へ。</div>'
+    + '</div>';
+}
+
+function renderSelStep3(body) {
+  var certOptions = [
+    { key:'shtBoeing', label:'Boeing承認' },
+    { key:'shtAirbus', label:'Airbus承認' },
+    { key:'shtNadcapHT', label:'NADCAP-HT' },
+    { key:'shtNadcapCP', label:'NADCAP-CP' },
+    { key:'shtNadcapCoat', label:'NADCAP-Coat' },
+    { key:'shtAms2750', label:'AMS2750' },
+    { key:'shtMilSpec', label:'MIL規格' },
+    { key:'shtJisq9100', label:'JISQ9100' },
+  ];
+  var html = '<div style="display:flex;flex-direction:column;gap:10px;">';
+  certOptions.forEach(function(opt) {
+    var sel = selState.certs.indexOf(opt.key) >= 0;
+    var bg = sel ? 'rgba(0,212,255,.08)' : 'rgba(0,0,0,.2)';
+    var border = sel ? '#00d4ff' : '#1e2d4a';
+    var cbBorder = sel ? '#00d4ff' : '#556677';
+    var cbBg = sel ? '#00d4ff' : 'transparent';
+    var textColor = sel ? '#e8f4fd' : '#8899aa';
+    html += '<div role="checkbox" aria-checked="' + sel + '" tabindex="0"'
+      + ' style="display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;'      + 'background:' + bg + ';border:1px solid ' + border + ';'      + 'border-radius:4px;padding:12px 16px;transition:.15s;"'
+      + ' onclick="selToggleCert(\'' + opt.key + '\')"'
+      + ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){selToggleCert(\'' + opt.key + '\');}">';
+    html += '<div style="width:16px;height:16px;border-radius:3px;border:2px solid ' + cbBorder + ';'      + 'background:' + cbBg + ';display:flex;align-items:center;justify-content:center;'      + 'font-size:10px;color:#0a0e1a;flex-shrink:0;pointer-events:none;">' + (sel ? '✓' : '') + '</div>';
+    html += '<span style="font-size:13px;color:' + textColor + ';pointer-events:none;">' + opt.label + '</span>';
+    html += '</div>';
+  });
+  html += '</div><div style="font-size:10px;color:#556677;margin-top:12px;">条件は AND 検索。未選択でスキップ。</div>';
+  body.innerHTML = html;
+}
+
+function selToggleCert(key) {
+  var idx = selState.certs.indexOf(key);
+  if (idx >= 0) selState.certs.splice(idx, 1);
+  else selState.certs.push(key);
+  renderSelStep3(document.getElementById('sel-body'));
+}
+
+function selNext() {
+  if (selState.step < 3) { selState.step++; renderSelStep(); }
+}
+function selBack() {
+  if (selState.step > 1) { selState.step--; renderSelStep(); }
+}
+
+function applySelection() {
+  closeSelectionPanel();
+  // カテゴリ（未選択なら全カテゴリに戻す）
+  if (selState.cat && CATEGORIES[selState.cat]) {
+    filterCats = new Set([selState.cat]);
+  } else {
+    filterCats = new Set(Object.keys(CATEGORIES));
+  }
+  // 左パネルのチップUI同期（data-cat で判定）
+  document.querySelectorAll('#cat-chips .cat-chip').forEach(function(el){
+    const active = filterCats.has(el.dataset.cat);
+    el.classList.toggle('off', !active);
+  });
+  // サイズキーワード → q-equip にも反映
+  var kw = selState.sizeKw.trim();
+  window.selSizeKw = kw.toLowerCase();
+  var qe = document.getElementById('q-equip');
+  if(qe && kw) qe.value = kw;
+  // 認定チップ: ウィザードと左パネルを排他
+  window.selCerts = selState.certs.slice();
+  if(selState.certs.length > 0){
+    filterCertKeys = new Set(); // 左パネル側はクリア
+    document.querySelectorAll('.cert-chip').forEach(function(el){ el.classList.remove('active'); });
+    const cb = document.getElementById('cert-filter-body');
+    if(cb) cb.style.display = 'none';
+  }
+  applyFilters();
+}
+
+function selCertMatch(c, key) {
+  if(key === 'shtJisq9100'){
+    return (c.shtCert || '').toUpperCase().includes('JISQ9100')
+        || (c.certStd || '').toUpperCase().includes('JISQ9100')
+        || (c.cert   || '').toUpperCase().includes('JISQ9100');
+  }
+  return c[key] === true;
+}
+
+function hexToRgb(hex) {
+  if (!hex || hex.length < 7) return '0,212,255';
+  var r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return r + ',' + g + ',' + b;
+}
+
 function getFilteredSorted(){
   // 社名・住所 検索クエリ取得（追加）
   const q = normQ(document.getElementById('q-search')?.value);
@@ -3687,6 +3889,19 @@ function getFilteredSorted(){
       if(typeof filterCertKeys !== 'undefined' && filterCertKeys.size > 0) {
         const ok = [...filterCertKeys].some(k => c[k] === true);
         if(!ok) return false;
+      }
+      // PATCH:sel-filter-check 選定パネル: サイズキーワードフィルター
+      if(window.selSizeKw) {
+        var _kw = window.selSizeKw;
+        var _hay = normQ((c.equipText||'') + ' ' + (c.shtFurnace||'') + ' ' + (c.shtProc||'') + ' ' + (c.note||''));
+        if(!_hay.includes(_kw)) return false;
+      }
+      // 選定パネル: 認定フィルター（AND検索）
+      if(window.selCerts && window.selCerts.length > 0) {
+        var _allOk = window.selCerts.every(function(k){
+          return selCertMatch(c, k);
+        });
+        if(!_allOk) return false;
       }
       return true;
     })
@@ -3998,6 +4213,11 @@ function clearFilters(){
     const ct=document.getElementById('cert-filter-toggle');
     if(ct){ ct.textContent='▶ 特殊工程認定でしぼる'; }
   }
+  // ウィザードフィルターもリセット
+  window.selSizeKw = '';
+  window.selCerts  = [];
+  const qe2 = document.getElementById('q-equip');
+  if(qe2) qe2.value = '';
   updateChips();
   applyFilters();
 }
@@ -4257,7 +4477,7 @@ function renderDrawer(c){
   const equipCountBadge=(c.equipCount&&!c.equipId)?`<div class="info-row"><span class="info-key">設備調査</span><span class="info-val" style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent3)">${c.equipCount}件収集済み</span></div>`:'';
 
   // 設備テキストサマリ（OASIS社のequipText）
-  const equipTextBadge=(c.equipText&&!c.equipId)?`<div style="margin:6px 0;padding:6px 10px;background:rgba(57,255,20,0.04);border-left:2px solid var(--accent3)40;font-size:10px;color:var(--muted);line-height:1.7">${c.equipText}</div>`:'';
+  const equipTextBadge=(c.equipText&&!c.equipId)?`<div style="margin:8px 0;padding:10px 12px;background:rgba(57,255,20,0.05);border-left:3px solid rgba(57,255,20,0.4);border-radius:0 4px 4px 0;font-size:11px;color:var(--text);line-height:1.8">${highlightDims(c.equipText)}</div>`:'';
 
   // 備考（OASIS調査メモ） - VERIFIED/CATEGORY ONLY/NO INFOバッジを分離してハイライト
   let noteBadge='';
@@ -4921,8 +5141,15 @@ function equipRow(d,vx,vy,vz,vm){
     <td><span class="e-size">${sizeStr}</span></td>
     <td><span style="font-size:9px;color:var(--muted);line-height:1.6">${d.ok.slice(0,3).join('、')}${d.ok.length>3?'…':''}</span></td>
     <td><span class="e-verdict ${verdictCls}">${verdictLabel}</span></td>
-    <td><div class="e-model">${d.model}</div></td>
+    <td><!-- PATCH:e-model-highlight --><div class="e-model">${highlightDims(d.model||"")}</div></td>
   </tr>`;
+}
+
+// PATCH:highlightDims
+function highlightDims(text) {
+  if (!text) return '';
+  return text.replace(/(\d[\d,\.]*\s*(?:mm|cm|m|\u03c6|\xd7\d+|\u5f84|\u76f4\u5f84))/g,
+    '<span style="color:#00d4ff;font-weight:600;">$1</span>');
 }
 
 function updateEquipJudge(equipId){
