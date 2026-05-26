@@ -197,6 +197,7 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
 .card-cat-tag{font-size:10px;padding:2px 6px;border-radius:2px;white-space:nowrap;font-weight:700}
 
 /* ── MAP ── */
+.map-col{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
 .map-wrap{flex:1;position:relative;overflow:hidden;isolation:isolate;z-index:0}
 #map{width:100%;height:100%;background:#050810;isolation:isolate;z-index:0}
 .map-wrap::before{content:'';position:absolute;inset:0;
@@ -1291,6 +1292,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   </div>
 
   <!-- マップ -->
+  <div class="map-col">
   <div class="map-wrap">
     <div class="corner corner-tl"></div>
     <div class="corner corner-tr"></div>
@@ -1304,7 +1306,8 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     style="position:absolute;top:14px;right:14px;z-index:800;background:rgba(15,22,40,.92);border:1px solid #00d4ff;color:#00d4ff;padding:8px 16px;border-radius:6px;font-size:12px;cursor:pointer;font-family:'Share Tech Mono',monospace;letter-spacing:1px;transition:.2s;box-shadow:0 0 12px rgba(0,212,255,.2);backdrop-filter:blur(4px);">
     🔍 メーカーを選ぶ
   </button>
-  <div id="selection-panel" style="position:absolute;bottom:0;left:0;right:0;z-index:900;background:#0f1628;border-top:2px solid #00d4ff;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);max-height:60vh;display:flex;flex-direction:column;box-shadow:0 -8px 32px rgba(0,0,0,.6);">
+  </div>
+  <div id="selection-panel" style="height:0;overflow:hidden;flex-shrink:0;background:#0f1628;border-top:2px solid #00d4ff;transition:height .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:0 -8px 32px rgba(0,0,0,.6);">
     <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid #1e2d4a;">
       <span style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:#8899aa;">STEP <span id="sel-step-num">1</span> / 3</span>
       <span id="sel-step-title" style="font-size:13px;font-weight:700;color:#e8f4fd;">工程カテゴリを選ぶ</span>
@@ -1318,7 +1321,6 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
       <button id="sel-apply-btn" onclick="applySelection()" style="display:none;background:rgba(0,212,255,.2);border:1px solid #00d4ff;color:#00d4ff;padding:8px 24px;border-radius:4px;font-size:13px;cursor:pointer;font-family:'Share Tech Mono',monospace;letter-spacing:1px;font-weight:700;">この条件で探す</button>
     </div>
   </div>
-
   </div>
 
   <!-- 右ドロワー -->
@@ -3692,10 +3694,10 @@ function openSelectionPanel() {
   window.selSizeKw = '';
   window.selCerts = [];
   renderSelStep();
-  document.getElementById('selection-panel').style.transform = 'translateY(0)';
+  document.getElementById('selection-panel').style.height = '300px';
 }
 function closeSelectionPanel() {
-  document.getElementById('selection-panel').style.transform = 'translateY(100%)';
+  document.getElementById('selection-panel').style.height = '0';
 }
 
 function renderSelStep() {
