@@ -3873,7 +3873,7 @@ function getFilteredSorted(){
       // PATCH:sel-filter-check 選定パネル: サイズキーワードフィルター
       if(window.selSizeKw) {
         var _kw = window.selSizeKw;
-        var _hay = ((c.equip_summary||c.fs||'') + ' ' + (c.model_or_summary||'') + ' ' + ((c.sur&&c.sur.fs)||'')).toLowerCase();
+        var _hay = ((c.equipText||'') + ' ' + (c.materialText||'') + ' ' + (c.shapeText||'') + ' ' + (c.vendorText||'') + ' ' + (c.note||'') + ' ' + (c.name||'')).toLowerCase();
         if(!_hay.includes(_kw)) return false;
       }
       // 選定パネル: 認定フィルター（AND検索）
@@ -3882,6 +3882,40 @@ function getFilteredSorted(){
           return c[k] === true || (c.shtCerts && c.shtCerts[k]);
         });
         if(!_allOk) return false;
+      }
+      return true;
+    })
+    .sort((a,b)=>a._dist-b._dist);
+}
+
+function getFilteredSorted_RAW(){
+  // selSizeKw/selCerts を除いた BASE フィルターのみ（STEP3用）
+  const q = normQ(document.getElementById('q-search')?.value);
+  const qVariants = expandQueryVariants(q);
+  const qe = normQ(document.getElementById('q-equip')?.value);
+  return companies
+    .filter(c=>{
+      if(q){
+        const nName = normQ(c.name), nAddr = normQ(c.addr);
+        const nNote = normQ(c.note||''), nEquip = normQ(c.equipText||'');
+        let hit = false;
+        for(const qv of qVariants){
+          if(nName.includes(qv) || nAddr.includes(qv) || nNote.includes(qv) || nEquip.includes(qv)){ hit = true; break; }
+        }
+        if(!hit) return false;
+      }
+      if(qe){
+        const nNote2 = normQ(c.note||''), nEquip2 = normQ(c.equipText||'');
+        if(!nNote2.includes(qe) && !nEquip2.includes(qe)) return false;
+      }
+      if(!c.cats.some(k=>filterCats.has(k))) return false;
+      if(filterPref && c.pref!==filterPref) return false;
+      if(filterDist>0 && c._dist>filterDist) return false;
+      if(c.category && OASIS_CATEGORY_COLORS[c.category] && !filterOasisCats.has(c.category)) return false;
+      if(filterWebOnly && !c.isWeb) return false;
+      if(typeof filterCertKeys !== 'undefined' && filterCertKeys.size > 0) {
+        const ok = [...filterCertKeys].some(k => c[k] === true);
+        if(!ok) return false;
       }
       return true;
     })
