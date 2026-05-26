@@ -1114,6 +1114,10 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
 /* ── 選定ボトムシート ── */
 /* selection-open-btn hover */
 #selection-open-btn:hover{background:rgba(0,212,255,.12);transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,212,255,.3)}
+/* ── ズームレベル別ピンサイズ ── */
+#map[data-zl="xs"] .leaflet-marker-icon{transform:scale(0.28);transform-origin:bottom center}
+#map[data-zl="sm"] .leaflet-marker-icon{transform:scale(0.5);transform-origin:bottom center}
+#map[data-zl="md"] .leaflet-marker-icon{transform:scale(0.72);transform-origin:bottom center}
 
 .cert-chip {
   padding: 5px 12px;
@@ -1151,6 +1155,8 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   <div class="pw-box">
     <div class="pw-logo">AEROSPACE SUPPLIER</div>
     <div class="pw-title">メーカー<span>マップ</span></div>
+    <div style="display:inline-block;background:rgba(0,212,255,.12);border:1px solid #00d4ff;color:#00d4ff;font-size:10px;font-family:'Share Tech Mono',monospace;letter-spacing:2px;padding:3px 12px;border-radius:3px;margin:8px 0 4px;">β VERSION — 試験運用中</div>
+    <div style="font-size:10px;color:#556677;margin-bottom:16px;font-family:'Share Tech Mono',monospace;">フィードバック大歓迎 / 無断転載・転用禁止</div>
     <div class="pw-sub">AUTHORIZED ACCESS ONLY</div>
     <div class="pw-field">
       <input type="password" id="pw-input" placeholder="PASSWORD" autocomplete="off" autofocus/>
@@ -1303,8 +1309,8 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   <!-- PATCH:selection-panel-html -->
   <!-- 選定ボタン（マップ右上に配置） -->
   <button id="selection-open-btn" onclick="openSelectionPanel()"
-    style="position:absolute;top:14px;right:14px;z-index:800;background:rgba(15,22,40,.92);border:1px solid #00d4ff;color:#00d4ff;padding:8px 16px;border-radius:6px;font-size:12px;cursor:pointer;font-family:'Share Tech Mono',monospace;letter-spacing:1px;transition:.2s;box-shadow:0 0 12px rgba(0,212,255,.2);backdrop-filter:blur(4px);">
-    🔍 メーカーを選ぶ
+    style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);z-index:800;background:rgba(15,22,40,.92);border:1px solid #00d4ff;border-bottom:none;color:#00d4ff;padding:6px 28px 8px;border-radius:8px 8px 0 0;font-size:12px;cursor:pointer;font-family:'Share Tech Mono',monospace;letter-spacing:1px;transition:.2s;box-shadow:0 -4px 16px rgba(0,212,255,.15);backdrop-filter:blur(4px);white-space:nowrap;">
+    ▲ メーカーを選ぶ
   </button>
   </div>
   <div id="selection-panel" style="height:0;overflow:hidden;flex-shrink:0;background:#0f1628;border-top:2px solid #00d4ff;transition:height .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:0 -8px 32px rgba(0,0,0,.6);">
@@ -3481,6 +3487,17 @@ lightTileLayer.on('tileerror', function(e){
   if(e.tile) e.tile.style.opacity = '0';
 });
 
+// ズームレベルに応じてピンサイズをCSSで制御
+function updatePinScale() {
+  var z = map.getZoom();
+  var lv = z <= 5 ? 'xs' : z <= 7 ? 'sm' : z <= 9 ? 'md' : '';
+  var el = document.getElementById('map');
+  if(lv) el.setAttribute('data-zl', lv);
+  else el.removeAttribute('data-zl');
+}
+map.on('zoomend', updatePinScale);
+updatePinScale();
+
 // Zoom/Move完了時に選択ピンのスポットライト再描画（ピン位置ずれ対策）
 map.on('zoomend moveend', ()=>{
   if(typeof window._reapplySelectionSpotlights === 'function'){
@@ -3694,10 +3711,16 @@ function openSelectionPanel() {
   window.selSizeKw = '';
   window.selCerts = [];
   renderSelStep();
-  document.getElementById('selection-panel').style.height = '300px';
+  var panel = document.getElementById('selection-panel');
+  var btn = document.getElementById('selection-open-btn');
+  panel.style.height = '300px';
+  if(btn) btn.style.display = 'none';
 }
 function closeSelectionPanel() {
-  document.getElementById('selection-panel').style.height = '0';
+  var panel = document.getElementById('selection-panel');
+  var btn = document.getElementById('selection-open-btn');
+  panel.style.height = '0';
+  if(btn) btn.style.display = '';
 }
 
 function renderSelStep() {
@@ -3719,23 +3742,31 @@ function renderSelStep() {
   else renderSelStep3(body);
 }
 
+var SEL_CAT_ORDER = ['cut','surface','heat','forge','edm','ndt','composite'];
+
 function renderSelStep1(body) {
   const counts = {};
   (companies || []).forEach(function(c) {
     (c.cats || []).forEach(function(k) { counts[k] = (counts[k] || 0) + 1; });
   });
   var html = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;">';
-  Object.entries(CATEGORIES).forEach(function(entry) {
-    var key = entry[0], cat = entry[1];
+  SEL_CAT_ORDER.forEach(function(key) {
+    var cat = CATEGORIES[key];
+    if (!cat) return;
     var cnt = counts[key] || 0;
-    if (!cnt) return;
     var sel = selState.cat === key;
     var rgb = hexToRgb(cat.color);
     var bg = sel ? ('rgba(' + rgb + ',.25)') : 'rgba(0,0,0,.3)';
     var border = sel ? cat.color : '#1e2d4a';
     var shadow = sel ? ('box-shadow:0 0 12px ' + cat.color + '44;') : '';
     var nameColor = sel ? cat.color : '#e8f4fd';
-    html += '<div onclick="selCat(\'' + key + '\')" style="'      + 'background:' + bg + ';'      + 'border:2px solid ' + border + ';'      + 'border-radius:6px;padding:12px 10px;cursor:pointer;text-align:center;transition:.15s;' + shadow + '">'      + '<div style="font-size:13px;font-weight:700;color:' + nameColor + ';margin-bottom:4px;">' + cat.label + '</div>'      + '<div style="font-size:10px;color:#8899aa;font-family:\'Share Tech Mono\',monospace;">' + cnt + '社</div>'      + '</div>';
+    html += '<div onclick="selCat(\'' + key + '\')" style="'
+      + 'background:' + bg + ';'
+      + 'border:2px solid ' + border + ';'
+      + 'border-radius:6px;padding:12px 10px;cursor:pointer;text-align:center;transition:.15s;' + shadow + '">'
+      + '<div style="font-size:13px;font-weight:700;color:' + nameColor + ';margin-bottom:4px;">' + cat.label + '</div>'
+      + '<div style="font-size:10px;color:#8899aa;font-family:\'Share Tech Mono\',monospace;">' + cnt + '社</div>'
+      + '</div>';
   });
   html += '</div>';
   body.innerHTML = html;
@@ -3746,20 +3777,55 @@ function selCat(key) {
   renderSelStep1(document.getElementById('sel-body'));
 }
 
+var SEL_STEP2_MAP = {
+  cut:       { ph:'例：5軸／φ800／チタン',       chips:['5軸加工','4軸加工','φ500以下','φ1000以上','2000mm超','チタン','インコネル','アルミ合金'] },
+  surface:   { ph:'例：PVD／アルマイト／溶射',    chips:['めっき','PVD','CVD','アルマイト','溶射','クロメート','無電解ニッケル','ペイント'] },
+  heat:      { ph:'例：真空炉／浸炭／φ1000',      chips:['真空炉','連続炉','バッチ炉','浸炭','窒化','時効処理','φ500以下','1500mm超'] },
+  forge:     { ph:'例：精密鋳造／チタン鍛造',      chips:['ダイカスト','精密鋳造','自由鍛造','型鍛造','チタン鍛造','アルミ鋳造','ニッケル基'] },
+  edm:       { ph:'例：EBW／FSW／HIP',            chips:['EBW','レーザー溶接','EDM','FSW','HIP','ウォータージェット','放電加工'] },
+  ndt:       { ph:'例：UT／RT／CT',               chips:['UT（超音波）','PT（浸透）','RT（X線）','MT（磁粉）','CT（X線CT）','AET（AE）'] },
+  composite: { ph:'例：オートクレーブ／RTM／CFRP', chips:['オートクレーブ','RTM','プリプレグ','NSM','ハンドレイアップ','CFRP','GFRP'] }
+};
+
 function renderSelStep2(body) {
   var val = selState.sizeKw || '';
-  body.innerHTML = '<div style="margin-bottom:16px;">'
+  var cfg = SEL_STEP2_MAP[selState.cat] || { ph:'例: 1000mm / φ500 / 真空浸炭', chips:[] };
+  var chipHtml = '';
+  if (cfg.chips.length) {
+    chipHtml = '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">';
+    cfg.chips.forEach(function(c) {
+      var active = val.includes(c);
+      chipHtml += '<div onclick="selStep2Chip(\'' + c.replace(/'/g,"\\'") + '\')" style="'
+        + 'padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer;transition:.15s;'
+        + (active ? 'border:1px solid #00d4ff;color:#00d4ff;background:rgba(0,212,255,.08);'
+                  : 'border:1px solid #1e2d4a;color:#8899aa;background:rgba(0,0,0,.3);')
+        + '">' + c + '</div>';
+    });
+    chipHtml += '</div>';
+  }
+  body.innerHTML = '<div style="margin-bottom:4px;">'
     + '<div style="font-size:11px;color:#8899aa;margin-bottom:8px;font-family:\'Share Tech Mono\',monospace;letter-spacing:1px;">設備・サイズキーワード</div>'
     + '<input id="sel-size-inp" type="text" value="' + val.replace(/"/g,'&quot;') + '"'
-    + ' placeholder="例: 1000mm / φ500 / 真空浸炭 / EBW"'
+    + ' placeholder="' + cfg.ph + '"'
     + ' autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"'
     + ' style="width:100%;background:rgba(0,0,0,.4);border:1px solid #1e2d4a;color:#e8f4fd;padding:10px 14px;border-radius:4px;font-size:13px;box-sizing:border-box;outline:none;-webkit-appearance:none;"'
-    + ' oninput="selState.sizeKw=this.value"'
+    + ' oninput="selState.sizeKw=this.value;renderSelStep2(document.getElementById(\'sel-body\'))"'
     + ' onfocus="this.style.borderColor=\'#00d4ff\'"'
     + ' onblur="this.style.borderColor=\'#1e2d4a\'"'
     + ' onkeydown="if(event.key===\'Enter\'&&!event.isComposing){event.preventDefault();selNext();}">'
-    + '<div style="font-size:10px;color:#556677;margin-top:6px;">設備情報テキストをキーワード検索します。空欄でスキップ。Enterで次へ。</div>'
+    + '<div style="font-size:10px;color:#556677;margin-top:6px;">空欄でスキップ。Enterで次へ。</div>'
+    + chipHtml
     + '</div>';
+}
+
+function selStep2Chip(c) {
+  var cur = selState.sizeKw || '';
+  if (cur.includes(c)) {
+    selState.sizeKw = cur.replace(c, '').replace(/\s+/g,' ').trim();
+  } else {
+    selState.sizeKw = cur ? cur + ' ' + c : c;
+  }
+  renderSelStep2(document.getElementById('sel-body'));
 }
 
 function renderSelStep3(body) {
@@ -5410,7 +5476,19 @@ function checkPw(){
   else{const i=document.getElementById('pw-input');const e=document.getElementById('pw-error');i.classList.add('pw-input-error');e.textContent='パスワードが違います';setTimeout(()=>{i.classList.remove('pw-input-error');i.value='';i.focus();e.textContent=''},700);}
 }
 document.getElementById('pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw();});
-if(sessionStorage.getItem(SK)==='1') document.getElementById('pw-screen').remove();
+// セッション済みなら即解除
+if(sessionStorage.getItem(SK)==='1'){document.getElementById('pw-screen').remove();}
+// URLハッシュに正しいパスワードが含まれていれば自動ログイン
+(function(){
+  var hash=decodeURIComponent(location.hash.replace(/^#/,''));
+  if(hash===PW){
+    sessionStorage.setItem(SK,'1');
+    var s=document.getElementById('pw-screen');
+    if(s){s.classList.add('unlocked');setTimeout(function(){s.remove();},520);}
+    history.replaceState(null,'',location.pathname+location.search);
+    setTimeout(function(){if(typeof startTutorial==='function')startTutorial(false);},1100);
+  }
+})();
 
 // ================================================================
 // CSVエクスポート（パスワード保護）
