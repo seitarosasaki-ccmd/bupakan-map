@@ -104,13 +104,11 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
   color:var(--muted);margin-bottom:8px;display:block}
 
 /* カテゴリフィルタ */
-.cat-chips{display:flex;flex-wrap:wrap;gap:5px}
-.cat-chip{padding:5px 11px;border-radius:14px;border:1px solid;
-  font-size:10px;cursor:pointer;transition:.18s;white-space:nowrap;background:transparent;
-  user-select:none;-webkit-tap-highlight-color:transparent}
-.cat-chip:hover{opacity:.85;transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.3)}
-.cat-chip:active{transform:scale(.94);opacity:1}
-.cat-chip.off{opacity:.22}
+.cat-chips{display:flex;flex-wrap:wrap;gap:4px}
+.cat-chip{padding:3px 8px;border-radius:3px;border:1px solid;
+  font-size:10px;cursor:pointer;transition:.15s;white-space:nowrap;background:transparent}
+.cat-chip:hover{opacity:.8}
+.cat-chip.off{opacity:.3}
 
 /* 都道府県 */
 .pref-select{width:100%;background:rgba(0,0,0,0.3);border:1px solid var(--border2);
@@ -197,8 +195,7 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
 .card-cat-tag{font-size:10px;padding:2px 6px;border-radius:2px;white-space:nowrap;font-weight:700}
 
 /* ── MAP ── */
-.map-col{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;height:100%;min-height:0}
-.map-wrap{flex:1;position:relative;overflow:hidden;isolation:isolate;z-index:0;min-height:200px}
+.map-wrap{flex:1;position:relative;overflow:hidden;isolation:isolate;z-index:0}
 #map{width:100%;height:100%;background:#050810;isolation:isolate;z-index:0}
 .map-wrap::before{content:'';position:absolute;inset:0;
   background-image:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),
@@ -272,9 +269,9 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
 .equip-table tr:hover td{background:rgba(0,212,255,.04)}
 .e-cat{font-size:9px;padding:1px 5px;border-radius:2px;
   background:rgba(0,212,255,.12);color:var(--accent);white-space:nowrap}
-/* PATCH:e-model-css */.e-model{font-size:11px;color:#b0bec5;margin-top:3px;white-space:pre-wrap;line-height:1.6}
-/* PATCH:e-size-css */.e-size{font-size:11px;color:#00d4ff;font-weight:600}
-.dim-hl{color:#00d4ff;font-weight:700}
+.e-model{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);
+  margin-top:2px;white-space:pre-line}
+.e-size{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted2)}
 
 .no-equip{text-align:center;padding:20px;color:var(--muted);font-size:11px;line-height:1.7}
 .no-equip-icon{font-size:24px;margin-bottom:8px}
@@ -1111,34 +1108,19 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   .selector-modal{width:98vw}
 }
 /* PATCH:ui-css */
-/* ── 選定ボトムシート ── */
-/* selection-open-btn hover */
-#selection-open-btn:hover{background:rgba(0,212,255,.12);transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,212,255,.3)}
-/* ── ズームレベル別ピンサイズ ── */
-#map[data-zl="xs"] .leaflet-marker-icon{transform:scale(0.28);transform-origin:bottom center}
-#map[data-zl="sm"] .leaflet-marker-icon{transform:scale(0.5);transform-origin:bottom center}
-#map[data-zl="md"] .leaflet-marker-icon{transform:scale(0.72);transform-origin:bottom center}
-
 .cert-chip {
-  padding: 5px 12px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: var(--panel2);
-  color: var(--muted);
+  padding: 3px 10px;
+  border-radius: 12px;
+  border: 1px solid #aaa;
+  background: #f5f5f5;
   font-size: 11px;
   cursor: pointer;
-  transition: all .18s;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s, color 0.15s;
 }
-.cert-chip:hover { border-color: var(--border2); color: var(--text); transform: translateY(-1px); }
-.cert-chip:active { transform: scale(.94); }
 .cert-chip.active {
-  background: rgba(0,212,255,.12);
-  color: var(--accent);
-  border-color: var(--accent);
-  font-weight: 700;
-  box-shadow: 0 0 8px rgba(0,212,255,.2);
+  background: #1a73e8;
+  color: #fff;
+  border-color: #1a73e8;
 }
 .card-size { font-size:11px; color:#888; margin-top:2px; }
 .cert-badge { display:inline-block; background:#1a73e8; color:#fff; border-radius:10px; padding:2px 8px; font-size:11px; margin:2px; }
@@ -1155,8 +1137,6 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   <div class="pw-box">
     <div class="pw-logo">AEROSPACE SUPPLIER</div>
     <div class="pw-title">メーカー<span>マップ</span></div>
-    <div style="display:inline-block;background:rgba(0,212,255,.12);border:1px solid #00d4ff;color:#00d4ff;font-size:10px;font-family:'Share Tech Mono',monospace;letter-spacing:2px;padding:3px 12px;border-radius:3px;margin:8px 0 4px;">β VERSION — 試験運用中</div>
-    <div style="font-size:10px;color:#556677;margin-bottom:16px;font-family:'Share Tech Mono',monospace;">フィードバック大歓迎 / 無断転載・転用禁止</div>
     <div class="pw-sub">AUTHORIZED ACCESS ONLY</div>
     <div class="pw-field">
       <input type="password" id="pw-input" placeholder="PASSWORD" autocomplete="off" autofocus/>
@@ -1298,7 +1278,6 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   </div>
 
   <!-- マップ -->
-  <div class="map-col">
   <div class="map-wrap">
     <div class="corner corner-tl"></div>
     <div class="corner corner-tr"></div>
@@ -1309,11 +1288,10 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   <!-- PATCH:selection-panel-html -->
   <!-- 選定ボタン（マップ右上に配置） -->
   <button id="selection-open-btn" onclick="openSelectionPanel()"
-    style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);z-index:800;background:rgba(15,22,40,.92);border:1px solid #00d4ff;border-bottom:none;color:#00d4ff;padding:6px 28px 8px;border-radius:8px 8px 0 0;font-size:12px;cursor:pointer;font-family:'Share Tech Mono',monospace;letter-spacing:1px;transition:.2s;box-shadow:0 -4px 16px rgba(0,212,255,.15);backdrop-filter:blur(4px);white-space:nowrap;">
-    ▲ メーカーを選ぶ
+    style="position:absolute;top:12px;right:420px;z-index:800;background:#0f1628;border:1px solid #00d4ff;color:#00d4ff;padding:8px 16px;border-radius:4px;font-size:12px;cursor:pointer;font-family:'Share Tech Mono',monospace;letter-spacing:1px;transition:.2s;box-shadow:0 0 12px rgba(0,212,255,.2);">
+    🔍 メーカーを選ぶ
   </button>
-  </div>
-  <div id="selection-panel" style="height:0;overflow:hidden;flex-shrink:0;background:#0f1628;border-top:2px solid #00d4ff;transition:height .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:0 -8px 32px rgba(0,0,0,.6);">
+  <div id="selection-panel" style="position:absolute;bottom:0;left:0;right:0;z-index:900;background:#0f1628;border-top:2px solid #00d4ff;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);max-height:60vh;display:flex;flex-direction:column;box-shadow:0 -8px 32px rgba(0,0,0,.6);">
     <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid #1e2d4a;">
       <span style="font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:3px;color:#8899aa;">STEP <span id="sel-step-num">1</span> / 3</span>
       <span id="sel-step-title" style="font-size:13px;font-weight:700;color:#e8f4fd;">工程カテゴリを選ぶ</span>
@@ -1327,6 +1305,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
       <button id="sel-apply-btn" onclick="applySelection()" style="display:none;background:rgba(0,212,255,.2);border:1px solid #00d4ff;color:#00d4ff;padding:8px 24px;border-radius:4px;font-size:13px;cursor:pointer;font-family:'Share Tech Mono',monospace;letter-spacing:1px;font-weight:700;">この条件で探す</button>
     </div>
   </div>
+
   </div>
 
   <!-- 右ドロワー -->
@@ -3454,6 +3433,8 @@ function haversineKm(lat1,lng1,lat2,lng2) {
   const a=Math.sin(dLat/2)**2+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
   return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
 }
+// 小牧からの距離をキャッシュ
+companies.forEach(c => { c._dist = Math.round(haversineKm(KOMAKI.lat,KOMAKI.lng,c.lat,c.lng)); });
 
 // 物流コスト概算（km→目安金額）
 function logisticsCostHint(km) {
@@ -3486,17 +3467,6 @@ darkTileLayer.on('tileerror', function(e){
 lightTileLayer.on('tileerror', function(e){
   if(e.tile) e.tile.style.opacity = '0';
 });
-
-// ズームレベルに応じてピンサイズをCSSで制御
-function updatePinScale() {
-  var z = map.getZoom();
-  var lv = z <= 5 ? 'xs' : z <= 7 ? 'sm' : z <= 9 ? 'md' : '';
-  var el = document.getElementById('map');
-  if(lv) el.setAttribute('data-zl', lv);
-  else el.removeAttribute('data-zl');
-}
-map.on('zoomend', updatePinScale);
-updatePinScale();
 
 // Zoom/Move完了時に選択ピンのスポットライト再描画（ピン位置ずれ対策）
 map.on('zoomend moveend', ()=>{
@@ -3711,18 +3681,12 @@ function openSelectionPanel() {
   window.selSizeKw = '';
   window.selCerts = [];
   renderSelStep();
-  var panel = document.getElementById('selection-panel');
-  var btn = document.getElementById('selection-open-btn');
-  panel.style.height = '380px';
-  if(btn) btn.style.display = 'none';
-  setTimeout(function(){ try{ map.invalidateSize(); }catch(e){} }, 360);
+  document.getElementById('selection-panel').style.transform = 'translateY(0)';
+  setTimeout(function(){ if(typeof map !== 'undefined' && map) map.invalidateSize(); }, 360);
 }
 function closeSelectionPanel() {
-  var panel = document.getElementById('selection-panel');
-  var btn = document.getElementById('selection-open-btn');
-  panel.style.height = '0';
-  if(btn) btn.style.display = '';
-  setTimeout(function(){ try{ map.invalidateSize(); }catch(e){} }, 360);
+  document.getElementById('selection-panel').style.transform = 'translateY(100%)';
+  setTimeout(function(){ if(typeof map !== 'undefined' && map) map.invalidateSize(); }, 360);
 }
 
 function renderSelStep() {
@@ -3744,31 +3708,23 @@ function renderSelStep() {
   else renderSelStep3(body);
 }
 
-var SEL_CAT_ORDER = ['cut','surface','heat','forge','edm','ndt','composite'];
-
 function renderSelStep1(body) {
   const counts = {};
   (companies || []).forEach(function(c) {
     (c.cats || []).forEach(function(k) { counts[k] = (counts[k] || 0) + 1; });
   });
   var html = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;">';
-  SEL_CAT_ORDER.forEach(function(key) {
-    var cat = CATEGORIES[key];
-    if (!cat) return;
+  Object.entries(CATEGORIES).forEach(function(entry) {
+    var key = entry[0], cat = entry[1];
     var cnt = counts[key] || 0;
+    if (!cnt) return;
     var sel = selState.cat === key;
     var rgb = hexToRgb(cat.color);
     var bg = sel ? ('rgba(' + rgb + ',.25)') : 'rgba(0,0,0,.3)';
     var border = sel ? cat.color : '#1e2d4a';
     var shadow = sel ? ('box-shadow:0 0 12px ' + cat.color + '44;') : '';
     var nameColor = sel ? cat.color : '#e8f4fd';
-    html += '<div onclick="selCat(\'' + key + '\')" style="'
-      + 'background:' + bg + ';'
-      + 'border:2px solid ' + border + ';'
-      + 'border-radius:6px;padding:12px 10px;cursor:pointer;text-align:center;transition:.15s;' + shadow + '">'
-      + '<div style="font-size:13px;font-weight:700;color:' + nameColor + ';margin-bottom:4px;">' + cat.label + '</div>'
-      + '<div style="font-size:10px;color:#8899aa;font-family:\'Share Tech Mono\',monospace;">' + cnt + '社</div>'
-      + '</div>';
+    html += '<div onclick="selCat(\'' + key + '\')" style="'      + 'background:' + bg + ';'      + 'border:2px solid ' + border + ';'      + 'border-radius:6px;padding:12px 10px;cursor:pointer;text-align:center;transition:.15s;' + shadow + '">'      + '<div style="font-size:13px;font-weight:700;color:' + nameColor + ';margin-bottom:4px;">' + cat.label + '</div>'      + '<div style="font-size:10px;color:#8899aa;font-family:\'Share Tech Mono\',monospace;">' + cnt + '社</div>'      + '</div>';
   });
   html += '</div>';
   body.innerHTML = html;
@@ -3779,91 +3735,9 @@ function selCat(key) {
   renderSelStep1(document.getElementById('sel-body'));
 }
 
-var SEL_STEP2_MAP = {
-  cut: {
-    ph:'例：5軸／EBW／φ800／チタン',
-    equip:['5軸MC','4軸MC','NC旋盤','複合加工機','FMS','ターニング','ワイヤ放電','型彫放電','研削','PECM・電解','レーザー加工','5面MC'],
-    size: ['φ300以下','φ500以下','φ1000以上','2000mm超','チタン','インコネル','アルミ合金','ステンレス']
-  },
-  surface: {
-    ph:'例：PVD／アルマイト／溶射',
-    equip:['めっき','PVD','CVD','アルマイト','溶射','無電解ニッケル','クロメート','ショットピーニング','電解研磨','ペイント'],
-    size: ['AMS2750適合','連続炉','バッチ炉','チタン対応','アルミ対応']
-  },
-  heat: {
-    ph:'例：真空炉／浸炭／φ1000',
-    equip:['真空炉','連続炉','バッチ炉','浸炭炉','窒化炉','イオン窒化','時効処理炉','オートクレーブ'],
-    size: ['φ300以下','φ500以下','φ1000以上','1500mm超','2000mm超']
-  },
-  forge: {
-    ph:'例：精密鋳造／チタン鍛造',
-    equip:['鍛造プレス','型鍛造','自由鍛造','ロストワックス','ダイカスト','砂型鋳造','板金プレス'],
-    size: ['チタン','アルミ合金','ニッケル基','ステンレス']
-  },
-  edm: {
-    ph:'例：EBW／FSW／HIP',
-    equip:['EBW（電子ビーム溶接）','レーザー溶接','レーザー加工','FSW（摩擦攪拌接合）','HIP','ウォータージェット','型彫放電','ワイヤ放電'],
-    size: ['真空チャンバー','チタン対応','インコネル対応','大型炉']
-  },
-  ndt: {
-    ph:'例：UT／RT／CT',
-    equip:['UT（超音波）','PT（浸透探傷）','RT（X線・γ線）','MT（磁粉）','CT（X線CT）','ET（渦流）','AET（AE法）'],
-    size: ['NADCAP NDT','JSNDI資格','大型部品対応']
-  },
-  composite: {
-    ph:'例：オートクレーブ／RTM／CFRP',
-    equip:['オートクレーブ','RTM','プリプレグ積層','NSM','VaRTM','AFP（テープ積層）','ハンドレイアップ'],
-    size: ['CFRP','GFRP','セラミックス系','大型治具']
-  }
-};
-
-function renderSelChipGroup(val, chips) {
-  var html = '<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;">';
-  chips.forEach(function(c) {
-    var active = val.includes(c);
-    html += '<div data-chip="' + c.replace(/"/g,'&quot;') + '" onclick="selStep2Chip(\'' + c.replace(/'/g,"\\'") + '\')" style="'
-      + 'padding:3px 10px;border-radius:12px;font-size:11px;cursor:pointer;transition:.15s;'
-      + (active ? 'border:1px solid #00d4ff;color:#00d4ff;background:rgba(0,212,255,.08);'
-                : 'border:1px solid #1e2d4a;color:#8899aa;background:rgba(0,0,0,.3);')
-      + '">' + c + '</div>';
-  });
-  html += '</div>';
-  return html;
-}
-
 function renderSelStep2(body) {
   var val = selState.sizeKw || '';
-  var cfg = SEL_STEP2_MAP[selState.cat] || { ph:'キーワードを入力', equip:[], size:[] };
-  var html = '<div style="margin-bottom:4px;">'
-    + '<input id="sel-size-inp" type="text" value="' + val.replace(/"/g,'&quot;') + '"'
-    + ' placeholder="' + cfg.ph + '"'
-    + ' autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"'
-    + ' style="width:100%;background:rgba(0,0,0,.4);border:1px solid #1e2d4a;color:#e8f4fd;padding:8px 12px;border-radius:4px;font-size:12px;box-sizing:border-box;outline:none;-webkit-appearance:none;"'
-    + ' oninput="selState.sizeKw=this.value;(function(){var b=document.getElementById(\'sel-body\');if(b){var chips=b.querySelectorAll(\'[data-chip]\');chips.forEach(function(el){var c=el.dataset.chip;var active=selState.sizeKw.includes(c);el.style.borderColor=active?\'#00d4ff\':\'#1e2d4a\';el.style.color=active?\'#00d4ff\':\'#8899aa\';el.style.background=active?\'rgba(0,212,255,.08)\':\'rgba(0,0,0,.3)\';})};})()"'
-    + ' onfocus="this.style.borderColor=\'#00d4ff44\'"'
-    + ' onblur="this.style.borderColor=\'#1e2d4a\'"'
-    + ' onkeydown="if(event.key===\'Enter\'&&!event.isComposing){event.preventDefault();selNext();}">'
-    + '</div>';
-  if (cfg.equip.length) {
-    html += '<div style="font-size:10px;color:#8899aa;margin:8px 0 4px;font-family:\'Share Tech Mono\',monospace;letter-spacing:1px;">設備・加工種別</div>'
-      + renderSelChipGroup(val, cfg.equip);
-  }
-  if (cfg.size.length) {
-    html += '<div style="font-size:10px;color:#8899aa;margin:8px 0 4px;font-family:\'Share Tech Mono\',monospace;letter-spacing:1px;">サイズ・仕様</div>'
-      + renderSelChipGroup(val, cfg.size);
-  }
-  html += '<div style="font-size:10px;color:#556677;margin-top:8px;">複数選択OR検索。空欄でスキップ。Enterで次へ。</div>';
-  body.innerHTML = html;
-}
-
-function selStep2Chip(c) {
-  var cur = selState.sizeKw || '';
-  if (cur.includes(c)) {
-    selState.sizeKw = cur.replace(c, '').replace(/\s+/g,' ').trim();
-  } else {
-    selState.sizeKw = cur ? cur + ' ' + c : c;
-  }
-  renderSelStep2(document.getElementById('sel-body'));
+  body.innerHTML = '<div style="margin-bottom:16px;">'    + '<div style="font-size:11px;color:#8899aa;margin-bottom:8px;font-family:\'Share Tech Mono\',monospace;letter-spacing:1px;">'    + '設備・サイズキーワード</div>'    + '<input id="sel-size-inp" type="text" value="' + val.replace(/"/g,'&quot;') + '"'    + ' placeholder="例: 1000mm, φ500, 真空浸炭, 大型..."'    + ' style="width:100%;background:rgba(0,0,0,.4);border:1px solid #1e2d4a;color:#e8f4fd;padding:10px 14px;border-radius:4px;font-size:13px;box-sizing:border-box;outline:none;"'    + ' oninput="selState.sizeKw=this.value"'    + ' onfocus="this.style.borderColor=\'#00d4ff\'"'    + ' onblur="this.style.borderColor=\'#1e2d4a\'">'    + '<div style="font-size:10px;color:#556677;margin-top:6px;">設備情報テキストをキーワード検索します。空欄でスキップ。</div>'    + '</div>';
 }
 
 function renderSelStep3(body) {
@@ -3875,7 +3749,7 @@ function renderSelStep3(body) {
     { key:'shtNadcapCoat', label:'NADCAP-Coat' },
     { key:'shtAms2750', label:'AMS2750' },
     { key:'shtMilSpec', label:'MIL規格' },
-    { key:'shtJisq9100', label:'JISQ9100' },
+    { key:'jisq9100', label:'JISQ9100' },
   ];
   var html = '<div style="display:flex;flex-direction:column;gap:10px;">';
   certOptions.forEach(function(opt) {
@@ -3885,13 +3759,10 @@ function renderSelStep3(body) {
     var cbBorder = sel ? '#00d4ff' : '#556677';
     var cbBg = sel ? '#00d4ff' : 'transparent';
     var textColor = sel ? '#e8f4fd' : '#8899aa';
-    html += '<div role="checkbox" aria-checked="' + sel + '" tabindex="0"'
-      + ' style="display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;'      + 'background:' + bg + ';border:1px solid ' + border + ';'      + 'border-radius:4px;padding:12px 16px;transition:.15s;"'
-      + ' onclick="selToggleCert(\'' + opt.key + '\')"'
-      + ' onkeydown="if(event.key===\'Enter\'||event.key===\' \'){selToggleCert(\'' + opt.key + '\');}">';
-    html += '<div style="width:16px;height:16px;border-radius:3px;border:2px solid ' + cbBorder + ';'      + 'background:' + cbBg + ';display:flex;align-items:center;justify-content:center;'      + 'font-size:10px;color:#0a0e1a;flex-shrink:0;pointer-events:none;">' + (sel ? '✓' : '') + '</div>';
-    html += '<span style="font-size:13px;color:' + textColor + ';pointer-events:none;">' + opt.label + '</span>';
-    html += '</div>';
+    html += '<label style="display:flex;align-items:center;gap:12px;cursor:pointer;'      + 'background:' + bg + ';border:1px solid ' + border + ';'      + 'border-radius:4px;padding:12px 16px;transition:.15s;"'      + ' onclick="selToggleCert(\'' + opt.key + '\')">';
+    html += '<div style="width:16px;height:16px;border-radius:3px;border:2px solid ' + cbBorder + ';'      + 'background:' + cbBg + ';display:flex;align-items:center;justify-content:center;'      + 'font-size:10px;color:#0a0e1a;flex-shrink:0;">' + (sel ? '✓' : '') + '</div>';
+    html += '<span style="font-size:13px;color:' + textColor + ';">' + opt.label + '</span>';
+    html += '</label>';
   });
   html += '</div><div style="font-size:10px;color:#556677;margin-top:12px;">条件は AND 検索。未選択でスキップ。</div>';
   body.innerHTML = html;
@@ -3913,40 +3784,15 @@ function selBack() {
 
 function applySelection() {
   closeSelectionPanel();
-  // カテゴリ（未選択なら全カテゴリに戻す）
   if (selState.cat && CATEGORIES[selState.cat]) {
     filterCats = new Set([selState.cat]);
   } else {
+    // カテゴリ未選択の場合は全カテゴリをリセット（左パネルの絞り込みを解除）
     filterCats = new Set(Object.keys(CATEGORIES));
   }
-  // 左パネルのチップUI同期（data-cat で判定）
-  document.querySelectorAll('#cat-chips .cat-chip').forEach(function(el){
-    const active = filterCats.has(el.dataset.cat);
-    el.classList.toggle('off', !active);
-  });
-  // サイズキーワード → q-equip にも反映
-  var kw = selState.sizeKw.trim();
-  window.selSizeKw = kw.toLowerCase();
-  var qe = document.getElementById('q-equip');
-  if(qe && kw) qe.value = kw;
-  // 認定チップ: ウィザードと左パネルを排他
+  window.selSizeKw = selState.sizeKw.trim().toLowerCase();
   window.selCerts = selState.certs.slice();
-  if(selState.certs.length > 0){
-    filterCertKeys = new Set(); // 左パネル側はクリア
-    document.querySelectorAll('.cert-chip').forEach(function(el){ el.classList.remove('active'); });
-    const cb = document.getElementById('cert-filter-body');
-    if(cb) cb.style.display = 'none';
-  }
   applyFilters();
-}
-
-function selCertMatch(c, key) {
-  if(key === 'shtJisq9100'){
-    return (c.shtCert || '').toUpperCase().includes('JISQ9100')
-        || (c.certStd || '').toUpperCase().includes('JISQ9100')
-        || (c.cert   || '').toUpperCase().includes('JISQ9100');
-  }
-  return c[key] === true;
 }
 
 function hexToRgb(hex) {
@@ -3996,16 +3842,16 @@ function getFilteredSorted(){
         const ok = [...filterCertKeys].some(k => c[k] === true);
         if(!ok) return false;
       }
-      // PATCH:sel-filter-check 選定パネル: サイズキーワードフィルター（OR検索）
+      // PATCH:sel-filter-check 選定パネル: サイズキーワードフィルター
       if(window.selSizeKw) {
-        var _kwList = window.selSizeKw.split(/\s+/).filter(Boolean);
-        var _hay = normQ((c.equipText||'') + ' ' + (c.shtFurnace||'') + ' ' + (c.shtProc||'') + ' ' + (c.note||''));
-        if(!_kwList.some(function(k){ return _hay.includes(k); })) return false;
+        var _kw = window.selSizeKw;
+        var _hay = ((c.equip_summary||c.fs||'') + ' ' + (c.model_or_summary||'') + ' ' + ((c.sur&&c.sur.fs)||'')).toLowerCase();
+        if(!_hay.includes(_kw)) return false;
       }
       // 選定パネル: 認定フィルター（AND検索）
       if(window.selCerts && window.selCerts.length > 0) {
         var _allOk = window.selCerts.every(function(k){
-          return selCertMatch(c, k);
+          return c[k] === true || (c.shtCerts && c.shtCerts[k]);
         });
         if(!_allOk) return false;
       }
@@ -4319,11 +4165,10 @@ function clearFilters(){
     const ct=document.getElementById('cert-filter-toggle');
     if(ct){ ct.textContent='▶ 特殊工程認定でしぼる'; }
   }
-  // ウィザードフィルターもリセット
+  // 選定パネル由来のフィルターも一緒にリセット
   window.selSizeKw = '';
-  window.selCerts  = [];
-  const qe2 = document.getElementById('q-equip');
-  if(qe2) qe2.value = '';
+  window.selCerts = [];
+  selState = { step: 1, cat: null, sizeKw: '', certs: [] };
   updateChips();
   applyFilters();
 }
@@ -4583,7 +4428,7 @@ function renderDrawer(c){
   const equipCountBadge=(c.equipCount&&!c.equipId)?`<div class="info-row"><span class="info-key">設備調査</span><span class="info-val" style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent3)">${c.equipCount}件収集済み</span></div>`:'';
 
   // 設備テキストサマリ（OASIS社のequipText）
-  const equipTextBadge=(c.equipText&&!c.equipId)?`<div style="margin:8px 0;padding:10px 12px;background:rgba(57,255,20,0.05);border-left:3px solid rgba(57,255,20,0.4);border-radius:0 4px 4px 0;font-size:11px;color:var(--text);line-height:1.8">${highlightDims(c.equipText)}</div>`:'';
+  const equipTextBadge=(c.equipText&&!c.equipId)?`<div style="margin:6px 0;padding:6px 10px;background:rgba(57,255,20,0.04);border-left:2px solid var(--accent3)40;font-size:10px;color:var(--muted);line-height:1.7">${c.equipText}</div>`:'';
 
   // 備考（OASIS調査メモ） - VERIFIED/CATEGORY ONLY/NO INFOバッジを分離してハイライト
   let noteBadge='';
@@ -5514,19 +5359,7 @@ function checkPw(){
   else{const i=document.getElementById('pw-input');const e=document.getElementById('pw-error');i.classList.add('pw-input-error');e.textContent='パスワードが違います';setTimeout(()=>{i.classList.remove('pw-input-error');i.value='';i.focus();e.textContent=''},700);}
 }
 document.getElementById('pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw();});
-// セッション済みなら即解除
-if(sessionStorage.getItem(SK)==='1'){document.getElementById('pw-screen').remove();}
-// URLハッシュに正しいパスワードが含まれていれば自動ログイン
-(function(){
-  var hash=decodeURIComponent(location.hash.replace(/^#/,''));
-  if(hash===PW){
-    sessionStorage.setItem(SK,'1');
-    var s=document.getElementById('pw-screen');
-    if(s){s.classList.add('unlocked');setTimeout(function(){s.remove();},520);}
-    history.replaceState(null,'',location.pathname+location.search);
-    setTimeout(function(){if(typeof startTutorial==='function')startTutorial(false);},1100);
-  }
-})();
+if(sessionStorage.getItem(SK)==='1') document.getElementById('pw-screen').remove();
 
 // ================================================================
 // CSVエクスポート（パスワード保護）
@@ -6888,34 +6721,15 @@ function toggleLogisticsMode(){
 }
 
 // ================================================================
-// 初期化実行（fetch版）
+// 初期化実行
 // ================================================================
-fetch('./manufacturers.json')
-  .then(function(r){
-    if(!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json();
-  })
-  .then(function(data){
-    companies = data;
-    // 小牧からの距離をキャッシュ
-    companies.forEach(function(c){ c._dist = Math.round(haversineKm(KOMAKI.lat,KOMAKI.lng,c.lat,c.lng)); });
-    initCatChips();
-    initPrefSelect();
-    initOasisCatChips();
-    initLegend();
-    updateEquipCounts();
-    applyFilters();
-    setTimeout(function(){ startTutorial(false); }, 600);
-  })
-  .catch(function(err){
-    console.error('[OASIS] manufacturers.json 読み込み失敗:', err);
-    var el = document.getElementById('map');
-    if(el) el.insertAdjacentHTML('afterbegin',
-      '<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(5,8,20,.95);border:1px solid #f44;border-radius:8px;padding:24px 32px;color:#f88;z-index:9999;text-align:center">'
-      + '<b>データ読み込みエラー</b><br><span style="font-size:12px;color:#aaa">' + err.message + '</span>'
-      + '<br><button onclick="location.reload()" style="margin-top:12px;padding:6px 16px;background:#333;color:#fff;border:1px solid #666;border-radius:4px;cursor:pointer">再読込</button></div>'
-    );
-  });
+initCatChips();
+initPrefSelect();
+initOasisCatChips();
+initLegend();
+updateEquipCounts();
+applyFilters();
+setTimeout(()=>startTutorial(false), 600);
 </script>
 </body>
 </html>
