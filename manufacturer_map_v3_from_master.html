@@ -197,8 +197,8 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
 .card-cat-tag{font-size:10px;padding:2px 6px;border-radius:2px;white-space:nowrap;font-weight:700}
 
 /* ── MAP ── */
-.map-col{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-.map-wrap{flex:1;position:relative;overflow:hidden;isolation:isolate;z-index:0}
+.map-col{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0;height:100%;min-height:0}
+.map-wrap{flex:1;position:relative;overflow:hidden;isolation:isolate;z-index:0;min-height:200px}
 #map{width:100%;height:100%;background:#050810;isolation:isolate;z-index:0}
 .map-wrap::before{content:'';position:absolute;inset:0;
   background-image:linear-gradient(rgba(0,212,255,.03) 1px,transparent 1px),
@@ -1194,7 +1194,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     <button class="btn-hdr green" onclick="openOasisModal()">⬡ OASIS</button>
     <button class="btn-hdr" onclick="exportCSV()" style="border-color:rgba(255,200,0,.35);color:#ffc800" title="全企業データをCSVダウンロード">↓ CSV</button>
     <button class="btn-hdr" id="btn-logistics" onclick="toggleLogisticsMode()" title="物流分析モード（IC・新幹線駅・空港を表示）" style="border-color:rgba(255,153,0,.45);color:#ff9900">🚚 物流</button>
-    <button class="btn-hdr selector-btn" id="btn-selector" onclick="openSelectorModal()" title="複合条件でメーカー選定（Sキー）">⚡ メーカー選定</button>
+    <button class="btn-hdr selector-btn" id="btn-selector" onclick="openSelectionPanel()" title="複合条件でメーカー選定（Sキー）">⚡ メーカー選定</button>
     <button class="btn-help" onclick="startTutorial(true)" title="操作説明を再表示（?キー）" id="btn-help">?</button>
   </div>
 </header>
@@ -3713,14 +3713,16 @@ function openSelectionPanel() {
   renderSelStep();
   var panel = document.getElementById('selection-panel');
   var btn = document.getElementById('selection-open-btn');
-  panel.style.height = '300px';
+  panel.style.height = '380px';
   if(btn) btn.style.display = 'none';
+  setTimeout(function(){ try{ map.invalidateSize(); }catch(e){} }, 360);
 }
 function closeSelectionPanel() {
   var panel = document.getElementById('selection-panel');
   var btn = document.getElementById('selection-open-btn');
   panel.style.height = '0';
   if(btn) btn.style.display = '';
+  setTimeout(function(){ try{ map.invalidateSize(); }catch(e){} }, 360);
 }
 
 function renderSelStep() {
@@ -3778,44 +3780,80 @@ function selCat(key) {
 }
 
 var SEL_STEP2_MAP = {
-  cut:       { ph:'例：5軸／φ800／チタン',       chips:['5軸加工','4軸加工','φ500以下','φ1000以上','2000mm超','チタン','インコネル','アルミ合金'] },
-  surface:   { ph:'例：PVD／アルマイト／溶射',    chips:['めっき','PVD','CVD','アルマイト','溶射','クロメート','無電解ニッケル','ペイント'] },
-  heat:      { ph:'例：真空炉／浸炭／φ1000',      chips:['真空炉','連続炉','バッチ炉','浸炭','窒化','時効処理','φ500以下','1500mm超'] },
-  forge:     { ph:'例：精密鋳造／チタン鍛造',      chips:['ダイカスト','精密鋳造','自由鍛造','型鍛造','チタン鍛造','アルミ鋳造','ニッケル基'] },
-  edm:       { ph:'例：EBW／FSW／HIP',            chips:['EBW','レーザー溶接','EDM','FSW','HIP','ウォータージェット','放電加工'] },
-  ndt:       { ph:'例：UT／RT／CT',               chips:['UT（超音波）','PT（浸透）','RT（X線）','MT（磁粉）','CT（X線CT）','AET（AE）'] },
-  composite: { ph:'例：オートクレーブ／RTM／CFRP', chips:['オートクレーブ','RTM','プリプレグ','NSM','ハンドレイアップ','CFRP','GFRP'] }
+  cut: {
+    ph:'例：5軸／EBW／φ800／チタン',
+    equip:['5軸MC','4軸MC','NC旋盤','複合加工機','FMS','ターニング','ワイヤ放電','型彫放電','研削','PECM・電解','レーザー加工','5面MC'],
+    size: ['φ300以下','φ500以下','φ1000以上','2000mm超','チタン','インコネル','アルミ合金','ステンレス']
+  },
+  surface: {
+    ph:'例：PVD／アルマイト／溶射',
+    equip:['めっき','PVD','CVD','アルマイト','溶射','無電解ニッケル','クロメート','ショットピーニング','電解研磨','ペイント'],
+    size: ['AMS2750適合','連続炉','バッチ炉','チタン対応','アルミ対応']
+  },
+  heat: {
+    ph:'例：真空炉／浸炭／φ1000',
+    equip:['真空炉','連続炉','バッチ炉','浸炭炉','窒化炉','イオン窒化','時効処理炉','オートクレーブ'],
+    size: ['φ300以下','φ500以下','φ1000以上','1500mm超','2000mm超']
+  },
+  forge: {
+    ph:'例：精密鋳造／チタン鍛造',
+    equip:['鍛造プレス','型鍛造','自由鍛造','ロストワックス','ダイカスト','砂型鋳造','板金プレス'],
+    size: ['チタン','アルミ合金','ニッケル基','ステンレス']
+  },
+  edm: {
+    ph:'例：EBW／FSW／HIP',
+    equip:['EBW（電子ビーム溶接）','レーザー溶接','レーザー加工','FSW（摩擦攪拌接合）','HIP','ウォータージェット','型彫放電','ワイヤ放電'],
+    size: ['真空チャンバー','チタン対応','インコネル対応','大型炉']
+  },
+  ndt: {
+    ph:'例：UT／RT／CT',
+    equip:['UT（超音波）','PT（浸透探傷）','RT（X線・γ線）','MT（磁粉）','CT（X線CT）','ET（渦流）','AET（AE法）'],
+    size: ['NADCAP NDT','JSNDI資格','大型部品対応']
+  },
+  composite: {
+    ph:'例：オートクレーブ／RTM／CFRP',
+    equip:['オートクレーブ','RTM','プリプレグ積層','NSM','VaRTM','AFP（テープ積層）','ハンドレイアップ'],
+    size: ['CFRP','GFRP','セラミックス系','大型治具']
+  }
 };
+
+function renderSelChipGroup(val, chips) {
+  var html = '<div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;">';
+  chips.forEach(function(c) {
+    var active = val.includes(c);
+    html += '<div data-chip="' + c.replace(/"/g,'&quot;') + '" onclick="selStep2Chip(\'' + c.replace(/'/g,"\\'") + '\')" style="'
+      + 'padding:3px 10px;border-radius:12px;font-size:11px;cursor:pointer;transition:.15s;'
+      + (active ? 'border:1px solid #00d4ff;color:#00d4ff;background:rgba(0,212,255,.08);'
+                : 'border:1px solid #1e2d4a;color:#8899aa;background:rgba(0,0,0,.3);')
+      + '">' + c + '</div>';
+  });
+  html += '</div>';
+  return html;
+}
 
 function renderSelStep2(body) {
   var val = selState.sizeKw || '';
-  var cfg = SEL_STEP2_MAP[selState.cat] || { ph:'例: 1000mm / φ500 / 真空浸炭', chips:[] };
-  var chipHtml = '';
-  if (cfg.chips.length) {
-    chipHtml = '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">';
-    cfg.chips.forEach(function(c) {
-      var active = val.includes(c);
-      chipHtml += '<div onclick="selStep2Chip(\'' + c.replace(/'/g,"\\'") + '\')" style="'
-        + 'padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer;transition:.15s;'
-        + (active ? 'border:1px solid #00d4ff;color:#00d4ff;background:rgba(0,212,255,.08);'
-                  : 'border:1px solid #1e2d4a;color:#8899aa;background:rgba(0,0,0,.3);')
-        + '">' + c + '</div>';
-    });
-    chipHtml += '</div>';
-  }
-  body.innerHTML = '<div style="margin-bottom:4px;">'
-    + '<div style="font-size:11px;color:#8899aa;margin-bottom:8px;font-family:\'Share Tech Mono\',monospace;letter-spacing:1px;">設備・サイズキーワード</div>'
+  var cfg = SEL_STEP2_MAP[selState.cat] || { ph:'キーワードを入力', equip:[], size:[] };
+  var html = '<div style="margin-bottom:4px;">'
     + '<input id="sel-size-inp" type="text" value="' + val.replace(/"/g,'&quot;') + '"'
     + ' placeholder="' + cfg.ph + '"'
     + ' autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"'
-    + ' style="width:100%;background:rgba(0,0,0,.4);border:1px solid #1e2d4a;color:#e8f4fd;padding:10px 14px;border-radius:4px;font-size:13px;box-sizing:border-box;outline:none;-webkit-appearance:none;"'
-    + ' oninput="selState.sizeKw=this.value;renderSelStep2(document.getElementById(\'sel-body\'))"'
-    + ' onfocus="this.style.borderColor=\'#00d4ff\'"'
+    + ' style="width:100%;background:rgba(0,0,0,.4);border:1px solid #1e2d4a;color:#e8f4fd;padding:8px 12px;border-radius:4px;font-size:12px;box-sizing:border-box;outline:none;-webkit-appearance:none;"'
+    + ' oninput="selState.sizeKw=this.value;(function(){var b=document.getElementById(\'sel-body\');if(b){var chips=b.querySelectorAll(\'[data-chip]\');chips.forEach(function(el){var c=el.dataset.chip;var active=selState.sizeKw.includes(c);el.style.borderColor=active?\'#00d4ff\':\'#1e2d4a\';el.style.color=active?\'#00d4ff\':\'#8899aa\';el.style.background=active?\'rgba(0,212,255,.08)\':\'rgba(0,0,0,.3)\';})};})()"'
+    + ' onfocus="this.style.borderColor=\'#00d4ff44\'"'
     + ' onblur="this.style.borderColor=\'#1e2d4a\'"'
     + ' onkeydown="if(event.key===\'Enter\'&&!event.isComposing){event.preventDefault();selNext();}">'
-    + '<div style="font-size:10px;color:#556677;margin-top:6px;">空欄でスキップ。Enterで次へ。</div>'
-    + chipHtml
     + '</div>';
+  if (cfg.equip.length) {
+    html += '<div style="font-size:10px;color:#8899aa;margin:8px 0 4px;font-family:\'Share Tech Mono\',monospace;letter-spacing:1px;">設備・加工種別</div>'
+      + renderSelChipGroup(val, cfg.equip);
+  }
+  if (cfg.size.length) {
+    html += '<div style="font-size:10px;color:#8899aa;margin:8px 0 4px;font-family:\'Share Tech Mono\',monospace;letter-spacing:1px;">サイズ・仕様</div>'
+      + renderSelChipGroup(val, cfg.size);
+  }
+  html += '<div style="font-size:10px;color:#556677;margin-top:8px;">複数選択OR検索。空欄でスキップ。Enterで次へ。</div>';
+  body.innerHTML = html;
 }
 
 function selStep2Chip(c) {
@@ -3958,11 +3996,11 @@ function getFilteredSorted(){
         const ok = [...filterCertKeys].some(k => c[k] === true);
         if(!ok) return false;
       }
-      // PATCH:sel-filter-check 選定パネル: サイズキーワードフィルター
+      // PATCH:sel-filter-check 選定パネル: サイズキーワードフィルター（OR検索）
       if(window.selSizeKw) {
-        var _kw = window.selSizeKw;
+        var _kwList = window.selSizeKw.split(/\s+/).filter(Boolean);
         var _hay = normQ((c.equipText||'') + ' ' + (c.shtFurnace||'') + ' ' + (c.shtProc||'') + ' ' + (c.note||''));
-        if(!_hay.includes(_kw)) return false;
+        if(!_kwList.some(function(k){ return _hay.includes(k); })) return false;
       }
       // 選定パネル: 認定フィルター（AND検索）
       if(window.selCerts && window.selCerts.length > 0) {
@@ -6353,7 +6391,7 @@ document.addEventListener('keydown', e=>{
     e.preventDefault();
     startTutorial(true);
   } else if(e.key==='s' || e.key==='S'){
-    if(typeof openSelectorModal === 'function') openSelectorModal();
+    if(typeof openSelectionPanel === 'function') openSelectionPanel();
   }
 });
 
