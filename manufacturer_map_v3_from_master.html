@@ -1128,6 +1128,12 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
 #hover-popup .hp-name { font-weight:700; color:#fff; font-size:12px; }
 #hover-popup .hp-cat  { color:rgba(0,212,255,.8); font-size:10px; margin-top:2px; }
 #hover-popup .hp-size { color:#888; font-size:10px; margin-top:2px; }
+/* ズームレベル別ピンスケール */
+#map[data-zl="xs"] .leaflet-marker-icon{transform:scale(0.28);transform-origin:center bottom}
+#map[data-zl="sm"] .leaflet-marker-icon{transform:scale(0.45);transform-origin:center bottom}
+#map[data-zl="md"] .leaflet-marker-icon{transform:scale(0.65);transform-origin:center bottom}
+#map[data-zl="lg"] .leaflet-marker-icon{transform:scale(0.85);transform-origin:center bottom}
+#map[data-zl="xl"] .leaflet-marker-icon{transform:scale(1.0);transform-origin:center bottom}
 </style>
 </head>
 <body>
@@ -1137,6 +1143,8 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   <div class="pw-box">
     <div class="pw-logo">AEROSPACE SUPPLIER</div>
     <div class="pw-title">メーカー<span>マップ</span></div>
+    <div style="display:inline-block;background:rgba(0,212,255,.12);border:1px solid #00d4ff;color:#00d4ff;font-size:10px;font-family:'Share Tech Mono',monospace;letter-spacing:2px;padding:3px 12px;border-radius:3px;margin:8px 0 4px;">β VERSION — 試験運用中</div>
+    <div style="font-size:10px;color:#556677;margin-bottom:16px;font-family:'Share Tech Mono',monospace;">フィードバック大歓迎 / 無断転載・転用禁止</div>
     <div class="pw-sub">AUTHORIZED ACCESS ONLY</div>
     <div class="pw-field">
       <input type="password" id="pw-input" placeholder="PASSWORD" autocomplete="off" autofocus/>
@@ -3674,6 +3682,18 @@ function toggleCertChip(el) {
 // ================================================================
 // 選定パネル（ボトムシート）
 // ================================================================
+// カテゴリ表示順
+var SEL_CAT_ORDER = ['cut','surface','heat','forge','edm','ndt','composite'];
+// ステップ2チップマップ（カテゴリ別詳細条件）
+var SEL_STEP2_MAP = {
+  cut:       ['小型(〜300mm)', '中型(〜1000mm)', '大型(1000mm〜)', '5軸加工', 'φ500以上', 'φ1000以上'],
+  surface:   ['陽極酸化', '硬質アルマイト', 'Nadcap-CP', 'Nadcap-Coat', 'AMS2750', 'MIL規格'],
+  heat:      ['真空熱処理', 'ろう付け', 'HIP', 'AMS2750', 'Nadcap-HT', 'AMS2750 Class2以上'],
+  forge:     ['型鍛造', '自由鍛造', 'ダイカスト', 'アルミ鍛造', 'チタン鍛造', '1000t以上プレス'],
+  edm:       ['ワイヤー放電', '形彫り放電', 'レーザー切断', 'ウォータージェット', '電解加工'],
+  ndt:       ['浸透探傷(FPI)', '磁粉探傷(MT)', '超音波探傷(UT)', 'X線検査(RT)', 'Nadcap-NDT'],
+  composite: ['オートクレーブ成形', 'RTM', 'フィラメントワインディング', 'CFRP', 'GFRP'],
+};
 let selState = { step: 1, cat: null, sizeKw: '', certs: [] };
 
 function openSelectionPanel() {
@@ -5360,6 +5380,12 @@ function checkPw(){
 }
 document.getElementById('pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw();});
 if(sessionStorage.getItem(SK)==='1') document.getElementById('pw-screen').remove();
+// URLハッシュによる自動ログイン（#pw=パスワード 形式）
+if(location.hash && location.hash.startsWith('#pw=')){
+  const hashPw = decodeURIComponent(location.hash.slice(4));
+  if(hashPw===PW){sessionStorage.setItem(SK,'1');const s=document.getElementById('pw-screen');if(s)s.remove();}
+  history.replaceState(null,'',location.pathname+location.search);
+}
 
 // ================================================================
 // CSVエクスポート（パスワード保護）
@@ -6721,15 +6747,29 @@ function toggleLogisticsMode(){
 }
 
 // ================================================================
-// 初期化実行
+// 初期化実行（JSON fetch版）
 // ================================================================
-initCatChips();
-initPrefSelect();
-initOasisCatChips();
-initLegend();
-updateEquipCounts();
-applyFilters();
-setTimeout(()=>startTutorial(false), 600);
+fetch('./manufacturers.json')
+  .then(r => r.json())
+  .then(data => {
+    companies = data;
+    initCatChips();
+    initPrefSelect();
+    initOasisCatChips();
+    initLegend();
+    updateEquipCounts();
+    applyFilters();
+    setTimeout(() => startTutorial(false), 600);
+  })
+  .catch(err => {
+    console.error('[ERROR] manufacturers.json 読み込み失敗:', err);
+    // フォールバック: データなしで初期化
+    initCatChips();
+    initPrefSelect();
+    initOasisCatChips();
+    initLegend();
+    applyFilters();
+  });
 </script>
 </body>
 </html>
