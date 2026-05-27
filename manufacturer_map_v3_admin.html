@@ -4038,7 +4038,7 @@ function renderAll(filtered){
         <div class="card-name">${c.name.replace(/\n/g,'<br>')}${c.isWeb?'<span style="font-size:8px;color:#39ff14;margin-left:4px">✓</span>':''}</div>
         <div class="card-meta">
           <span class="card-pref" style="background:${color}15;color:${color};border-color:${color}40">${c.pref}</span>
-          <span class="card-dist" style="color:${distColor}">${c._dist}km</span>
+          <span class="card-dist" style="color:${distColor}">${c._dist??'?'}km</span>
           ${hasEquip?'<span class="card-equip-dot" title="設備データあり"></span>':''}
           ${c.equipCount>0?`<span style="font-size:9px;color:var(--accent);font-family:monospace">設${c.equipCount}</span>`:''}
           <span class="card-cat-tag" style="background:${color}15;color:${color}">${c.category||CATEGORIES[mainCat]?.label||'その他'}</span>
@@ -4073,7 +4073,7 @@ function renderAll(filtered){
       ${hasEquip?`<span style="font-size:9px;background:rgba(57,255,20,.12);color:#39ff14;padding:1px 6px;border-radius:2px;font-family:monospace">設備データあり</span>`:''}
       <div class="popup-div"></div>
       <div class="popup-addr">${c.addr}${c.tel?`<br>TEL: ${c.tel}`:''}</div>
-      <div class="popup-dist" style="color:${distCol}">小牧から ${c._dist}km ／ ${logisticsCostHint(c._dist)}</div>
+      <div class="popup-dist" style="color:${distCol}">小牧から ${c._dist??'?'}km ／ ${logisticsCostHint(c._dist)}</div>
       ${equipInfo}
       ${hpLink||epLink ? `<div style="display:flex;gap:6px;margin-top:4px">${hpLink}${epLink}</div>` : ''}
     </div>`;
@@ -4493,7 +4493,7 @@ function renderDrawer(c){
   let html=`
     <div class="dist-card">
       <div>
-        <div class="dist-num" style="color:${distColor}">${c._dist}<span style="font-size:12px;color:var(--muted)"> km</span></div>
+        <div class="dist-num" style="color:${distColor}">${c._dist??'?'}<span style="font-size:12px;color:var(--muted)"> km</span></div>
       </div>
       <div class="dist-info">
         <div><strong>小牧発</strong> 物流目安${dqBadge}</div>
@@ -4607,7 +4607,7 @@ function renderDrawer(c){
         simHtml += `<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;margin-bottom:5px;background:rgba(0,212,255,0.04);border:1px solid var(--border);border-radius:3px;cursor:pointer" onclick="openDrawer(${idx})">`
           + `<div><div style="font-size:12px;font-weight:700;color:var(--text)">${co.name.replace(/\n/g,' ')}</div>`
           + `<div style="font-size:10px;color:${cc};margin-top:1px">${co.cats.map(k=>CATEGORIES[k]?.label||k).join(' / ')}</div>`
-          + `<div style="font-size:10px;color:${dc};margin-top:1px">${co._dist}km</div></div>`
+          + `<div style="font-size:10px;color:${dc};margin-top:1px">${co._dist??'?'}km</div></div>`
           + `<div style="display:flex;align-items:center;gap:6px">`
           + `<span style="font-size:9px;font-family:monospace;color:var(--muted)">${Math.round(score*100)}%</span>`
           + `<button onclick="event.stopPropagation();toggleSelect(${idx})" style="background:none;border:1px solid var(--border);color:var(--muted);border-radius:3px;padding:2px 7px;font-size:11px;cursor:pointer" title="ストックに追加">+</button>`
