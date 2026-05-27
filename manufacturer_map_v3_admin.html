@@ -1219,7 +1219,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
              placeholder="例：イーグル工業／愛知県" autocomplete="off"
              oninput="onSearchInput()"
              oncompositionstart="_imeComposing=true"
-             oncompositionend="_imeComposing=false;onSearchInput()"/>
+             oncompositionend="_imeComposing=false"/>
     </div>
 
     <!-- 設備名称 検索（追加） -->
@@ -3639,7 +3639,7 @@ let _searchTimer = null;
 function onSearchInput(){
   if(_imeComposing) return;          // IME変換中はスキップ
   clearTimeout(_searchTimer);
-  _searchTimer = setTimeout(applyFilters, 200);
+  _searchTimer = setTimeout(applyFilters, 400);
 }
 
 // 社名・住所 検索 正規化ヘルパー（追加）
