@@ -1129,11 +1129,11 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
 #hover-popup .hp-cat  { color:rgba(0,212,255,.8); font-size:10px; margin-top:2px; }
 #hover-popup .hp-size { color:#888; font-size:10px; margin-top:2px; }
 /* ズームレベル別ピンスケール */
-#map[data-zl="xs"] .leaflet-marker-icon{transform:scale(0.28);transform-origin:center bottom}
-#map[data-zl="sm"] .leaflet-marker-icon{transform:scale(0.45);transform-origin:center bottom}
-#map[data-zl="md"] .leaflet-marker-icon{transform:scale(0.65);transform-origin:center bottom}
-#map[data-zl="lg"] .leaflet-marker-icon{transform:scale(0.85);transform-origin:center bottom}
-#map[data-zl="xl"] .leaflet-marker-icon{transform:scale(1.0);transform-origin:center bottom}
+#map[data-zl="xs"] .leaflet-div-icon>svg{transform:scale(0.28);transform-origin:center bottom}
+#map[data-zl="sm"] .leaflet-div-icon>svg{transform:scale(0.45);transform-origin:center bottom}
+#map[data-zl="md"] .leaflet-div-icon>svg{transform:scale(0.65);transform-origin:center bottom}
+#map[data-zl="lg"] .leaflet-div-icon>svg{transform:scale(0.85);transform-origin:center bottom}
+#map[data-zl="xl"] .leaflet-div-icon>svg{transform:scale(1.0);transform-origin:center bottom}
 </style>
 </head>
 <body>
@@ -4198,6 +4198,11 @@ function clearFilters(){
   window.selSizeKw = '';
   window.selCerts = [];
   selState = { step: 1, cat: null, sizeKw: '', certs: [] };
+  // 社名・設備検索テキストもリセット
+  const qs = document.getElementById('q-search');
+  if(qs) qs.value = '';
+  const qe = document.getElementById('q-equip');
+  if(qe) qe.value = '';
   updateChips();
   applyFilters();
 }
@@ -6764,6 +6769,7 @@ fetch('./manufacturers.json')
   .then(r => r.json())
   .then(data => {
     companies = data;
+    companies.forEach(c => { c._dist = Math.round(haversineKm(KOMAKI.lat,KOMAKI.lng,c.lat,c.lng)); });
     initCatChips();
     initPrefSelect();
     initOasisCatChips();
