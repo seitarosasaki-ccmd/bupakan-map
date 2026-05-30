@@ -1128,7 +1128,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
 #hover-popup .hp-name { font-weight:700; color:#fff; font-size:12px; }
 #hover-popup .hp-cat  { color:rgba(0,212,255,.8); font-size:10px; margin-top:2px; }
 #hover-popup .hp-size { color:#888; font-size:10px; margin-top:2px; }
-/* ズームレベル別ピンスケール */
+/* PATCH:zoom-pin-scale */
 #map[data-zl="xs"] .leaflet-div-icon>svg{transform:scale(0.28);transform-origin:center bottom}
 #map[data-zl="sm"] .leaflet-div-icon>svg{transform:scale(0.45);transform-origin:center bottom}
 #map[data-zl="md"] .leaflet-div-icon>svg{transform:scale(0.65);transform-origin:center bottom}
@@ -1143,8 +1143,6 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   <div class="pw-box">
     <div class="pw-logo">AEROSPACE SUPPLIER</div>
     <div class="pw-title">メーカー<span>マップ</span></div>
-    <div style="display:inline-block;background:rgba(0,212,255,.12);border:1px solid #00d4ff;color:#00d4ff;font-size:10px;font-family:'Share Tech Mono',monospace;letter-spacing:2px;padding:3px 12px;border-radius:3px;margin:8px 0 4px;">β VERSION — 試験運用中</div>
-    <div style="font-size:10px;color:#556677;margin-bottom:16px;font-family:'Share Tech Mono',monospace;">フィードバック大歓迎 / 無断転載・転用禁止</div>
     <div class="pw-sub">AUTHORIZED ACCESS ONLY</div>
     <div class="pw-field">
       <input type="password" id="pw-input" placeholder="PASSWORD" autocomplete="off" autofocus/>
@@ -1182,6 +1180,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     <button class="btn-hdr green" onclick="openOasisModal()">⬡ OASIS</button>
     <button class="btn-hdr" onclick="exportCSV()" style="border-color:rgba(255,200,0,.35);color:#ffc800" title="全企業データをCSVダウンロード">↓ CSV</button>
     <button class="btn-hdr" id="btn-logistics" onclick="toggleLogisticsMode()" title="物流分析モード（IC・新幹線駅・空港を表示）" style="border-color:rgba(255,153,0,.45);color:#ff9900">🚚 物流</button>
+    <button class="btn-hdr selector-btn" id="btn-selector" onclick="openSelectorModal()" title="複合条件でメーカー選定（Sキー）">⚡ メーカー選定</button>
     <button class="btn-help" onclick="startTutorial(true)" title="操作説明を再表示（?キー）" id="btn-help">?</button>
   </div>
 </header>
@@ -1219,7 +1218,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
              placeholder="例：イーグル工業／愛知県" autocomplete="off"
              oninput="onSearchInput()"
              oncompositionstart="_imeComposing=true"
-             oncompositionend="_imeComposing=false"/>
+             oncompositionend="_imeComposing=false;onSearchInput()"/>
     </div>
 
     <!-- 設備名称 検索（追加） -->
@@ -1229,7 +1228,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
              placeholder="例：EBW／マシニングセンタ／HIP" autocomplete="off"
              oninput="onSearchInput()"
              oncompositionstart="_imeComposing=true"
-             oncompositionend="_imeComposing=false"/>
+             oncompositionend="_imeComposing=false;onSearchInput()"/>
     </div>
 
     <!-- カテゴリ -->
@@ -1296,7 +1295,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   <!-- 選定ボタン（マップ右上に配置） -->
   <button id="selection-open-btn" onclick="openSelectionPanel()"
     style="position:absolute;top:12px;right:420px;z-index:800;background:#0f1628;border:1px solid #00d4ff;color:#00d4ff;padding:8px 16px;border-radius:4px;font-size:12px;cursor:pointer;font-family:'Share Tech Mono',monospace;letter-spacing:1px;transition:.2s;box-shadow:0 0 12px rgba(0,212,255,.2);">
-    メーカーを探す
+    🔍 メーカーを選ぶ
   </button>
   <div id="selection-panel" style="position:absolute;bottom:0;left:0;right:0;z-index:900;background:#0f1628;border-top:2px solid #00d4ff;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);max-height:60vh;display:flex;flex-direction:column;box-shadow:0 -8px 32px rgba(0,0,0,.6);">
     <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid #1e2d4a;">
@@ -1306,10 +1305,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     </div>
     <div id="sel-body" style="flex:1;overflow-y:auto;padding:16px 20px;"></div>
     <div style="padding:12px 20px;border-top:1px solid #1e2d4a;display:flex;align-items:center;justify-content:space-between;">
-      <div style="display:flex;align-items:center;gap:8px;">
-        <button id="sel-back-btn" onclick="selBack()" style="background:none;border:1px solid #1e2d4a;color:#8899aa;padding:8px 20px;border-radius:4px;font-size:12px;cursor:pointer;display:none;">← 戻る</button>
-        <button id="sel-clear-btn" onclick="clearSelectionPanel()" style="background:none;border:none;color:#556677;font-size:11px;cursor:pointer;padding:4px 8px;text-decoration:underline;">クリア</button>
-      </div>
+      <button id="sel-back-btn" onclick="selBack()" style="background:none;border:1px solid #1e2d4a;color:#8899aa;padding:8px 20px;border-radius:4px;font-size:12px;cursor:pointer;display:none;">← 戻る</button>
       <div style="flex:1"></div>
       <button id="sel-next-btn" onclick="selNext()" style="background:rgba(0,212,255,.12);border:1px solid #00d4ff;color:#00d4ff;padding:8px 24px;border-radius:4px;font-size:12px;cursor:pointer;font-family:'Share Tech Mono',monospace;letter-spacing:1px;">次へ →</button>
       <button id="sel-apply-btn" onclick="applySelection()" style="display:none;background:rgba(0,212,255,.2);border:1px solid #00d4ff;color:#00d4ff;padding:8px 24px;border-radius:4px;font-size:13px;cursor:pointer;font-family:'Share Tech Mono',monospace;letter-spacing:1px;font-weight:700;">この条件で探す</button>
@@ -3478,15 +3474,20 @@ lightTileLayer.on('tileerror', function(e){
   if(e.tile) e.tile.style.opacity = '0';
 });
 
-// ピンのズームスケール更新（data-zl属性をマップ要素にセット → CSS側でscale制御）
+// Zoom/Move完了時に選択ピンのスポットライト再描画（ピン位置ずれ対策）
+map.on('zoomend moveend', ()=>{
+  if(typeof window._reapplySelectionSpotlights === 'function'){
+    setTimeout(()=>window._reapplySelectionSpotlights(), 50);
+  }
+});
+
+// PATCH:update-pin-scale-fn
 function updatePinScale() {
   var z = map.getZoom();
   var zl = z <= 7 ? 'xs' : z <= 9 ? 'sm' : z <= 11 ? 'md' : z <= 13 ? 'lg' : 'xl';
   document.getElementById('map').setAttribute('data-zl', zl);
 }
-updatePinScale(); // 初期適用
-
-// Zoom/Move完了時に選択ピンのスポットライト再描画（ピン位置ずれ対策）
+updatePinScale();
 map.on('zoomend moveend', ()=>{
   updatePinScale();
   if(typeof window._reapplySelectionSpotlights === 'function'){
@@ -3642,7 +3643,7 @@ let _searchTimer = null;
 function onSearchInput(){
   if(_imeComposing) return;          // IME変換中はスキップ
   clearTimeout(_searchTimer);
-  _searchTimer = setTimeout(applyFilters, 400);
+  _searchTimer = setTimeout(applyFilters, 200);
 }
 
 // 社名・住所 検索 正規化ヘルパー（追加）
@@ -3693,43 +3694,17 @@ function toggleCertChip(el) {
 // ================================================================
 // 選定パネル（ボトムシート）
 // ================================================================
-// カテゴリ表示順
-var SEL_CAT_ORDER = ['cut','surface','heat','forge','edm','ndt','composite'];
-// ステップ2チップマップ（カテゴリ別詳細条件）
-var SEL_STEP2_MAP = {
-  cut:       ['小型(〜300mm)', '中型(〜1000mm)', '大型(1000mm〜)', '5軸加工', 'φ500以上', 'φ1000以上'],
-  surface:   ['陽極酸化', '硬質アルマイト', 'Nadcap-CP', 'Nadcap-Coat', 'AMS2750', 'MIL規格'],
-  heat:      ['真空熱処理', 'ろう付け', 'HIP', 'AMS2750', 'Nadcap-HT', 'AMS2750 Class2以上'],
-  forge:     ['型鍛造', '自由鍛造', 'ダイカスト', 'アルミ鍛造', 'チタン鍛造', '1000t以上プレス'],
-  edm:       ['ワイヤー放電', '形彫り放電', 'レーザー切断', 'ウォータージェット', '電解加工'],
-  ndt:       ['浸透探傷(FPI)', '磁粉探傷(MT)', '超音波探傷(UT)', 'X線検査(RT)', 'Nadcap-NDT'],
-  composite: ['オートクレーブ成形', 'RTM', 'フィラメントワインディング', 'CFRP', 'GFRP'],
-};
 let selState = { step: 1, cat: null, sizeKw: '', certs: [] };
 
 function openSelectionPanel() {
-  // ドロワーが開いていたら閉じる
-  if(typeof closeDrawer==='function') closeDrawer();
   selState = { step: 1, cat: null, sizeKw: '', certs: [] };
   window.selSizeKw = '';
   window.selCerts = [];
   renderSelStep();
   document.getElementById('selection-panel').style.transform = 'translateY(0)';
-  setTimeout(function(){ if(typeof map !== 'undefined' && map) map.invalidateSize(); }, 360);
 }
 function closeSelectionPanel() {
   document.getElementById('selection-panel').style.transform = 'translateY(100%)';
-  setTimeout(function(){ if(typeof map !== 'undefined' && map) map.invalidateSize(); }, 360);
-}
-function clearSelectionPanel() {
-  // 選定パネル起因のフィルターを全解除してSTEP1に戻す
-  selState = { step: 1, cat: null, sizeKw: '', certs: [] };
-  window.selSizeKw = '';
-  window.selCerts = [];
-  // カテゴリフィルターを全解除（選定パネルが絞り込んでいた分を戻す）
-  filterCats = new Set(Object.keys(CATEGORIES));
-  applyFilters();
-  renderSelStep();
 }
 
 function renderSelStep() {
@@ -3780,7 +3755,7 @@ function selCat(key) {
 
 function renderSelStep2(body) {
   var val = selState.sizeKw || '';
-  body.innerHTML = '<div style="margin-bottom:16px;">'    + '<div style="font-size:11px;color:#8899aa;margin-bottom:8px;font-family:\'Share Tech Mono\',monospace;letter-spacing:1px;">'    + '設備・サイズキーワード</div>'    + '<input id="sel-size-inp" type="text" value="' + val.replace(/"/g,'&quot;') + '"'    + ' placeholder="例: 1000mm, φ500, 真空浸炭, 大型..."'    + ' style="width:100%;background:rgba(0,0,0,.4);border:1px solid #1e2d4a;color:#e8f4fd;padding:10px 14px;border-radius:4px;font-size:13px;box-sizing:border-box;outline:none;"'    + ' oninput="selState.sizeKw=this.value;window.selSizeKw=this.value.trim().toLowerCase();applyFilters()"'    + ' onfocus="this.style.borderColor=\'#00d4ff\'"'    + ' onblur="this.style.borderColor=\'#1e2d4a\'">'    + '<div style="font-size:10px;color:#556677;margin-top:6px;">設備情報テキストをキーワード検索します。空欄でスキップ。</div>'    + '</div>';
+  body.innerHTML = '<div style="margin-bottom:16px;">'    + '<div style="font-size:11px;color:#8899aa;margin-bottom:8px;font-family:\'Share Tech Mono\',monospace;letter-spacing:1px;">'    + '設備・サイズキーワード</div>'    + '<input id="sel-size-inp" type="text" value="' + val.replace(/"/g,'&quot;') + '"'    + ' placeholder="例: 1000mm, φ500, 真空浸炭, 大型..."'    + ' style="width:100%;background:rgba(0,0,0,.4);border:1px solid #1e2d4a;color:#e8f4fd;padding:10px 14px;border-radius:4px;font-size:13px;box-sizing:border-box;outline:none;"'    + ' oninput="selState.sizeKw=this.value"'    + ' onfocus="this.style.borderColor=\'#00d4ff\'"'    + ' onblur="this.style.borderColor=\'#1e2d4a\'">'    + '<div style="font-size:10px;color:#556677;margin-top:6px;">設備情報テキストをキーワード検索します。空欄でスキップ。</div>'    + '</div>';
 }
 
 function renderSelStep3(body) {
@@ -3829,9 +3804,6 @@ function applySelection() {
   closeSelectionPanel();
   if (selState.cat && CATEGORIES[selState.cat]) {
     filterCats = new Set([selState.cat]);
-  } else {
-    // カテゴリ未選択の場合は全カテゴリをリセット（左パネルの絞り込みを解除）
-    filterCats = new Set(Object.keys(CATEGORIES));
   }
   window.selSizeKw = selState.sizeKw.trim().toLowerCase();
   window.selCerts = selState.certs.slice();
@@ -4051,12 +4023,13 @@ function renderAll(filtered){
         <div class="card-name">${c.name.replace(/\n/g,'<br>')}${c.isWeb?'<span style="font-size:8px;color:#39ff14;margin-left:4px">✓</span>':''}</div>
         <div class="card-meta">
           <span class="card-pref" style="background:${color}15;color:${color};border-color:${color}40">${c.pref}</span>
-          <span class="card-dist" style="color:${distColor}">${c._dist??'?'}km</span>
+          <span class="card-dist" style="color:${distColor}">${c._dist}km</span>
           ${hasEquip?'<span class="card-equip-dot" title="設備データあり"></span>':''}
           ${c.equipCount>0?`<span style="font-size:9px;color:var(--accent);font-family:monospace">設${c.equipCount}</span>`:''}
           <span class="card-cat-tag" style="background:${color}15;color:${color}">${c.category||CATEGORIES[mainCat]?.label||'その他'}</span>
         </div>
-        ${/* PATCH:card-size */(c.maxX||c.maxY||c.maxZ)?`<div class="card-size">最大: ${c.maxX||'?'}×${c.maxY||'?'}×${c.maxZ||'?'}mm</div>`:''}
+        // PATCH:card-size
+        ${(c.maxX||c.maxY||c.maxZ)?`<div class="card-size">最大: ${c.maxX||'?'}×${c.maxY||'?'}×${c.maxZ||'?'}mm</div>`:''}
       </div>`;
     card.onclick=(e)=>{
       const realIdx=companies.indexOf(c);
@@ -4086,7 +4059,7 @@ function renderAll(filtered){
       ${hasEquip?`<span style="font-size:9px;background:rgba(57,255,20,.12);color:#39ff14;padding:1px 6px;border-radius:2px;font-family:monospace">設備データあり</span>`:''}
       <div class="popup-div"></div>
       <div class="popup-addr">${c.addr}${c.tel?`<br>TEL: ${c.tel}`:''}</div>
-      <div class="popup-dist" style="color:${distCol}">小牧から ${c._dist??'?'}km ／ ${logisticsCostHint(c._dist)}</div>
+      <div class="popup-dist" style="color:${distCol}">小牧から ${c._dist}km ／ ${logisticsCostHint(c._dist)}</div>
       ${equipInfo}
       ${hpLink||epLink ? `<div style="display:flex;gap:6px;margin-top:4px">${hpLink}${epLink}</div>` : ''}
     </div>`;
@@ -4207,15 +4180,6 @@ function clearFilters(){
     const ct=document.getElementById('cert-filter-toggle');
     if(ct){ ct.textContent='▶ 特殊工程認定でしぼる'; }
   }
-  // 選定パネル由来のフィルターも一緒にリセット
-  window.selSizeKw = '';
-  window.selCerts = [];
-  selState = { step: 1, cat: null, sizeKw: '', certs: [] };
-  // 社名・設備検索テキストもリセット
-  const qs = document.getElementById('q-search');
-  if(qs) qs.value = '';
-  const qe = document.getElementById('q-equip');
-  if(qe) qe.value = '';
   updateChips();
   applyFilters();
 }
@@ -4296,8 +4260,6 @@ function drawerGoBack(){
 function openDrawer(origIdx){
   const c=companies[origIdx];
   if(!c) return;
-  // 選定パネルが開いていたら閉じる
-  if(typeof closeSelectionPanel==='function') closeSelectionPanel();
   activeCard=origIdx;
   // PATCH:openDrawer-history 履歴に積む（直前と同じなら積まない）
   if(drawerHistory.length === 0 || drawerHistory[drawerHistory.length-1] !== origIdx){
@@ -4311,7 +4273,7 @@ function openDrawer(origIdx){
   document.getElementById(`card-${origIdx}`)?.classList.add('active');
   document.getElementById(`card-${origIdx}`)?.scrollIntoView({behavior:'smooth',block:'nearest'});
 
-  document.getElementById('drawer-label').textContent=`${c.pref||''} / 小牧から${c._dist!=null?c._dist:'?'}km`;
+  document.getElementById('drawer-label').textContent=`${c.pref} / 小牧から${c._dist}km`;
   document.getElementById('drawer-name').textContent=c.name.replace(/\n/g,' ');
   document.getElementById('drawer').classList.add('open');
   // PATCH:openDrawer-extras モバイルbackdrop表示
@@ -4506,7 +4468,7 @@ function renderDrawer(c){
   let html=`
     <div class="dist-card">
       <div>
-        <div class="dist-num" style="color:${distColor}">${c._dist??'?'}<span style="font-size:12px;color:var(--muted)"> km</span></div>
+        <div class="dist-num" style="color:${distColor}">${c._dist}<span style="font-size:12px;color:var(--muted)"> km</span></div>
       </div>
       <div class="dist-info">
         <div><strong>小牧発</strong> 物流目安${dqBadge}</div>
@@ -4620,7 +4582,7 @@ function renderDrawer(c){
         simHtml += `<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 10px;margin-bottom:5px;background:rgba(0,212,255,0.04);border:1px solid var(--border);border-radius:3px;cursor:pointer" onclick="openDrawer(${idx})">`
           + `<div><div style="font-size:12px;font-weight:700;color:var(--text)">${co.name.replace(/\n/g,' ')}</div>`
           + `<div style="font-size:10px;color:${cc};margin-top:1px">${co.cats.map(k=>CATEGORIES[k]?.label||k).join(' / ')}</div>`
-          + `<div style="font-size:10px;color:${dc};margin-top:1px">${co._dist??'?'}km</div></div>`
+          + `<div style="font-size:10px;color:${dc};margin-top:1px">${co._dist}km</div></div>`
           + `<div style="display:flex;align-items:center;gap:6px">`
           + `<span style="font-size:9px;font-family:monospace;color:var(--muted)">${Math.round(score*100)}%</span>`
           + `<button onclick="event.stopPropagation();toggleSelect(${idx})" style="background:none;border:1px solid var(--border);color:var(--muted);border-radius:3px;padding:2px 7px;font-size:11px;cursor:pointer" title="ストックに追加">+</button>`
@@ -5409,12 +5371,6 @@ function checkPw(){
 }
 document.getElementById('pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw();});
 if(sessionStorage.getItem(SK)==='1') document.getElementById('pw-screen').remove();
-// URLハッシュによる自動ログイン（#pw=パスワード 形式）
-if(location.hash && location.hash.startsWith('#pw=')){
-  const hashPw = decodeURIComponent(location.hash.slice(4));
-  if(hashPw===PW){sessionStorage.setItem(SK,'1');const s=document.getElementById('pw-screen');if(s)s.remove();}
-  history.replaceState(null,'',location.pathname+location.search);
-}
 
 // ================================================================
 // CSVエクスポート（パスワード保護）
@@ -6051,8 +6007,8 @@ const TUTORIAL_STEPS = [
     body: '小牧拠点から見た航空宇宙メーカー <em>1,635社</em> をマッピング。<br>距離・工程・OASIS認証・設備サイズなどで複合検索できる。<br><br>30秒で使い方を案内するから、ざっと見ていって。',
   },
   {
-    target: '#selection-open-btn',
-    title: '<span>メーカーを探す</span>はここから',
+    target: '#btn-selector',
+    title: '<span>メーカー選定</span>はここから',
     body: 'これがメイン機能。<br>工程カテゴリ・OASIS業種・認証規格・距離レンジ・設備サイズなどを<em>複合条件</em>で絞り込める。<br><br>キーボード <span class="tut-keyhint">S</span> でも開ける。',
     placement: 'bottom-right',
   },
@@ -6279,7 +6235,7 @@ document.addEventListener('keydown', e=>{
     e.preventDefault();
     startTutorial(true);
   } else if(e.key==='s' || e.key==='S'){
-    if(typeof openSelectionPanel === 'function') openSelectionPanel();
+    if(typeof openSelectorModal === 'function') openSelectorModal();
   }
 });
 
@@ -6776,30 +6732,15 @@ function toggleLogisticsMode(){
 }
 
 // ================================================================
-// 初期化実行（JSON fetch版）
+// 初期化実行
 // ================================================================
-fetch('./manufacturers.json')
-  .then(r => r.json())
-  .then(data => {
-    companies = data;
-    companies.forEach(c => { c._dist = Math.round(haversineKm(KOMAKI.lat,KOMAKI.lng,c.lat,c.lng)); });
-    initCatChips();
-    initPrefSelect();
-    initOasisCatChips();
-    initLegend();
-    updateEquipCounts();
-    applyFilters();
-    setTimeout(() => startTutorial(false), 600);
-  })
-  .catch(err => {
-    console.error('[ERROR] manufacturers.json 読み込み失敗:', err);
-    // フォールバック: データなしで初期化
-    initCatChips();
-    initPrefSelect();
-    initOasisCatChips();
-    initLegend();
-    applyFilters();
-  });
+initCatChips();
+initPrefSelect();
+initOasisCatChips();
+initLegend();
+updateEquipCounts();
+applyFilters();
+setTimeout(()=>startTutorial(false), 600);
 </script>
 </body>
 </html>
