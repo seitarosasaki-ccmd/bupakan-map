@@ -5472,6 +5472,8 @@ let selectorViewMode = 'filter'; // 'filter' = 非選定を非表示, 'highlight
 const WZ_STATE = {step:1, selectedCnt:0, checkedIds:new Set(), sort:'dist'};
 
 function openSelectorModal(){
+  var __wp=document.getElementById('wo-panel');
+  if(__wp){ __wp.style.display=(__wp.style.display==='none'||!__wp.style.display?'block':'none'); return; }
   // 初回のみテンプレチップ生成
   initSelectorTemplates();
   // SELECTOR_STATE をリセット
@@ -6747,7 +6749,7 @@ setTimeout(()=>startTutorial(false), 600);
 </script>
 <!-- ===== ワーク起点メーカー選定（2026-05-31統合・外部JSON fetch） ===== -->
 <style>
-#wo-fab{position:fixed;right:18px;bottom:18px;z-index:9000;background:#0d1b2a;color:#39ff14;border:1px solid #39ff14;border-radius:24px;padding:10px 16px;font-size:14px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.4);font-family:inherit;}
+#wo-fab{display:none !important;position:fixed;right:18px;bottom:18px;z-index:9000;background:#0d1b2a;color:#39ff14;border:1px solid #39ff14;border-radius:24px;padding:10px 16px;font-size:14px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.4);font-family:inherit;}
 #wo-panel{position:fixed;right:18px;bottom:70px;z-index:9000;width:362px;max-height:76vh;overflow:auto;background:#0d1b2a;color:#e6eef5;border:1px solid #2a3f55;border-radius:10px;padding:14px;box-shadow:0 4px 24px rgba(0,0,0,.5);font-size:13px;}
 #wo-panel h3{margin:0 0 4px;font-size:15px;color:#39ff14;}
 .wo-chip{font-size:12px;padding:4px 9px;border-radius:6px;border:1px solid #2a3f55;background:transparent;color:#e6eef5;cursor:pointer;margin:0 4px 4px 0;}
