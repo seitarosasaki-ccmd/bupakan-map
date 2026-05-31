@@ -3701,9 +3701,11 @@ function openSelectionPanel() {
   window.selCerts = [];
   renderSelStep();
   document.getElementById('selection-panel').style.transform = 'translateY(0)';
+  setTimeout(function(){ if(typeof map !== 'undefined' && map) map.invalidateSize(); }, 360);
 }
 function closeSelectionPanel() {
   document.getElementById('selection-panel').style.transform = 'translateY(100%)';
+  setTimeout(function(){ if(typeof map !== 'undefined' && map) map.invalidateSize(); }, 360);
 }
 
 function renderSelStep() {
@@ -3823,6 +3825,8 @@ function getFilteredSorted(){
   const qe = normQ(document.getElementById('q-equip')?.value);
   return companies
     .filter(c=>{
+      // ワーク起点選定の結果ハイライト（selOinSet集合があればそのOINのみ表示）
+      if(window.selOinSet && window.selOinSet.size){ if(!c.oin || !window.selOinSet.has(String(c.oin))) return false; }
       // 社名・住所・備考・設備テキスト 検索 + alias展開（追加→拡張）
       if(q){
         const nName = normQ(c.name), nAddr = normQ(c.addr);
@@ -6740,6 +6744,85 @@ initLegend();
 updateEquipCounts();
 applyFilters();
 setTimeout(()=>startTutorial(false), 600);
+</script>
+<!-- ===== ワーク起点メーカー選定（2026-05-31統合・外部JSON fetch） ===== -->
+<style>
+#wo-fab{position:fixed;right:18px;bottom:18px;z-index:9000;background:#0d1b2a;color:#39ff14;border:1px solid #39ff14;border-radius:24px;padding:10px 16px;font-size:14px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.4);font-family:inherit;}
+#wo-panel{position:fixed;right:18px;bottom:70px;z-index:9000;width:362px;max-height:76vh;overflow:auto;background:#0d1b2a;color:#e6eef5;border:1px solid #2a3f55;border-radius:10px;padding:14px;box-shadow:0 4px 24px rgba(0,0,0,.5);font-size:13px;}
+#wo-panel h3{margin:0 0 4px;font-size:15px;color:#39ff14;}
+.wo-chip{font-size:12px;padding:4px 9px;border-radius:6px;border:1px solid #2a3f55;background:transparent;color:#e6eef5;cursor:pointer;margin:0 4px 4px 0;}
+.wo-chip.on{border-color:#39ff14;color:#39ff14;background:rgba(57,255,20,.10);}
+.wo-step{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid #2a3f55;border-radius:6px;margin-bottom:4px;cursor:pointer;}
+.wo-step.on{border-color:#39ff14;background:rgba(57,255,20,.12);}
+.wo-step.self{opacity:.5;cursor:default;}
+.wo-step .wn{flex:1;font-size:12px;}
+.wo-step .wc{font-family:monospace;font-size:12px;color:#9fe1cb;}
+.wo-ph{font-size:9px;color:#7a8aa0;width:56px;flex-shrink:0;}
+.wo-bn{color:#ffb300;}
+.wo-btn{font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #2a3f55;background:transparent;color:#e6eef5;cursor:pointer;}
+</style>
+<button id="wo-fab">&#127919; ワーク起点で選定</button>
+<div id="wo-panel" style="display:none">
+  <h3>ワーク起点でメーカー選定</h3>
+  <div style="font-size:11px;color:#7a8aa0;margin-bottom:6px">作りたい物のおおまかな分類を選ぶ</div>
+  <div style="font-size:11px;color:#7a8aa0;margin:4px 0">材料</div><div id="wo-mat"></div>
+  <div style="font-size:11px;color:#7a8aa0;margin:6px 0 4px">形状</div><div id="wo-shp"></div>
+  <div id="wo-title" style="margin:8px 0;font-weight:bold;color:#39ff14"></div>
+  <div id="wo-flow"></div>
+  <div style="display:flex;gap:6px;margin-top:10px">
+    <button class="wo-btn" id="wo-clear">ハイライト解除</button>
+    <button class="wo-btn" id="wo-csv">CSV書き出し</button>
+  </div>
+  <div style="font-size:10px;color:#7a8aa0;margin-top:8px;line-height:1.5">工程をクリック→その工程の対応メーカーを地図にハイライト。<span style="color:#ffb300">&#9679;</span>=ボトルネック(20社未満)。付帯=単独発注しない工程(自社実施・他工程内包)。</div>
+</div>
+<script>
+(function(){
+var WE=null,PI=null,BP=null,curMat='アルミ',curShp='角',curProc=null;
+var PHS=['荒加工','熱処理','仕上加工','検査(探傷)','表面処理','最終検査'];
+var MATS=['アルミ','鉄','耐熱・耐食鋼','チタン','インコネル'],SHPS=['円筒','角','複雑'];
+var MATD={'アルミ':'軽量・非鉄','鉄':'鋼・強度','耐熱・耐食鋼':'ステンレス系','チタン':'難削・高比強度','インコネル':'耐熱合金'};
+var SHPD={'円筒':'丸物・回転体','角':'角物・板物','複雑':'複雑形状'};
+var SELF={'硬さ検査':'自社/検査','外観検査':'自社/検査','膜厚測定':'自社/検査','歪修正':'仕上に内包','ザイグロ前エッチング':'FPIに内包'};
+var fb=document.getElementById('wo-fab');
+fb.onclick=function(){var p=document.getElementById('wo-panel');p.style.display=(p.style.display==='none'?'block':'none');};
+Promise.all([
+ fetch('work_envelope_by_oin.json').then(function(r){return r.json();}).catch(function(){return{};}),
+ fetch('process_maker_index.json').then(function(r){return r.json();}).catch(function(){return{};}),
+ fetch('b_presets.json').then(function(r){return r.json();}).catch(function(){return{};})
+]).then(function(a){WE=a[0];PI=a[1];BP=(a[2]&&a[2].presets)||a[2]||{};build();});
+function chips(id,arr,cur,fn){var el=document.getElementById(id);el.innerHTML='';arr.forEach(function(v){var b=document.createElement('button');b.className='wo-chip'+(v===cur?' on':'');b.textContent=v;b.onclick=function(){fn(v);};el.appendChild(b);});}
+function build(){
+ chips('wo-mat',MATS,curMat,function(v){curMat=v;curProc=null;build();});
+ chips('wo-shp',SHPS,curShp,function(v){curShp=v;curProc=null;build();});
+ var key=curMat+'|'+curShp;
+ document.getElementById('wo-title').textContent=curMat+' × '+curShp+'（'+(MATD[curMat]||'')+' / '+(SHPD[curShp]||'')+'）';
+ var pre=(BP[key]&&BP[key].phases)||{};
+ var html='';
+ PHS.forEach(function(ph){(pre[ph]||[]).forEach(function(w){
+   if(SELF[w]){html+='<div class="wo-step self"><span class="wo-ph">'+ph+'</span><span class="wn">'+w+'</span><span class="wc">付帯('+SELF[w]+')</span></div>';return;}
+   var d=PI[w];var c=d?d.count:0;var bn=(c>0&&c<20);
+   html+='<div class="wo-step'+(curProc===w?' on':'')+'" data-w="'+w+'"><span class="wo-ph">'+ph+'</span><span class="wn">'+(bn?'● ':'')+w+'</span><span class="wc'+(bn?' wo-bn':'')+'">'+(d?c+'社':'—')+'</span></div>';
+ });});
+ document.getElementById('wo-flow').innerHTML=html||'<div style="color:#7a8aa0">この組み合わせのプリセット未登録</div>';
+ Array.prototype.forEach.call(document.querySelectorAll('#wo-flow .wo-step[data-w]'),function(el){el.onclick=function(){selectProc(el.getAttribute('data-w'));};});
+}
+function selectProc(w){
+ var d=PI[w];if(!d){return;}
+ curProc=w;
+ window.selOinSet=new Set((d.makers||[]).map(function(m){return String(m.oin);}));
+ if(typeof applyFilters==='function')applyFilters();
+ build();
+}
+document.getElementById('wo-clear').onclick=function(){window.selOinSet=null;curProc=null;if(typeof applyFilters==='function')applyFilters();build();};
+document.getElementById('wo-csv').onclick=function(){
+ if(!curProc||!PI[curProc]){alert('工程をクリックして選んでください');return;}
+ var d=PI[curProc];var rows=[['oin','name','工程']];
+ (d.makers||[]).forEach(function(m){rows.push([m.oin,String(m.name||'').replace(/[,\n]/g,' '),curProc]);});
+ var csv=rows.map(function(r){return r.join(',');}).join('\n');
+ var blob=new Blob(['﻿'+csv],{type:'text/csv'});var u=URL.createObjectURL(blob);
+ var a=document.createElement('a');a.href=u;a.download='選定_'+curMat+'_'+curShp+'_'+curProc+'.csv';a.click();URL.revokeObjectURL(u);
+};
+})();
 </script>
 </body>
 </html>
