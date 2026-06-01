@@ -269,9 +269,8 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
 .equip-table tr:hover td{background:rgba(0,212,255,.04)}
 .e-cat{font-size:9px;padding:1px 5px;border-radius:2px;
   background:rgba(0,212,255,.12);color:var(--accent);white-space:nowrap}
-.e-model{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted);
-  margin-top:2px;white-space:pre-line}
-.e-size{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--muted2)}
+/* PATCH:e-model-css */.e-model{font-size:11px;color:#b0bec5;margin-top:3px;white-space:pre-wrap;line-height:1.6}
+/* PATCH:e-size-css */.e-size{font-size:11px;color:#00d4ff;font-weight:600}
 
 .no-equip{text-align:center;padding:20px;color:var(--muted);font-size:11px;line-height:1.7}
 .no-equip-icon{font-size:24px;margin-bottom:8px}
@@ -1128,12 +1127,12 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
 #hover-popup .hp-name { font-weight:700; color:#fff; font-size:12px; }
 #hover-popup .hp-cat  { color:rgba(0,212,255,.8); font-size:10px; margin-top:2px; }
 #hover-popup .hp-size { color:#888; font-size:10px; margin-top:2px; }
-/* ズームレベル別ピンスケール */
-#map[data-zl="xs"] .leaflet-marker-icon{transform:scale(0.28);transform-origin:center bottom}
-#map[data-zl="sm"] .leaflet-marker-icon{transform:scale(0.45);transform-origin:center bottom}
-#map[data-zl="md"] .leaflet-marker-icon{transform:scale(0.65);transform-origin:center bottom}
-#map[data-zl="lg"] .leaflet-marker-icon{transform:scale(0.85);transform-origin:center bottom}
-#map[data-zl="xl"] .leaflet-marker-icon{transform:scale(1.0);transform-origin:center bottom}
+/* PATCH:zoom-pin-scale */
+#map[data-zl="xs"] .leaflet-div-icon>svg{transform:scale(0.28);transform-origin:center bottom}
+#map[data-zl="sm"] .leaflet-div-icon>svg{transform:scale(0.45);transform-origin:center bottom}
+#map[data-zl="md"] .leaflet-div-icon>svg{transform:scale(0.65);transform-origin:center bottom}
+#map[data-zl="lg"] .leaflet-div-icon>svg{transform:scale(0.85);transform-origin:center bottom}
+#map[data-zl="xl"] .leaflet-div-icon>svg{transform:scale(1.0);transform-origin:center bottom}
 </style>
 </head>
 <body>
@@ -1143,9 +1142,9 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   <div class="pw-box">
     <div class="pw-logo">AEROSPACE SUPPLIER</div>
     <div class="pw-title">メーカー<span>マップ</span></div>
+    <div class="pw-sub">AUTHORIZED ACCESS ONLY</div>
     <div style="display:inline-block;background:rgba(0,212,255,.12);border:1px solid #00d4ff;color:#00d4ff;font-size:10px;font-family:'Share Tech Mono',monospace;letter-spacing:2px;padding:3px 12px;border-radius:3px;margin:8px 0 4px;">β VERSION — 試験運用中</div>
     <div style="font-size:10px;color:#556677;margin-bottom:16px;font-family:'Share Tech Mono',monospace;">フィードバック大歓迎 / 無断転載・転用禁止</div>
-    <div class="pw-sub">AUTHORIZED ACCESS ONLY</div>
     <div class="pw-field">
       <input type="password" id="pw-input" placeholder="PASSWORD" autocomplete="off" autofocus/>
       <button class="pw-toggle" onclick="document.getElementById('pw-input').type=document.getElementById('pw-input').type==='password'?'text':'password'" tabindex="-1">👁</button>
@@ -1178,10 +1177,11 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     <div class="h-count"><strong id="shown-count">—</strong>件表示</div>
     <button class="btn-hdr" onclick="flyToKomaki()">東海</button>
     <button class="btn-hdr" onclick="flyToJapan()">全国</button>
-    <button class="btn-hdr" onclick="openModal()">＋ 追加</button>
+    
     <button class="btn-hdr green" onclick="openOasisModal()">⬡ OASIS</button>
-    <button class="btn-hdr" onclick="exportCSV()" style="border-color:rgba(255,200,0,.35);color:#ffc800" title="全企業データをCSVダウンロード">↓ CSV</button>
+    
     <button class="btn-hdr" id="btn-logistics" onclick="toggleLogisticsMode()" title="物流分析モード（IC・新幹線駅・空港を表示）" style="border-color:rgba(255,153,0,.45);color:#ff9900">🚚 物流</button>
+    <button class="btn-hdr selector-btn" id="btn-selector" disabled style="opacity:0.3;cursor:not-allowed;" onclick="var p=document.getElementById('wo-panel');p.style.display=(p.style.display==='none'?'block':'none');" title="ワーク起点でメーカー選定">⚡ メーカー選定</button>
     <button class="btn-help" onclick="startTutorial(true)" title="操作説明を再表示（?キー）" id="btn-help">?</button>
   </div>
 </header>
@@ -1219,7 +1219,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
              placeholder="例：イーグル工業／愛知県" autocomplete="off"
              oninput="onSearchInput()"
              oncompositionstart="_imeComposing=true"
-             oncompositionend="_imeComposing=false;onSearchInput()"/>
+             oncompositionend="onCompositionEnd()"/>
     </div>
 
     <!-- 設備名称 検索（追加） -->
@@ -1229,7 +1229,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
              placeholder="例：EBW／マシニングセンタ／HIP" autocomplete="off"
              oninput="onSearchInput()"
              oncompositionstart="_imeComposing=true"
-             oncompositionend="_imeComposing=false;onSearchInput()"/>
+             oncompositionend="onCompositionEnd()"/>
     </div>
 
     <!-- カテゴリ -->
@@ -1296,7 +1296,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   <!-- 選定ボタン（マップ右上に配置） -->
   <button id="selection-open-btn" onclick="openSelectionPanel()"
     style="position:absolute;top:12px;right:420px;z-index:800;background:#0f1628;border:1px solid #00d4ff;color:#00d4ff;padding:8px 16px;border-radius:4px;font-size:12px;cursor:pointer;font-family:'Share Tech Mono',monospace;letter-spacing:1px;transition:.2s;box-shadow:0 0 12px rgba(0,212,255,.2);">
-    メーカーを選ぶ
+    🔍 メーカーを選ぶ
   </button>
   <div id="selection-panel" style="position:absolute;bottom:0;left:0;right:0;z-index:900;background:#0f1628;border-top:2px solid #00d4ff;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);max-height:60vh;display:flex;flex-direction:column;box-shadow:0 -8px 32px rgba(0,0,0,.6);">
     <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid #1e2d4a;">
@@ -3475,15 +3475,20 @@ lightTileLayer.on('tileerror', function(e){
   if(e.tile) e.tile.style.opacity = '0';
 });
 
-// ピンのズームスケール更新（data-zl属性をマップ要素にセット → CSS側でscale制御）
+// Zoom/Move完了時に選択ピンのスポットライト再描画（ピン位置ずれ対策）
+map.on('zoomend moveend', ()=>{
+  if(typeof window._reapplySelectionSpotlights === 'function'){
+    setTimeout(()=>window._reapplySelectionSpotlights(), 50);
+  }
+});
+
+// PATCH:update-pin-scale-fn
 function updatePinScale() {
   var z = map.getZoom();
   var zl = z <= 7 ? 'xs' : z <= 9 ? 'sm' : z <= 11 ? 'md' : z <= 13 ? 'lg' : 'xl';
   document.getElementById('map').setAttribute('data-zl', zl);
 }
-updatePinScale(); // 初期適用
-
-// Zoom/Move完了時に選択ピンのスポットライト再描画（ピン位置ずれ対策）
+updatePinScale();
 map.on('zoomend moveend', ()=>{
   updatePinScale();
   if(typeof window._reapplySelectionSpotlights === 'function'){
@@ -3636,6 +3641,14 @@ const COMPANY_ALIASES = {"yoshii plant, chugoku kayaku co., ltd.":["YOSHII PLANT
 // IME変換中フラグ + debounce タイマー（追加）
 let _imeComposing = false;
 let _searchTimer = null;
+// compositionend ハンドラ：_imeComposing をリセットし applyFilters を直接スケジュール。
+// onSearchInput() は呼ばない（二重発火防止）。
+// Chrome/Edge 等で input が compositionend より先に発火するケースに対応。
+function onCompositionEnd(){
+  _imeComposing = false;
+  clearTimeout(_searchTimer);
+  _searchTimer = setTimeout(applyFilters, 50);
+}
 function onSearchInput(){
   if(_imeComposing) return;          // IME変換中はスキップ
   clearTimeout(_searchTimer);
@@ -3690,18 +3703,6 @@ function toggleCertChip(el) {
 // ================================================================
 // 選定パネル（ボトムシート）
 // ================================================================
-// カテゴリ表示順
-var SEL_CAT_ORDER = ['cut','surface','heat','forge','edm','ndt','composite'];
-// ステップ2チップマップ（カテゴリ別詳細条件）
-var SEL_STEP2_MAP = {
-  cut:       ['小型(〜300mm)', '中型(〜1000mm)', '大型(1000mm〜)', '5軸加工', 'φ500以上', 'φ1000以上'],
-  surface:   ['陽極酸化', '硬質アルマイト', 'Nadcap-CP', 'Nadcap-Coat', 'AMS2750', 'MIL規格'],
-  heat:      ['真空熱処理', 'ろう付け', 'HIP', 'AMS2750', 'Nadcap-HT', 'AMS2750 Class2以上'],
-  forge:     ['型鍛造', '自由鍛造', 'ダイカスト', 'アルミ鍛造', 'チタン鍛造', '1000t以上プレス'],
-  edm:       ['ワイヤー放電', '形彫り放電', 'レーザー切断', 'ウォータージェット', '電解加工'],
-  ndt:       ['浸透探傷(FPI)', '磁粉探傷(MT)', '超音波探傷(UT)', 'X線検査(RT)', 'Nadcap-NDT'],
-  composite: ['オートクレーブ成形', 'RTM', 'フィラメントワインディング', 'CFRP', 'GFRP'],
-};
 let selState = { step: 1, cat: null, sizeKw: '', certs: [] };
 
 function openSelectionPanel() {
@@ -3765,7 +3766,7 @@ function selCat(key) {
 
 function renderSelStep2(body) {
   var val = selState.sizeKw || '';
-  body.innerHTML = '<div style="margin-bottom:16px;">'    + '<div style="font-size:11px;color:#8899aa;margin-bottom:8px;font-family:\'Share Tech Mono\',monospace;letter-spacing:1px;">'    + '設備・サイズキーワード</div>'    + '<input id="sel-size-inp" type="text" value="' + val.replace(/"/g,'&quot;') + '"'    + ' placeholder="例: 1000mm, φ500, 真空浸炭, 大型..."'    + ' style="width:100%;background:rgba(0,0,0,.4);border:1px solid #1e2d4a;color:#e8f4fd;padding:10px 14px;border-radius:4px;font-size:13px;box-sizing:border-box;outline:none;"'    + ' oninput="selState.sizeKw=this.value;window.selSizeKw=this.value.trim().toLowerCase();applyFilters()"'    + ' onfocus="this.style.borderColor=\'#00d4ff\'"'    + ' onblur="this.style.borderColor=\'#1e2d4a\'">'    + '<div style="font-size:10px;color:#556677;margin-top:6px;">設備情報テキストをキーワード検索します。空欄でスキップ。</div>'    + '</div>';
+  body.innerHTML = '<div style="margin-bottom:16px;">'    + '<div style="font-size:11px;color:#8899aa;margin-bottom:8px;font-family:\'Share Tech Mono\',monospace;letter-spacing:1px;">'    + '設備・サイズキーワード</div>'    + '<input id="sel-size-inp" type="text" value="' + val.replace(/"/g,'&quot;') + '"'    + ' placeholder="例: 1000mm, φ500, 真空浸炭, 大型..."'    + ' style="width:100%;background:rgba(0,0,0,.4);border:1px solid #1e2d4a;color:#e8f4fd;padding:10px 14px;border-radius:4px;font-size:13px;box-sizing:border-box;outline:none;"'    + ' oninput="selState.sizeKw=this.value"'    + ' onfocus="this.style.borderColor=\'#00d4ff\'"'    + ' onblur="this.style.borderColor=\'#1e2d4a\'">'    + '<div style="font-size:10px;color:#556677;margin-top:6px;">設備情報テキストをキーワード検索します。空欄でスキップ。</div>'    + '</div>';
 }
 
 function renderSelStep3(body) {
@@ -3814,9 +3815,6 @@ function applySelection() {
   closeSelectionPanel();
   if (selState.cat && CATEGORIES[selState.cat]) {
     filterCats = new Set([selState.cat]);
-  } else {
-    // カテゴリ未選択の場合は全カテゴリをリセット（左パネルの絞り込みを解除）
-    filterCats = new Set(Object.keys(CATEGORIES));
   }
   window.selSizeKw = selState.sizeKw.trim().toLowerCase();
   window.selCerts = selState.certs.slice();
@@ -3837,6 +3835,8 @@ function getFilteredSorted(){
   const qe = normQ(document.getElementById('q-equip')?.value);
   return companies
     .filter(c=>{
+      // ワーク起点選定の結果ハイライト（selOinSet集合があればそのOINのみ表示）
+      if(window.selOinSet && window.selOinSet.size){ if(!c.oin || !window.selOinSet.has(String(c.oin))) return false; }
       // 社名・住所・備考・設備テキスト 検索 + alias展開（追加→拡張）
       if(q){
         const nName = normQ(c.name), nAddr = normQ(c.addr);
@@ -4193,10 +4193,6 @@ function clearFilters(){
     const ct=document.getElementById('cert-filter-toggle');
     if(ct){ ct.textContent='▶ 特殊工程認定でしぼる'; }
   }
-  // 選定パネル由来のフィルターも一緒にリセット
-  window.selSizeKw = '';
-  window.selCerts = [];
-  selState = { step: 1, cat: null, sizeKw: '', certs: [] };
   updateChips();
   applyFilters();
 }
@@ -6030,8 +6026,8 @@ const TUTORIAL_STEPS = [
     body: '小牧拠点から見た航空宇宙メーカー <em>1,635社</em> をマッピング。<br>距離・工程・OASIS認証・設備サイズなどで複合検索できる。<br><br>30秒で使い方を案内するから、ざっと見ていって。',
   },
   {
-    target: '#selection-open-btn',
-    title: '<span>メーカーを選ぶ</span>はここから',
+    target: '#btn-selector',
+    title: '<span>メーカー選定</span>はここから',
     body: 'これがメイン機能。<br>工程カテゴリ・OASIS業種・認証規格・距離レンジ・設備サイズなどを<em>複合条件</em>で絞り込める。<br><br>キーボード <span class="tut-keyhint">S</span> でも開ける。',
     placement: 'bottom-right',
   },
@@ -6258,7 +6254,7 @@ document.addEventListener('keydown', e=>{
     e.preventDefault();
     startTutorial(true);
   } else if(e.key==='s' || e.key==='S'){
-    if(typeof openSelectionPanel === 'function') openSelectionPanel();
+    if(typeof openSelectorModal === 'function') openSelectorModal();
   }
 });
 
@@ -6755,29 +6751,104 @@ function toggleLogisticsMode(){
 }
 
 // ================================================================
-// 初期化実行（JSON fetch版）
+// 初期化実行
 // ================================================================
 fetch('./manufacturers.json')
   .then(r => r.json())
   .then(data => {
     companies = data;
+    companies.forEach(c => { c._dist = Math.round(haversineKm(KOMAKI.lat, KOMAKI.lng, c.lat, c.lng)); });
     initCatChips();
     initPrefSelect();
     initOasisCatChips();
     initLegend();
     updateEquipCounts();
     applyFilters();
-    setTimeout(() => startTutorial(false), 600);
+    setTimeout(()=>startTutorial(false), 600);
   })
-  .catch(err => {
-    console.error('[ERROR] manufacturers.json 読み込み失敗:', err);
-    // フォールバック: データなしで初期化
-    initCatChips();
-    initPrefSelect();
-    initOasisCatChips();
-    initLegend();
-    applyFilters();
-  });
+  .catch(err => { console.error('manufacturers.json load error:', err); });
+</script>
+<!-- ===== ワーク起点メーカー選定（2026-05-31統合・外部JSON fetch） ===== -->
+<style>
+#wo-fab{display:none !important;position:fixed;right:18px;bottom:18px;z-index:9000;background:#0d1b2a;color:#39ff14;border:1px solid #39ff14;border-radius:24px;padding:10px 16px;font-size:14px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.4);font-family:inherit;}
+#wo-panel{position:fixed;right:18px;bottom:70px;z-index:9000;width:362px;max-height:76vh;overflow:auto;background:#0d1b2a;color:#e6eef5;border:1px solid #2a3f55;border-radius:10px;padding:14px;box-shadow:0 4px 24px rgba(0,0,0,.5);font-size:13px;}
+#wo-panel h3{margin:0 0 4px;font-size:15px;color:#39ff14;}
+.wo-chip{font-size:12px;padding:4px 9px;border-radius:6px;border:1px solid #2a3f55;background:transparent;color:#e6eef5;cursor:pointer;margin:0 4px 4px 0;}
+.wo-chip.on{border-color:#39ff14;color:#39ff14;background:rgba(57,255,20,.10);}
+.wo-step{display:flex;align-items:center;gap:8px;padding:6px 8px;border:1px solid #2a3f55;border-radius:6px;margin-bottom:4px;cursor:pointer;}
+.wo-step.on{border-color:#39ff14;background:rgba(57,255,20,.12);}
+.wo-step.self{opacity:.5;cursor:default;}
+.wo-step .wn{flex:1;font-size:12px;}
+.wo-step .wc{font-family:monospace;font-size:12px;color:#9fe1cb;}
+.wo-ph{font-size:9px;color:#7a8aa0;width:56px;flex-shrink:0;}
+.wo-bn{color:#ffb300;}
+.wo-btn{font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #2a3f55;background:transparent;color:#e6eef5;cursor:pointer;}
+</style>
+<button id="wo-fab">&#127919; ワーク起点で選定</button>
+<div id="wo-panel" style="display:none">
+  <h3>ワーク起点でメーカー選定</h3>
+  <div style="font-size:11px;color:#7a8aa0;margin-bottom:6px">作りたい物のおおまかな分類を選ぶ</div>
+  <div style="font-size:11px;color:#7a8aa0;margin:4px 0">材料</div><div id="wo-mat"></div>
+  <div style="font-size:11px;color:#7a8aa0;margin:6px 0 4px">形状</div><div id="wo-shp"></div>
+  <div id="wo-title" style="margin:8px 0;font-weight:bold;color:#39ff14"></div>
+  <div id="wo-flow"></div>
+  <div style="display:flex;gap:6px;margin-top:10px">
+    <button class="wo-btn" id="wo-clear">ハイライト解除</button>
+    <button class="wo-btn" id="wo-csv">CSV書き出し</button>
+  </div>
+  <div style="font-size:10px;color:#7a8aa0;margin-top:8px;line-height:1.5">工程をクリック→その工程の対応メーカーを地図にハイライト。<span style="color:#ffb300">&#9679;</span>=ボトルネック(20社未満)。付帯=単独発注しない工程(自社実施・他工程内包)。</div>
+</div>
+<script>
+(function(){
+var WE=null,PI=null,BP=null,curMat='アルミ',curShp='角',curProc=null;
+var PHS=['荒加工','熱処理','仕上加工','検査(探傷)','表面処理','最終検査'];
+var MATS=['アルミ','鉄','耐熱・耐食鋼','チタン','インコネル'],SHPS=['円筒','角','複雑'];
+var MATD={'アルミ':'軽量・非鉄','鉄':'鋼・強度','耐熱・耐食鋼':'ステンレス系','チタン':'難削・高比強度','インコネル':'耐熱合金'};
+var SHPD={'円筒':'丸物・回転体','角':'角物・板物','複雑':'複雑形状'};
+var SELF={'硬さ検査':'自社/検査','外観検査':'自社/検査','膜厚測定':'自社/検査','歪修正':'仕上に内包','ザイグロ前エッチング':'FPIに内包'};
+var fb=document.getElementById('wo-fab');
+fb.onclick=function(){var p=document.getElementById('wo-panel');p.style.display=(p.style.display==='none'?'block':'none');};
+Promise.all([
+ fetch('work_envelope_by_oin.json').then(function(r){return r.json();}).catch(function(){return{};}),
+ fetch('process_maker_index.json').then(function(r){return r.json();}).catch(function(){return{};}),
+ fetch('b_presets.json').then(function(r){return r.json();}).catch(function(){return{};})
+]).then(function(a){WE=a[0];PI=a[1];BP=(a[2]&&a[2].presets)||a[2]||{};build();});
+function chips(id,arr,cur,fn){var el=document.getElementById(id);el.innerHTML='';arr.forEach(function(v){var b=document.createElement('button');b.className='wo-chip'+(v===cur?' on':'');b.textContent=v;b.onclick=function(){fn(v);};el.appendChild(b);});}
+function build(){
+ chips('wo-mat',MATS,curMat,function(v){curMat=v;curProc=null;build();});
+ chips('wo-shp',SHPS,curShp,function(v){curShp=v;curProc=null;build();});
+ var key=curMat+'|'+curShp;
+ document.getElementById('wo-title').textContent=curMat+' × '+curShp+'（'+(MATD[curMat]||'')+' / '+(SHPD[curShp]||'')+'）';
+ var pre=(BP[key]&&BP[key].phases)||{};
+ var html='';
+ PHS.forEach(function(ph){(pre[ph]||[]).forEach(function(w){
+   if(SELF[w]){html+='<div class="wo-step self"><span class="wo-ph">'+ph+'</span><span class="wn">'+w+'</span><span class="wc">付帯('+SELF[w]+')</span></div>';return;}
+   var d=PI[w];var c=d?d.count:0;var bn=(c>0&&c<20);
+   html+='<div class="wo-step'+(curProc===w?' on':'')+'" data-w="'+w+'"><span class="wo-ph">'+ph+'</span><span class="wn">'+(bn?'● ':'')+w+'</span><span class="wc'+(bn?' wo-bn':'')+'">'+(d?c+'社':'—')+'</span></div>';
+ });});
+ document.getElementById('wo-flow').innerHTML=html||'<div style="color:#7a8aa0">この組み合わせのプリセット未登録</div>';
+ Array.prototype.forEach.call(document.querySelectorAll('#wo-flow .wo-step[data-w]'),function(el){el.onclick=function(){selectProc(el.getAttribute('data-w'));};});
+}
+function selectProc(w){
+ var d=PI[w];if(!d){return;}
+ curProc=w;
+ window.selOinSet=new Set((d.makers||[]).map(function(m){return String(m.oin);}));
+ if(typeof applyFilters==='function')applyFilters();
+ build();
+}
+document.getElementById('wo-clear').onclick=function(){window.selOinSet=null;curProc=null;if(typeof applyFilters==='function')applyFilters();build();};
+document.getElementById('wo-csv').onclick=function(){
+ if(!curProc||!PI[curProc]){alert('工程をクリックして選んでください');return;}
+ var d=PI[curProc];var rows=[['oin','name','工程']];
+ (d.makers||[]).forEach(function(m){
+  rows.push([m.oin, m.name||'', curProc]);
+ });
+ var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\r\n');
+ var blob=new Blob(['\ufeff'+csv],{type:'text/csv'});
+ var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+ a.download='process_makers_'+curProc.replace(/[\/\/:*?"<>|]/g,'_')+'.csv';a.click();
+};
+})();
 </script>
 </body>
 </html>
