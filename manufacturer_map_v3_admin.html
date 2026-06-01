@@ -6863,7 +6863,8 @@ var C_PHASE={'フライス加工':'荒加工','マシニング加工':'仕上加
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function pcount(w){var d=PI&&PI[w];return d?(d.count||(d.makers?d.makers.length:0)):0;}
-function pmakers(w){var d=PI&&PI[w];return d&&d.makers?d.makers:[];}
+function normOin(o){return String(o).replace(/\.0+$/,'');}
+function pmakers(w){var d=PI&&PI[w];return d&&d.makers?d.makers.map(function(m){return {oin:normOin(m.oin),name:m.name};}):[];}
 
 var fb=document.getElementById('wo-fab');
 fb.onclick=function(){var p=document.getElementById('wo-panel');p.style.display=(p.style.display==='none'?'block':'none');};
