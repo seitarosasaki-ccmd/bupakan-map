@@ -1179,7 +1179,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     <button class="btn-hdr green" onclick="openOasisModal()">⬡ OASIS</button>
     <button class="btn-hdr" onclick="exportCSV()" style="border-color:rgba(255,200,0,.35);color:#ffc800" title="全企業データをCSVダウンロード">↓ CSV</button>
     <button class="btn-hdr" id="btn-logistics" onclick="toggleLogisticsMode()" title="物流分析モード（IC・新幹線駅・空港を表示）" style="border-color:rgba(255,153,0,.45);color:#ff9900">🚚 物流</button>
-    <button class="btn-hdr selector-btn" id="btn-selector" onclick="openSelectorModal()" title="複合条件でメーカー選定（Sキー）">⚡ メーカー選定</button>
+    <button class="btn-hdr selector-btn" id="btn-selector" onclick="var p=document.getElementById('wo-panel');p.style.display=(p.style.display==='none'?'block':'none');" title="ワーク起点でメーカー選定">⚡ メーカー選定</button>
     <button class="btn-help" onclick="startTutorial(true)" title="操作説明を再表示（?キー）" id="btn-help">?</button>
   </div>
 </header>
@@ -6820,9 +6820,4 @@ document.getElementById('wo-csv').onclick=function(){
  (d.makers||[]).forEach(function(m){rows.push([m.oin,String(m.name||'').replace(/[,\n]/g,' '),curProc]);});
  var csv=rows.map(function(r){return r.join(',');}).join('\n');
  var blob=new Blob(['﻿'+csv],{type:'text/csv'});var u=URL.createObjectURL(blob);
- var a=document.createElement('a');a.href=u;a.download='選定_'+curMat+'_'+curShp+'_'+curProc+'.csv';a.click();URL.revokeObjectURL(u);
-};
-})();
-</script>
-</body>
-</html>
+ var a=document.createElement('a');a.href=u;a.download='選定_'+curMat+'_'+curShp+'_'+curProc+'.csv
