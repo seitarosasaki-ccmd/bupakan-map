@@ -6824,4 +6824,12 @@ document.getElementById('wo-clear').onclick=function(){window.selOinSet=null;cur
 document.getElementById('wo-csv').onclick=function(){
  if(!curProc||!PI[curProc]){alert('工程をクリックして選んでください');return;}
  var d=PI[curProc];var rows=[['oin','name','工程']];
- (d.makers||[]).forEach(function(m){rows.push([
+ (d.makers||[]).forEach(function(m){rows.push([m.oin,String(m.name||'').replace(/[,\n]/g,' '),curProc]);});
+ var csv=rows.map(function(r){return r.join(',');}).join('\n');
+ var blob=new Blob(['﻿'+csv],{type:'text/csv'});var u=URL.createObjectURL(blob);
+ var a=document.createElement('a');a.href=u;a.download='選定_'+curMat+'_'+curShp+'_'+curProc+'.csv';a.click();URL.revokeObjectURL(u);
+};
+})();
+</script>
+</body>
+</html>
