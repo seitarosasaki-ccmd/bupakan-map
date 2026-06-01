@@ -6737,13 +6737,20 @@ function toggleLogisticsMode(){
 // ================================================================
 // 初期化実行
 // ================================================================
-initCatChips();
-initPrefSelect();
-initOasisCatChips();
-initLegend();
-updateEquipCounts();
-applyFilters();
-setTimeout(()=>startTutorial(false), 600);
+fetch('./manufacturers.json')
+  .then(r => r.json())
+  .then(data => {
+    companies = data;
+    companies.forEach(c => { c._dist = Math.round(haversineKm(KOMAKI.lat, KOMAKI.lng, c.lat, c.lng)); });
+    initCatChips();
+    initPrefSelect();
+    initOasisCatChips();
+    initLegend();
+    updateEquipCounts();
+    applyFilters();
+    setTimeout(()=>startTutorial(false), 600);
+  })
+  .catch(err => { console.error('manufacturers.json load error:', err); });
 </script>
 <!-- ===== ワーク起点メーカー選定（2026-05-31統合・外部JSON fetch） ===== -->
 <style>
@@ -6817,7 +6824,4 @@ document.getElementById('wo-clear').onclick=function(){window.selOinSet=null;cur
 document.getElementById('wo-csv').onclick=function(){
  if(!curProc||!PI[curProc]){alert('工程をクリックして選んでください');return;}
  var d=PI[curProc];var rows=[['oin','name','工程']];
- (d.makers||[]).forEach(function(m){rows.push([m.oin,String(m.name||'').replace(/[,\n]/g,' '),curProc]);});
- var csv=rows.map(function(r){return r.join(',');}).join('\n');
- var blob=new Blob(['﻿'+csv],{type:'text/csv'});var u=URL.createObjectURL(blob);
- var a=document.createElement('a');a.href=u;a.download='選定_'+curMat+'_'+curShp+'_'+curProc+'.csv
+ (d.makers||[]).forEach(function(m){rows.push([
