@@ -1179,7 +1179,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     <button class="btn-hdr green" onclick="openOasisModal()">⬡ OASIS</button>
     <button class="btn-hdr" onclick="exportCSV()" style="border-color:rgba(255,200,0,.35);color:#ffc800" title="全企業データをCSVダウンロード">↓ CSV</button>
     <button class="btn-hdr" id="btn-logistics" onclick="toggleLogisticsMode()" title="物流分析モード（IC・新幹線駅・空港を表示）" style="border-color:rgba(255,153,0,.45);color:#ff9900">🚚 物流</button>
-    <button class="btn-hdr selector-btn" id="btn-selector" onclick="var p=document.getElementById('wo-panel');p.style.display=(p.style.display==='none'?'block':'none');" title="ワーク起点でメーカー選定">⚡ メーカー選定</button>
+    <button class="btn-hdr selector-btn" id="btn-selector" onclick="var p=document.getElementById('wo-panel');var v=(p.style.display==='none'||!p.style.display);p.style.display=(v?'block':'none');if(v&&typeof map!=='undefined'&&map.invalidateSize){setTimeout(function(){map.invalidateSize();},60);}" title="ワーク起点でメーカー選定">⚡ メーカー選定</button>
     <button class="btn-help" onclick="startTutorial(true)" title="操作説明を再表示（?キー）" id="btn-help">?</button>
   </div>
 </header>
@@ -3638,17 +3638,21 @@ const COMPANY_ALIASES = {"yoshii plant, chugoku kayaku co., ltd.":["YOSHII PLANT
 
 // IME変換中フラグ + debounce タイマー（追加）
 let _imeComposing = false;
+let _imeJustEnded = false;
 let _searchTimer = null;
 // compositionend ハンドラ：_imeComposing をリセットし applyFilters を直接スケジュール。
 // onSearchInput() は呼ばない（二重発火防止）。
 // Chrome/Edge 等で input が compositionend より先に発火するケースに対応。
 function onCompositionEnd(){
   _imeComposing = false;
+  _imeJustEnded = true;              // 直後に来るinputイベントの二重発火を抑止
+  setTimeout(function(){ _imeJustEnded = false; }, 80);
   clearTimeout(_searchTimer);
-  _searchTimer = setTimeout(applyFilters, 50);
+  _searchTimer = setTimeout(applyFilters, 120);  // 確定後の反映はここで一度だけ
 }
 function onSearchInput(){
   if(_imeComposing) return;          // IME変換中はスキップ
+  if(_imeJustEnded) return;          // 変換確定直後のinputは二重発火なので無視
   clearTimeout(_searchTimer);
   _searchTimer = setTimeout(applyFilters, 200);
 }
@@ -6793,7 +6797,7 @@ fetch('./manufacturers.json')
 .wo-close{position:absolute;top:10px;right:10px;width:26px;height:26px;padding:0;border-radius:50%;border:1px solid #2a3f55;background:transparent;color:#9fb2c8;cursor:pointer;font-size:14px;line-height:1;}
 </style>
 <button id="wo-fab">&#127919; ワーク起点で選定</button>
-<div id="wo-panel" style="display:none;position:relative">
+<div id="wo-panel" style="display:none">
   <button class="wo-close" id="wo-close" title="閉じる" aria-label="閉じる">&#10005;</button>
   <h3>ワーク起点でメーカー選定</h3>
   <div class="wo-tabs">
