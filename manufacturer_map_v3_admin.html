@@ -1217,7 +1217,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
              placeholder="例：イーグル工業／愛知県" autocomplete="off"
              oninput="onSearchInput()"
              oncompositionstart="_imeComposing=true"
-             oncompositionend="_imeComposing=false"/>
+             oncompositionend="onCompositionEnd()"/>
     </div>
 
     <!-- 設備名称 検索（追加） -->
@@ -1227,7 +1227,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
              placeholder="例：EBW／マシニングセンタ／HIP" autocomplete="off"
              oninput="onSearchInput()"
              oncompositionstart="_imeComposing=true"
-             oncompositionend="_imeComposing=false"/>
+             oncompositionend="onCompositionEnd()"/>
     </div>
 
     <!-- カテゴリ -->
@@ -3639,6 +3639,14 @@ const COMPANY_ALIASES = {"yoshii plant, chugoku kayaku co., ltd.":["YOSHII PLANT
 // IME変換中フラグ + debounce タイマー（追加）
 let _imeComposing = false;
 let _searchTimer = null;
+// compositionend ハンドラ：_imeComposing をリセットし applyFilters を直接スケジュール。
+// onSearchInput() は呼ばない（二重発火防止）。
+// Chrome/Edge 等で input が compositionend より先に発火するケースに対応。
+function onCompositionEnd(){
+  _imeComposing = false;
+  clearTimeout(_searchTimer);
+  _searchTimer = setTimeout(applyFilters, 50);
+}
 function onSearchInput(){
   if(_imeComposing) return;          // IME変換中はスキップ
   clearTimeout(_searchTimer);
@@ -6824,10 +6832,13 @@ document.getElementById('wo-clear').onclick=function(){window.selOinSet=null;cur
 document.getElementById('wo-csv').onclick=function(){
  if(!curProc||!PI[curProc]){alert('工程をクリックして選んでください');return;}
  var d=PI[curProc];var rows=[['oin','name','工程']];
- (d.makers||[]).forEach(function(m){rows.push([m.oin,String(m.name||'').replace(/[,\n]/g,' '),curProc]);});
- var csv=rows.map(function(r){return r.join(',');}).join('\n');
- var blob=new Blob(['﻿'+csv],{type:'text/csv'});var u=URL.createObjectURL(blob);
- var a=document.createElement('a');a.href=u;a.download='選定_'+curMat+'_'+curShp+'_'+curProc+'.csv';a.click();URL.revokeObjectURL(u);
+ (d.makers||[]).forEach(function(m){
+  rows.push([m.oin, m.name||'', curProc]);
+ });
+ var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\r\n');
+ var blob=new Blob(['\ufeff'+csv],{type:'text/csv'});
+ var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+ a.download='process_makers_'+curProc.replace(/[\/\/:*?"<>|]/g,'_')+'.csv';a.click();
 };
 })();
 </script>
