@@ -1217,7 +1217,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
              placeholder="例：イーグル工業／愛知県" autocomplete="off"
              oninput="onSearchInput()"
              oncompositionstart="_imeComposing=true"
-             oncompositionend="_imeComposing=false;onSearchInput()"/>
+             oncompositionend="_imeComposing=false"/>
     </div>
 
     <!-- 設備名称 検索（追加） -->
@@ -1227,7 +1227,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
              placeholder="例：EBW／マシニングセンタ／HIP" autocomplete="off"
              oninput="onSearchInput()"
              oncompositionstart="_imeComposing=true"
-             oncompositionend="_imeComposing=false;onSearchInput()"/>
+             oncompositionend="_imeComposing=false"/>
     </div>
 
     <!-- カテゴリ -->
@@ -5472,8 +5472,6 @@ let selectorViewMode = 'filter'; // 'filter' = 非選定を非表示, 'highlight
 const WZ_STATE = {step:1, selectedCnt:0, checkedIds:new Set(), sort:'dist'};
 
 function openSelectorModal(){
-  var __wp=document.getElementById('wo-panel');
-  if(__wp){ __wp.style.display=(__wp.style.display==='none'||!__wp.style.display?'block':'none'); return; }
   // 初回のみテンプレチップ生成
   initSelectorTemplates();
   // SELECTOR_STATE をリセット
@@ -6828,3 +6826,4 @@ document.getElementById('wo-csv').onclick=function(){
 </script>
 </body>
 </html>
+                                                                                                                                                            
