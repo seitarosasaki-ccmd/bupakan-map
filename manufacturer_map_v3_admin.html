@@ -6775,37 +6775,180 @@ fetch('./manufacturers.json')
 .wo-ph{font-size:9px;color:#7a8aa0;width:56px;flex-shrink:0;}
 .wo-bn{color:#ffb300;}
 .wo-btn{font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #2a3f55;background:transparent;color:#e6eef5;cursor:pointer;}
+.wo-tabs{display:flex;gap:5px;margin-bottom:12px;}
+.wo-tab{flex:1;text-align:center;padding:7px 4px;border-radius:6px;border:1px solid #2a3f55;background:transparent;color:#9fb2c8;font-size:12px;cursor:pointer;}
+.wo-tab.on{border-color:#39ff14;color:#39ff14;background:rgba(57,255,20,.10);font-weight:bold;}
+.wo-note{display:flex;gap:7px;background:rgba(57,255,20,.06);border:1px solid rgba(57,255,20,.25);border-radius:6px;padding:7px 9px;margin-bottom:12px;font-size:11px;color:#bfe9c9;line-height:1.55;}
+.wo-lab{font-size:11px;color:#7a8aa0;margin:6px 0 4px;}
+.wo-num{width:60px;height:30px;text-align:center;background:#0a1422;border:1px solid #2a3f55;border-radius:5px;color:#e6eef5;font-size:12px;}
+.wo-jt{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed;}
+.wo-jt td{padding:5px 4px;}
+.wo-jt tr+tr td{border-top:1px solid #1c2c40;}
+.wo-mark{display:inline-block;width:21px;height:21px;line-height:21px;text-align:center;border-radius:50%;font-weight:bold;}
+.wo-ok{background:rgba(29,158,117,.18);color:#5dcaa5;}
+.wo-wn{background:rgba(255,179,0,.18);color:#ffb300;}
+.wo-ng{background:rgba(226,75,74,.16);color:#f09595;}
+.wo-pal{font-size:11px;padding:4px 7px;border:1px solid #2a3f55;border-radius:5px;margin-bottom:3px;color:#9fb2c8;cursor:pointer;}
+.wo-x{width:18px;height:18px;padding:0;border:none;background:transparent;color:#7a8aa0;cursor:pointer;font-size:13px;line-height:1;}
+.wo-close{position:absolute;top:10px;right:10px;width:26px;height:26px;padding:0;border-radius:50%;border:1px solid #2a3f55;background:transparent;color:#9fb2c8;cursor:pointer;font-size:14px;line-height:1;}
 </style>
 <button id="wo-fab">&#127919; ワーク起点で選定</button>
-<div id="wo-panel" style="display:none">
+<div id="wo-panel" style="display:none;position:relative">
+  <button class="wo-close" id="wo-close" title="閉じる" aria-label="閉じる">&#10005;</button>
   <h3>ワーク起点でメーカー選定</h3>
-  <div style="font-size:11px;color:#7a8aa0;margin-bottom:6px">作りたい物のおおまかな分類を選ぶ</div>
-  <div style="font-size:11px;color:#7a8aa0;margin:4px 0">材料</div><div id="wo-mat"></div>
-  <div style="font-size:11px;color:#7a8aa0;margin:6px 0 4px">形状</div><div id="wo-shp"></div>
-  <div id="wo-title" style="margin:8px 0;font-weight:bold;color:#39ff14"></div>
-  <div id="wo-flow"></div>
-  <div style="display:flex;gap:6px;margin-top:10px">
-    <button class="wo-btn" id="wo-clear">ハイライト解除</button>
-    <button class="wo-btn" id="wo-csv">CSV書き出し</button>
+  <div class="wo-tabs">
+    <div class="wo-tab on" id="wo-tab-a" data-mode="a">寸法で探す</div>
+    <div class="wo-tab" id="wo-tab-b" data-mode="b">工程で探す</div>
+    <div class="wo-tab" id="wo-tab-c" data-mode="c">工程を組む</div>
   </div>
-  <div style="font-size:10px;color:#7a8aa0;margin-top:8px;line-height:1.5">工程をクリック→その工程の対応メーカーを地図にハイライト。<span style="color:#ffb300">&#9679;</span>=ボトルネック(20社未満)。付帯=単独発注しない工程(自社実施・他工程内包)。</div>
+
+  <div id="wo-mode-a">
+    <div class="wo-note"><span>&#9432;</span><span>この検索は<b>形状と寸法だけ</b>で、対応できる設備枠を持つメーカーを当てます。加工種類（マシニング／旋盤など）は問いません。マシニングで丸物を削る等もあるため、加工方法は各社の保有設備にお任せです。</span></div>
+    <div class="wo-lab">形状</div>
+    <div id="wo-a-shp"></div>
+    <div id="wo-a-dims" style="margin-top:8px"></div>
+    <div id="wo-a-hint" style="font-size:10px;color:#7a8aa0;margin-top:5px"></div>
+    <div id="wo-a-summary" style="font-size:12px;color:#9fb2c8;margin:10px 0 6px"></div>
+    <div id="wo-a-results"></div>
+    <div style="font-size:10px;color:#7a8aa0;margin-top:8px;line-height:1.5"><span style="color:#5dcaa5">&#9675; 対応可</span>＝全軸10%以上余裕／<span style="color:#ffb300">&#9651; 要確認</span>＝収まるがギリ・一部寸法未確認／<span style="color:#f09595">&#10005; 非対応</span>＝収まる機種なし。距離は二次条件。</div>
+  </div>
+
+  <div id="wo-mode-b" style="display:none">
+    <div style="font-size:11px;color:#7a8aa0;margin-bottom:6px">作りたい物の材料と形状を選ぶと、標準工程フローと各工程の対応メーカー数が出ます。</div>
+    <div class="wo-lab">材料</div><div id="wo-mat"></div>
+    <div class="wo-lab">形状</div><div id="wo-shp"></div>
+    <div id="wo-title" style="margin:8px 0;font-weight:bold;color:#39ff14"></div>
+    <div id="wo-flow"></div>
+    <div style="font-size:10px;color:#7a8aa0;margin-top:8px;line-height:1.5">工程をクリック→その工程の対応メーカーを地図にハイライト。<span style="color:#ffb300">&#9679;</span>=ボトルネック(20社未満)。付帯=単独発注しない工程(自社実施・他工程内包)。</div>
+  </div>
+
+  <div id="wo-mode-c" style="display:none">
+    <div class="wo-note"><span>&#9432;</span><span>必要な工程を自分で並べて、<b>各工程ごとに対応メーカー</b>を出します。定番フローが無い品物や工程を限定したい時に。工程順はフェーズで自動整列します。</span></div>
+    <div style="display:flex;gap:10px">
+      <div style="flex:1">
+        <div class="wo-lab">組んだ工程（&#10005;で外す）</div>
+        <div id="wo-c-flow"></div>
+        <div id="wo-c-result" style="margin-top:8px"></div>
+      </div>
+      <div style="width:118px;flex-shrink:0">
+        <div class="wo-lab">工程を足す</div>
+        <div id="wo-c-pal" style="max-height:260px;overflow:auto"></div>
+      </div>
+    </div>
+    <div style="font-size:10px;color:#7a8aa0;margin-top:8px;line-height:1.5">工程をクリック→その工程の対応メーカーを地図にハイライト。<span style="color:#ffb300">&#9679;</span>=対応20社未満。</div>
+  </div>
+
+  <div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">
+    <button class="wo-btn" id="wo-csv">CSV書き出し</button>
+    <button class="wo-btn" id="wo-reset">選定をリセット</button>
+  </div>
 </div>
 <script>
 (function(){
 var WE=null,PI=null,BP=null,curMat='アルミ',curShp='角',curProc=null;
+var mode='a';
 var PHS=['荒加工','熱処理','仕上加工','検査(探傷)','表面処理','最終検査'];
+var PHORD={'荒加工':0,'熱処理':1,'仕上加工':2,'検査(探傷)':3,'表面処理':4,'最終検査':5};
 var MATS=['アルミ','鉄','耐熱・耐食鋼','チタン','インコネル'],SHPS=['円筒','角','複雑'];
 var MATD={'アルミ':'軽量・非鉄','鉄':'鋼・強度','耐熱・耐食鋼':'ステンレス系','チタン':'難削・高比強度','インコネル':'耐熱合金'};
 var SHPD={'円筒':'丸物・回転体','角':'角物・板物','複雑':'複雑形状'};
 var SELF={'硬さ検査':'自社/検査','外観検査':'自社/検査','膜厚測定':'自社/検査','歪修正':'仕上に内包','ザイグロ前エッチング':'FPIに内包'};
+var aShape='角',aDim={X:300,Y:200,Z:150,D:120,L:400},aLast=null;
+var cPick=['フライス加工','5軸マシニング加工'],cProc=null;
+var C_PHASE={'フライス加工':'荒加工','マシニング加工':'仕上加工','5軸マシニング加工':'仕上加工','NC旋盤':'仕上加工','複合旋盤':'仕上加工','研削':'仕上加工','ブローチ加工':'仕上加工','ガンドリル':'仕上加工','BTA加工':'仕上加工','真空熱処理':'熱処理','焼入焼戻':'熱処理','時効処理':'熱処理','化成処理':'表面処理','塗装':'表面処理','アノダイズ':'表面処理','めっき':'表面処理','ショットピーニング':'表面処理','パシベート':'表面処理','浸透探傷検査(FPI)':'検査(探傷)','磁粉探傷検査(MPI)':'検査(探傷)','寸法検査(三次元測定)':'検査(探傷)'};
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function pcount(w){var d=PI&&PI[w];return d?(d.count||(d.makers?d.makers.length:0)):0;}
+function pmakers(w){var d=PI&&PI[w];return d&&d.makers?d.makers:[];}
+
 var fb=document.getElementById('wo-fab');
 fb.onclick=function(){var p=document.getElementById('wo-panel');p.style.display=(p.style.display==='none'?'block':'none');};
+document.getElementById('wo-close').onclick=function(){document.getElementById('wo-panel').style.display='none';};
+
+Array.prototype.forEach.call(document.querySelectorAll('.wo-tab'),function(t){t.onclick=function(){setMode(t.getAttribute('data-mode'));};});
+function setMode(m){
+ mode=m;
+ Array.prototype.forEach.call(document.querySelectorAll('.wo-tab'),function(t){t.className='wo-tab'+(t.getAttribute('data-mode')===m?' on':'');});
+ document.getElementById('wo-mode-a').style.display=(m==='a'?'block':'none');
+ document.getElementById('wo-mode-b').style.display=(m==='b'?'block':'none');
+ document.getElementById('wo-mode-c').style.display=(m==='c'?'block':'none');
+ if(m==='a')buildA();else if(m==='b')build();else buildC();
+}
+
 Promise.all([
  fetch('work_envelope_by_oin.json').then(function(r){return r.json();}).catch(function(){return{};}),
  fetch('process_maker_index.json').then(function(r){return r.json();}).catch(function(){return{};}),
  fetch('b_presets.json').then(function(r){return r.json();}).catch(function(){return{};})
-]).then(function(a){WE=a[0];PI=a[1];BP=(a[2]&&a[2].presets)||a[2]||{};build();});
+]).then(function(a){WE=a[0];PI=a[1];BP=(a[2]&&a[2].presets)||a[2]||{};setMode('a');});
 function chips(id,arr,cur,fn){var el=document.getElementById(id);el.innerHTML='';arr.forEach(function(v){var b=document.createElement('button');b.className='wo-chip'+(v===cur?' on':'');b.textContent=v;b.onclick=function(){fn(v);};el.appendChild(b);});}
+
+function buildA(){
+ chips('wo-a-shp',['角物','丸物'],aShape==='角'?'角物':'丸物',function(v){aShape=(v==='角物'?'角':'丸');buildA();});
+ var dh,hint;
+ if(aShape==='角'){
+  dh='<span style="font-size:12px;color:#9fb2c8">X</span><input class="wo-num" id="wo-X" type="number" value="'+aDim.X+'"> <span style="font-size:12px;color:#9fb2c8">Y</span><input class="wo-num" id="wo-Y" type="number" value="'+aDim.Y+'"> <span style="font-size:12px;color:#9fb2c8">Z</span><input class="wo-num" id="wo-Z" type="number" value="'+aDim.Z+'"> <span style="font-size:11px;color:#7a8aa0">mm</span>';
+  hint='角物・板物。X×Y×Z（外形の最大寸法）を入力。';
+ }else{
+  dh='<span style="font-size:12px;color:#9fb2c8">φ</span><input class="wo-num" id="wo-D" type="number" value="'+aDim.D+'"> <span style="font-size:12px;color:#9fb2c8">L</span><input class="wo-num" id="wo-L" type="number" value="'+aDim.L+'"> <span style="font-size:11px;color:#7a8aa0">mm</span>';
+  hint='丸物・回転体。φ（最大径）× L（長さ）を入力。';
+ }
+ document.getElementById('wo-a-dims').innerHTML=dh;
+ document.getElementById('wo-a-hint').textContent=hint;
+ ['X','Y','Z','D','L'].forEach(function(k){var el=document.getElementById('wo-'+k);if(el)el.oninput=function(){aDim[k]=+el.value||0;evalA();};});
+ evalA();
+}
+function judgeA(c){
+ var wx,wy,wz;
+ if(aShape==='角'){wx=aDim.X;wy=aDim.Y;wz=aDim.Z;}else{wx=aDim.D;wy=aDim.D;wz=aDim.L;}
+ var cx,cy,cz,unknown=false;
+ if(aShape==='丸'&&c.mdia>0){cx=c.mdia;cy=c.mdia;cz=c.mz||0;}
+ else{cx=c.mx;cy=c.my;cz=c.mz;}
+ if(!cx||!cy||!cz)unknown=true;
+ var lab=(aShape==='丸'&&c.mdia>0)?('φ'+Math.round(c.mdia)+'×L'+Math.round(c.mz||0)):('X'+Math.round(c.mx||0)+'×Y'+Math.round(c.my||0)+'×Z'+Math.round(c.mz||0));
+ if(unknown){
+  var fits=((cx||1e9)>=wx)&&((cy||1e9)>=wy)&&((cz||1e9)>=wz);
+  return {mark:fits?'△':'×',cls:fits?'wn':'ng',label:lab,note:'一部寸法未確認'};
+ }
+ if(!((cx>=wx)&&(cy>=wy)&&(cz>=wz)))return {mark:'×',cls:'ng',label:lab,note:'収まる機種なし'};
+ var mg=Math.min(cx/wx,cy/wy,cz/wz);
+ if(mg>=1.10)return {mark:'○',cls:'ok',label:lab,note:'余裕'+Math.round((mg-1)*100)+'%'};
+ return {mark:'△',cls:'wn',label:lab,note:'ギリ（余裕'+Math.round((mg-1)*100)+'%）'};
+}
+function evalA(){
+ if(!WE){return;}
+ var order={'○':0,'△':1,'×':2},rows=[];
+ for(var oin in WE){if(!WE.hasOwnProperty(oin))continue;var c=WE[oin];
+  if(aShape==='角'&&c.nonmc)continue;
+  var j=judgeA(c);if(j.mark==='×'&&!(c.mx||c.mdia))continue;
+  rows.push({oin:oin,name:c.name||'',km:kmOf(oin),j:j});
+ }
+ rows.sort(function(a,b){var d=order[a.j.mark]-order[b.j.mark];if(d!==0)return d;return (a.km==null?9e9:a.km)-(b.km==null?9e9:b.km);});
+ aLast=rows;
+ var top=rows.slice(0,60);
+ var h='<table class="wo-jt"><tr style="color:#7a8aa0;font-size:11px"><td style="width:30px">判定</td><td>企業名</td><td style="width:128px">最大対応寸法</td><td style="width:42px;text-align:right">小牧</td></tr>';
+ top.forEach(function(r){
+  h+='<tr><td><span class="wo-mark wo-'+r.j.cls+'">'+r.j.mark+'</span></td>'+
+   '<td><div style="font-weight:bold">'+esc(r.name)+'</div><div style="font-size:10px;color:#7a8aa0">'+r.j.note+'</div></td>'+
+   '<td style="font-family:monospace;font-size:11px;color:#9fb2c8">'+r.j.label+'</td>'+
+   '<td style="text-align:right;color:#7a8aa0">'+(r.km!=null?r.km+'km':'—')+'</td></tr>';
+ });
+ h+='</table>';
+ if(!rows.length)h='<div style="color:#7a8aa0;font-size:11px">寸法を入力してください</div>';
+ document.getElementById('wo-a-results').innerHTML=h;
+ var n={ok:0,wn:0,ng:0};rows.forEach(function(r){n[r.j.cls]++;});
+ document.getElementById('wo-a-summary').innerHTML='<span style="color:#5dcaa5">○'+n.ok+'</span> ／ <span style="color:#ffb300">△'+n.wn+'</span> ／ <span style="color:#f09595">×'+n.ng+'</span>（全'+rows.length+'社中・上位60社表示）';
+ var hset=new Set();rows.forEach(function(r){if(r.j.mark==='○'||r.j.mark==='△')hset.add(String(r.oin));});
+ window.selOinSet=hset.size?hset:null;curProc=null;
+ if(typeof applyFilters==='function')applyFilters();
+}
+function kmOf(oin){
+ try{
+  if(typeof companies!=='undefined'&&companies&&companies.length){
+   for(var i=0;i<companies.length;i++){if(String(companies[i].oin)===String(oin)&&typeof companies[i]._dist==='number')return companies[i]._dist;}
+  }
+ }catch(e){}
+ return null;
+}
 function build(){
  chips('wo-mat',MATS,curMat,function(v){curMat=v;curProc=null;build();});
  chips('wo-shp',SHPS,curShp,function(v){curShp=v;curProc=null;build();});
@@ -6815,30 +6958,63 @@ function build(){
  var html='';
  PHS.forEach(function(ph){(pre[ph]||[]).forEach(function(w){
    if(SELF[w]){html+='<div class="wo-step self"><span class="wo-ph">'+ph+'</span><span class="wn">'+w+'</span><span class="wc">付帯('+SELF[w]+')</span></div>';return;}
-   var d=PI[w];var c=d?d.count:0;var bn=(c>0&&c<20);
-   html+='<div class="wo-step'+(curProc===w?' on':'')+'" data-w="'+w+'"><span class="wo-ph">'+ph+'</span><span class="wn">'+(bn?'● ':'')+w+'</span><span class="wc'+(bn?' wo-bn':'')+'">'+(d?c+'社':'—')+'</span></div>';
+   var c=pcount(w);var bn=(c>0&&c<20);
+   html+='<div class="wo-step'+(curProc===w?' on':'')+'" data-w="'+w+'"><span class="wo-ph">'+ph+'</span><span class="wn">'+(bn?'● ':'')+w+'</span><span class="wc'+(bn?' wo-bn':'')+'">'+(c?c+'社':'—')+'</span></div>';
  });});
  document.getElementById('wo-flow').innerHTML=html||'<div style="color:#7a8aa0">この組み合わせのプリセット未登録</div>';
  Array.prototype.forEach.call(document.querySelectorAll('#wo-flow .wo-step[data-w]'),function(el){el.onclick=function(){selectProc(el.getAttribute('data-w'));};});
 }
 function selectProc(w){
- var d=PI[w];if(!d){return;}
+ if(!PI[w]){return;}
  curProc=w;
- window.selOinSet=new Set((d.makers||[]).map(function(m){return String(m.oin);}));
+ window.selOinSet=new Set(pmakers(w).map(function(m){return String(m.oin);}));
  if(typeof applyFilters==='function')applyFilters();
  build();
 }
-document.getElementById('wo-clear').onclick=function(){window.selOinSet=null;curProc=null;if(typeof applyFilters==='function')applyFilters();build();};
-document.getElementById('wo-csv').onclick=function(){
- if(!curProc||!PI[curProc]){alert('工程をクリックして選んでください');return;}
- var d=PI[curProc];var rows=[['oin','name','工程']];
- (d.makers||[]).forEach(function(m){
-  rows.push([m.oin, m.name||'', curProc]);
+function buildC(){
+ cPick.sort(function(a,b){return (PHORD[C_PHASE[a]]||9)-(PHORD[C_PHASE[b]]||9);});
+ var fh='';
+ cPick.forEach(function(w){var c=pcount(w),bn=(c>0&&c<20),ph=C_PHASE[w]||'';
+  fh+='<div class="wo-step'+(cProc===w?' on':'')+'" data-cw="'+esc(w)+'"><span class="wo-ph">'+ph+'</span><span class="wn">'+(bn?'● ':'')+w+'</span><span class="wc'+(bn?' wo-bn':'')+'">'+(c?c+'社':'—')+'</span><button class="wo-x" data-rm="'+esc(w)+'" title="外す">&#10005;</button></div>';
  });
+ document.getElementById('wo-c-flow').innerHTML=fh||'<div style="color:#7a8aa0;font-size:11px">右から工程を足してください</div>';
+ var avail=Object.keys(C_PHASE).filter(function(w){return cPick.indexOf(w)<0&&PI&&PI[w];});
+ document.getElementById('wo-c-pal').innerHTML=avail.map(function(w){return '<div class="wo-pal" data-add="'+esc(w)+'">+ '+w+'</div>';}).join('');
+ var rh='';
+ if(cPick.length){
+  var mn=Math.min.apply(null,cPick.map(function(w){return pcount(w);}));
+  rh='<div style="font-size:11px;color:#9fb2c8;line-height:1.5">工程をクリックすると、その工程の対応メーカーを地図にハイライトします。各工程の対応社数は上のとおり（最少 '+mn+'社）。足りない工程は別メーカーに振り分けてください。</div>';
+ }
+ document.getElementById('wo-c-result').innerHTML=rh;
+ Array.prototype.forEach.call(document.querySelectorAll('#wo-c-flow [data-rm]'),function(b){b.onclick=function(ev){ev.stopPropagation();cPick=cPick.filter(function(x){return x!==b.getAttribute('data-rm');});if(cProc&&cPick.indexOf(cProc)<0)cProc=null;buildC();};});
+ Array.prototype.forEach.call(document.querySelectorAll('#wo-c-pal [data-add]'),function(b){b.onclick=function(){var w=b.getAttribute('data-add');if(cPick.indexOf(w)<0)cPick.push(w);buildC();};});
+ Array.prototype.forEach.call(document.querySelectorAll('#wo-c-flow [data-cw]'),function(el){el.onclick=function(){selectCProc(el.getAttribute('data-cw'));};});
+}
+function selectCProc(w){
+ if(!PI[w]){return;}
+ cProc=w;curProc=w;
+ window.selOinSet=new Set(pmakers(w).map(function(m){return String(m.oin);}));
+ if(typeof applyFilters==='function')applyFilters();
+ buildC();
+}
+document.getElementById('wo-reset').onclick=function(){window.selOinSet=null;curProc=null;cProc=null;if(typeof applyFilters==='function')applyFilters();if(mode==='a')evalA();else if(mode==='b')build();else buildC();};
+document.getElementById('wo-csv').onclick=function(){
+ var rows,fname;
+ if(mode==='a'){
+  if(!aLast||!aLast.length){alert('寸法を入力してください');return;}
+  rows=[['oin','name','判定','最大対応寸法','小牧km']];
+  aLast.forEach(function(r){rows.push([r.oin,r.name,r.j.mark,r.j.label,(r.km!=null?r.km:'')]);});
+  fname='dimension_match_'+aShape+'.csv';
+ }else{
+  if(!curProc||!PI[curProc]){alert('工程をクリックして選んでください');return;}
+  rows=[['oin','name','工程']];
+  pmakers(curProc).forEach(function(m){rows.push([m.oin,m.name||'',curProc]);});
+  fname='process_makers_'+curProc.replace(/[\/\\:*?"<>|]/g,'_')+'.csv';
+ }
  var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\r\n');
  var blob=new Blob(['\ufeff'+csv],{type:'text/csv'});
  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
- a.download='process_makers_'+curProc.replace(/[\/\/:*?"<>|]/g,'_')+'.csv';a.click();
+ a.download=fname;a.click();
 };
 })();
 </script>
