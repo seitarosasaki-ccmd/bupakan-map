@@ -400,6 +400,13 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
 .pw-btn:hover{box-shadow:0 0 20px rgba(0,212,255,.4)}
 .pw-error{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--ng);height:16px;margin-top:4px}
 .pw-input-error{border-color:var(--ng)!important;box-shadow:0 0 8px rgba(255,68,68,.2)}
+.pw-log{margin-top:20px;text-align:left;border-top:1px solid var(--border);padding-top:14px}
+.pw-log-ttl{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);margin-bottom:8px}
+.pw-log-item{margin-bottom:10px}
+.pw-log-item:last-child{margin-bottom:0}
+.pw-log-date{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:10px;color:#39ff14;background:rgba(57,255,20,.10);border:1px solid rgba(57,255,20,.3);border-radius:3px;padding:1px 7px;margin-bottom:4px}
+.pw-log-h{font-size:12px;font-weight:700;color:var(--text);margin:3px 0 2px}
+.pw-log-b{font-size:11px;color:var(--muted);line-height:1.65}
 
 /* ── 選択ハイライト ── */
 .company-card.selected {
@@ -1149,6 +1156,19 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     </div>
     <div class="pw-error" id="pw-error"></div>
     <button class="pw-btn" onclick="checkPw()">ENTER</button>
+    <div class="pw-log">
+      <div class="pw-log-ttl">▣ 更新履歴 / CHANGELOG</div>
+      <div class="pw-log-item">
+        <div class="pw-log-date">2026-06</div>
+        <div class="pw-log-h">メーカー選定機能を追加</div>
+        <div class="pw-log-b">ワークの寸法（角物 X×Y×Z／丸物 φ×L）や製造工程から発注先メーカーを検索できるようになりました。各社の対応可否は〇×マトリクスで一覧でき、社名クリックで地図上のピンへ移動します。</div>
+      </div>
+      <div class="pw-log-item">
+        <div class="pw-log-date">2026-05</div>
+        <div class="pw-log-h">距離・認証・設備サイズでの複合検索を整備</div>
+        <div class="pw-log-b">小牧拠点からの距離レンジ、JIS Q 9100／Nadcap 認証、保有設備サイズによる絞り込みに対応しました。</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -6019,12 +6039,12 @@ const TUTORIAL_STEPS = [
   {
     target: null, // 中央表示
     title: 'ようこそ、<span>メーカー選定マップ</span>へ',
-    body: '小牧拠点から見た航空宇宙メーカー <em>1,635社</em> をマッピング。<br>距離・工程・OASIS認証・設備サイズなどで複合検索できる。<br><br>30秒で使い方を案内するから、ざっと見ていって。',
+    body: '小牧拠点から見た航空宇宙メーカー <em>1,600社超</em> をマッピング。<br>距離・工程・OASIS認証・設備サイズなどで複合検索できる。<br><br>30秒で使い方を案内するから、ざっと見ていって。',
   },
   {
     target: '#btn-selector',
     title: '<span>メーカー選定</span>はここから',
-    body: 'これがメイン機能。<br>工程カテゴリ・OASIS業種・認証規格・距離レンジ・設備サイズなどを<em>複合条件</em>で絞り込める。<br><br>キーボード <span class="tut-keyhint">S</span> でも開ける。',
+    body: 'ワーク起点で発注先を探すメイン機能。<br><em>寸法で探す</em>（形状＋サイズ）／<em>工程で探す</em>（材料×形状の標準フロー）／<em>工程を組む</em>（必要工程を自分で並べる）の3タブ。<br><br>結果は <em>縦リスト</em> と、対応可否がひと目で分かる <em>〇×マトリクス</em> で切替表示。社名クリックで地図のピンへ飛ぶ。<br><br>キーボード <span class="tut-keyhint">S</span> でも開ける。',
     placement: 'bottom-right',
   },
   {
@@ -7183,5 +7203,42 @@ document.getElementById('wo-csv').onclick=function(){
 };
 })();
 </script>
+</body>
+</html>
+Pick.indexOf(cProc)<0)cProc=null;buildC();};});
+ Array.prototype.forEach.call(document.querySelectorAll('#wo-c-pal [data-add]'),function(b){b.onclick=function(){var w=b.getAttribute('data-add');if(cPick.indexOf(w)<0)cPick.push(w);buildC();};});
+ Array.prototype.forEach.call(document.querySelectorAll('#wo-c-flow [data-cw]'),function(el){el.onclick=function(){selectCProc(el.getAttribute('data-cw'));};});
+}
+function selectCProc(w){
+ if(!PI[w]){return;}
+ cProc=w;curProc=w;
+ window.selOinSet=new Set(pmakers(w).map(function(m){return String(m.oin);}));
+ if(typeof applyFilters==='function')applyFilters();
+ buildC();
+}
+document.getElementById('wo-reset').onclick=function(){window.selOinSet=null;curProc=null;cProc=null;if(typeof applyFilters==='function')applyFilters();if(mode==='a')evalA();else if(mode==='b')build();else buildC();};
+document.getElementById('wo-csv').onclick=function(){
+ var rows,fname;
+ if(mode==='a'){
+  if(!aLast||!aLast.length){alert('寸法を入力してください');return;}
+  rows=[['oin','name','判定','最大対応寸法','小牧km']];
+  aLast.forEach(function(r){rows.push([r.oin,r.name,r.j.mark,r.j.label,(r.km!=null?r.km:'')]);});
+  fname='dimension_match_'+aShape+'.csv';
+ }else{
+  if(!curProc||!PI[curProc]){alert('工程をクリックして選んでください');return;}
+  rows=[['oin','name','工程']];
+  pmakers(curProc).forEach(function(m){rows.push([m.oin,m.name||'',curProc]);});
+  fname='process_makers_'+curProc.replace(/[\/\\:*?"<>|]/g,'_')+'.csv';
+ }
+ var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\r\n');
+ var blob=new Blob(['\ufeff'+csv],{type:'text/csv'});
+ var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+ a.download=fname;a.click();
+};
+})();
+</script>
+</body>
+</html>
+ipt>
 </body>
 </html>
