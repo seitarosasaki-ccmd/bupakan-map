@@ -6774,6 +6774,22 @@ fetch('./manufacturers.json')
   .then(data => {
     companies = data;
     companies.forEach(c => { c._dist = Math.round(haversineKm(KOMAKI.lat, KOMAKI.lng, c.lat, c.lng)); });
+    // 設備型番サイドカー（equip_text_by_oin.json）を上書きマージ。
+    // equipText拡充はこの小ファイルだけ再アップで反映でき、manufacturers.json/HTML再生成が不要になる。
+    // 失敗してもmanufacturers.json側のequipTextで動作継続（非致命）。
+    return fetch('./equip_text_by_oin.json')
+      .then(r => r.ok ? r.json() : {})
+      .catch(() => ({}))
+      .then(sc => {
+        if (sc && typeof sc === 'object') {
+          companies.forEach(c => {
+            var k = String(c.oin).replace(/\.0+$/, '');
+            if (sc[k]) c.equipText = sc[k];
+          });
+        }
+      });
+  })
+  .then(() => {
     initCatChips();
     initPrefSelect();
     initOasisCatChips();
@@ -6782,7 +6798,7 @@ fetch('./manufacturers.json')
     applyFilters();
     setTimeout(()=>startTutorial(false), 600);
   })
-  .catch(err => { console.error('manufacturers.json load error:', err); });
+  .catch(err => { console.error('init load error:', err); });
 </script>
 <!-- ===== ワーク起点メーカー選定（2026-05-31統合・外部JSON fetch） ===== -->
 <style>
