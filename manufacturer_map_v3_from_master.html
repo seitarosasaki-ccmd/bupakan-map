@@ -1320,7 +1320,50 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
       <div class="cat-chips" id="cat-chips"></div>
     </div>
 
-    <!-- 都道府県 -->
+    <!-- ワーク寸法/距離フィルタ用CSS -->
+    <style>
+    .work-shape-btn{flex:1;padding:5px 4px;border-radius:3px;border:1px solid var(--border2);background:transparent;color:var(--muted);font-size:11px;cursor:pointer;font-family:inherit;transition:.15s}
+    .work-shape-btn.on{background:rgba(0,212,255,.15);border-color:var(--accent);color:var(--accent)}
+    .work-dim{display:flex;flex-direction:column;gap:2px}
+    .work-dim>span{font-size:9px;color:var(--muted);font-family:'Share Tech Mono',monospace}
+    .work-dim input{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--border2);color:var(--text);padding:5px 6px;border-radius:3px;font-size:11px;outline:none;box-sizing:border-box}
+    .work-dim input:focus{border-color:var(--accent)}
+    #dist-slider{width:100%;accent-color:var(--accent);margin-top:4px}
+    </style>
+
+    <!-- 地域（都道府県＋小牧からの距離） -->
+    <div class="fp-section">
+      <span class="fp-label">地域（都道府県）</span>
+      <select class="pref-select" id="pref-filter" onchange="applyFilters()">
+        <option value="">すべて</option>
+      </select>
+      <span class="fp-label" style="display:flex;align-items:center;justify-content:space-between;margin-top:10px">
+        <span>小牧からの距離</span>
+        <span id="dist-slider-val" style="color:var(--accent)">制限なし</span>
+      </span>
+      <input type="range" id="dist-slider" min="0" max="800" step="10" value="800" oninput="onDistSlider(this.value)"/>
+    </div>
+
+    <!-- ワーク寸法 -->
+    <div class="fp-section">
+      <span class="fp-label">ワーク寸法でしぼる</span>
+      <div style="display:flex;gap:6px;margin-bottom:8px">
+        <button id="work-shape-kaku" class="work-shape-btn on" onclick="setWorkShape('kaku')">角物</button>
+        <button id="work-shape-maru" class="work-shape-btn" onclick="setWorkShape('maru')">丸物</button>
+      </div>
+      <div id="work-kaku-inputs" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
+        <label class="work-dim"><span>X (mm)</span><input type="number" id="work-X" min="0" placeholder="0" oninput="onWorkInput()"/></label>
+        <label class="work-dim"><span>Y (mm)</span><input type="number" id="work-Y" min="0" placeholder="0" oninput="onWorkInput()"/></label>
+        <label class="work-dim"><span>Z (mm)</span><input type="number" id="work-Z" min="0" placeholder="0" oninput="onWorkInput()"/></label>
+      </div>
+      <div id="work-maru-inputs" style="display:none;grid-template-columns:1fr 1fr;gap:6px">
+        <label class="work-dim"><span>φ (mm)</span><input type="number" id="work-D" min="0" placeholder="0" oninput="onWorkInput()"/></label>
+        <label class="work-dim"><span>L (mm)</span><input type="number" id="work-L" min="0" placeholder="0" oninput="onWorkInput()"/></label>
+      </div>
+      <div style="font-size:9px;color:var(--muted);margin-top:6px;line-height:1.5">寸法を入力すると、収まる設備を持つメーカーのみ表示します（寸法未確認の社は除外）。基準は選定#10と同一。</div>
+    </div>
+
+    <!-- OASIS 業種 -->
     <div class="fp-section" id="oasis-cat-section">
       <span class="fp-label" style="display:flex;align-items:center;justify-content:space-between">
         <span>OASIS 業種</span>
@@ -1330,12 +1373,6 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
         </span>
       </span>
       <div id="oasis-cat-chips" style="display:flex;flex-wrap:wrap;gap:3px;margin-top:6px;max-height:180px;overflow-y:auto"></div>
-    </div>
-    <div class="fp-section">
-      <span class="fp-label">都道府県</span>
-      <select class="pref-select" id="pref-filter" onchange="applyFilters()">
-        <option value="">すべて</option>
-      </select>
     </div>
 
     <!-- PATCH:cert-filter-html -->
@@ -3463,6 +3500,9 @@ const OASIS_CATEGORY_COLORS = {
   '設計・開発': '#94a3b8',
 };
 
+// 業種チップ表示順（本人使用頻度順：加工系を前・商社/物流を後ろ）。フィルタ・カウントはこの配列を「含む」基準で判定。
+const GYOSHU_ORDER = ["機械加工","表面処理","熱処理","鍛造・鋳造","板金・プレス","溶接・接合","塗装","複合材・FRP","機体・構造部品製造","エンジン・動力","ベアリング・精密部品","スプリング・ワイヤ","ファスナー・締結部品","シール・ゴム・樹脂","内装・シート・シール","素材・材料","航空電子（アビオニクス）","電子・電気機器","計測・試験機器","非破壊検査","油圧・空圧・流体","エンジニアリング・設計","ソフトウェア・IT","MRO（整備・修理・オーバーホール）","商社・販売","物流","その他・総合"];
+
 // 設備DBキー（equipment_selector.htmlと対応）
 const EQUIP_IDS = ['heiwa','kondo','mizuno','ikex','apc','wada','tenryu','tamagawa','aero_inc','shimada','hikari','ohori','nabtesco','khi_gifu','daido_metal','daido_cast','ntn','sinfonia','kimura','kapp','karumo','ticon'];
 
@@ -3611,8 +3651,9 @@ let filterPref = '';
 let filterDist = 0;
 let filterEquip = false; // legacy bool（互換のため残す）
 let filterEquipState = 'off'; // 'off' | 'detail' | 'researched'
-let filterOasisCats = new Set(Object.keys(OASIS_CATEGORY_COLORS)); // OASIS全ON
+let filterOasisCats = new Set(GYOSHU_ORDER); // OASIS全ON（GYOSHU_ORDER基準）
 let filterWebOnly = false;
+let filterWork = {on:false, shape:'kaku', X:0,Y:0,Z:0, D:0, L:0};
 let activeCard = -1;
 let leafletMarkers = {};
 
@@ -3646,10 +3687,10 @@ function toggleCat(k){
 function initOasisCatChips(){
   const wrap = document.getElementById('oasis-cat-chips');
   if(!wrap) return;
-  const cats = Object.keys(OASIS_CATEGORY_COLORS);
-  // 各業種の会社数をカウント
+  const cats = GYOSHU_ORDER;
+  // 各業種の会社数をカウント（部分一致＝含む基準）
   const catCount = {};
-  companies.forEach(c=>{ if(c.category) catCount[c.category]=(catCount[c.category]||0)+1; });
+  GYOSHU_ORDER.forEach(k=>{ catCount[k]=companies.filter(c=>c.category && c.category.includes(k)).length; });
   
   cats.forEach(cat=>{
     const col = OASIS_CATEGORY_COLORS[cat]||'#888';
@@ -3685,7 +3726,7 @@ function toggleOasisCat(cat, chip, col){
   applyFilters();
 }
 function selectAllOasisCats(){
-  filterOasisCats = new Set(Object.keys(OASIS_CATEGORY_COLORS));
+  filterOasisCats = new Set(GYOSHU_ORDER);
   document.querySelectorAll('[data-oasis-cat]').forEach(chip=>{
     const cat = chip.dataset.oasisCat;
     const col = OASIS_CATEGORY_COLORS[cat]||'#888';
@@ -3946,7 +3987,7 @@ function getFilteredSorted(_qOv, _qeOv){
         if(!nNote2.includes(qe) && !nEquip2.includes(qe)) return false;
       }
       // カテゴリ
-      if(!c.cats.some(k=>filterCats.has(k))) return false;
+      if(Array.isArray(c.cats) && c.cats.length && !c.cats.some(k=>filterCats.has(k))) return false;
       // 都道府県
       if(filterPref && c.pref!==filterPref) return false;
       // 距離
@@ -3954,8 +3995,24 @@ function getFilteredSorted(_qOv, _qeOv){
       // 設備データ有無
       if(false && !c.equipId) return false;
       if(false && !(c.equipId || (c.note && c.note.startsWith('[VERIFIED]')))) return false;
-      // OASIS業種フィルター（OASIS_CATEGORY_COLORSに登録ある社のみ判定。未登録カテゴリは無条件通過＝表示）
-      if(c.category && OASIS_CATEGORY_COLORS[c.category] && !filterOasisCats.has(c.category)) return false;
+      // ワーク寸法フィルター（#10 judgeAと同じ「収まる」基準。寸法未確認の社は除外）
+      if(filterWork.on){
+        var wx,wy,wz;
+        if(filterWork.shape==='kaku'){wx=filterWork.X;wy=filterWork.Y;wz=filterWork.Z;}
+        else{wx=filterWork.D;wy=filterWork.D;wz=filterWork.L;}
+        if(wx||wy||wz){
+          var cx=(filterWork.shape==='maru'&&c.mdia>0)?c.mdia:c.maxX;
+          var cy=(filterWork.shape==='maru'&&c.mdia>0)?c.mdia:c.maxY;
+          var cz=c.maxZ;
+          if(!cx||!cy||!cz) return false;
+          if(!(cx>=wx && cy>=wy && cz>=wz)) return false;
+        }
+      }
+      // OASIS業種フィルター（部分一致＝含む基準。GYOSHU_ORDERのキーで判定。どのキーにも該当しない社は無条件通過）
+      if(c.category){
+        var _mk=GYOSHU_ORDER.filter(function(k){return c.category.includes(k);});
+        if(_mk.length && !_mk.some(function(k){return filterOasisCats.has(k);})) return false;
+      }
       // Web確認済みのみ
       if(filterWebOnly && !c.isWeb) return false;
       // PATCH:cert-filter-check 認定フィルター（OR結合）
@@ -4225,9 +4282,45 @@ function setDistFilter(km){
     }).addTo(map);
     map.flyTo([KOMAKI.lat,KOMAKI.lng],km<80?10:km<150?9:km<300?8:7,{duration:.8});
   }
+  var _ds2=document.getElementById('dist-slider');if(_ds2)_ds2.value=(km===0?800:km);
+  var _dv2=document.getElementById('dist-slider-val');if(_dv2)_dv2.textContent=(km===0?'制限なし':km+' km');
   applyFilters();
 }
 
+function onDistSlider(v){
+  v=parseInt(v)||0;
+  filterDist=(v>=800?0:v);
+  var lv=document.getElementById('dist-slider-val');
+  if(lv) lv.textContent=(filterDist===0?'制限なし':filterDist+' km');
+  ['50','100','200','all'].forEach(function(k){
+    var b=document.getElementById('dist-'+k);
+    if(b) b.classList.toggle('active', k==='all'?filterDist===0:parseInt(k)===filterDist);
+  });
+  if(distCircle){map.removeLayer(distCircle);distCircle=null;}
+  if(filterDist>0){
+    distCircle=L.circle([KOMAKI.lat,KOMAKI.lng],{radius:filterDist*1000,color:'rgba(0,212,255,0.5)',fillColor:'rgba(0,212,255,0.04)',fillOpacity:1,weight:1.5,dashArray:'6 6'}).addTo(map);
+  }
+  applyFilters();
+}
+function setWorkShape(s){
+  filterWork.shape=s;
+  var bk=document.getElementById('work-shape-kaku'),bm=document.getElementById('work-shape-maru');
+  if(bk) bk.classList.toggle('on',s==='kaku');
+  if(bm) bm.classList.toggle('on',s==='maru');
+  var ik=document.getElementById('work-kaku-inputs'),im=document.getElementById('work-maru-inputs');
+  if(ik) ik.style.display=(s==='kaku'?'grid':'none');
+  if(im) im.style.display=(s==='maru'?'grid':'none');
+  onWorkInput();
+}
+function onWorkInput(){
+  function gv(id){var e=document.getElementById(id);return e?(+e.value||0):0;}
+  filterWork.X=gv('work-X');filterWork.Y=gv('work-Y');filterWork.Z=gv('work-Z');
+  filterWork.D=gv('work-D');filterWork.L=gv('work-L');
+  var anyK=(filterWork.shape==='kaku'&&(filterWork.X||filterWork.Y||filterWork.Z));
+  var anyM=(filterWork.shape==='maru'&&(filterWork.D||filterWork.L));
+  filterWork.on=!!(anyK||anyM);
+  applyFilters();
+}
 function toggleEquipFilter(){
   // 旧API互換: cycle off → detail → researched → off
   const order = ['off','detail','researched'];
@@ -4256,8 +4349,13 @@ function updateEquipCounts(){
 function clearFilters(){
   filterCats=new Set(Object.keys(CATEGORIES));
   filterPref='';filterDist=0;filterEquip=false;filterEquipState='off';
-  filterOasisCats=new Set(Object.keys(OASIS_CATEGORY_COLORS));
+  filterOasisCats=new Set(GYOSHU_ORDER);
   filterWebOnly=false;
+  filterWork={on:false,shape:'kaku',X:0,Y:0,Z:0,D:0,L:0};
+  ['work-X','work-Y','work-Z','work-D','work-L'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
+  if(typeof setWorkShape==='function')setWorkShape('kaku');
+  var _ds=document.getElementById('dist-slider');if(_ds)_ds.value=800;
+  var _dv=document.getElementById('dist-slider-val');if(_dv)_dv.textContent='制限なし';
   document.querySelectorAll('[data-oasis-cat]').forEach(chip=>{
     const cat=chip.dataset.oasisCat;
     const col=OASIS_CATEGORY_COLORS[cat]||'#888';
@@ -6851,7 +6949,7 @@ function toggleLogisticsMode(){
 // ================================================================
 var EQUIP_DEV_BY_OIN = {};  // 機種別構造化設備データ（equip_devices_by_oin.json）
 fetch('./manufacturers.json')
-  .then(r => r.json())
+  .then(r => { if(!r.ok) throw new Error('manufacturers.json HTTP ' + r.status); return r.json(); })
   .then(data => {
     companies = data;
     companies.forEach(c => { c._dist = Math.round(haversineKm(KOMAKI.lat, KOMAKI.lng, c.lat, c.lng)); });
@@ -6878,7 +6976,7 @@ fetch('./manufacturers.json')
     applyFilters();
     setTimeout(()=>startTutorial(false), 600);
   })
-  .catch(err => { console.error('init load error:', err); });
+  .catch(err => { console.error('init load error:', err); var el=document.getElementById('company-list'); if(el) el.innerHTML='<div style="padding:24px;color:#ffd60a;font-size:12px;line-height:1.8">データの読み込みに失敗しました（manufacturers.json）。<br>時間をおいて再読込するか、配置・ネットワークをご確認ください。<br><span style="color:#5a7090;font-size:10px">'+((err&&err.message)||err)+'</span></div>'; });
 </script>
 <!-- ===== ワーク起点メーカー選定（2026-05-31統合・外部JSON fetch） ===== -->
 <style>
