@@ -1204,6 +1204,26 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   </div>
 </header>
 
+<!-- ===== β免責バナー＋フッター CSS（案A／案B・既存ダークテーマ準拠） ===== -->
+<style>
+#beta-banner{display:flex;align-items:flex-start;gap:10px;padding:9px 18px;background:var(--panel2);border-bottom:1px solid var(--border);color:#c8d4e6;font-size:12.5px;line-height:1.6;flex-shrink:0}
+#beta-banner .ico{color:var(--warn);flex:0 0 auto;margin-top:1px;font-size:14px}
+#beta-banner p{margin:0;flex:1}
+#beta-banner .close{cursor:pointer;color:var(--muted);background:none;border:none;font-size:16px;line-height:1;padding:0 2px;flex:0 0 auto}
+#beta-banner .close:hover{color:var(--text)}
+#beta-footer{padding:8px 18px;background:var(--bg);border-top:1px solid var(--border);display:flex;align-items:center;gap:8px;font-size:11.5px;line-height:1.5;color:var(--muted);flex-shrink:0}
+#beta-footer .ico{color:var(--muted)}
+#beta-footer a{color:var(--accent);text-decoration:none;font-weight:700}
+#beta-footer a:hover{text-decoration:underline}
+</style>
+<!-- ===== 案A：β免責バナー（ヘッダー直下・×で閉じたら再表示しない） ===== -->
+<div id="beta-banner">
+  <span class="ico">&#9432;</span>
+  <p>本サイトはβ版です。掲載情報は順次更新しており、その正確性・完全性を保証するものではありません。発注に係る最終判断は、利用者ご自身の責任において行ってください。</p>
+  <button class="close" aria-label="閉じる" onclick="document.getElementById('beta-banner').style.display='none';try{localStorage.setItem('betaBannerClosed','1')}catch(e){}">&#10005;</button>
+</div>
+<script>try{if(localStorage.getItem('betaBannerClosed')==='1'){var _bb=document.getElementById('beta-banner');if(_bb)_bb.style.display='none';}}catch(e){}</script>
+
 <!-- チュートリアル（フルスクリーン・スポットライト型） -->
 <div id="tutorial-overlay">
   <div id="tutorial-spotlight"></div>
@@ -1348,6 +1368,13 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     </div>
     <div class="drawer-body" id="drawer-body"></div>
   </div>
+</div>
+
+<!-- ===== 案B：β免責フッター（常設・フィードバックフォームリンク同居） ===== -->
+<div id="beta-footer">
+  <span class="ico">&#9432;</span>
+  <span>β版／掲載情報は順次更新中。正確性・完全性は保証されません。発注の最終判断はご自身の責任で。
+  <a href="https://forms.gle/oJoRDMd1wSFxMXuC6" target="_blank" rel="noopener">改善要望・誤りのご連絡はこちら ↗</a></span>
 </div>
 
 <!-- PATCH:hover-popup-html -->
