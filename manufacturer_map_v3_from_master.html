@@ -255,6 +255,38 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
 
 .divider{height:1px;background:linear-gradient(90deg,var(--accent),transparent 70%);
   margin:12px 0;opacity:.4}
+/* === ドロワー設備v2（構造化表示） === */
+.dv-sec{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--accent);margin:16px 0 7px;display:flex;align-items:center;gap:7px}
+.dv-sec::after{content:"";flex:1;height:1px;background:var(--border)}
+.dv-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.dv-title{font-size:12px;font-weight:700;letter-spacing:1px;color:var(--text)}
+.dv-badge{font-size:9px;font-weight:900;border-radius:3px;padding:1px 6px;font-family:'Share Tech Mono',monospace}
+.dv-ver{background:rgba(57,255,20,.14);color:var(--ok);border:1px solid rgba(57,255,20,.4)}
+.dv-srcn{background:rgba(0,212,255,.12);color:var(--accent);border:1px solid rgba(0,212,255,.4)}
+.dv-non{background:rgba(122,138,160,.15);color:var(--muted)}
+.dv-cert{font-size:9px;font-weight:900;border-radius:3px;padding:1px 6px}
+.c9100{background:rgba(199,125,255,.18);color:#c77dff;border:1px solid rgba(199,125,255,.45)}
+.cnad{background:rgba(255,180,0,.16);color:#ffb400;border:1px solid rgba(255,180,0,.45)}
+.dv-tbl{width:100%;border-collapse:collapse;font-size:11px}
+.dv-tbl th{font-size:9px;letter-spacing:1px;color:var(--muted2);text-align:left;font-weight:400;padding:0 5px 5px 0;border-bottom:1px solid var(--border)}
+.dv-tbl td{padding:6px 5px 6px 0;border-bottom:1px solid #16202f;vertical-align:top}
+.dv-proc{color:#9fe1cb;font-weight:700;white-space:nowrap}
+.dv-maker{color:var(--text)}.dv-model{color:var(--muted);font-size:10px;font-family:'Share Tech Mono',monospace}
+.dv-cnt{color:var(--accent);font-family:'Share Tech Mono',monospace;text-align:center}
+.dv-dim{color:var(--text);font-family:'Share Tech Mono',monospace;font-size:10px;white-space:nowrap}.dv-dim .none{color:var(--muted2)}
+.dv-cf{font-size:8px;font-weight:900;border-radius:3px;padding:1px 4px}
+.dv-cf-high{background:rgba(57,255,20,.16);color:var(--ok)}.dv-cf-mid{background:rgba(0,212,255,.14);color:var(--accent)}.dv-cf-low{background:rgba(255,179,0,.14);color:var(--warn)}
+.dv-srclink{color:var(--accent);text-decoration:none}
+.dv-matrow{margin-top:9px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.dv-matlab{font-size:10px;color:var(--muted)}
+.dv-chip{font-size:10px;background:rgba(57,255,20,.08);color:#9fe1cb;border:1px solid rgba(57,255,20,.25);border-radius:10px;padding:1px 8px}
+.dv-surf td{padding:5px 5px 5px 0;border-bottom:1px solid #16202f;font-size:11px}
+.dv-surf .k{color:var(--muted);font-size:10px;white-space:nowrap;width:74px}
+.dv-srcblk{margin-top:6px;background:var(--panel2);border-radius:6px;padding:10px 12px}
+.dv-srcblk .sh{font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:6px}
+.dv-srcitem{font-size:11px;margin-bottom:5px;line-height:1.4}.dv-srcitem a{color:var(--accent);text-decoration:none;word-break:break-all}
+.dv-srcitem .tag{font-size:8px;color:var(--muted2);border:1px solid var(--border);border-radius:3px;padding:0 4px;margin-right:5px}
+.dv-fallback{font-size:11px;color:var(--muted);line-height:1.7}
 
 /* 設備テーブル */
 .equip-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
@@ -4409,6 +4441,82 @@ function closeCompareModal(){
   if(window._comparePrevFocus) window._comparePrevFocus.focus();
 }
 
+function dvEsc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function dvNorm(o){return String(o==null?'':o).replace(/\.0+$/,'');}
+function dvDim(d){
+  if(d.dia){return 'Φ'+Math.round(d.dia)+(d.len?'×L'+Math.round(d.len):'');}
+  if(d.x||d.y||d.z){return 'X'+Math.round(d.x||0)+'×Y'+Math.round(d.y||0)+'×Z'+Math.round(d.z||0);}
+  return '<span class="none">— 未確認</span>';
+}
+function dvCertBadges(c){
+  var out=[],v=(c.cert||c.certStd||'')+'';
+  if(/9100/.test(v)) out.push('<span class="dv-cert c9100">JIS Q9100</span>');
+  var nd=[];
+  if(c.shtNadcapHT)nd.push('HT'); if(c.shtNadcapCP)nd.push('CP'); if(c.shtNadcapCoat)nd.push('Coat');
+  if(nd.length) nd.forEach(function(x){out.push('<span class="dv-cert cnad">Nadcap '+x+'</span>');});
+  else if(/nadcap/i.test(v)) out.push('<span class="dv-cert cnad">Nadcap</span>');
+  return out.join(' ');
+}
+function dvCollectSrc(c,devs){
+  var urls=[],seen={};
+  function add(u){ if(!u)return; u=(''+u).trim(); if(!/^https?:/.test(u))return; if(seen[u])return; seen[u]=1; urls.push(u); }
+  (devs||[]).forEach(function(d){ (d.src||[]).forEach(add); });
+  try{ if(typeof LATEST_RESEARCH!=='undefined'&&LATEST_RESEARCH[c.oin]&&LATEST_RESEARCH[c.oin].erl&&LATEST_RESEARCH[c.oin].erl.sr){ (''+LATEST_RESEARCH[c.oin].erl.sr).split(/[\s;,]+/).forEach(add); } }catch(e){}
+  if(c.hp)add(c.hp); if(c.ep)add(c.ep); if(c.url)add(c.url);
+  return urls;
+}
+function buildEquipV2(c){
+  var oin=dvNorm(c.oin);
+  var dev=(EQUIP_DEV_BY_OIN&&EQUIP_DEV_BY_OIN[oin])?EQUIP_DEV_BY_OIN[oin]:null;
+  var devs=(dev&&dev.devices)?dev.devices:[];
+  var certs=dvCertBadges(c), srcUrls=dvCollectSrc(c,devs);
+  var html='<div class="dv-sec">EQUIPMENT</div>';
+  html+='<div class="dv-head"><span class="dv-title">設備（機種別）</span>'
+      +(devs.length?'<span class="dv-badge dv-ver">✓ VERIFIED</span>':'<span class="dv-badge dv-non">未深掘り</span>')
+      +(srcUrls.length?'<span class="dv-badge dv-srcn">出典 '+srcUrls.length+'</span>':'')
+      +(certs?'<span style="margin-left:auto">'+certs+'</span>':'')+'</div>';
+  if(devs.length){
+    html+='<table class="dv-tbl"><tr><th>種類</th><th>メーカー / 型番</th><th style="text-align:center">台数</th><th>最大ワーク寸法</th><th>確度</th></tr>';
+    devs.forEach(function(d){
+      var cf=(d.conf||'mid'),cfc=cf==='high'?'dv-cf-high':(cf==='low'?'dv-cf-low':'dv-cf-mid');
+      var s0=(d.src&&d.src[0])?d.src[0]:'';
+      var link=s0?(' <a class="dv-srclink" href="'+dvEsc(s0)+'" target="_blank" rel="noopener noreferrer" title="'+dvEsc(s0)+'">↗</a>'):'';
+      html+='<tr><td class="dv-proc">'+dvEsc(d.proc||'—')+'</td>'
+          +'<td><span class="dv-maker">'+dvEsc(d.maker||'—')+'</span>'+(d.model?'<br><span class="dv-model">'+dvEsc(d.model)+'</span>':'')+'</td>'
+          +'<td class="dv-cnt">'+dvEsc(d.count!=null?d.count:'—')+'</td>'
+          +'<td class="dv-dim">'+dvDim(d)+'</td>'
+          +'<td><span class="dv-cf '+cfc+'">'+cf+'</span>'+link+'</td></tr>';
+    });
+    html+='</table>';
+    var mats={}; devs.forEach(function(d){(d.materials||[]).forEach(function(m){if(m)mats[m]=1;});});
+    var matList=Object.keys(mats);
+    if(!matList.length&&c.materialText) matList=(''+c.materialText).split(/[;,、\/／\s]+/).filter(Boolean).slice(0,8);
+    if(matList.length) html+='<div class="dv-matrow"><span class="dv-matlab">対応材料</span>'+matList.map(function(m){return '<span class="dv-chip">'+dvEsc(m)+'</span>';}).join('')+'</div>';
+  }else{
+    html+='<div class="dv-fallback">機種別の詳細データは未取得（深掘り調査の対象キュー）。';
+    html+= c.equipText? ('現時点の概要：<br>'+dvEsc(c.equipText)) : '現時点で公開設備情報は未収録。';
+    html+='</div>';
+  }
+  var surfRows='';
+  try{
+    if(typeof LATEST_RESEARCH!=='undefined'&&LATEST_RESEARCH[c.oin]&&LATEST_RESEARCH[c.oin].sur){
+      var su=LATEST_RESEARCH[c.oin].sur;
+      if(su.pc) surfRows+='<tr><td class="k">処理</td><td>'+dvEsc(su.pc)+(su.pt?' ／ '+dvEsc(su.pt):'')+'</td></tr>';
+      if(su.fs) surfRows+='<tr><td class="k">炉/槽サイズ</td><td>'+dvEsc(su.fs)+'</td></tr>';
+      if(su.cer||su.nad) surfRows+='<tr><td class="k">認証</td><td>'+dvEsc((su.cer||'')+(su.nad?' / Nadcap:'+su.nad:''))+'</td></tr>';
+    }
+  }catch(e){}
+  if(surfRows) html+='<div class="dv-sec">SURFACE / HEAT</div><table class="dv-surf">'+surfRows+'</table>';
+  if(srcUrls.length){
+    html+='<div class="dv-sec">出典 / SOURCES</div><div class="dv-srcblk"><div class="sh">この企業のデータ取得元</div>';
+    srcUrls.slice(0,8).forEach(function(u){
+      var dom=u.replace(/^https?:\/\//,'').split('/')[0];
+      html+='<div class="dv-srcitem"><span class="tag">web</span><a href="'+dvEsc(u)+'" target="_blank" rel="noopener noreferrer">'+dvEsc(dom)+' ↗</a></div>';
+    });
+    html+='<div class="dv-srcitem" style="color:var(--muted2);font-size:9px">確度: high=公式一次 / mid=二次 / low=断片（無出典は非掲載）</div></div>';
+  }
+  return html;
+}
 function renderDrawer(c){
   const body=document.getElementById('drawer-body');
 
@@ -4546,85 +4654,19 @@ function renderDrawer(c){
     <div class="info-row"><span class="info-key">工程</span><span class="info-val">
       ${c.cats.map(k=>`<span style="margin-right:4px;font-size:10px;padding:2px 6px;border-radius:3px;background:${CATEGORIES[k]?.color||'#3a86ff'}20;color:${CATEGORIES[k]?.color||'#3a86ff'}">${CATEGORIES[k]?.label||k}</span>`).join('')}
     </span></div>
-    ${bizBadge}${certBadge}${urlBadge}${epBadge}${equipCountBadge}${equipTextBadge}${noteBadge}${xyzBanner||''}${researchBanner||''}
+    ${bizBadge}${urlBadge}${epBadge}${noteBadge}
     ${renderCorpSection(c)}
     <div class="divider"></div>`;
+  // 設備セクションv2（機種別構造化テーブル＋認証＋表面処理＋出典集約）。旧researchBanner/equipText/xyz/SCHEDULED DATAを統合。
+  html += buildEquipV2(c);
 
-  // 設備情報（4段階で表現を変える）
+  // 設備サイズ判定UI（EQUIP_DB保有の詳細社のみ）。機種一覧・出典は buildEquipV2 が担当。
   if(c.equipId && EQUIP_DB[c.equipId]){
     html += renderEquipSection(c);
-  } else if(c.equipText && c.equipText.trim()){
-    // equipText要約あり：簡潔表示のみ（バナーは出さない、設備テキストは既にequipTextBadgeで上に表示済）
-    // 何も追加しない
-  } else if(c.equipCount && c.equipCount>0){
-    html += `<div class="no-equip" style="background:rgba(255,214,10,.04);border-color:rgba(255,214,10,.3)">
-      <span style="font-size:11px;color:#ffd60a">📋 設備調査済 ${c.equipCount}件</span>
-      <span style="font-size:10px;color:var(--muted);margin-left:6px">サイズ判定対象外</span>
-    </div>`;
-  } else {
-    html += `<div class="no-equip" style="background:rgba(90,112,144,.04);border-color:rgba(90,112,144,.3)">
-      <span style="font-size:10px;color:var(--muted2)">設備情報 未収録</span>
-    </div>`;
   }
 
 
-  // === OIN_DETAILS: スケジュールデータ詳細セクション（B案追加） ===
-  if(c.oin && typeof OIN_DETAILS !== 'undefined' && OIN_DETAILS[c.oin]){
-    const od = OIN_DETAILS[c.oin];
-    let detailHtml = '<div style="margin-top:14px;padding-top:10px;border-top:1px dashed var(--border2)">';
-    detailHtml += '<div style="font-family:Share Tech Mono,monospace;font-size:9px;letter-spacing:2px;color:var(--accent);margin-bottom:8px">SCHEDULED DATA</div>';
-    // 設備精度ログ
-    if(od.ea && od.ea.length){
-      detailHtml += '<div style="font-size:10px;color:var(--muted);margin-bottom:4px;font-weight:700">設備モデル詳細 ('+od.ea.length+'件)</div>';
-      od.ea.forEach(e=>{
-        let line = '<div style="margin:4px 0;padding:5px 8px;background:rgba(0,212,255,0.04);border-left:2px solid var(--accent)40;font-size:10px;line-height:1.5">';
-        if(e.m) line += '<div>'+e.m.substring(0,200)+'</div>';
-        if(e.x) line += '<div style="color:var(--muted);font-size:9px">寸法: '+e.x.substring(0,80)+'</div>';
-        if(e.c) line += '<div style="color:var(--muted);font-size:9px">台数: '+e.c+'</div>';
-        if(e.ok) line += '<div style="color:var(--accent3);font-size:9px">対応材: '+e.ok+'</div>';
-        line += '</div>';
-        detailHtml += line;
-      });
-    }
-    // 設備調査ログ
-    if(od.er && od.er.length){
-      detailHtml += '<div style="font-size:10px;color:var(--muted);margin:8px 0 4px;font-weight:700">設備カテゴリ調査</div>';
-      od.er.forEach(e=>{
-        let line = '<div style="margin:4px 0;padding:5px 8px;background:rgba(57,255,20,0.04);border-left:2px solid var(--accent3)40;font-size:10px;line-height:1.5">';
-        if(e.c) line += '<div style="color:var(--accent3)">'+e.c+'</div>';
-        if(e.s) line += '<div style="color:var(--muted);font-size:9px">'+e.s.substring(0,200)+'</div>';
-        line += '</div>';
-        detailHtml += line;
-      });
-    }
-    // 表面処理・熱処理
-    if(od.st && od.st.length){
-      detailHtml += '<div style="font-size:10px;color:var(--muted);margin:8px 0 4px;font-weight:700">表面処理・熱処理</div>';
-      od.st.forEach(e=>{
-        let line = '<div style="margin:4px 0;padding:5px 8px;background:rgba(255,193,7,0.04);border-left:2px solid #ffd60a40;font-size:10px;line-height:1.5">';
-        if(e.cat) line += '<div style="color:#ffd60a">'+e.cat+'</div>';
-        if(e.p) line += '<div>'+e.p+'</div>';
-        if(e.f) line += '<div style="color:var(--muted);font-size:9px">炉/槽: '+e.f+'</div>';
-        if(e.cert) line += '<div style="color:var(--accent);font-size:9px">認証: '+e.cert+'</div>';
-        if(e.nadcap) line += '<div style="color:var(--accent);font-size:9px">Nadcap: '+e.nadcap+'</div>';
-        line += '</div>';
-        detailHtml += line;
-      });
-    }
-    // 住所検証
-    if(od.av && (od.av.a || od.av.c)){
-      detailHtml += '<div style="font-size:10px;color:var(--muted);margin:8px 0 4px;font-weight:700">住所検証</div>';
-      let line = '<div style="margin:4px 0;padding:5px 8px;background:rgba(185,103,255,0.04);border-left:2px solid #b967ff40;font-size:10px;line-height:1.5">';
-      if(od.av.a) line += '<div>'+od.av.a+'</div>';
-      if(od.av.c) line += '<div style="color:var(--muted);font-size:9px">市区町村: '+od.av.c+'</div>';
-      if(od.av.cf) line += '<div style="color:var(--muted);font-size:9px">確度: '+od.av.cf+'</div>';
-      line += '</div>';
-      detailHtml += line;
-    }
-    detailHtml += '</div>';
-    // body.innerHTMLが既に組まれている前提で、末尾にappend
-    html += detailHtml;
-  }
+  // （旧 SCHEDULED DATA 生ログ表示は buildEquipV2 の機種テーブル＋表面処理＋出典に統合済みのため廃止）
 
   body.innerHTML=html;
 
@@ -6801,25 +6843,25 @@ function toggleLogisticsMode(){
 // ================================================================
 // 初期化実行
 // ================================================================
+var EQUIP_DEV_BY_OIN = {};  // 機種別構造化設備データ（equip_devices_by_oin.json）
 fetch('./manufacturers.json')
   .then(r => r.json())
   .then(data => {
     companies = data;
     companies.forEach(c => { c._dist = Math.round(haversineKm(KOMAKI.lat, KOMAKI.lng, c.lat, c.lng)); });
-    // 設備型番サイドカー（equip_text_by_oin.json）を上書きマージ。
-    // equipText拡充はこの小ファイルだけ再アップで反映でき、manufacturers.json/HTML再生成が不要になる。
-    // 失敗してもmanufacturers.json側のequipTextで動作継続（非致命）。
-    return fetch('./equip_text_by_oin.json')
-      .then(r => r.ok ? r.json() : {})
-      .catch(() => ({}))
-      .then(sc => {
-        if (sc && typeof sc === 'object') {
-          companies.forEach(c => {
-            var k = String(c.oin).replace(/\.0+$/, '');
-            if (sc[k]) c.equipText = sc[k];
-          });
-        }
+    // 設備サイドカー2種を上書きマージ（小ファイル再アップだけで反映＝HTML再生成不要）。
+    // equip_text_by_oin.json=表示用要約 / equip_devices_by_oin.json=機種別構造化(正本)。失敗しても非致命。
+    return Promise.all([
+      fetch('./equip_text_by_oin.json').then(r => r.ok ? r.json() : {}).catch(() => ({})),
+      fetch('./equip_devices_by_oin.json').then(r => r.ok ? r.json() : {}).catch(() => ({}))
+    ]).then(res => {
+      var sc = res[0] || {};
+      EQUIP_DEV_BY_OIN = res[1] || {};
+      companies.forEach(c => {
+        var k = String(c.oin).replace(/\.0+$/, '');
+        if (sc[k]) c.equipText = sc[k];
       });
+    });
   })
   .then(() => {
     initCatChips();
