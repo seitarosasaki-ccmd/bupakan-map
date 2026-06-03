@@ -1205,6 +1205,26 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   </div>
 </header>
 
+<!-- ===== β免責バナー＋フッター CSS（案A／案B・既存ダークテーマ準拠） ===== -->
+<style>
+#beta-banner{display:flex;align-items:flex-start;gap:10px;padding:9px 18px;background:var(--panel2);border-bottom:1px solid var(--border);color:#c8d4e6;font-size:12.5px;line-height:1.6;flex-shrink:0}
+#beta-banner .ico{color:var(--warn);flex:0 0 auto;margin-top:1px;font-size:14px}
+#beta-banner p{margin:0;flex:1}
+#beta-banner .close{cursor:pointer;color:var(--muted);background:none;border:none;font-size:16px;line-height:1;padding:0 2px;flex:0 0 auto}
+#beta-banner .close:hover{color:var(--text)}
+#beta-footer{padding:8px 18px;background:var(--bg);border-top:1px solid var(--border);display:flex;align-items:center;gap:8px;font-size:11.5px;line-height:1.5;color:var(--muted);flex-shrink:0}
+#beta-footer .ico{color:var(--muted)}
+#beta-footer a{color:var(--accent);text-decoration:none;font-weight:700}
+#beta-footer a:hover{text-decoration:underline}
+</style>
+<!-- ===== 案A：β免責バナー（ヘッダー直下・×で閉じたら再表示しない） ===== -->
+<div id="beta-banner">
+  <span class="ico">&#9432;</span>
+  <p>本サイトはβ版です。掲載情報は順次更新しており、その正確性・完全性を保証するものではありません。発注に係る最終判断は、利用者ご自身の責任において行ってください。</p>
+  <button class="close" aria-label="閉じる" onclick="document.getElementById('beta-banner').style.display='none';try{localStorage.setItem('betaBannerClosed','1')}catch(e){}">&#10005;</button>
+</div>
+<script>try{if(localStorage.getItem('betaBannerClosed')==='1'){var _bb=document.getElementById('beta-banner');if(_bb)_bb.style.display='none';}}catch(e){}</script>
+
 <!-- チュートリアル（フルスクリーン・スポットライト型） -->
 <div id="tutorial-overlay">
   <div id="tutorial-spotlight"></div>
@@ -1349,6 +1369,13 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     </div>
     <div class="drawer-body" id="drawer-body"></div>
   </div>
+</div>
+
+<!-- ===== 案B：β免責フッター（常設・フィードバックフォームリンク同居） ===== -->
+<div id="beta-footer">
+  <span class="ico">&#9432;</span>
+  <span>β版／掲載情報は順次更新中。正確性・完全性は保証されません。発注の最終判断はご自身の責任で。
+  <a href="https://forms.gle/oJoRDMd1wSFxMXuC6" target="_blank" rel="noopener">改善要望・誤りのご連絡はこちら ↗</a></span>
 </div>
 
 <!-- PATCH:hover-popup-html -->
@@ -6779,6 +6806,22 @@ fetch('./manufacturers.json')
   .then(data => {
     companies = data;
     companies.forEach(c => { c._dist = Math.round(haversineKm(KOMAKI.lat, KOMAKI.lng, c.lat, c.lng)); });
+    // 設備型番サイドカー（equip_text_by_oin.json）を上書きマージ。
+    // equipText拡充はこの小ファイルだけ再アップで反映でき、manufacturers.json/HTML再生成が不要になる。
+    // 失敗してもmanufacturers.json側のequipTextで動作継続（非致命）。
+    return fetch('./equip_text_by_oin.json')
+      .then(r => r.ok ? r.json() : {})
+      .catch(() => ({}))
+      .then(sc => {
+        if (sc && typeof sc === 'object') {
+          companies.forEach(c => {
+            var k = String(c.oin).replace(/\.0+$/, '');
+            if (sc[k]) c.equipText = sc[k];
+          });
+        }
+      });
+  })
+  .then(() => {
     initCatChips();
     initPrefSelect();
     initOasisCatChips();
@@ -6787,7 +6830,7 @@ fetch('./manufacturers.json')
     applyFilters();
     setTimeout(()=>startTutorial(false), 600);
   })
-  .catch(err => { console.error('manufacturers.json load error:', err); });
+  .catch(err => { console.error('init load error:', err); });
 </script>
 <!-- ===== ワーク起点メーカー選定（2026-05-31統合・外部JSON fetch） ===== -->
 <style>
@@ -7089,6 +7132,7 @@ function judgeA(c){
  if(aShape==='角'){wx=aDim.X;wy=aDim.Y;wz=aDim.Z;}else{wx=aDim.D;wy=aDim.D;wz=aDim.L;}
  var cx,cy,cz,unknown=false;
  if(aShape==='丸'&&c.mdia>0){cx=c.mdia;cy=c.mdia;cz=c.mz||0;}
+ else if(aShape==='丸'){return {mark:'×',cls:'ng',label:'旋盤なし',note:'丸物は旋削設備が必要'};}
  else{cx=c.mx;cy=c.my;cz=c.mz;}
  if(!cx||!cy||!cz)unknown=true;
  var lab=(aShape==='丸'&&c.mdia>0)?('φ'+Math.round(c.mdia)+'×L'+Math.round(c.mz||0)):('X'+Math.round(c.mx||0)+'×Y'+Math.round(c.my||0)+'×Z'+Math.round(c.mz||0));
@@ -7106,6 +7150,7 @@ function evalA(){
  var order={'○':0,'△':1,'×':2},rows=[];
  for(var oin in WE){if(!WE.hasOwnProperty(oin))continue;var c=WE[oin];
   if(aShape==='角'&&c.nonmc)continue;
+  if(aShape==='丸'&&(!c.mdia||c.mdia<=0))continue;
   var j=judgeA(c);if(j.mark==='×'&&!(c.mx||c.mdia))continue;
   rows.push({oin:oin,name:c.name||'',km:kmOf(oin),j:j});
  }
