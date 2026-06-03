@@ -5174,5 +5174,2073 @@
     ]
    }
   ]
+ },
+ "6115109560": {
+  "name": "恵那機器株式会社",
+  "updated": "2026-06-03T01:16:49.806475+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "マシニングセンタ(同時5軸)",
+    "maker": "DMG森精機",
+    "model": "DMC100U DUO BLOCK(2APC)",
+    "count": 1,
+    "shape": "角",
+    "x": 1000.0,
+    "y": 1250.0,
+    "z": 1000.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "マシニングセンタ(同時5軸)",
+    "maker": "DMG森精機",
+    "model": "DMC100U DUO BLOCK(6APC)",
+    "count": 1,
+    "shape": "角",
+    "x": 1000.0,
+    "y": 1250.0,
+    "z": 1000.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "マシニングセンタ(同時5軸)",
+    "maker": "牧野フライス",
+    "model": "a61nx-5E(2APC)",
+    "count": 1,
+    "shape": "角",
+    "x": 730.0,
+    "y": 730.0,
+    "z": 680.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "マシニングセンタ(横型4軸)",
+    "maker": "三井精機",
+    "model": "HU80A(2APC)",
+    "count": 1,
+    "shape": "角",
+    "x": 1200.0,
+    "y": 950.0,
+    "z": 900.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "マシニングセンタ(横型4軸)",
+    "maker": "三井精機",
+    "model": "HU50A(6APC)",
+    "count": 1,
+    "shape": "角",
+    "x": 720.0,
+    "y": 700.0,
+    "z": 650.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "マシニングセンタ(横型4軸)",
+    "maker": "大隈豊和",
+    "model": "630H(2APC)",
+    "count": 2,
+    "shape": "角",
+    "x": 1020.0,
+    "y": 820.0,
+    "z": 820.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "マシニングセンタ(横型4軸)",
+    "maker": "牧野フライス",
+    "model": "a61nx(6APC)",
+    "count": 1,
+    "shape": "角",
+    "x": 730.0,
+    "y": 730.0,
+    "z": 800.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "マシニングセンタ(横型4軸)",
+    "maker": "牧野フライス",
+    "model": "N2",
+    "count": 2,
+    "shape": "角",
+    "x": 300.0,
+    "y": 300.0,
+    "z": 230.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "マシニングセンタ(縦型4軸)",
+    "maker": "三井精機",
+    "model": "VS5A",
+    "count": 3,
+    "shape": "角",
+    "x": 1080.0,
+    "y": 650.0,
+    "z": 610.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "マシニングセンタ(縦型4軸)",
+    "maker": "三井精機",
+    "model": "VU65A",
+    "count": 8,
+    "shape": "角",
+    "x": 1280.0,
+    "y": 650.0,
+    "z": 610.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "マシニングセンタ(縦型4軸)",
+    "maker": "大隈豊和",
+    "model": "MILLAC 611V",
+    "count": 2,
+    "shape": "角",
+    "x": 1100.0,
+    "y": 610.0,
+    "z": 560.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "マシニングセンタ(縦型4軸)",
+    "maker": "大隈豊和",
+    "model": "MILLAC 761V",
+    "count": 2,
+    "shape": "角",
+    "x": 1540.0,
+    "y": 760.0,
+    "z": 660.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "マシニングセンタ(縦型4軸)",
+    "maker": "キタムラ機械",
+    "model": "4XiF",
+    "count": 1,
+    "shape": "角",
+    "x": 1016.0,
+    "y": 510.0,
+    "z": 510.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "マシニングセンタ(縦型4軸)",
+    "maker": "ニデックOKK",
+    "model": "VM76RII",
+    "count": 1,
+    "shape": "角",
+    "x": 1540.0,
+    "y": 760.0,
+    "z": 660.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "複合加工機",
+    "maker": "オークマ",
+    "model": "U3000",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 645.0,
+    "len": 1100.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "複合加工機",
+    "maker": "中村留精密工業",
+    "model": "NTX-S",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 630.0,
+    "len": 1150.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤(同時2軸)",
+    "maker": "オークマ",
+    "model": "LU35",
+    "count": 2,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 380.0,
+    "len": 1570.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤(同時2軸)",
+    "maker": "オークマ",
+    "model": "LS30-N",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 340.0,
+    "len": 1260.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤(同時2軸)",
+    "maker": "オークマ",
+    "model": "LC30-2SC",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 230.0,
+    "len": 1265.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤(同時2軸)",
+    "maker": "オークマ",
+    "model": "LC30-2ST",
+    "count": 2,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 230.0,
+    "len": 1020.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤(同時2軸)",
+    "maker": "オークマ",
+    "model": "LU25",
+    "count": 2,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 210.0,
+    "len": 1250.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤(同時2軸)",
+    "maker": "オークマ",
+    "model": "LB300",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 185.0,
+    "len": 1020.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤(同時2軸)",
+    "maker": "オークマ",
+    "model": "LB15",
+    "count": 2,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 150.0,
+    "len": 520.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤(同時2軸)",
+    "maker": "オークマ",
+    "model": "LCS15",
+    "count": 2,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 135.0,
+    "len": 320.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "精密旋盤(10尺)",
+    "maker": "オークマ",
+    "model": "LSC-10",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 300.0,
+    "len": 1500.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "精密旋盤(6尺)",
+    "maker": "ワシノ",
+    "model": "LEO-80A",
+    "count": 2,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 140.0,
+    "len": 530.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "精密旋盤(5尺)",
+    "maker": "オークマ",
+    "model": "LK",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 200.0,
+    "len": 585.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "精密旋盤(5尺)",
+    "maker": "ワシノ",
+    "model": "LPT-35C",
+    "count": 2,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 200.0,
+    "len": 500.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "精密旋盤(4尺)",
+    "maker": "江黒",
+    "model": "GL120",
+    "count": 2,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 180.0,
+    "len": 240.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   },
+   {
+    "proc": "精密旋盤(3尺)",
+    "maker": "江黒",
+    "model": "EL3",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 100.0,
+    "len": 190.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "http://www.enakiki.co.jp/content/products.html"
+    ]
+   }
+  ]
+ },
+ "6122249882": {
+  "name": "株式会社川崎製作所",
+  "updated": "2026-06-03T01:16:49.806475+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "立型5軸加工機(旋盤+MC複合)",
+    "maker": "DMG森精機",
+    "model": "DMU210FD",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 2500.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "MAXφ2500大径ワーク対応(公式記載)",
+    "conf": "high",
+    "src": [
+     "https://www.kawasaki-ss.jp/factory/",
+     "https://www.kawasaki-ss.jp/strength/"
+    ]
+   },
+   {
+    "proc": "横型5軸複合加工機",
+    "maker": "ヤマザキマザック",
+    "model": "INTEGREX e650H-4000",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 4000.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "大型長尺・1mロングボーリング対応(公式)",
+    "conf": "high",
+    "src": [
+     "https://www.kawasaki-ss.jp/factory/",
+     "https://www.kawasaki-ss.jp/strength/"
+    ]
+   },
+   {
+    "proc": "門型マシニングセンタ(同時4軸)",
+    "maker": "ニデックOKK",
+    "model": "MCR-A5C II",
+    "count": 1,
+    "shape": "角",
+    "x": 4000.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "長さ4000特大ワーク・津田駒円テーブル同期(公式)",
+    "conf": "high",
+    "src": [
+     "https://www.kawasaki-ss.jp/factory/",
+     "https://www.kawasaki-ss.jp/strength/"
+    ]
+   },
+   {
+    "proc": "横型5軸複合加工機",
+    "maker": "オークマ",
+    "model": "MULTUS B400 II",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "サポイン採択導入",
+    "conf": "high",
+    "src": [
+     "https://www.kawasaki-ss.jp/factory/",
+     "https://www.kawasaki-ss.jp/strength/"
+    ]
+   },
+   {
+    "proc": "NC旋盤",
+    "maker": "オークマ",
+    "model": "LB35 III",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 400.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "φ100〜φ400・耐熱鋼高速旋削(公式)",
+    "conf": "high",
+    "src": [
+     "https://www.kawasaki-ss.jp/factory/",
+     "https://www.kawasaki-ss.jp/strength/"
+    ]
+   },
+   {
+    "proc": "大型三次元測定機",
+    "maker": "カールツァイス",
+    "model": "MMZ-B",
+    "count": 1,
+    "shape": "角",
+    "x": 4000.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "最大4mワーク・保証精度10μm・国内初導入",
+    "conf": "high",
+    "src": [
+     "https://www.kawasaki-ss.jp/factory/",
+     "https://www.kawasaki-ss.jp/strength/"
+    ]
+   }
+  ]
+ },
+ "6115490444": {
+  "name": "株式会社光製作所",
+  "updated": "2026-06-03T01:16:49.806475+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "大型高速5軸マシニングセンタ",
+    "maker": "(公式非記載)",
+    "model": "大型高速5軸MC(主軸12000min)",
+    "count": 1,
+    "shape": "角",
+    "x": 20100.0,
+    "y": 3100.0,
+    "z": 800.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "移動量XYZ20100×3100×800mm・公式記載(大型門型)",
+    "conf": "high",
+    "src": [
+     "https://www.hikariss.co.jp/biz01.html"
+    ]
+   },
+   {
+    "proc": "超高速5軸マシニングセンタ",
+    "maker": "(公式非記載)",
+    "model": "超高速5軸MC(主軸33000min)",
+    "count": 1,
+    "shape": "角",
+    "x": 1520.0,
+    "y": 1100.0,
+    "z": 1350.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "A210/B360連続回転・公式記載",
+    "conf": "high",
+    "src": [
+     "https://www.hikariss.co.jp/biz01.html"
+    ]
+   },
+   {
+    "proc": "同時5軸制御横型マシニングセンタ",
+    "maker": "(公式非記載)",
+    "model": "横型5軸MC(主軸6000min)",
+    "count": 1,
+    "shape": "角",
+    "x": 1200.0,
+    "y": 1000.0,
+    "z": 1050.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "公式記載",
+    "conf": "high",
+    "src": [
+     "https://www.hikariss.co.jp/biz01.html"
+    ]
+   }
+  ]
+ },
+ "6115047703": {
+  "name": "株式会社オノプラント",
+  "updated": "2026-06-03T01:16:49.806475+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "5軸マシニングセンタ(同型多数)",
+    "maker": "(公式非記載)",
+    "model": "5軸MC(本社第二工場・同型)",
+    "count": 18,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金"
+    ],
+    "note": "同型5軸MC18台・3次元アルミ削り出し主力(公式・型番非公開)",
+    "conf": "high",
+    "src": [
+     "https://www.onoplant.co.jp/facility/"
+    ]
+   },
+   {
+    "proc": "溶接組立(航空機用溶接)",
+    "maker": "-",
+    "model": "溶接構造品ライン",
+    "count": 1,
+    "shape": "角",
+    "x": 10000.0,
+    "y": 2000.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "鉄",
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス"
+    ],
+    "note": "溶接構造品最大長さ10m/機械加工伴う溶接組立8mクラス(公式)",
+    "conf": "mid",
+    "src": [
+     "https://www.onoplant.co.jp/facility/"
+    ]
+   },
+   {
+    "proc": "焼付塗装(クリーンルーム基準)",
+    "maker": "-",
+    "model": "塗装設備",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [],
+    "note": "クリーンルーム基準焼付塗装(公式)",
+    "conf": "mid",
+    "src": [
+     "https://www.onoplant.co.jp/facility/"
+    ]
+   }
+  ]
+ },
+ "6123070445": {
+  "name": "株式会社三差製作所",
+  "updated": "2026-06-03T01:16:49.806475+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "NC旋盤",
+    "maker": "森精機",
+    "model": "SL-25",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤",
+    "maker": "森精機",
+    "model": "SL-75B",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "複合加工機(NC旋盤)",
+    "maker": "オークマ",
+    "model": "MULTUS U4000",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤",
+    "maker": "森精機",
+    "model": "SL-35",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤",
+    "maker": "HAAS",
+    "model": "SL-40",
+    "count": 2,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 533.0,
+    "len": 1016.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "HAAS公式φ533×1016",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤",
+    "maker": "HAAS",
+    "model": "SL-20",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤",
+    "maker": "森精機",
+    "model": "SL-6/SL65",
+    "count": 3,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤(長尺)",
+    "maker": "森精機",
+    "model": "SL-603/2000",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 2000.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤",
+    "maker": "森精機",
+    "model": "SL-403/800",
+    "count": 2,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 800.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "NC旋盤(長尺)",
+    "maker": "森精機",
+    "model": "SL-403/2000",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 2000.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "複合加工機",
+    "maker": "ヤマザキマザック",
+    "model": "INTEGREX 60 C1500",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 1500.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "NC立型旋盤",
+    "maker": "ヤマザキマザック",
+    "model": "MEGATURN 600",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 600.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "最大旋削φ600クラス",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "NC立型旋盤",
+    "maker": "ヤマザキマザック",
+    "model": "MEGATURN 1600",
+    "count": 2,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 1600.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "最大旋削φ1600クラス",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "5軸マシニングセンタ",
+    "maker": "オークマ",
+    "model": "MILLAC-1000VH",
+    "count": 1,
+    "shape": "角",
+    "x": 1000.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "立型マシニングセンタ",
+    "maker": "HAAS",
+    "model": "VF-5",
+    "count": 1,
+    "shape": "角",
+    "x": 1270.0,
+    "y": 660.0,
+    "z": 635.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "HAAS公式X1270×Y660×Z635",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "立型マシニングセンタ",
+    "maker": "森精機",
+    "model": "MV-45",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "立型マシニングセンタ",
+    "maker": "OKK",
+    "model": "MCV820",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "立型マシニングセンタ",
+    "maker": "森精機",
+    "model": "MV-80",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "立型マシニングセンタ",
+    "maker": "牧野フライス",
+    "model": "FNC-128-A59",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "横型マシニングセンタ",
+    "maker": "森精機",
+    "model": "NHX8000",
+    "count": 1,
+    "shape": "角",
+    "x": 1400.0,
+    "y": 1250.0,
+    "z": 1540.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "DMG森公式travels(パレット800)",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "横型マシニングセンタ",
+    "maker": "牧野フライス",
+    "model": "MC108H-A",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "ロボドリル",
+    "maker": "ファナック",
+    "model": "α-D21MiB5ADV",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "汎用横型旋盤(長尺)",
+    "maker": "KURAKI",
+    "model": "10尺",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "センター間約3000mm級",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "平面研削盤(ロータリー)",
+    "maker": "三正",
+    "model": "600 ロータリー",
+    "count": 2,
+    "shape": "角",
+    "x": 600.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "低温処理槽",
+    "maker": "-",
+    "model": "-200℃低温装置",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [],
+    "note": "超低温圧縮機関連",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   },
+   {
+    "proc": "三次元測定機",
+    "maker": "ZEISS/東京精密/ミツトヨ",
+    "model": "CONTURA G2他",
+    "count": 3,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://misashi.co.jp/facility.html"
+    ]
+   }
+  ]
+ },
+ "6125749004": {
+  "name": "株式会社瑞木製作所",
+  "updated": "2026-06-03T01:16:49.806475+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "5軸マシニングセンタ",
+    "maker": "DMG森精機",
+    "model": "5軸MC",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "竪型マシニング(5軸機能付き)",
+    "maker": "DMG森精機",
+    "model": "竪型5軸MC",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "マシニングセンタ",
+    "maker": "DMG森精機",
+    "model": "MC",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "横型マシニングセンタ",
+    "maker": "DMG森精機",
+    "model": "横型MC",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "竪型マシニング",
+    "maker": "森精機/OKK",
+    "model": "竪型MC(複数)",
+    "count": 4,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "N/Cマシニング",
+    "maker": "日立精機",
+    "model": "NC-MC",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "竪型NC旋盤",
+    "maker": "オーエム(O-M)",
+    "model": "竪型NC旋盤",
+    "count": 3,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "複合加工機",
+    "maker": "ヤマザキマザック",
+    "model": "複合加工機",
+    "count": 1,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "CNC旋盤",
+    "maker": "ヤマザキマザック",
+    "model": "QTN-200-II MY",
+    "count": 2,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "CNC旋盤",
+    "maker": "ヤマザキマザック",
+    "model": "QUICK TURN SMART 350M",
+    "count": 2,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "精密旋盤",
+    "maker": "ワシノ機械/大隈鉄工",
+    "model": "精密旋盤(複数)",
+    "count": 5,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "CNC円筒研削盤",
+    "maker": "ジェイテクト",
+    "model": "CNC円筒研削盤",
+    "count": 2,
+    "shape": "丸",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "平面研削盤",
+    "maker": "岡本",
+    "model": "平面研削機",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "ワイヤー放電加工機",
+    "maker": "三菱電機",
+    "model": "WEDM",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "精密レーザー加工機",
+    "maker": "-",
+    "model": "珪素鋼板電動機部品レーザー",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "珪素鋼板"
+    ],
+    "note": "事業内容より・型番不明",
+    "conf": "low",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   },
+   {
+    "proc": "三次元測定機",
+    "maker": "ミツトヨ",
+    "model": "三次元測定機",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "http://www.mizuki-ss.co.jp/",
+     "https://eigyo-mfg.com/service/navi/company/05HbVIhmPmtQ"
+    ]
+   }
+  ]
+ },
+ "6122255465": {
+  "name": "株式会社岡部製作所",
+  "updated": "2026-06-03T01:16:49.806475+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "マシニングセンタ(5軸ブレード加工機含む)",
+    "maker": "(公式非記載)",
+    "model": "MC群",
+    "count": 38,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "工具鋼",
+     "超硬"
+    ],
+    "note": "ターレットパンチプレス用ブレード(切刃)専門・MC38台(公式)",
+    "conf": "high",
+    "src": [
+     "http://www.okabe-seisakusho.co.jp/flow.html"
+    ]
+   },
+   {
+    "proc": "NCフライス盤",
+    "maker": "(公式非記載)",
+    "model": "NCフライス",
+    "count": 16,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "工具鋼"
+    ],
+    "note": "公式記載",
+    "conf": "high",
+    "src": [
+     "http://www.okabe-seisakusho.co.jp/flow.html"
+    ]
+   },
+   {
+    "proc": "オートカット(自動切断)",
+    "maker": "(公式非記載)",
+    "model": "オートカット",
+    "count": 3,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "工具鋼"
+    ],
+    "note": "公式・汎用機含め23〜24時間稼働",
+    "conf": "high",
+    "src": [
+     "http://www.okabe-seisakusho.co.jp/flow.html"
+    ]
+   }
+  ]
+ },
+ "6122532366": {
+  "name": "東都工業株式会社",
+  "updated": "2026-06-03T01:16:49.806475+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "5軸マシニングセンタ",
+    "maker": "(公式非記載)",
+    "model": "5軸MC",
+    "count": 1,
+    "shape": "角",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0,
+    "dia": 0.0,
+    "len": 0.0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "ニッケル合金(インコネル等)"
+    ],
+    "note": "5軸マシニング使用・精密製品製造(公式)・台数/型番非公開。JIS Q9100認証",
+    "conf": "low",
+    "src": [
+     "http://www.touto-kogyo.co.jp/"
+    ]
+   }
+  ]
  }
 }
