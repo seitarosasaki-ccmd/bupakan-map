@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>メーカーマップ フィードバック</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e1a; --panel:#0f1628; --text:#e8f0ff; --muted:#5a7090;
+  --accent:#00d4ff; --teal:#2dd4aa; --navy:#12202e; --border:#1e2d4a;
+  --ok:#39ff14; --warn:#ffd60a; --err:#f09595;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);
+  min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:32px 16px}
+.card{width:100%;max-width:560px;background:var(--panel);border:1px solid var(--border);
+  border-top:3px solid var(--teal);border-radius:10px;padding:28px}
+.brand{font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;color:var(--teal);margin-bottom:6px}
+h1{font-size:19px;margin-bottom:6px}
+.lead{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:22px}
+label{display:block;font-size:12px;color:#9fb2c8;margin:16px 0 6px}
+select,textarea,input[type=text]{width:100%;background:var(--navy);color:var(--text);
+  border:1px solid var(--border);border-radius:6px;padding:10px 12px;font-size:14px;font-family:inherit}
+textarea{min-height:130px;resize:vertical;line-height:1.6}
+.hint{font-size:11px;color:var(--muted);margin-top:4px}
+button{margin-top:22px;width:100%;background:var(--teal);color:#06231b;border:none;border-radius:6px;
+  padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+button:hover{filter:brightness(1.08)}
+button:disabled{opacity:.5;cursor:default}
+.msg{margin-top:16px;padding:12px;border-radius:6px;font-size:13px;line-height:1.6;display:none}
+.msg.ok{display:block;background:rgba(57,255,20,.08);border:1px solid rgba(57,255,20,.4);color:#bfffb0}
+.msg.err{display:block;background:rgba(240,149,149,.08);border:1px solid rgba(240,149,149,.4);color:#ffc7c7}
+.alt{margin-top:24px;padding-top:18px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);line-height:1.8}
+.alt a{color:var(--accent);text-decoration:none}
+.alt a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="brand">◇ OASIS MFG MAP</div>
+  <h1>フィードバック・改訂要望</h1>
+  <p class="lead">航空宇宙メーカーマップへのご意見・誤りのご指摘・掲載情報の修正依頼などをお寄せください。匿名で送信できます。社名・連絡先の記入は任意です。</p>
+
+  <form id="fb-form">
+    <label for="fb-type">種別</label>
+    <select id="fb-type" name="種別">
+      <option>掲載情報の誤り・修正依頼</option>
+      <option>掲載メーカーの追加希望</option>
+      <option>機能・使い勝手のご要望</option>
+      <option>不具合の報告</option>
+      <option>その他</option>
+    </select>
+
+    <label for="fb-company">対象メーカー名（任意）</label>
+    <input type="text" id="fb-company" name="対象メーカー" placeholder="例：◯◯工業株式会社">
+
+    <label for="fb-body">内容</label>
+    <textarea id="fb-body" name="内容" placeholder="ご意見・ご指摘の内容をご記入ください。" required></textarea>
+
+    <label for="fb-contact">ご連絡先（任意・返信をご希望の場合）</label>
+    <input type="text" id="fb-contact" name="連絡先" placeholder="メールアドレス等（空欄可）">
+    <div class="hint">記入いただいた場合のみ、返信に使用します。</div>
+
+    <button type="submit" id="fb-submit">送信する</button>
+    <div class="msg" id="fb-msg"></div>
+  </form>
+
+  <div class="alt">
+    メールアプリが使えない場合は、Googleフォームもご利用いただけます：<br>
+    <a href="https://forms.gle/oJoRDMd1wSFxMXuC6" target="_blank" rel="noopener">Googleフォームで送る</a>
+    <span style="color:var(--muted)">（社内ネットワークでGoogleがブロックされている場合は、上のフォームから送信してください）</span>
+  </div>
+</div>
+
+<script>
+// ===== 送信先（匿名プロジェクトアドレス） =====
+const CONTACT = 'oasis.mfg.map@gmail.com';
+// mailto方式：会社のプロキシ/DLPで弾かれない（Google等への通信が発生しないローカルのメール起動）
+// ============================================
+
+const form = document.getElementById('fb-form');
+const msg  = document.getElementById('fb-msg');
+const btn  = document.getElementById('fb-submit');
+
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  const type    = document.getElementById('fb-type').value;
+  const company = document.getElementById('fb-company').value.trim();
+  const body    = document.getElementById('fb-body').value.trim();
+  const contact = document.getElementById('fb-contact').value.trim();
+  if(!body){ return; }
+
+  const subject = '【メーカーマップ】' + type;
+  const lines = [
+    '種別：' + type,
+    '対象メーカー：' + (company || '（未記入）'),
+    '',
+    '内容：',
+    body,
+    '',
+    '連絡先：' + (contact || '（未記入）'),
+    '',
+    '— oasis-map.com フィードバックフォームより'
+  ].join('\n');
+
+  const href = 'mailto:' + CONTACT
+             + '?subject=' + encodeURIComponent(subject)
+             + '&body='    + encodeURIComponent(lines);
+
+  window.location.href = href;
+
+  msg.className = 'msg ok';
+  msg.innerHTML = 'メールアプリが立ち上がります。そのまま送信してください。<br>'
+                + '起動しない場合は、お手数ですが <b>' + CONTACT + '</b> 宛にそのままお送りください。';
+});
+</script>
+</body>
+</html>
