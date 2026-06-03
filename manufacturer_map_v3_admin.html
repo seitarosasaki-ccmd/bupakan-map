@@ -1162,6 +1162,12 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
 }
 .card-size { font-size:11px; color:#888; margin-top:2px; }
 .cert-badge { display:inline-block; background:#1a73e8; color:#fff; border-radius:10px; padding:2px 8px; font-size:11px; margin:2px; }
+.cert-evi{margin-top:10px;padding:9px 11px;background:rgba(45,212,170,.06);border:1px solid rgba(45,212,170,.25);border-radius:6px}
+.cert-evi-h{font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;color:#2dd4aa;margin-bottom:7px}
+.cert-evi-h::before{content:"\25C7 "}
+.cert-evi .info-val.mono{font-family:'Share Tech Mono',monospace}
+.cert-evi .info-val.tbd{color:var(--muted)}
+.cert-evi .info-val.tbd::after{content:" \2500 \8abf\67fb\4e2d";color:var(--muted2);font-size:10px}
 #hover-popup { position:fixed; display:none; background:rgba(5,8,20,.92); border:1px solid rgba(0,212,255,.4); border-radius:4px; padding:8px 12px; font-size:11px; color:#e0e8f0; pointer-events:none; z-index:1500; max-width:220px; line-height:1.5; box-shadow:0 0 12px rgba(0,212,255,.2); }
 #hover-popup .hp-name { font-weight:700; color:#fff; font-size:12px; }
 #hover-popup .hp-cat  { color:rgba(0,212,255,.8); font-size:10px; margin-top:2px; }
@@ -1190,6 +1196,11 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     <button class="pw-btn" onclick="checkPw()">ENTER</button>
     <div class="pw-log">
       <div class="pw-log-ttl">▣ 更新履歴 / CHANGELOG</div>
+      <div class="pw-log-item">
+        <div class="pw-log-date">2026-06</div>
+        <div class="pw-log-h">認証根拠の表示・掲載拡充・検索と選定の改善</div>
+        <div class="pw-log-b">全掲載社にJIS Q 9100の認証番号・認証機関を表示しました。掲載をOASIS登録のほぼ全量（約1,600社）に拡充。検索バーの日本語入力の不具合を修正し、メーカー選定のサイズ判定（過大な設備を除外）を改善しました。</div>
+      </div>
       <div class="pw-log-item">
         <div class="pw-log-date">2026-06</div>
         <div class="pw-log-h">メーカー選定機能を追加</div>
@@ -1228,7 +1239,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     <button class="btn-hdr" onclick="flyToKomaki()">東海</button>
     <button class="btn-hdr" onclick="flyToJapan()">全国</button>
     <button class="btn-hdr" onclick="openModal()">＋ 追加</button>
-    <button class="btn-hdr green" onclick="openOasisModal()">⬡ OASIS</button>
+    <!-- OASISアップロード一旦非表示 2026-06-03 -->
     <button class="btn-hdr" onclick="exportCSV()" style="border-color:rgba(255,200,0,.35);color:#ffc800" title="全企業データをCSVダウンロード">↓ CSV</button>
     <button class="btn-hdr" id="btn-logistics" onclick="toggleLogisticsMode()" title="物流分析モード（IC・新幹線駅・空港を表示）" style="border-color:rgba(255,153,0,.45);color:#ff9900">🚚 物流</button>
     <button class="btn-hdr selector-btn" id="btn-selector" onclick="var p=document.getElementById('wo-panel');var v=(p.style.display==='none'||!p.style.display);p.style.display=(v?'block':'none');if(v&&typeof map!=='undefined'&&map.invalidateSize){setTimeout(function(){map.invalidateSize();},60);}" title="ワーク起点でメーカー選定">⚡ メーカー選定</button>
@@ -1328,7 +1339,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
 
     <!-- PATCH:cert-filter-html -->
     <!-- 特殊工程認定フィルター -->
-    <div id="cert-filter-section" style="margin-top:8px;padding:0 0 4px 0;">
+    <div id="cert-filter-section" style="display:none;margin-top:8px;padding:0 0 4px 0;">
       <div id="cert-filter-toggle" onclick="toggleCertSection()" style="cursor:pointer;font-size:12px;color:#888;user-select:none;padding:4px 0;">
         ▶ 特殊工程認定でしぼる
       </div>
@@ -1406,7 +1417,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
 <div id="beta-footer">
   <span class="ico">&#9432;</span>
   <span>β版／掲載情報は順次更新中。正確性・完全性は保証されません。発注の最終判断はご自身の責任で。
-  <a href="https://forms.gle/oJoRDMd1wSFxMXuC6" target="_blank" rel="noopener">改善要望・誤りのご連絡はこちら ↗</a></span>
+  <a href="feedback.html" target="_blank" rel="noopener">改善要望・誤りのご連絡はこちら ↗</a></span>
 </div>
 
 <!-- PATCH:hover-popup-html -->
@@ -3908,12 +3919,12 @@ function hexToRgb(hex) {
   return r + ',' + g + ',' + b;
 }
 
-function getFilteredSorted(){
+function getFilteredSorted(_qOv, _qeOv){
   // 社名・住所 検索クエリ取得（追加）
-  const q = normQ(document.getElementById('q-search')?.value);
+  const q = normQ(_qOv!==undefined?_qOv:document.getElementById('q-search')?.value);
   const qVariants = expandQueryVariants(q);
   // 設備名称 検索クエリ取得（追加）
-  const qe = normQ(document.getElementById('q-equip')?.value);
+  const qe = normQ(_qeOv!==undefined?_qeOv:document.getElementById('q-equip')?.value);
   return companies
     .filter(c=>{
       // ワーク起点選定の結果ハイライト（selOinSet集合があればそのOINのみ表示）
@@ -4043,19 +4054,13 @@ function buildEmptyStateHTML(){
   }
   // 検索クエリ
   if(q){
-    const inp = document.getElementById('q-search');
-    inp.value = '';
-    const n = getFilteredSorted().length;
-    inp.value = rawQ;
+    const n = getFilteredSorted('').length;
     if(n > 0) reliefs.push({label:'検索クエリ「' + rawQ + '」を解除 (+' + n + '件)', action:"document.getElementById('q-search').value='';applyFilters()"});
   }
   // 設備名称クエリの解除（追加）
   const rawQE = (document.getElementById('q-equip')?.value || '').trim();
   if(rawQE){
-    const inp2 = document.getElementById('q-equip');
-    inp2.value = '';
-    const n = getFilteredSorted().length;
-    inp2.value = rawQE;
+    const n = getFilteredSorted(undefined, '').length;
     if(n > 0) reliefs.push({label:'設備名称「' + rawQE + '」を解除 (+' + n + '件)', action:"document.getElementById('q-equip').value='';applyFilters()"});
   }
   // 全フィルタ解除（最終手段）
@@ -4063,13 +4068,9 @@ function buildEmptyStateHTML(){
     filterCats = new Set(Object.keys(CATEGORIES));
     filterOasisCats = new Set(Object.keys(OASIS_CATEGORY_COLORS));
     filterPref = ''; filterDist = 0; filterEquipState = 'off';
-    const inp = document.getElementById('q-search');
-    const savedQ = inp ? inp.value : '';
-    if(inp) inp.value = '';
-    const n = getFilteredSorted().length;
+    const n = getFilteredSorted('').length;
     filterCats = origCats; filterOasisCats = origOasis;
     filterPref = origPref; filterDist = origDist; filterEquipState = origEquipState;
-    if(inp) inp.value = savedQ;
     if(n > 0) reliefs.push({label:'★ 全フィルタを解除 (+' + n + '件)', action:"filterCats=new Set(Object.keys(CATEGORIES));filterOasisCats=new Set(Object.keys(OASIS_CATEGORY_COLORS));filterPref='';filterDist=0;filterEquipState='off';document.querySelectorAll('.cat-chip').forEach(el=>el.classList.remove('off'));if(typeof selectAllOasisCats==='function')selectAllOasisCats();const inp=document.getElementById('q-search');if(inp)inp.value='';const inp2=document.getElementById('q-equip');if(inp2)inp2.value='';const ps=document.getElementById('pref-filter');if(ps)ps.value='';const ds=document.getElementById('dist-filter');if(ds)ds.value=0;const dv=document.getElementById('dist-val');if(dv)dv.textContent='∞';applyFilters()"});
   }
 
@@ -4600,6 +4601,11 @@ function renderDrawer(c){
   const certVal = c.cert || c.certStd || '';
   // PATCH:cert-badge-render
   const certBadge=certVal?`<div class="info-row"><span class="info-key">認証</span><span class="info-val">${certVal.split(/[,、/／]+/).map(s=>'<span class="cert-badge">'+s.trim()+'</span>').join('')}</span></div>`:'';
+  // PATCH:cert-evidence 認証根拠ブロック（OIN→cert_by_oin.json）
+  const _ce=(typeof CERT!=='undefined'&&c.oin&&CERT[c.oin])?CERT[c.oin]:null;
+  const _ceNo=(_ce&&_ce.no)?`<span class="info-val mono">${_ce.no}</span>`:`<span class="info-val tbd"></span>`;
+  const _ceOrg=(_ce&&_ce.org)?`<span class="info-val">${_ce.org}</span>`:`<span class="info-val tbd"></span>`;
+  const certEviBlock=certVal?`<div class="cert-evi"><div class="cert-evi-h">認証根拠</div><div class="info-row"><span class="info-key">規格</span><span class="info-val">JIS Q 9100 (9001:2015)</span></div><div class="info-row"><span class="info-key">認証番号</span>${_ceNo}</div><div class="info-row"><span class="info-key">認証機関</span>${_ceOrg}</div></div>`:'';
 
   // 業種分類（bizType / category 両対応）
   const bizVal = c.bizType || c.category || '';
@@ -4653,7 +4659,7 @@ function renderDrawer(c){
     <div class="info-row"><span class="info-key">工程</span><span class="info-val">
       ${c.cats.map(k=>`<span style="margin-right:4px;font-size:10px;padding:2px 6px;border-radius:3px;background:${CATEGORIES[k]?.color||'#3a86ff'}20;color:${CATEGORIES[k]?.color||'#3a86ff'}">${CATEGORIES[k]?.label||k}</span>`).join('')}
     </span></div>
-    ${bizBadge}${urlBadge}${epBadge}${noteBadge}
+    ${bizBadge}${certBadge}${certEviBlock}${urlBadge}${epBadge}${noteBadge}
     ${renderCorpSection(c)}
     <div class="divider"></div>`;
   // 設備セクションv2（機種別構造化テーブル＋認証＋表面処理＋出典集約）。旧researchBanner/equipText/xyz/SCHEDULED DATAを統合。
@@ -7045,11 +7051,13 @@ function setMode(m){
  applyView(m);
 }
 
+var CERT={};
 Promise.all([
  fetch('work_envelope_by_oin.json').then(function(r){return r.json();}).catch(function(){return{};}),
  fetch('process_maker_index.json').then(function(r){return r.json();}).catch(function(){return{};}),
- fetch('b_presets.json').then(function(r){return r.json();}).catch(function(){return{};})
-]).then(function(a){WE=a[0];PI=a[1];BP=(a[2]&&a[2].presets)||a[2]||{};setMode('a');});
+ fetch('b_presets.json').then(function(r){return r.json();}).catch(function(){return{};}),
+ fetch('cert_by_oin.json').then(function(r){return r.json();}).catch(function(){return{};})
+]).then(function(a){WE=a[0];PI=a[1];BP=(a[2]&&a[2].presets)||a[2]||{};CERT=a[3]||{};setMode('a');});
 function chips(id,arr,cur,fn){var el=document.getElementById(id);el.innerHTML='';arr.forEach(function(v){var b=document.createElement('button');b.className='wo-chip'+(v===cur?' on':'');b.textContent=v;b.onclick=function(){fn(v);};el.appendChild(b);});}
 
 /* ===== マトリクス表示（縦リスト⇄マトリクス切替・2026-06-02統合） ===== */
@@ -7179,6 +7187,8 @@ function judgeA(c){
  }
  if(!((cx>=wx)&&(cy>=wy)&&(cz>=wz)))return {mark:'×',cls:'ng',label:lab,note:'収まる機種なし'};
  var mg=Math.min(cx/wx,cy/wy,cz/wz);
+ if(mg>10)return {mark:'×',cls:'ng',label:lab,note:'過大すぎ（'+Math.round(mg)+'倍）'};
+ if(mg>5)return {mark:'△',cls:'wn',label:lab,note:'過大（余裕'+Math.round((mg-1)*100)+'%）'};
  if(mg>=1.10)return {mark:'○',cls:'ok',label:lab,note:'余裕'+Math.round((mg-1)*100)+'%'};
  return {mark:'△',cls:'wn',label:lab,note:'ギリ（余裕'+Math.round((mg-1)*100)+'%）'};
 }
