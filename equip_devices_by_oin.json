@@ -39659,5 +39659,2734 @@
     ]
    }
   ]
+ },
+ "6147785282": {
+  "name": "山一産業株式会社 本社",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "大型油圧鍛造プレス",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "Al合金",
+     "ステンレス",
+     "炭素鋼",
+     "Ti合金（6Al-4V等）",
+     "Ni合金（耐熱合金）"
+    ],
+    "note": "既存equipText由来・自動構造化・出典未確定(公式設備ページ未取得)",
+    "conf": "low",
+    "src": []
+   },
+   {
+    "proc": "三次元測定機（接触式）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "Al合金",
+     "ステンレス",
+     "炭素鋼",
+     "Ti合金（6Al-4V等）",
+     "Ni合金（耐熱合金）"
+    ],
+    "note": "既存equipText由来・自動構造化・出典未確定(公式設備ページ未取得)",
+    "conf": "low",
+    "src": []
+   },
+   {
+    "proc": "立形マシニングセンタ（3軸、中型）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "Al合金",
+     "ステンレス",
+     "炭素鋼",
+     "Ti合金（6Al-4V等）",
+     "Ni合金（耐熱合金）"
+    ],
+    "note": "既存equipText由来・自動構造化・出典未確定(公式設備ページ未取得)",
+    "conf": "low",
+    "src": []
+   }
+  ]
+ },
+ "6133572344": {
+  "name": "ヤチヨダ精密株式会社 本社工場",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "CNC複合旋盤",
+    "maker": "オークマ",
+    "model": "LB3000EX II / MY450",
+    "count": 1,
+    "shape": "丸",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 410,
+    "len": 1500,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス",
+     "耐熱合金"
+    ],
+    "note": "2020年導入。Y軸付ミーリング複合。最大加工径・長はLB3000EX系標準値",
+    "conf": "mid",
+    "src": [
+     "https://yachiyoda.co.jp/",
+     "https://www.okuma.co.jp/product/genosl2/"
+    ]
+   },
+   {
+    "proc": "CNC旋盤",
+    "maker": "オークマ",
+    "model": "GENOS L250-II",
+    "count": 2,
+    "shape": "丸",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 280,
+    "len": 500,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス"
+    ],
+    "note": "2020年2台導入。最大加工径Φ280×最大加工長500mm・8インチチャック(オークマ公式)",
+    "conf": "high",
+    "src": [
+     "https://yachiyoda.co.jp/",
+     "https://www.okuma.co.jp/product/genosl2/"
+    ]
+   },
+   {
+    "proc": "立形マシニングセンタ",
+    "maker": "オークマ",
+    "model": "MB-66VB",
+    "count": 1,
+    "shape": "角",
+    "x": 1500,
+    "y": 660,
+    "z": 660,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "アルミ合金",
+     "チタン合金",
+     "ステンレス"
+    ],
+    "note": "2022年9月導入。ストロークX1500×Y660×Z660・テーブル1530×660(中古流通仕様より)",
+    "conf": "mid",
+    "src": [
+     "https://yachiyoda.co.jp/",
+     "https://www.okuma.co.jp/product/mb66v/"
+    ]
+   },
+   {
+    "proc": "円筒研削盤",
+    "maker": "岡本工作機械製作所",
+    "model": "OMG250UDXB",
+    "count": 1,
+    "shape": "丸",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 250,
+    "len": 500,
+    "materials": [
+     "鋼",
+     "ステンレス",
+     "耐熱合金"
+    ],
+    "note": "2022年3月導入。型番OMGはセンタ間/振り径から推定、要公式確認",
+    "conf": "low",
+    "src": [
+     "https://yachiyoda.co.jp/"
+    ]
+   },
+   {
+    "proc": "平面研削盤",
+    "maker": "岡本工作機械製作所",
+    "model": "PSG63SA1",
+    "count": 1,
+    "shape": "角",
+    "x": 600,
+    "y": 300,
+    "z": 300,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "鋼",
+     "ステンレス"
+    ],
+    "note": "2022年5月導入。PSG63=テーブル約600×300クラス",
+    "conf": "mid",
+    "src": [
+     "https://yachiyoda.co.jp/"
+    ]
+   },
+   {
+    "proc": "三次元測定機(CNC)",
+    "maker": "ミツトヨ",
+    "model": "CRYSTA-Apex V7106",
+    "count": 1,
+    "shape": "角",
+    "x": 700,
+    "y": 1000,
+    "z": 600,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "2022年5月導入。測定範囲X700×Y1000×Z600mm(ミツトヨ公式)。CAD/CAMはhyperMILL併用",
+    "conf": "high",
+    "src": [
+     "https://yachiyoda.co.jp/",
+     "https://www.mitutoyo.co.jp/products/measuring-machines/cmm/standard/191-565/"
+    ]
+   }
+  ]
+ },
+ "6148230480": {
+  "name": "山手株式会社 本社・工場",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "オートクレーブ（複合材成形）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "Al合金",
+     "ステンレス",
+     "炭素鋼",
+     "CFRP",
+     "GFRP"
+    ],
+    "note": "既存equipText由来・自動構造化・出典未確定(公式設備ページ未取得)",
+    "conf": "low",
+    "src": []
+   },
+   {
+    "proc": "三次元測定機（接触式）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "Al合金",
+     "ステンレス",
+     "炭素鋼",
+     "CFRP",
+     "GFRP"
+    ],
+    "note": "既存equipText由来・自動構造化・出典未確定(公式設備ページ未取得)",
+    "conf": "low",
+    "src": []
+   },
+   {
+    "proc": "立形マシニングセンタ（3軸、中型）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "Al合金",
+     "ステンレス",
+     "炭素鋼",
+     "CFRP",
+     "GFRP"
+    ],
+    "note": "既存equipText由来・自動構造化・出典未確定(公式設備ページ未取得)",
+    "conf": "low",
+    "src": []
+   }
+  ]
+ },
+ "6145996387": {
+  "name": "米子機工株式会社 本社、米子工場",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "NC旋盤",
+    "maker": "",
+    "model": "",
+    "count": 15,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化・出典未確定(公式設備ページ未取得)",
+    "conf": "low",
+    "src": []
+   },
+   {
+    "proc": "NC門型マシニングセンタ",
+    "maker": "",
+    "model": "",
+    "count": 7,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化・出典未確定(公式設備ページ未取得)",
+    "conf": "low",
+    "src": []
+   },
+   {
+    "proc": "NC横中繰り盤",
+    "maker": "",
+    "model": "",
+    "count": 10,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化・出典未確定(公式設備ページ未取得)",
+    "conf": "low",
+    "src": []
+   }
+  ]
+ },
+ "6135514724": {
+  "name": "株式会社神戸製鋼所 加古川製鉄所 チタン関連部門",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "チタン総合一貫製造設備（高石工場・我が国唯一）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "純チタン（KS40",
+     "KS50",
+     "KS100）",
+     "Ti-6Al-4V",
+     "超高強度合金KS15-5-3",
+     "AKOT耐食合金"
+    ],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.kobelco.co.jp/"
+    ]
+   },
+   {
+    "proc": "アルミニウム鋳鍛造設備（航空機用部品）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "純チタン（KS40",
+     "KS50",
+     "KS100）",
+     "Ti-6Al-4V",
+     "超高強度合金KS15-5-3",
+     "AKOT耐食合金"
+    ],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.kobelco.co.jp/"
+    ]
+   }
+  ]
+ },
+ "700096545": {
+  "name": "ユキメタルテック株式会社",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": []
+ },
+ "6138991302": {
+  "name": "日鉄関西マシニング株式会社",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "オートクレーブ（複合材成形）(1) プラズマ窒化処理 nitriding",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "CFRP",
+     "GFRP",
+     "アラミド繊維複合材"
+    ],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.nskm.nipponsteel.com/"
+    ]
+   }
+  ]
+ },
+ "6119897807": {
+  "name": "日本製鉄株式会社 関西製鉄所 大阪地区",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": []
+ },
+ "6140273568": {
+  "name": "山本金属テクノス株式会社",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "切削加工(マシニング/旋盤)",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "鋼",
+     "ステンレス",
+     "チタン合金",
+     "耐熱合金",
+     "アルミ合金"
+    ],
+    "note": "精密切削加工部品の製造・販売が主力。川崎重工より品質優良賞・JISQ9100:2009認証(2014)",
+    "conf": "mid",
+    "src": [
+     "https://yama-kin.co.jp/",
+     "https://yama-kin.co.jp/company/introduction"
+    ]
+   },
+   {
+    "proc": "円筒研削盤(外径/内径/テーパー)",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "丸",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "鋼",
+     "ステンレス",
+     "耐熱合金"
+    ],
+    "note": "既存equipText由来。精密研削",
+    "conf": "mid",
+    "src": [
+     "https://yama-kin.co.jp/"
+    ]
+   },
+   {
+    "proc": "三次元測定機(CMM)",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "角",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "検査。真円度測定機も併設",
+    "conf": "mid",
+    "src": [
+     "https://yama-kin.co.jp/"
+    ]
+   },
+   {
+    "proc": "回転曲げ疲労試験機",
+    "maker": "(自社)",
+    "model": "GIGAQUAD(4連式)",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "自社開発・グッドデザインBEST100。材料疲労試験。加工モニタリング機器MULTI INTELLIGENCEも自社開発",
+    "conf": "mid",
+    "src": [
+     "https://yama-kin.co.jp/"
+    ]
+   }
+  ]
+ },
+ "6115505203": {
+  "name": "日本製鉄株式会社 東日本製鉄所 直江津地区",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "めっき（プレめっき・後めっき） 電気めっき 溶融めっき 塗装（製品表面処理） 圧延加工（ステンレス・チタン薄板",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.nipponsteel.com/works/east_nippon/naoetsu/about/index.html"
+    ]
+   },
+   {
+    "proc": "厚板）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.nipponsteel.com/works/east_nippon/naoetsu/about/index.html"
+    ]
+   }
+  ]
+ },
+ "6157370687": {
+  "name": "TANIDA株式会社",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "精密鋳造設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "アルミ合金",
+     "マグネシウム合金"
+    ],
+    "note": "アルミ・マグネシウム合金の精密鋳造専門。航空宇宙向け。casting→machining一貫",
+    "conf": "mid",
+    "src": [
+     "https://tanida.co.jp/"
+    ]
+   },
+   {
+    "proc": "NC機械加工設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "アルミ合金",
+     "マグネシウム合金"
+    ],
+    "note": "1980年代後半よりNC機を継続導入。多品種少量・短納期。鋳造から機械加工まで一貫",
+    "conf": "mid",
+    "src": [
+     "https://tanida.co.jp/"
+    ]
+   },
+   {
+    "proc": "溶接設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "アルミ合金",
+     "マグネシウム合金"
+    ],
+    "note": "welding工程内製",
+    "conf": "mid",
+    "src": [
+     "https://tanida.co.jp/"
+    ]
+   },
+   {
+    "proc": "熱処理炉",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "アルミ合金",
+     "マグネシウム合金"
+    ],
+    "note": "heat treat。AMS2750(Class4準拠)・AMS2771準拠",
+    "conf": "mid",
+    "src": [
+     "https://tanida.co.jp/"
+    ]
+   },
+   {
+    "proc": "非破壊検査(NDT)設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "アルミ合金",
+     "マグネシウム合金"
+    ],
+    "note": "NDT・材料試験(ISO/IEC17025)を内製",
+    "conf": "mid",
+    "src": [
+     "https://tanida.co.jp/"
+    ]
+   },
+   {
+    "proc": "表面処理設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "アルミ合金",
+     "マグネシウム合金"
+    ],
+    "note": "surface treatment工程内製",
+    "conf": "mid",
+    "src": [
+     "https://tanida.co.jp/"
+    ]
+   }
+  ]
+ },
+ "6114409504": {
+  "name": "大同特殊鋼株式会社 渋川工場",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "真空誘導溶解炉（VIM）世界最大級",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "Ni基合金",
+     "Ti合金",
+     "Co基合金",
+     "高純度ステンレス",
+     "クリーンステンレス（SUS316超清浄度）"
+    ],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.daido.co.jp/"
+    ]
+   },
+   {
+    "proc": "真空アーク再溶解炉（VAR）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "Ni基合金",
+     "Ti合金",
+     "Co基合金",
+     "高純度ステンレス",
+     "クリーンステンレス（SUS316超清浄度）"
+    ],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.daido.co.jp/"
+    ]
+   },
+   {
+    "proc": "MT認定見込み（世界4大エンジンメーカー製造認定取得） NADCAP ナドキャップ",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "Ni基合金",
+     "Ti合金",
+     "Co基合金",
+     "高純度ステンレス",
+     "クリーンステンレス（SUS316超清浄度）"
+    ],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.daido.co.jp/"
+    ]
+   }
+  ]
+ },
+ "6135068885": {
+  "name": "大和合金株式会社 三好工場",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "鍛造油圧プレス",
+    "maker": "(自社/三芳合金工業)",
+    "model": "1500t",
+    "count": 1,
+    "shape": "丸",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "アルミニウム青銅(C6161/C6191/C6241/C63000=AMS4640/CAC702/CAC703)",
+     "クロム銅",
+     "ベリリウム銅",
+     "高力黄銅",
+     "コルソン合金(NC合金)"
+    ],
+    "note": "2020年8月稼働。中量品の短納期鍛造。航空機ランディングギア向け特殊アルミ青銅実績",
+    "conf": "high",
+    "src": [
+     "http://www.yamatogokin.co.jp/",
+     "https://www.tokyo-cci.or.jp/seisaku/committee/mono/smart/case/48/"
+    ]
+   },
+   {
+    "proc": "溶解設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "アルミニウム青銅(C6161/C6191/C6241/C63000=AMS4640/CAC702/CAC703)",
+     "クロム銅",
+     "ベリリウム銅",
+     "高力黄銅",
+     "コルソン合金(NC合金)"
+    ],
+    "note": "特殊銅合金の溶解。溶解→鋳造→鍛造→引抜→熱処理→機械加工の一貫設備",
+    "conf": "mid",
+    "src": [
+     "http://www.yamatogokin.co.jp/"
+    ]
+   },
+   {
+    "proc": "鋳造設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "アルミニウム青銅(C6161/C6191/C6241/C63000=AMS4640/CAC702/CAC703)",
+     "クロム銅",
+     "ベリリウム銅",
+     "高力黄銅",
+     "コルソン合金(NC合金)"
+    ],
+    "note": "鋳造金型・鋳造。JISQ9100:2016認証範囲に航空宇宙防衛向け銅合金材料の製造含む",
+    "conf": "mid",
+    "src": [
+     "http://www.yamatogokin.co.jp/"
+    ]
+   },
+   {
+    "proc": "引抜設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "丸",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "アルミニウム青銅(C6161/C6191/C6241/C63000=AMS4640/CAC702/CAC703)",
+     "クロム銅",
+     "ベリリウム銅",
+     "高力黄銅",
+     "コルソン合金(NC合金)"
+    ],
+    "note": "棒材引抜",
+    "conf": "mid",
+    "src": [
+     "http://www.yamatogokin.co.jp/"
+    ]
+   },
+   {
+    "proc": "熱処理炉",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "アルミニウム青銅(C6161/C6191/C6241/C63000=AMS4640/CAC702/CAC703)",
+     "クロム銅",
+     "ベリリウム銅",
+     "高力黄銅",
+     "コルソン合金(NC合金)"
+    ],
+    "note": "時効硬化等の熱処理",
+    "conf": "mid",
+    "src": [
+     "http://www.yamatogokin.co.jp/"
+    ]
+   },
+   {
+    "proc": "機械加工設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "アルミニウム青銅(C6161/C6191/C6241/C63000=AMS4640/CAC702/CAC703)",
+     "クロム銅",
+     "ベリリウム銅",
+     "高力黄銅",
+     "コルソン合金(NC合金)"
+    ],
+    "note": "加工・販売を大和合金が担当",
+    "conf": "mid",
+    "src": [
+     "http://www.yamatogokin.co.jp/"
+    ]
+   }
+  ]
+ },
+ "6147332347": {
+  "name": "ヤマキン株式会社 群馬工場 （第3工場）",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "大型油圧鍛造プレス",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "Ti合金（6Al-4V等）",
+     "Ni合金（耐熱合金）",
+     "全材料対応",
+     "Al合金",
+     "Ti合金"
+    ],
+    "note": "既存equipText由来・自動構造化・出典未確定(公式設備ページ未取得)",
+    "conf": "low",
+    "src": []
+   },
+   {
+    "proc": "三次元測定機（接触式）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "Ti合金（6Al-4V等）",
+     "Ni合金（耐熱合金）",
+     "全材料対応",
+     "Al合金",
+     "Ti合金"
+    ],
+    "note": "既存equipText由来・自動構造化・出典未確定(公式設備ページ未取得)",
+    "conf": "low",
+    "src": []
+   },
+   {
+    "proc": "超音波探傷装置（フェーズドアレイUT）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "Ti合金（6Al-4V等）",
+     "Ni合金（耐熱合金）",
+     "全材料対応",
+     "Al合金",
+     "Ti合金"
+    ],
+    "note": "既存equipText由来・自動構造化・出典未確定(公式設備ページ未取得)",
+    "conf": "low",
+    "src": []
+   }
+  ]
+ },
+ "6141116747": {
+  "name": "山本電機製作所",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": []
+ },
+ "6140092642": {
+  "name": "寺崎電気産業株式会社",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "N",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.terasaki.co.jp/"
+    ]
+   },
+   {
+    "proc": "A（電気機器・配電盤製造設備）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.terasaki.co.jp/"
+    ]
+   }
+  ]
+ },
+ "700063462": {
+  "name": "第3工場、丹勵株式会社",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "自社設計リングローリングマシン;クランクプレス2台搭載リングミル",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "炭素鋼",
+     "軸受鋼(SUJ)",
+     "合金鋼"
+    ],
+    "note": "既存equipText由来・自動構造化・出典未確定(公式設備ページ未取得)",
+    "conf": "low",
+    "src": []
+   }
+  ]
+ },
+ "6142967720": {
+  "name": "飛島工場、三菱重工業、統合防衛・宇宙システム 宇宙システム事業部",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "自動打鋲機（型番非公開）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [
+     "アルミニウム合金",
+     "炭素繊維複合材(CFRP)"
+    ],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.mhi.com/jp/"
+    ]
+   }
+  ]
+ },
+ "6131530061": {
+  "name": "東邦チタニウム株式会社",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "チタン製造設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   },
+   {
+    "proc": "溶解炉",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   },
+   {
+    "proc": "鋳造設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   },
+   {
+    "proc": "スポンジチタン製造設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   },
+   {
+    "proc": "チタンインゴット製造設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   },
+   {
+    "proc": "真空溶解炉系",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   },
+   {
+    "proc": "チタンインゴット溶解炉",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   }
+  ]
+ },
+ "6115490363": {
+  "name": "東邦チタニウム株式会社 茅ヶ崎工場",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "スポンジチタン製造装置(クロール法)",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   },
+   {
+    "proc": "チタンインゴット溶解炉",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   },
+   {
+    "proc": "WEBTi多孔チタン板製造装置 チタンスポンジ製造（クロール法化学還元） チタンインゴット製造（EB溶解・VAR溶解）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   }
+  ]
+ },
+ "6133334825": {
+  "name": "東邦チタニウム株式会社 若松工場",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "スポンジチタン製造設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   },
+   {
+    "proc": "ニッケル粉製造設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   },
+   {
+    "proc": "スポンジチタン製造設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   },
+   {
+    "proc": "ニッケル粉製造設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   }
+  ]
+ },
+ "6131530100": {
+  "name": "東邦チタニウム株式会社 八幡工場",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "チタンインゴット製造設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   },
+   {
+    "proc": "プラズマ溶解炉",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.toho-titanium.co.jp/"
+    ]
+   }
+  ]
+ },
+ "6145102249": {
+  "name": "東海テクノセンター株式会社 技術エンジニアリング部",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "エンジン・動力",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.tokai-ele.com/ttc/"
+    ]
+   },
+   {
+    "proc": "MRO（整備・修理・オーバーホール）",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.tokai-ele.com/ttc/"
+    ]
+   },
+   {
+    "proc": "エンジニアリング・設計",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.tokai-ele.com/ttc/"
+    ]
+   },
+   {
+    "proc": "計測制御システム",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.tokai-ele.com/ttc/"
+    ]
+   },
+   {
+    "proc": "検査装置開発",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.tokai-ele.com/ttc/"
+    ]
+   },
+   {
+    "proc": "自動制御機器",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.tokai-ele.com/ttc/"
+    ]
+   }
+  ]
+ },
+ "6148017425": {
+  "name": "徳之島工場、日本マルコ株式会社",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "コネクタ組立ライン",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.nihon-maruko.jp/"
+    ]
+   },
+   {
+    "proc": "ハーネス製造設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.nihon-maruko.jp/"
+    ]
+   },
+   {
+    "proc": "クリーンルーム",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.nihon-maruko.jp/"
+    ]
+   },
+   {
+    "proc": "コネクタ製造",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.nihon-maruko.jp/"
+    ]
+   },
+   {
+    "proc": "ハーネス組立",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.nihon-maruko.jp/"
+    ]
+   },
+   {
+    "proc": "検査設備",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.nihon-maruko.jp/"
+    ]
+   },
+   {
+    "proc": "コネクタ",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.nihon-maruko.jp/"
+    ]
+   },
+   {
+    "proc": "ハーネス組立ライン",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.nihon-maruko.jp/"
+    ]
+   }
+  ]
+ },
+ "6122376043": {
+  "name": "徳島工場、新明和工業株式会社 航空機事業部",
+  "updated": "2026-06-03T21:15:40+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "航空機部品製造",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.shinmaywa.co.jp/aircraft/"
+    ]
+   },
+   {
+    "proc": "機体・構造部品製造",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.shinmaywa.co.jp/aircraft/"
+    ]
+   },
+   {
+    "proc": "固定翼機機体製造ライン",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.shinmaywa.co.jp/aircraft/"
+    ]
+   },
+   {
+    "proc": "座席",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.shinmaywa.co.jp/aircraft/"
+    ]
+   },
+   {
+    "proc": "GSE製造",
+    "maker": "",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": 0,
+    "y": 0,
+    "z": 0,
+    "dia": 0,
+    "len": 0,
+    "materials": [],
+    "note": "既存equipText由来・自動構造化",
+    "conf": "mid",
+    "src": [
+     "https://www.shinmaywa.co.jp/aircraft/"
+    ]
+   }
+  ]
+ },
+ "6139789924": {
+  "name": "エヌ・デイ・ケー加工センター株式会社",
+  "updated": "2026-06-04T01:15:47.832803+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "電子ビーム溶接(EBW)",
+    "maker": "",
+    "model": "大型電子ビーム溶接機",
+    "count": 6,
+    "shape": "角",
+    "x": 3100,
+    "y": 2100,
+    "z": 2450,
+    "dia": "",
+    "len": "",
+    "materials": [
+     "W",
+     "Ni",
+     "Ta",
+     "Ti",
+     "Cu",
+     "SUS",
+     "高融点材",
+     "活性金属"
+    ],
+    "note": "最大ワークサイズL3100×W2100×H2450。微細穴あけφ10〜200μm・とも付け深溶込・異種金属接合(Cu+SUS)",
+    "conf": "high",
+    "src": [
+     "http://www.ndk-kakou.co.jp/processing/electron/",
+     "http://www.ndk-kakou.co.jp/company/"
+    ]
+   },
+   {
+    "proc": "真空熱処理",
+    "maker": "IHI-Ipsen",
+    "model": "真空熱処理炉",
+    "count": 1,
+    "shape": "角",
+    "x": 2000,
+    "y": 910,
+    "z": 790,
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "最大L2000×W910×H790 1500kg(reuse:sht研究ログ・公式設備頁要再確認)",
+    "conf": "mid",
+    "src": [
+     "http://www.ndk-kakou.co.jp/processing/heat.html"
+    ]
+   },
+   {
+    "proc": "プラズマ窒化(イオン窒化)",
+    "maker": "",
+    "model": "イオン窒化装置",
+    "count": 1,
+    "shape": "丸",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": 1300,
+    "len": 2450,
+    "materials": [],
+    "note": "最大φ1300×H2450 1000kg",
+    "conf": "mid",
+    "src": [
+     "http://www.ndk-kakou.co.jp/processing/plasma.html"
+    ]
+   },
+   {
+    "proc": "真空ロウ付け",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "真空中ロウ付け",
+    "conf": "mid",
+    "src": [
+     "http://www.ndk-kakou.co.jp/processing/brazing.html"
+    ]
+   },
+   {
+    "proc": "真空接合(拡散接合)",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "真空拡散接合",
+    "conf": "mid",
+    "src": [
+     "http://www.ndk-kakou.co.jp/processing/diffusion.html"
+    ]
+   },
+   {
+    "proc": "精密機械加工",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "微細加工",
+    "conf": "mid",
+    "src": [
+     "http://www.ndk-kakou.co.jp/processing/machining.html"
+    ]
+   }
+  ]
+ },
+ "6142396443": {
+  "name": "株式会社JMC",
+  "updated": "2026-06-04T01:15:47.832803+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "5軸立形MC",
+    "maker": "ヤマザキマザック",
+    "model": "VARIAXIS i-700 PC2",
+    "count": 1,
+    "shape": "丸",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": 700,
+    "len": 500,
+    "materials": [],
+    "note": "φ700×Y500・PC2(510角)",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "5軸立形MC",
+    "maker": "DMG森精機",
+    "model": "DMC 80 U duoBLOCK",
+    "count": 2,
+    "shape": "角",
+    "x": 800,
+    "y": 1050,
+    "z": 850,
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "5軸立形MC",
+    "maker": "DMG森精機",
+    "model": "NMV5000 DCG",
+    "count": 1,
+    "shape": "角",
+    "x": 730,
+    "y": 510,
+    "z": 510,
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "5軸立形MC",
+    "maker": "DMG森精機",
+    "model": "DMU 65 monoBLOCK",
+    "count": 1,
+    "shape": "丸",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": 650,
+    "len": 560,
+    "materials": [],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "5軸横形MC",
+    "maker": "三井精機工業",
+    "model": "HU63A-5X",
+    "count": 1,
+    "shape": "丸",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": 950,
+    "len": 900,
+    "materials": [],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "立形MC",
+    "maker": "DMG森精機",
+    "model": "CMX1100V",
+    "count": 4,
+    "shape": "角",
+    "x": 1100,
+    "y": 560,
+    "z": 510,
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "立形MC(木型用)",
+    "maker": "OKK",
+    "model": "VM76R",
+    "count": 1,
+    "shape": "角",
+    "x": 1550,
+    "y": 760,
+    "z": 660,
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "立形MC",
+    "maker": "OKK",
+    "model": "VM53R",
+    "count": 1,
+    "shape": "角",
+    "x": 1050,
+    "y": 530,
+    "z": 510,
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "立形MC",
+    "maker": "DMG森精機",
+    "model": "MV-40E",
+    "count": 1,
+    "shape": "角",
+    "x": 900,
+    "y": 450,
+    "z": 460,
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "立形MC",
+    "maker": "DMG森精機",
+    "model": "F-M1",
+    "count": 1,
+    "shape": "角",
+    "x": 900,
+    "y": 450,
+    "z": 460,
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "立形MC(木型用)",
+    "maker": "ファナック",
+    "model": "ROBODRILL α-T21iFL/iFLa",
+    "count": 2,
+    "shape": "角",
+    "x": 700,
+    "y": 400,
+    "z": 330,
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "横形MC",
+    "maker": "DMG森精機",
+    "model": "NH6300 DCGⅡ",
+    "count": 1,
+    "shape": "角",
+    "x": 1050,
+    "y": 900,
+    "z": 980,
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "CNC旋盤",
+    "maker": "オークマ",
+    "model": "LB3000 EXⅡ(L)",
+    "count": 1,
+    "shape": "丸",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": 410,
+    "len": 500,
+    "materials": [],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "CNC旋盤(複合)",
+    "maker": "オークマ",
+    "model": "LB3000 EXⅡ(M)",
+    "count": 1,
+    "shape": "丸",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": 410,
+    "len": 500,
+    "materials": [],
+    "note": "",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "砂型鋳造(鋳造炉)",
+    "maker": "",
+    "model": "鋳造炉",
+    "count": 11,
+    "shape": "鋳造品",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [
+     "Al合金",
+     "Mg合金(高強度マグネシウム)"
+    ],
+    "note": "11基で多品種小ロット同時鋳造・低圧鋳造炉含む・室温管理システム",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "熱処理炉",
+    "maker": "",
+    "model": "",
+    "count": 4,
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "T4/T5/T6/T7対応・大型炉",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "砂型3Dプリント",
+    "maker": "",
+    "model": "砂型3Dプリンター",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "複雑形状短納期",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "3Dプリント(光造形/粉末焼結)",
+    "maker": "シーメット/EOS/ユニオンテック",
+    "model": "光造形機・粉末焼結造形機",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "年間約3000件",
+    "conf": "mid",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   },
+   {
+    "proc": "産業用CT検査",
+    "maker": "",
+    "model": "産業用CTスキャナ",
+    "count": 5,
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "業界最大規模5台・年13000回撮影・非破壊検査/欠陥可視化",
+    "conf": "high",
+    "src": [
+     "https://www.metal-casting.jp/equipment",
+     "https://www.metal-casting.jp/company"
+    ]
+   }
+  ]
+ },
+ "6127830500": {
+  "name": "川西航空機器工業株式会社 那須工場",
+  "updated": "2026-06-04T01:15:47.832803+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "化学皮膜処理(クロメート/アロジン)",
+    "maker": "",
+    "model": "処理槽",
+    "count": 1,
+    "shape": "角",
+    "x": 750,
+    "y": 1200,
+    "z": 600,
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "Nadcap CP",
+    "conf": "mid",
+    "src": [
+     "reuse:oasis_統合_会社マスタ(sht_furnace_or_tank_size)・sht研究ログ"
+    ]
+   },
+   {
+    "proc": "陽極酸化(アルマイト)",
+    "maker": "",
+    "model": "処理槽",
+    "count": 1,
+    "shape": "角",
+    "x": 450,
+    "y": 450,
+    "z": 600,
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "reuse:oasis_統合_会社マスタ(sht_furnace_or_tank_size)・sht研究ログ"
+    ]
+   },
+   {
+    "proc": "不動態化/カドミウムめっき",
+    "maker": "",
+    "model": "処理槽",
+    "count": 1,
+    "shape": "角",
+    "x": 500,
+    "y": 700,
+    "z": 600,
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "reuse:oasis_統合_会社マスタ(sht_furnace_or_tank_size)・sht研究ログ"
+    ]
+   },
+   {
+    "proc": "蛍光浸透探傷(FPI)",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "Nadcap NDT",
+    "conf": "mid",
+    "src": [
+     "reuse:oasis_統合_会社マスタ(sht_furnace_or_tank_size)・sht研究ログ"
+    ]
+   },
+   {
+    "proc": "磁粉探傷(MPI)",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "reuse:oasis_統合_会社マスタ(sht_furnace_or_tank_size)・sht研究ログ"
+    ]
+   },
+   {
+    "proc": "機械加工",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "reuse:oasis_統合_会社マスタ(sht_furnace_or_tank_size)・sht研究ログ"
+    ]
+   },
+   {
+    "proc": "スポット溶接",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "reuse:oasis_統合_会社マスタ(sht_furnace_or_tank_size)・sht研究ログ"
+    ]
+   }
+  ]
+ },
+ "6146918005": {
+  "name": "城北機業株式会社",
+  "updated": "2026-06-04T01:15:47.832803+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "NC旋盤・マシニングセンタ切削加工",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [
+     "インコネル",
+     "チタン",
+     "アルミ",
+     "難削材"
+    ],
+    "note": "航空機エンジン/機体構造の難削材加工(SOLAE参画)・加工サンプルφ17×L42×t0.5",
+    "conf": "mid",
+    "src": [
+     "https://www.johoku-kigyo.co.jp/technology/aircraft",
+     "https://www.hama-sss.com/sys/members/show/82"
+    ]
+   },
+   {
+    "proc": "静電塗装",
+    "maker": "",
+    "model": "6価クロムフリー静電塗装ライン",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "二輪/マリン/エンジン部品の一貫塗装",
+    "conf": "mid",
+    "src": [
+     "https://www.johoku-kigyo.co.jp/technology/aircraft",
+     "https://www.hama-sss.com/sys/members/show/82"
+    ]
+   },
+   {
+    "proc": "組立",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "フロント/リヤホイール専用組立ライン",
+    "conf": "mid",
+    "src": [
+     "https://www.johoku-kigyo.co.jp/technology/aircraft",
+     "https://www.hama-sss.com/sys/members/show/82"
+    ]
+   }
+  ]
+ },
+ "700103718": {
+  "name": "株式会社松本製作所",
+  "updated": "2026-06-04T01:15:47.832803+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "5軸制御マシニングセンタ",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "難削材機械加工",
+    "conf": "mid",
+    "src": [
+     "https://ma2moto-f.jp/machine",
+     "https://mono.ipros.com/product/detail/2000358837",
+     "https://web.hyogo-iic.ne.jp/files/uploads/genki1910.pdf"
+    ]
+   },
+   {
+    "proc": "細穴高速放電加工",
+    "maker": "三菱電機",
+    "model": "EDBV8",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "耐熱合金/難削材を高能率・水中安定加工(ディフューザ24秒/孔6秒)",
+    "conf": "high",
+    "src": [
+     "https://ma2moto-f.jp/machine",
+     "https://mono.ipros.com/product/detail/2000358837",
+     "https://web.hyogo-iic.ne.jp/files/uploads/genki1910.pdf"
+    ]
+   },
+   {
+    "proc": "横中繰り盤",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "https://ma2moto-f.jp/machine",
+     "https://mono.ipros.com/product/detail/2000358837",
+     "https://web.hyogo-iic.ne.jp/files/uploads/genki1910.pdf"
+    ]
+   },
+   {
+    "proc": "TIG溶接",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "難削材小径深穴",
+    "conf": "mid",
+    "src": [
+     "https://ma2moto-f.jp/machine",
+     "https://mono.ipros.com/product/detail/2000358837",
+     "https://web.hyogo-iic.ne.jp/files/uploads/genki1910.pdf"
+    ]
+   },
+   {
+    "proc": "溶射加工",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "M&Aで表面処理技術取得",
+    "conf": "mid",
+    "src": [
+     "https://ma2moto-f.jp/machine",
+     "https://mono.ipros.com/product/detail/2000358837",
+     "https://web.hyogo-iic.ne.jp/files/uploads/genki1910.pdf"
+    ]
+   },
+   {
+    "proc": "検査",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "品質保証部",
+    "conf": "mid",
+    "src": [
+     "https://ma2moto-f.jp/machine",
+     "https://mono.ipros.com/product/detail/2000358837",
+     "https://web.hyogo-iic.ne.jp/files/uploads/genki1910.pdf"
+    ]
+   }
+  ]
+ },
+ "6124759448": {
+  "name": "株式会社山之内製作所 巻工場",
+  "updated": "2026-06-04T01:15:47.832803+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "5軸複合加工(五軸+旋盤)",
+    "maker": "森ハイテック",
+    "model": "",
+    "count": 1,
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "難削材/難形状・Nadcap巻工場 Conventional Machining",
+    "conf": "mid",
+    "src": [
+     "https://eigyo-mfg.com/service/navi/company/lg4mLP8x0t7b",
+     "https://www.atengineer.com/pr/ysec"
+    ]
+   },
+   {
+    "proc": "NC旋盤",
+    "maker": "日立/大隈/森精機/中村留",
+    "model": "",
+    "count": 8,
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "",
+    "conf": "mid",
+    "src": [
+     "https://eigyo-mfg.com/service/navi/company/lg4mLP8x0t7b",
+     "https://www.atengineer.com/pr/ysec"
+    ]
+   },
+   {
+    "proc": "三次元測定",
+    "maker": "カールツァイス/東京精密/ミツトヨ",
+    "model": "",
+    "count": 4,
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "Nadcap NDT/PT(AC7004)",
+    "conf": "mid",
+    "src": [
+     "https://eigyo-mfg.com/service/navi/company/lg4mLP8x0t7b",
+     "https://www.atengineer.com/pr/ysec"
+    ]
+   }
+  ]
+ },
+ "700033346": {
+  "name": "加賀ワークス株式会社",
+  "updated": "2026-06-04T01:15:47.832803+00:00",
+  "round": 1,
+  "devices": [
+   {
+    "proc": "3軸/4軸/5軸マシニングセンタ切削加工",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [
+     "金属",
+     "非金属",
+     "難削材"
+    ],
+    "note": "航空・宇宙・防衛分野の機械切削加工(長野県飯田市)",
+    "conf": "mid",
+    "src": [
+     "https://kagaworks.co.jp",
+     "https://eigyo-mfg.com/service/navi/company/5yAbxQ5IqRGe"
+    ]
+   },
+   {
+    "proc": "シール材撹拌脱泡充填・成形",
+    "maker": "",
+    "model": "",
+    "count": "",
+    "shape": "",
+    "x": "",
+    "y": "",
+    "z": "",
+    "dia": "",
+    "len": "",
+    "materials": [],
+    "note": "特許技術による撹拌脱泡充填/成形",
+    "conf": "mid",
+    "src": [
+     "https://kagaworks.co.jp",
+     "https://eigyo-mfg.com/service/navi/company/5yAbxQ5IqRGe"
+    ]
+   }
+  ]
  }
 }
