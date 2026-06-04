@@ -4188,7 +4188,6 @@ function renderAll(filtered){
           ${c.equipCount>0?`<span style="font-size:9px;color:var(--accent);font-family:monospace">設${c.equipCount}</span>`:''}
           <span class="card-cat-tag" style="background:${color}15;color:${color}">${c.category||CATEGORIES[mainCat]?.label||'その他'}</span>
         </div>
-        // PATCH:card-size
         ${(c.maxX||c.maxY||c.maxZ)?`<div class="card-size">最大: ${c.maxX||'?'}×${c.maxY||'?'}×${c.maxZ||'?'}mm</div>`:''}
       </div>`;
     card.onclick=(e)=>{
