@@ -1294,6 +1294,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
       <button class="fp-clear" onclick="clearFilters()">RESET</button>
     </div>
 
+    <div class="fp-scroll">
     <!-- 社名・住所 検索（追加） -->
     <div class="fp-section">
       <span class="fp-label">社名・住所 検索</span>
@@ -1329,6 +1330,11 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     .work-dim input{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--border2);color:var(--text);padding:5px 6px;border-radius:3px;font-size:11px;outline:none;box-sizing:border-box}
     .work-dim input:focus{border-color:var(--accent)}
     #dist-slider{width:100%;accent-color:var(--accent);margin-top:4px}
+    .fp-scroll{flex:0 1 auto;overflow-y:auto;min-height:0}
+    .fp-scroll::-webkit-scrollbar{width:5px}
+    .fp-scroll::-webkit-scrollbar-track{background:var(--panel)}
+    .fp-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+    #company-list{flex:1 1 auto;min-height:140px;overflow-y:auto}
     </style>
 
     <!-- 地域（都道府県＋小牧からの距離） -->
@@ -1393,6 +1399,8 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
         </div>
       </div>
     </div>
+
+    </div><!-- /fp-scroll -->
 
     <!-- 結果リスト -->
     <div class="result-head">
@@ -4203,7 +4211,7 @@ function renderAll(filtered){
     const oasisCatColor = c.category ? (OASIS_CATEGORY_COLORS[c.category]||'#888') : null;
     const catBadge = c.category ? `<span style="background:${oasisCatColor}22;color:${oasisCatColor};border:1px solid ${oasisCatColor}44;font-size:9px;font-family:monospace;padding:1px 6px;border-radius:2px;margin-left:4px">${c.category}</span>` : '';
     const webBadge = c.isWeb ? `<span style="background:rgba(57,255,20,.12);color:#39ff14;border:1px solid rgba(57,255,20,.3);font-size:9px;font-family:monospace;padding:1px 6px;border-radius:2px;margin-left:4px">WEB確認</span>` : '';
-    const equipInfo = c.equipCount>0 ? `<div style="font-size:10px;color:var(--muted);margin-top:3px;padding-top:3px;border-top:1px solid var(--border)">設備 ${c.equipCount}件${c.equipText?' / '+c.equipText.substring(0,60):''}</div>` : '';
+    const equipInfo = c.equipCount>0 ? `<div style="font-size:10px;color:var(--muted);margin-top:3px;padding-top:3px;border-top:1px solid var(--border)">設備 ${c.equipCount}件${c.equipText?' / '+String(c.equipText).substring(0,60):''}</div>` : '';
     const hpLink = c.hp ? `<a href="${c.hp}" target="_blank" rel="noopener noreferrer"/*PATCH:noopener-hp*/ style="color:var(--accent);font-size:10px;font-family:monospace;margin-top:5px;display:inline-block;padding:2px 8px;border:1px solid rgba(0,212,255,.3);border-radius:2px;text-decoration:none">🌐 公式HP</a>` : '';
     const epLink = c.ep ? `<a href="${c.ep}" target="_blank" rel="noopener noreferrer"/*PATCH:noopener-ep*/ style="color:#39ff14;font-size:10px;font-family:monospace;margin-top:5px;display:inline-block;padding:2px 8px;border:1px solid rgba(57,255,20,.3);border-radius:2px;text-decoration:none;margin-left:6px">🔧 設備</a>` : '';
     const popup=`<div class="popup-inner">
@@ -6963,7 +6971,7 @@ fetch('./manufacturers.json')
       EQUIP_DEV_BY_OIN = res[1] || {};
       companies.forEach(c => {
         var k = String(c.oin).replace(/\.0+$/, '');
-        if (sc[k]) c.equipText = sc[k];
+        if (sc[k]) { var _et = sc[k]; c.equipText = (typeof _et === 'string') ? _et : ((_et && (_et.equipText || _et.text)) || ''); }
       });
     });
   })
