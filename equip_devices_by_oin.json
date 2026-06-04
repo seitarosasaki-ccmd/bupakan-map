@@ -60108,5 +60108,6864 @@
         ]
       }
     ]
+  },
+  "6146812664": {
+    "name": "株式会社ワダ航空技術",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "5軸マシニング",
+        "maker": "ヤマザキマザック",
+        "model": "RB300F",
+        "count": 1,
+        "shape": "角",
+        "x": 8250,
+        "y": 2900,
+        "z": 1450,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "チタン",
+          "インコネル",
+          "インバー"
+        ],
+        "note": "MILLAC 1000VHも同等サイズ。RB250F/RB200Fも保有",
+        "conf": "high",
+        "src": [
+          "https://aichi-nagoya-aerospace.jp/companies/files/pdf/7b184516bd0eae2fe52aa430c18ec89fb899d4a0.pdf"
+        ]
+      },
+      {
+        "proc": "5軸マシニング",
+        "maker": "ヤマザキマザック",
+        "model": "RB250F",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "チタン",
+          "インコネル"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://aichi-nagoya-aerospace.jp/companies/files/pdf/7b184516bd0eae2fe52aa430c18ec89fb899d4a0.pdf"
+        ]
+      },
+      {
+        "proc": "5軸マシニング",
+        "maker": "ヤマザキマザック",
+        "model": "RB200F",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "チタン"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://aichi-nagoya-aerospace.jp/companies/files/pdf/7b184516bd0eae2fe52aa430c18ec89fb899d4a0.pdf"
+        ]
+      },
+      {
+        "proc": "3軸マシニング",
+        "maker": "ヤマザキマザック",
+        "model": "MILLAC 611V2",
+        "count": 1,
+        "shape": "角",
+        "x": 1600,
+        "y": 610,
+        "z": 560,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金"
+        ],
+        "note": "MILLAC 561Vも保有",
+        "conf": "high",
+        "src": [
+          "https://aichi-nagoya-aerospace.jp/companies/files/pdf/7b184516bd0eae2fe52aa430c18ec89fb899d4a0.pdf"
+        ]
+      },
+      {
+        "proc": "2ヘッド5軸CNC加工",
+        "maker": "不明",
+        "model": "2ヘッド5軸CNC",
+        "count": 1,
+        "shape": "角",
+        "x": 12700,
+        "y": 4000,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "CFRP"
+        ],
+        "note": "航空機胴体スキンミル用大型設備",
+        "conf": "mid",
+        "src": [
+          "https://aichi-nagoya-aerospace.jp/companies/files/pdf/7b184516bd0eae2fe52aa430c18ec89fb899d4a0.pdf"
+        ]
+      }
+    ]
+  },
+  "6120903405": {
+    "name": "株式会社放電精密加工研究所（HSK）",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "放電加工",
+        "maker": "自社/各社",
+        "model": "放電加工機（ワイヤー・型彫り）",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "超合金",
+          "チタン",
+          "ステンレス"
+        ],
+        "note": "航空機エンジン部品のフィルム冷却孔加工・世界初曲孔加工技術保有。本社(厚木)・小牧・春日井・岡山に事業所",
+        "conf": "high",
+        "src": [
+          "https://www.hsk.co.jp/ja/index.html",
+          "https://ja.wikipedia.org/wiki/%E6%94%BE%E9%9B%BB%E7%B2%BE%E5%AF%86%E5%8A%A0%E5%B7%A5%E7%A0%94%E7%A9%B6%E6%89%80"
+        ]
+      },
+      {
+        "proc": "コーティング（表面処理）",
+        "maker": "Sermatech（ライセンス）",
+        "model": "SermeTel coating設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "ニッケル超合金",
+          "チタン"
+        ],
+        "note": "耐熱・耐食コーティング（SermeTel）。完全クロムフリー塗料ZECCORT保有",
+        "conf": "high",
+        "src": [
+          "https://www.hsk.co.jp/ja/index.html"
+        ]
+      },
+      {
+        "proc": "プレス加工",
+        "maker": "自社開発",
+        "model": "ZEN Former（デジタルサーボプレス）",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼材",
+          "アルミ"
+        ],
+        "note": "直動式デジタルサーボプレス。2020年大和事業所にプレス新工場設立",
+        "conf": "high",
+        "src": [
+          "https://job.mynavi.jp/27/pc/search/corp51661/outline.html"
+        ]
+      }
+    ]
+  },
+  "6140312982": {
+    "name": "金属技研株式会社",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "HIP処理",
+        "maker": "自社/各社",
+        "model": "Giga-HIP（世界最大）",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 2050,
+        "len": 4200,
+        "materials": [
+          "チタン合金",
+          "ニッケル超合金",
+          "アルミ合金",
+          "超硬合金"
+        ],
+        "note": "姫路工場。最高2000℃・196MPa。国内外20台以上保有",
+        "conf": "high",
+        "src": [
+          "https://www.kinzoku.co.jp/core_technology/hip.html"
+        ]
+      },
+      {
+        "proc": "HIP処理",
+        "maker": "自社",
+        "model": "Mega-HIP（国内最大）",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 1100,
+        "len": 2100,
+        "materials": [
+          "チタン合金",
+          "ニッケル超合金"
+        ],
+        "note": "群馬工場",
+        "conf": "high",
+        "src": [
+          "https://www.kinzoku.co.jp/core_technology/hip.html"
+        ]
+      },
+      {
+        "proc": "HIP処理",
+        "maker": "自社",
+        "model": "国内最長HIP装置",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 800,
+        "len": 3700,
+        "materials": [
+          "各種金属"
+        ],
+        "note": "茨城工場",
+        "conf": "high",
+        "src": [
+          "https://www.kinzoku.co.jp/core_technology/hip.html"
+        ]
+      },
+      {
+        "proc": "真空熱処理",
+        "maker": "各社",
+        "model": "真空熱処理炉",
+        "count": null,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 2000,
+        "len": 3500,
+        "materials": [
+          "チタン合金",
+          "ニッケル超合金",
+          "ステンレス"
+        ],
+        "note": "国内最大級の真空炉(Φ2000×3500H)を含む。雰囲気炉50基以上保有。Nadcap認証（滋賀・姫路）",
+        "conf": "high",
+        "src": [
+          "https://www.kinzoku.co.jp/core_technology/heat_treatment.html"
+        ]
+      },
+      {
+        "proc": "超塑性成形（SPF）",
+        "maker": "各社",
+        "model": "SPF装置",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "アルミ合金"
+        ],
+        "note": "滋賀工場。航空機構造部品の成形",
+        "conf": "high",
+        "src": [
+          "https://www.kinzoku.co.jp/about_mtc/history.html"
+        ]
+      },
+      {
+        "proc": "金属積層造形（AM）",
+        "maker": "Arcam/EOS/PTC",
+        "model": "電子ビーム積層造形装置（Arcam A2X, Q20）、Spectra L",
+        "count": 3,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "ニッケル超合金",
+          "コバルト合金"
+        ],
+        "note": "テクニカルセンター(神奈川)。Spectra L=国内初導入(2026年)。EOSINT M280も保有",
+        "conf": "high",
+        "src": [
+          "https://www.kinzoku.co.jp/about_mtc/history.html",
+          "https://www.kinzoku.co.jp"
+        ]
+      }
+    ]
+  },
+  "6144228807": {
+    "name": "株式会社プロテリアル特殊鋼 西宮機械加工センター",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "フライス加工",
+        "maker": "各社",
+        "model": "縦型NCフライス",
+        "count": 22,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "特殊鋼",
+          "工具鋼"
+        ],
+        "note": "カスタムプレート（金型材）加工用",
+        "conf": "high",
+        "src": [
+          "https://www.ss.proterial.com/strength/customplate/facilities.html"
+        ]
+      },
+      {
+        "proc": "フライス加工",
+        "maker": "各社",
+        "model": "両頭NCフライス",
+        "count": 20,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "特殊鋼",
+          "工具鋼"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ss.proterial.com/strength/customplate/facilities.html"
+        ]
+      },
+      {
+        "proc": "マシニングセンタ",
+        "maker": "各社",
+        "model": "門型5面加工マシニングセンタ",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "特殊鋼"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ss.proterial.com/strength/customplate/facilities.html"
+        ]
+      },
+      {
+        "proc": "マシニングセンタ",
+        "maker": "各社",
+        "model": "縦型マシニングセンタ",
+        "count": 6,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "特殊鋼"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ss.proterial.com/strength/customplate/facilities.html"
+        ]
+      },
+      {
+        "proc": "マシニングセンタ",
+        "maker": "各社",
+        "model": "横型マシニングセンタ",
+        "count": 6,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "特殊鋼"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ss.proterial.com/strength/customplate/facilities.html"
+        ]
+      },
+      {
+        "proc": "旋盤加工（スリーブ）",
+        "maker": "大日金属/オークマ/ヤマザキマザック",
+        "model": "NC旋盤（スリーブ加工センター）",
+        "count": 12,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 600,
+        "len": 2500,
+        "materials": [
+          "特殊鋼",
+          "金型用鋼"
+        ],
+        "note": "最大Φ480×2500L（大日金属製）ほか多数。栃木県スリーブ加工センター",
+        "conf": "high",
+        "src": [
+          "https://www.ss.proterial.com/strength/machined_components/facilities.html"
+        ]
+      },
+      {
+        "proc": "マシニングセンタ（スリーブ加工センター）",
+        "maker": "大隈豊和/新日本工機/日立精機",
+        "model": "マシニングセンタ",
+        "count": 4,
+        "shape": "角",
+        "x": 2050,
+        "y": 850,
+        "z": 750,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "特殊鋼"
+        ],
+        "note": "最大2050×850×750（大隈豊和）",
+        "conf": "high",
+        "src": [
+          "https://www.ss.proterial.com/strength/machined_components/facilities.html"
+        ]
+      }
+    ]
+  },
+  "6127553285": {
+    "name": "株式会社松原製作所 板金工場",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "ルーター加工",
+        "maker": "キクカワ",
+        "model": "NCルーター",
+        "count": 3,
+        "shape": "角",
+        "x": 3660,
+        "y": 1830,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "チタン"
+        ],
+        "note": "航空宇宙板金部品加工",
+        "conf": "high",
+        "src": [
+          "https://aichi-nagoya-aerospace.jp/companies/files/pdf/7177d2deb2199fa22519deda218d91f340b2b78a.pdf"
+        ]
+      },
+      {
+        "proc": "プレス加工（曲げ）",
+        "maker": "アマダ",
+        "model": "ブレーキプレス 220t",
+        "count": 2,
+        "shape": "角",
+        "x": 4000,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス",
+          "チタン"
+        ],
+        "note": "航空機構造部品の長尺曲げ加工",
+        "conf": "high",
+        "src": [
+          "https://aichi-nagoya-aerospace.jp/companies/files/pdf/7177d2deb2199fa22519deda218d91f340b2b78a.pdf"
+        ]
+      },
+      {
+        "proc": "プレス加工（曲げ）",
+        "maker": "アマダ",
+        "model": "ブレーキプレス 50t",
+        "count": 1,
+        "shape": "角",
+        "x": 1200,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://aichi-nagoya-aerospace.jp/companies/files/pdf/7177d2deb2199fa22519deda218d91f340b2b78a.pdf"
+        ]
+      },
+      {
+        "proc": "プレス加工",
+        "maker": "川崎油工",
+        "model": "200t油圧プレス",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "鉄鋼"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://aichi-nagoya-aerospace.jp/companies/files/pdf/7177d2deb2199fa22519deda218d91f340b2b78a.pdf"
+        ]
+      },
+      {
+        "proc": "プレス加工",
+        "maker": "ワシノ機器",
+        "model": "100tクランクプレス",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金"
+        ],
+        "note": "35tクランクプレスも1台保有",
+        "conf": "high",
+        "src": [
+          "https://aichi-nagoya-aerospace.jp/companies/files/pdf/7177d2deb2199fa22519deda218d91f340b2b78a.pdf"
+        ]
+      },
+      {
+        "proc": "溶接（TIG）",
+        "maker": "ダイヘン",
+        "model": "交直両用TIG溶接機",
+        "count": 10,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス",
+          "チタン"
+        ],
+        "note": "NADCAP溶接認証取得。アルミ薄板精密溶接を得意とする",
+        "conf": "high",
+        "src": [
+          "https://aichi-nagoya-aerospace.jp/companies/files/pdf/7177d2deb2199fa22519deda218d91f340b2b78a.pdf"
+        ]
+      },
+      {
+        "proc": "ロール成形",
+        "maker": "クワバラ",
+        "model": "電動ウレタンロール",
+        "count": 1,
+        "shape": "角",
+        "x": 1000,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金"
+        ],
+        "note": "手動3本ロール(1100mm)×4台も保有",
+        "conf": "high",
+        "src": [
+          "https://aichi-nagoya-aerospace.jp/companies/files/pdf/7177d2deb2199fa22519deda218d91f340b2b78a.pdf"
+        ]
+      },
+      {
+        "proc": "ターレットパンチプレス",
+        "maker": "アマダ",
+        "model": "ターレットパンチプレス",
+        "count": 1,
+        "shape": "角",
+        "x": 1270,
+        "y": 1220,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://aichi-nagoya-aerospace.jp/companies/files/pdf/7177d2deb2199fa22519deda218d91f340b2b78a.pdf"
+        ]
+      }
+    ]
+  },
+  "6131338043": {
+    "name": "TANIDA株式会社",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "精密鋳造（差圧鋳造）",
+        "maker": "自社開発",
+        "model": "差圧鋳造プロセス装置",
+        "count": 3,
+        "shape": "角",
+        "x": 1200,
+        "y": 1200,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "マグネシウム合金"
+        ],
+        "note": "独自開発の差圧鋳造技術。航空宇宙・防衛部品の精密鋳造",
+        "conf": "high",
+        "src": [
+          "https://www.isico.or.jp/virtual/vkogyo/tanida.html"
+        ]
+      },
+      {
+        "proc": "溶解・鋳造",
+        "maker": "各社",
+        "model": "スパイラル式ガス炉（Al/Mg）",
+        "count": 8,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "マグネシウム合金"
+        ],
+        "note": "Al炉6台・Mg炉2台。300kg容量",
+        "conf": "high",
+        "src": [
+          "https://www.isico.or.jp/virtual/vkogyo/tanida.html"
+        ]
+      },
+      {
+        "proc": "熱処理",
+        "maker": "各社",
+        "model": "熱処理炉（Nadcap認証）",
+        "count": 3,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "マグネシウム合金"
+        ],
+        "note": "Nadcap熱処理認証取得（Al/Mg ガス炉）",
+        "conf": "high",
+        "src": [
+          "https://www.isico.or.jp/virtual/vkogyo/tanida.html"
+        ]
+      },
+      {
+        "proc": "砂型鋳造（積層造形）",
+        "maker": "各社",
+        "model": "砂型積層3Dプリンタ（3D積層造形機）",
+        "count": 5,
+        "shape": "角",
+        "x": 1800,
+        "y": 1000,
+        "z": 700,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "砂型用材料"
+        ],
+        "note": "1800×1000×700mmサイズ砂型造形",
+        "conf": "high",
+        "src": [
+          "https://www.isico.or.jp/virtual/vkogyo/tanida.html"
+        ]
+      },
+      {
+        "proc": "砂型鋳造",
+        "maker": "各社",
+        "model": "自硬性造形ライン",
+        "count": 1,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "砂型用材料"
+        ],
+        "note": "自硬性砂50枠/日",
+        "conf": "high",
+        "src": [
+          "https://www.isico.or.jp/virtual/vkogyo/tanida.html"
+        ]
+      },
+      {
+        "proc": "5軸マシニング",
+        "maker": "牧野フライス製作所",
+        "model": "MAKINO D2",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "マグネシウム合金"
+        ],
+        "note": "2024年9月新設。5軸制御立形マシニングセンタ",
+        "conf": "high",
+        "src": [
+          "https://tanida.co.jp/ja/post-14851"
+        ]
+      }
+    ]
+  },
+  "6155552384": {
+    "name": "黒木コンポジット株式会社",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "電子ビーム溶接（EBW）",
+        "maker": "三菱電機",
+        "model": "電子ビーム加工機（EBM）",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "ニッケル超合金",
+          "異種金属"
+        ],
+        "note": "創業35年以上のEBW専業。異種金属接合が主力",
+        "conf": "high",
+        "src": [
+          "https://www.kuroki.co.jp/composites",
+          "https://www.youtube.com/watch?v=x3iIPvc4iOo"
+        ]
+      },
+      {
+        "proc": "HIP処理",
+        "maker": "各社",
+        "model": "HIP装置（2号機）",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 650,
+        "len": 2500,
+        "materials": [
+          "チタン合金",
+          "ニッケル超合金"
+        ],
+        "note": "最大1380℃/117.6MPa。HIP装置5台保有（1〜5号機）",
+        "conf": "high",
+        "src": [
+          "https://www.kuroki.co.jp/composites/facilities.html"
+        ]
+      },
+      {
+        "proc": "複合機（旋削+ミリング）",
+        "maker": "各社",
+        "model": "複合機 NC-8",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 760,
+        "len": 1532,
+        "materials": [
+          "チタン合金",
+          "ニッケル超合金"
+        ],
+        "note": "最大Φ760×1532L。複合機3台保有（NC-6,8,9）",
+        "conf": "high",
+        "src": [
+          "https://www.kuroki.co.jp/composites/facilities.html"
+        ]
+      },
+      {
+        "proc": "旋盤加工",
+        "maker": "各社",
+        "model": "NC旋盤",
+        "count": 7,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 650,
+        "len": 950,
+        "materials": [
+          "チタン合金",
+          "ニッケル超合金"
+        ],
+        "note": "最大Φ650×950L（NC-4, NC-5）。7台保有",
+        "conf": "high",
+        "src": [
+          "https://www.kuroki.co.jp/composites/facilities.html"
+        ]
+      },
+      {
+        "proc": "マシニングセンタ",
+        "maker": "各社",
+        "model": "マシニングセンタ MC-4",
+        "count": 1,
+        "shape": "角",
+        "x": 2240,
+        "y": 750,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "ニッケル超合金"
+        ],
+        "note": "最大2240×750。5軸MC(MC-3, 500×500)含む5台保有",
+        "conf": "high",
+        "src": [
+          "https://www.kuroki.co.jp/composites/facilities.html"
+        ]
+      },
+      {
+        "proc": "ホットプレス",
+        "maker": "各社",
+        "model": "HOT PRESS装置",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 560,
+        "len": 500,
+        "materials": [
+          "セラミックス",
+          "金属粉末"
+        ],
+        "note": "最高1600℃/175ton/10-1Pa",
+        "conf": "high",
+        "src": [
+          "https://www.kuroki.co.jp/composites/facilities.html"
+        ]
+      },
+      {
+        "proc": "真空熱処理",
+        "maker": "各社",
+        "model": "真空炉",
+        "count": 1,
+        "shape": "角",
+        "x": 600,
+        "y": 600,
+        "z": 1000,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "ニッケル超合金"
+        ],
+        "note": "最高1280℃（真空）/850℃（ガス）。Ar/N2冷却",
+        "conf": "high",
+        "src": [
+          "https://www.kuroki.co.jp/composites/facilities.html"
+        ]
+      }
+    ]
+  },
+  "6134891529": {
+    "name": "NTNテクニカルサービス株式会社 精密加工事業部",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "5軸マシニング",
+        "maker": "各社",
+        "model": "5軸マシニングセンタ",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "特殊鋼",
+          "超硬合金"
+        ],
+        "note": "難削材加工対応。鍛造金型（等速ジョイント用）製造",
+        "conf": "mid",
+        "src": [
+          "https://www.ntn-ts.co.jp/business/tec"
+        ]
+      },
+      {
+        "proc": "放電加工",
+        "maker": "各社",
+        "model": "放電加工機",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "工具鋼",
+          "超硬合金"
+        ],
+        "note": "金型・治工具の精密加工",
+        "conf": "mid",
+        "src": [
+          "https://www.ntn-ts.co.jp/business/tec"
+        ]
+      },
+      {
+        "proc": "旋削加工",
+        "maker": "各社",
+        "model": "CNC旋盤",
+        "count": null,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "軸受用鋼",
+          "特殊鋼"
+        ],
+        "note": "航空機向け軸受製品の旋削加工",
+        "conf": "mid",
+        "src": [
+          "https://www.ntn-ts.co.jp/business/tec"
+        ]
+      }
+    ]
+  },
+  "6146898620": {
+    "name": "新明和工業株式会社 播磨分工場",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "機械加工（金属部品）",
+        "maker": "各社",
+        "model": "CNC機械加工設備群",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "チタン合金"
+        ],
+        "note": "2016年10月開設。777X翼胴フェアリング・787主翼スパーの金属部品を担当。新機械加工設備を導入",
+        "conf": "mid",
+        "src": [
+          "https://www.jwing.net/news/1066",
+          "https://www.shinmaywa.co.jp/products/aircraft/commercial.html"
+        ]
+      },
+      {
+        "proc": "表面処理・塗装",
+        "maker": "各社",
+        "model": "表面処理・塗装設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "チタン合金"
+        ],
+        "note": "播磨分工場に表面処理・塗装設備を導入（2016年開設時）",
+        "conf": "mid",
+        "src": [
+          "https://www.jwing.net/news/1066"
+        ]
+      }
+    ]
+  },
+  "6123659329": {
+    "name": "東明工業株式会社 小牧南工場（三菱重工小牧南工場内）",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "治工具製作",
+        "maker": "各社",
+        "model": "航空機製造附随治工具設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "鉄鋼"
+        ],
+        "note": "MHI小牧南工場内常駐。航空機製造に附随する各種治工具の設計・製造。東明エンジニアリングと連携",
+        "conf": "mid",
+        "src": [
+          "https://tohmei.com/system"
+        ]
+      },
+      {
+        "proc": "3次元測定",
+        "maker": "各社",
+        "model": "3次元レーザー測定機",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "受託検査業務対応",
+        "conf": "mid",
+        "src": [
+          "https://tohmei.com/system"
+        ]
+      }
+    ]
+  },
+  "6125363600": {
+    "name": "株式会社IHIジェットサービス 呉事業所",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "エンジン整備支援・製造支援",
+        "maker": "IHI",
+        "model": "航空機用エンジン整備支援設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "呉事業所。ガスタービン整備サービス・航空エンジン技術支援",
+        "conf": "low",
+        "src": [
+          "https://www.ihi.co.jp/company/offices/_cms_conf01/__icsFiles/afieldfile/2023/06/21/e3a75fe54e45d0171e7e08a5e4454267.pdf"
+        ]
+      }
+    ]
+  },
+  "6125363587": {
+    "name": "株式会社IHIジェットサービス 瑞穂事業所",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "エンジン整備支援・製造支援",
+        "maker": "IHI",
+        "model": "航空機用エンジン整備支援設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "瑞穂事業所。航空機用エンジン整備・生産設備導入計画。IHI小牧工場内",
+        "conf": "low",
+        "src": [
+          "https://www.ihi.co.jp/company/offices/_cms_conf01/__icsFiles/afieldfile/2023/06/21/e3a75fe54e45d0171e7e08a5e4454267.pdf"
+        ]
+      }
+    ]
+  },
+  "6125363626": {
+    "name": "株式会社IHIジェットサービス 相馬事業所",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "エンジン整備支援・製造支援",
+        "maker": "IHI",
+        "model": "航空機用エンジン整備支援設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "相馬市大野台。切削工具加工・組立部品の入出庫業務。ジェットエンジン/ロケット関連部品の製造業務",
+        "conf": "low",
+        "src": [
+          "https://www.ihi.co.jp/company/offices/_cms_conf01/__icsFiles/afieldfile/2023/06/21/e3a75fe54e45d0171e7e08a5e4454267.pdf"
+        ]
+      }
+    ]
+  },
+  "6145829328": {
+    "name": "MHIエアロスペースプロダクション 製造支援センター",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "航空機製造支援・MRO",
+        "maker": "三菱重工グループ",
+        "model": "航空機製造・整備設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "部品製造・組立・物流・切削工具診断研磨。名誘工場内（愛知県小牧市）",
+        "conf": "low",
+        "src": [
+          "https://www.mhi.com/jp/group/map"
+        ]
+      }
+    ]
+  },
+  "6145949428": {
+    "name": "MHIエアロテクノロジーズ 小牧北",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "航空機製造支援・MRO",
+        "maker": "三菱重工グループ",
+        "model": "航空機製造・整備設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "小牧北（航空自衛隊小牧基地）。MRO・計測・エンジニアリング。MHI民間機セグメント系",
+        "conf": "low",
+        "src": [
+          "https://www.mhi.com/jp/group/map"
+        ]
+      }
+    ]
+  },
+  "6149572684": {
+    "name": "MHIエアロテクノロジーズ 小牧南",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "航空機製造支援・MRO",
+        "maker": "三菱重工グループ",
+        "model": "航空機製造・整備設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "小牧南（防衛省向け航空機組立・艤装）。MRO・計測・エンジニアリング",
+        "conf": "low",
+        "src": [
+          "https://www.mhi.com/jp/group/map"
+        ]
+      }
+    ]
+  },
+  "6143602563": {
+    "name": "NECネットワーク・センサ 白石工場",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "電子機器製造",
+        "maker": "NECグループ",
+        "model": "電子装置・センサ製造設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "防衛・航空向け電子装置・水中センサ製造。機械加工設備データは公開情報なし",
+        "conf": "low",
+        "src": [
+          "https://doda.jp/DodaFront/View/JobSearchDetail/j_jid__3014538261"
+        ]
+      }
+    ]
+  },
+  "6143602440": {
+    "name": "NECネットワーク・センサ 相模原事業所",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "電子機器製造",
+        "maker": "NECグループ",
+        "model": "電子装置・センサ製造設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "防衛・航空向け電子装置・水中センサ製造。機械加工設備データは公開情報なし",
+        "conf": "low",
+        "src": [
+          "https://doda.jp/DodaFront/View/JobSearchDetail/j_jid__3014538261"
+        ]
+      }
+    ]
+  },
+  "6134682181": {
+    "name": "三菱プレシジョン株式会社",
+    "updated": "2026-06-04T16:21:24Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "シミュレーション機器・航空宇宙機器製造",
+        "maker": "三菱グループ",
+        "model": "シミュレーション機器製造設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "シミュレーション機器・慣性装置・駐車場機器が主力。機械加工設備データ公開情報なし",
+        "conf": "low",
+        "src": [
+          "https://www.mpcnet.co.jp/corporate"
+        ]
+      }
+    ]
+  },
+  "6155182987": {
+    "name": "日本工機株式会社",
+    "updated": "2026-06-04T17:17:54Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "機械加工",
+        "maker": "各社",
+        "model": "各種NC旋盤",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "特殊鋼"
+        ],
+        "note": "防衛弾薬製造用NC旋盤群。機種・台数詳細非公開",
+        "conf": "low",
+        "src": [
+          "https://www.nippon-koki.co.jp/skill/manufacturer.html",
+          "https://www.shirakawadb.jp/162028"
+        ]
+      },
+      {
+        "proc": "プレス加工",
+        "maker": "各社",
+        "model": "各種プレス機",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "銅合金"
+        ],
+        "note": "砲弾ケース成形用プレス群",
+        "conf": "low",
+        "src": [
+          "https://www.nippon-koki.co.jp/skill/manufacturer.html"
+        ]
+      },
+      {
+        "proc": "熱処理",
+        "maker": "各社",
+        "model": "熱処理設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼"
+        ],
+        "note": "弾薬製造工程内熱処理設備（詳細非公開）",
+        "conf": "low",
+        "src": [
+          "https://www.nippon-koki.co.jp/skill/manufacturer.html"
+        ]
+      }
+    ]
+  },
+  "6124168288": {
+    "name": "株式会社IHIキャスティングス 相馬工場",
+    "updated": "2026-06-04T17:17:54Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "精密鋳造（ロストワックス）",
+        "maker": "IHIキャスティングス",
+        "model": "WAX射出成形機",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "耐熱合金",
+          "Ni基超合金",
+          "Ti合金"
+        ],
+        "note": "航空エンジンブレード用ロストワックスWAX型成形",
+        "conf": "mid",
+        "src": [
+          "https://www.ihi.co.jp/icc/kigyo/kisyagaiyou.html"
+        ]
+      },
+      {
+        "proc": "精密鋳造（ロストワックス）",
+        "maker": "IHIキャスティングス",
+        "model": "セラミックシェル造型装置",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "耐熱合金",
+          "Ni基超合金"
+        ],
+        "note": "ロストワックス鋳造用セラミックシェル造型工程",
+        "conf": "mid",
+        "src": [
+          "https://www.ihi.co.jp/icc/kigyo/kisyagaiyou.html"
+        ]
+      },
+      {
+        "proc": "精密鋳造（ロストワックス）",
+        "maker": "IHIキャスティングス",
+        "model": "真空溶解炉",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "耐熱合金",
+          "Ni基超合金",
+          "Ti合金"
+        ],
+        "note": "単結晶・一方向凝固対応真空溶解炉。航空エンジン翼製造",
+        "conf": "mid",
+        "src": [
+          "https://www.ihi.co.jp/icc/kigyo/kisyagaiyou.html",
+          "https://nihonsanki-shimbun.com/%E8%88%AA%E7%A9%BA%E6%A9%9F%E7%94%A3%E6%A5%AD%E3%81%AE%E7%94%9F%E7%94%A3%E5%B7%A5%E5%A0%B4%E3%82%92%E8%A8%AA%E3%81%AD%E3%81%A6%E3%80%80%EF%BD%89%EF%BD%88%EF%BD%89%E7%9B%B8%E9%A6%AC%E4%BA%8B%E6%A5%AD/"
+        ]
+      },
+      {
+        "proc": "熱処理",
+        "maker": "IHIキャスティングス",
+        "model": "真空熱処理炉",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "耐熱合金",
+          "Ni基超合金",
+          "Ti合金"
+        ],
+        "note": "NADCAP認証取得（RT・PT・CR）。鋳造後熱処理工程",
+        "conf": "mid",
+        "src": [
+          "https://www.ihi.co.jp/icc/kigyo/kisyagaiyou.html"
+        ]
+      }
+    ]
+  },
+  "700054686": {
+    "name": "多摩冶金株式会社 東京南工場",
+    "updated": "2026-06-04T17:17:54Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "熱処理",
+        "maker": "各社",
+        "model": "真空熱処理炉（オールメタル炉）",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "Al合金",
+          "Ni合金",
+          "Ti合金",
+          "Cu合金"
+        ],
+        "note": "AMS2759/3/4/5, AMS2769, MIL-H-6875対応。JIS Q 9100, Nadcap, Rolls-Royce認定",
+        "conf": "mid",
+        "src": [
+          "https://www.tamayakin.co.jp/tokyofactory/",
+          "https://www.tamayakin.co.jp/"
+        ]
+      },
+      {
+        "proc": "熱処理",
+        "maker": "各社",
+        "model": "浸炭・雰囲気熱処理炉",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS"
+        ],
+        "note": "ガス浸炭焼入れ AMS2759/7、雰囲気焼入れ・焼戻し対応",
+        "conf": "mid",
+        "src": [
+          "https://www.tamayakin.co.jp/tokyofactory/"
+        ]
+      },
+      {
+        "proc": "熱処理",
+        "maker": "各社",
+        "model": "ガス窒化炉",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS"
+        ],
+        "note": "ガス窒化・ガス軟窒化 AMS2759/6,10対応",
+        "conf": "mid",
+        "src": [
+          "https://www.tamayakin.co.jp/tokyofactory/"
+        ]
+      },
+      {
+        "proc": "熱処理",
+        "maker": "各社",
+        "model": "アルミ合金熱処理炉",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "Al合金"
+        ],
+        "note": "溶体化・時効硬化・焼きなまし対応。AMS2770対応",
+        "conf": "mid",
+        "src": [
+          "https://www.tamayakin.co.jp/tokyofactory/"
+        ]
+      }
+    ]
+  },
+  "6147004141": {
+    "name": "ニシジマ精機株式会社",
+    "updated": "2026-06-04T17:17:54Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "機械加工",
+        "maker": "OKUMA",
+        "model": "MCR-A5C",
+        "count": 1,
+        "shape": "角",
+        "x": 4000,
+        "y": 2500,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "アルミ",
+          "特殊鋼"
+        ],
+        "note": "5面加工門型マシニングセンタ。佐伯工場。大型航空・船舶部品対応",
+        "conf": "high",
+        "src": [
+          "https://nisijima.jp/setubi-ichiran/"
+        ]
+      },
+      {
+        "proc": "機械加工",
+        "maker": "OKUMA",
+        "model": "MCR-A5CⅡ",
+        "count": 1,
+        "shape": "角",
+        "x": 8000,
+        "y": 3000,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "アルミ",
+          "特殊鋼"
+        ],
+        "note": "5面加工門型MC。佐伯工場。20～30t級大型ワーク対応",
+        "conf": "high",
+        "src": [
+          "https://nisijima.jp/setubi-ichiran/"
+        ]
+      },
+      {
+        "proc": "機械加工",
+        "maker": "新日本工機",
+        "model": "RB-260M",
+        "count": 1,
+        "shape": "角",
+        "x": 3000,
+        "y": 2500,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "アルミ"
+        ],
+        "note": "門型5面マシニングセンタ。佐伯工場",
+        "conf": "high",
+        "src": [
+          "https://nisijima.jp/setubi-ichiran/"
+        ]
+      },
+      {
+        "proc": "機械加工",
+        "maker": "OKUMA",
+        "model": "mu-8000V",
+        "count": 2,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": 630,
+        "dia": 800,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "アルミ",
+          "Ti合金"
+        ],
+        "note": "5軸制御立型マシニングセンタ。大分工場。テーブルφ800",
+        "conf": "high",
+        "src": [
+          "https://nisijima.jp/setubi-ichiran/"
+        ]
+      },
+      {
+        "proc": "機械加工",
+        "maker": "OKUMA",
+        "model": "MCV-A0M",
+        "count": 1,
+        "shape": "角",
+        "x": 5000,
+        "y": 2000,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "アルミ"
+        ],
+        "note": "門型マシニングセンタ。佐伯工場",
+        "conf": "high",
+        "src": [
+          "https://nisijima.jp/setubi-ichiran/"
+        ]
+      },
+      {
+        "proc": "機械加工",
+        "maker": "OKUMA",
+        "model": "MB-8000H",
+        "count": 1,
+        "shape": "角",
+        "x": 1300,
+        "y": 1100,
+        "z": 1250,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "アルミ"
+        ],
+        "note": "高速横形マシニングセンタ。佐伯工場",
+        "conf": "high",
+        "src": [
+          "https://nisijima.jp/setubi-ichiran/"
+        ]
+      },
+      {
+        "proc": "機械加工",
+        "maker": "OKUMA",
+        "model": "MILLAC 1052V",
+        "count": 1,
+        "shape": "角",
+        "x": 2050,
+        "y": 1060,
+        "z": 800,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "アルミ"
+        ],
+        "note": "立型マシニングセンタ。佐伯工場",
+        "conf": "high",
+        "src": [
+          "https://nisijima.jp/setubi-ichiran/"
+        ]
+      },
+      {
+        "proc": "旋削",
+        "maker": "オーエム製作所",
+        "model": "NEOα-28EX",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 3000,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "アルミ",
+          "特殊鋼"
+        ],
+        "note": "CNCターニングセンタ。テーブル径φ2800、最大旋削外径φ3000",
+        "conf": "high",
+        "src": [
+          "https://nisijima.jp/setubi-ichiran/"
+        ]
+      },
+      {
+        "proc": "旋削",
+        "maker": "ヤマザキマザック",
+        "model": "MAZATROL 640T",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 770,
+        "len": 3000,
+        "materials": [
+          "鋼",
+          "SUS",
+          "アルミ"
+        ],
+        "note": "CNC旋盤。心間3000mm×ベッド上振り770mm",
+        "conf": "high",
+        "src": [
+          "https://nisijima.jp/setubi-ichiran/"
+        ]
+      },
+      {
+        "proc": "旋削",
+        "maker": "ヤマザキマザック",
+        "model": "SLANTTURN 450",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 620,
+        "len": 1534,
+        "materials": [
+          "鋼",
+          "SUS",
+          "アルミ"
+        ],
+        "note": "NC旋盤。最大加工径φ620mm×長さ1534mm",
+        "conf": "high",
+        "src": [
+          "https://nisijima.jp/setubi-ichiran/"
+        ]
+      },
+      {
+        "proc": "旋削",
+        "maker": "西森工業",
+        "model": "NAF-6000",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 1460,
+        "len": 6000,
+        "materials": [
+          "鋼",
+          "SUS",
+          "アルミ",
+          "特殊鋼"
+        ],
+        "note": "汎用旋盤。心間6000mm×ベッド上振り1460mm",
+        "conf": "high",
+        "src": [
+          "https://nisijima.jp/setubi-ichiran/"
+        ]
+      },
+      {
+        "proc": "機械加工",
+        "maker": "倉敷機械",
+        "model": "KBT-13DX-A",
+        "count": 2,
+        "shape": "角",
+        "x": 3000,
+        "y": 2000,
+        "z": 1300,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "アルミ"
+        ],
+        "note": "CNC横中ぐりフライス盤。φ130スピンドル",
+        "conf": "high",
+        "src": [
+          "https://nisijima.jp/setubi-ichiran/"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": "ダイヘン",
+        "model": "CPXD-500",
+        "count": 1,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS"
+        ],
+        "note": "CO2/MAGアーク溶接機",
+        "conf": "high",
+        "src": [
+          "https://nisijima.jp/setubi-ichiran/"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": "ダイヘン",
+        "model": "FD-B8L",
+        "count": 1,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS"
+        ],
+        "note": "溶接ロボットシステム。垂直多関節形6軸",
+        "conf": "high",
+        "src": [
+          "https://nisijima.jp/setubi-ichiran/"
+        ]
+      }
+    ]
+  },
+  "6143219626": {
+    "name": "株式会社大磯精工",
+    "updated": "2026-06-04T17:17:54Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "機械加工",
+        "maker": "安田工業",
+        "model": "PX30i",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 300,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "Ti合金",
+          "Al合金",
+          "耐熱合金",
+          "難削材"
+        ],
+        "note": "5軸立型MC。33パレット/323本仕様。高精度ジグボーラタイプ",
+        "conf": "high",
+        "src": [
+          "https://www.ohiso.co.jp/equipment/equipment-list/"
+        ]
+      },
+      {
+        "proc": "機械加工",
+        "maker": "安田工業",
+        "model": "YBM Vi40",
+        "count": 2,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 400,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "Ti合金",
+          "Al合金",
+          "耐熱合金"
+        ],
+        "note": "5軸立型マシニングセンタ",
+        "conf": "high",
+        "src": [
+          "https://www.ohiso.co.jp/equipment/equipment-list/"
+        ]
+      },
+      {
+        "proc": "機械加工",
+        "maker": "牧野フライス",
+        "model": "D200Z",
+        "count": 3,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 300,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "Ti合金",
+          "耐熱合金",
+          "難削材"
+        ],
+        "note": "5軸立型MC。D200Z: 12パレット仕様×2台、28パレット仕様×1台",
+        "conf": "high",
+        "src": [
+          "https://www.ohiso.co.jp/equipment/equipment-list/"
+        ]
+      },
+      {
+        "proc": "機械加工",
+        "maker": "DMG森精機",
+        "model": "NVX5080/40",
+        "count": 2,
+        "shape": "角",
+        "x": 800,
+        "y": 500,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "Ti合金",
+          "Al合金"
+        ],
+        "note": "5軸立型MC。DDRT200同時5軸仕様",
+        "conf": "high",
+        "src": [
+          "https://www.ohiso.co.jp/equipment/equipment-list/"
+        ]
+      },
+      {
+        "proc": "機械加工",
+        "maker": "DMG森精機",
+        "model": "NMV3000DCG",
+        "count": 3,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 300,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "Ti合金",
+          "耐熱合金"
+        ],
+        "note": "5軸立型マシニングセンタ",
+        "conf": "high",
+        "src": [
+          "https://www.ohiso.co.jp/equipment/equipment-list/"
+        ]
+      },
+      {
+        "proc": "機械加工",
+        "maker": "DMG森精機",
+        "model": "DMU50 3rdG",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 500,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "Ti合金",
+          "Al合金"
+        ],
+        "note": "5軸立型MC。10パレット/120本仕様",
+        "conf": "high",
+        "src": [
+          "https://www.ohiso.co.jp/equipment/equipment-list/"
+        ]
+      },
+      {
+        "proc": "機械加工",
+        "maker": "安田工業",
+        "model": "YBM950V",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "Ti合金",
+          "耐熱合金"
+        ],
+        "note": "縦形マシニングセンタ",
+        "conf": "high",
+        "src": [
+          "https://www.ohiso.co.jp/equipment/equipment-list/"
+        ]
+      },
+      {
+        "proc": "放電加工",
+        "maker": "ファナック",
+        "model": "α-C400iC",
+        "count": 2,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "Ti合金",
+          "超硬"
+        ],
+        "note": "ワイヤー放電加工機",
+        "conf": "high",
+        "src": [
+          "https://www.ohiso.co.jp/equipment/equipment-list/"
+        ]
+      },
+      {
+        "proc": "放電加工",
+        "maker": "三菱電機",
+        "model": "VH10",
+        "count": 1,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 0.02,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS",
+          "超硬"
+        ],
+        "note": "細穴放電加工機 最小φ0.02mm",
+        "conf": "high",
+        "src": [
+          "https://www.ohiso.co.jp/equipment/equipment-list/"
+        ]
+      },
+      {
+        "proc": "研削",
+        "maker": "シギヤ",
+        "model": "GP30-40A",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 300,
+        "len": 400,
+        "materials": [
+          "鋼",
+          "SUS",
+          "超硬"
+        ],
+        "note": "円筒研削盤",
+        "conf": "high",
+        "src": [
+          "https://www.ohiso.co.jp/equipment/equipment-list/"
+        ]
+      },
+      {
+        "proc": "研削",
+        "maker": "岡本工作",
+        "model": "PSG-84DX",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "SUS"
+        ],
+        "note": "平面研削盤",
+        "conf": "high",
+        "src": [
+          "https://www.ohiso.co.jp/equipment/equipment-list/"
+        ]
+      },
+      {
+        "proc": "高周波焼入",
+        "maker": "高周波システム",
+        "model": "KS-103",
+        "count": 1,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼"
+        ],
+        "note": "高周波焼入機",
+        "conf": "high",
+        "src": [
+          "https://www.ohiso.co.jp/equipment/equipment-list/"
+        ]
+      }
+    ]
+  },
+  "700083897": {
+    "name": "有限会社飯田製作所",
+    "updated": "2026-06-04T17:17:54Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "旋削",
+        "maker": "DMG森精機",
+        "model": "小型NC旋盤（G-05相当）",
+        "count": null,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "PTFE",
+          "PEEK",
+          "フッ素樹脂",
+          "エンジニアリングプラスチック"
+        ],
+        "note": "フッ素樹脂・PEEK精密旋削加工専業。100台超の小型NC旋盤ライン。年間1億個以上生産",
+        "conf": "mid",
+        "src": [
+          "https://pr.mono.ipros.com/iidaf/product/detail/2000519639/",
+          "https://iidaf.com/"
+        ]
+      },
+      {
+        "proc": "旋削",
+        "maker": "DMG森精機",
+        "model": "カスタムNC旋盤C3-D相当",
+        "count": null,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 700,
+        "len": null,
+        "materials": [
+          "PTFE",
+          "PEEK",
+          "フッ素樹脂"
+        ],
+        "note": "中径品対応カスタムNC旋盤。φ700まで対応",
+        "conf": "mid",
+        "src": [
+          "https://iidaf.com/facility_detail/%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0nc%E6%97%8B%E7%9B%A4/"
+        ]
+      },
+      {
+        "proc": "機械加工",
+        "maker": "DMG森精機",
+        "model": "NCフライス旋盤複合機G-07M相当",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "PTFE",
+          "PEEK",
+          "フッ素樹脂"
+        ],
+        "note": "複合加工機（ミーリング+旋削）",
+        "conf": "mid",
+        "src": [
+          "https://iidaf.com/"
+        ]
+      }
+    ]
+  },
+  "6128117989": {
+    "name": "コスモ精機株式会社 相馬工場",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "NC立旋盤",
+        "maker": "オーエム製作所",
+        "model": "TM2-12N/16",
+        "count": 3,
+        "shape": "丸",
+        "dia": null,
+        "len": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC立旋盤",
+        "maker": "ヤマザキマザック",
+        "model": "MEGA TURN 600",
+        "count": 1,
+        "shape": "丸",
+        "dia": null,
+        "len": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC立旋盤",
+        "maker": "オーエム製作所",
+        "model": "RT-915",
+        "count": 1,
+        "shape": "丸",
+        "dia": null,
+        "len": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC立旋盤",
+        "maker": "オーエム製作所",
+        "model": "VL-6N/6NT",
+        "count": 2,
+        "shape": "丸",
+        "dia": null,
+        "len": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC立旋盤",
+        "maker": "オーエム製作所",
+        "model": "OMEGA 50",
+        "count": 5,
+        "shape": "丸",
+        "dia": null,
+        "len": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC立旋盤",
+        "maker": "オーエム製作所",
+        "model": "VTLex 915",
+        "count": 5,
+        "shape": "丸",
+        "dia": null,
+        "len": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC複合立型旋盤",
+        "maker": "オーエム製作所",
+        "model": "Neoα-10EXⅡ",
+        "count": 2,
+        "shape": "丸",
+        "dia": null,
+        "len": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "立型旋盤",
+        "maker": "オーエム製作所",
+        "model": "VTO12",
+        "count": 2,
+        "shape": "丸",
+        "dia": 1200,
+        "len": null,
+        "note": "φ1200mm",
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC横型旋盤",
+        "maker": "DMG森精機",
+        "model": "NLX3000/700",
+        "count": 2,
+        "shape": "丸",
+        "dia": null,
+        "len": 700,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC横型旋盤",
+        "maker": "DMG森精機",
+        "model": "NLX4000/750",
+        "count": 2,
+        "shape": "丸",
+        "dia": null,
+        "len": 750,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC横型旋盤",
+        "maker": "DMG森精機",
+        "model": "SL403C/800",
+        "count": 6,
+        "shape": "丸",
+        "dia": null,
+        "len": 800,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC横型旋盤",
+        "maker": "DMG森精機",
+        "model": "SL603C/1000",
+        "count": 1,
+        "shape": "丸",
+        "dia": null,
+        "len": 1000,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC横型旋盤",
+        "maker": "DMG森精機",
+        "model": "SL-25MC/500,SL-25B5",
+        "count": 2,
+        "shape": "丸",
+        "dia": null,
+        "len": 500,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC横型旋盤",
+        "maker": "DMG森精機",
+        "model": "CL-20,SL-303B",
+        "count": 2,
+        "shape": "丸",
+        "dia": null,
+        "len": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC横型旋盤",
+        "maker": "DMGテクノワシノ",
+        "model": "J-5",
+        "count": 3,
+        "shape": "丸",
+        "dia": null,
+        "len": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC横型旋盤",
+        "maker": "ヤマザキマザック",
+        "model": "QT-250",
+        "count": 1,
+        "shape": "丸",
+        "dia": null,
+        "len": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC横型旋盤",
+        "maker": "ヤマザキマザック",
+        "model": "SQT200,QT-15N",
+        "count": 2,
+        "shape": "丸",
+        "dia": null,
+        "len": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC横型旋盤",
+        "maker": "大日金属",
+        "model": "DL95",
+        "count": 1,
+        "shape": "丸",
+        "dia": null,
+        "len": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC複合横型旋盤",
+        "maker": "DMG森精機",
+        "model": "NLX2000,NLX2500Y-700",
+        "count": 1,
+        "shape": "丸",
+        "dia": null,
+        "len": 700,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "汎用旋盤",
+        "maker": "昌運工作所/森精機",
+        "model": "HB-725/575,MS-850/650",
+        "count": 7,
+        "shape": "丸",
+        "dia": null,
+        "len": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "5軸マシニングセンタ",
+        "maker": "三井精機",
+        "model": "HU63A-5X,HU80A-5X",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "5軸マシニングセンタ",
+        "maker": "三井精機",
+        "model": "Vertex75xⅡ,Vertex75x3",
+        "count": 3,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "5軸マシニングセンタ",
+        "maker": "HERMLE",
+        "model": "C52U",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "横型マシニングセンタ(4軸)",
+        "maker": "三井精機",
+        "model": "HU-50A",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "横型マシニングセンタ(4軸)",
+        "maker": "ヤマザキマザック",
+        "model": "FH-6000",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "立型マシニングセンタ(3軸)",
+        "maker": "三井精機",
+        "model": "VU50A,VU65A",
+        "count": 6,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "立型マシニングセンタ(3軸)",
+        "maker": "安田機械",
+        "model": "YBM-950V",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "立型マシニングセンタ(3軸)",
+        "maker": "DMG森精機",
+        "model": "NVX5060/40,SV-500B/40",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "立型マシニングセンタ(3軸)",
+        "maker": "ヤマザキマザック",
+        "model": "VTC-41",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "立型マシニングセンタ(3軸)",
+        "maker": "ヤマザキマザック",
+        "model": "FJV-250,MTV-655",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC横型中ぐり盤",
+        "maker": "東芝機械",
+        "model": "BTD-200QE",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "横型中ぐり盤",
+        "maker": "倉敷機械",
+        "model": "BM-10",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "横型中ぐり盤",
+        "maker": "倉敷機械",
+        "model": "BZ-8",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "横型中ぐり盤",
+        "maker": "品田鉄工所",
+        "model": "SB80",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NCフライス",
+        "maker": "静岡鉄工所/オークマ",
+        "model": "VHR-AP,ST-NR",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "立型フライス",
+        "maker": "静岡鉄工所/牧野",
+        "model": "VHR-A,SV-CH,KVJP-55",
+        "count": 3,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "横型フライス",
+        "maker": "平岡工業",
+        "model": "MS-P",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC放電加工機",
+        "maker": "ソディック",
+        "model": "EPOC-4",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC放電加工機",
+        "maker": "三菱電機",
+        "model": "EX-30,M35J",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NCワイヤーカット放電加工機",
+        "maker": "三菱電機",
+        "model": "FA20S",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NCワイヤーカット放電加工機",
+        "maker": "ファナック",
+        "model": "FTC-W1",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "平面研削盤",
+        "maker": "岡本工作機械",
+        "model": "PSG-63DX",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "平面研削盤",
+        "maker": "岡本工作機械",
+        "model": "PRG6DXNC",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "平面研削盤",
+        "maker": "三正",
+        "model": "GK-8",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "ロータリー平面研削盤",
+        "maker": "三正",
+        "model": "SS-5F",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NCロータリー平面研削盤",
+        "maker": "岡本工作機械",
+        "model": "PRG-6DXNC",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "NC円筒研削盤",
+        "maker": "ツガミ",
+        "model": "G18AB,G18-Ⅱ",
+        "count": 2,
+        "shape": "丸",
+        "dia": null,
+        "len": null,
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      },
+      {
+        "proc": "蛍光浸透探傷検査(FPI)",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "Nadcap認証取得(穴あけ加工含む)、JISQ9100取得",
+        "materials": [
+          "Ni合金",
+          "Ti合金",
+          "Co合金",
+          "SUS",
+          "超ジュラルミン"
+        ],
+        "conf": "high",
+        "src": [
+          "https://cosmoseiki.com/technology/"
+        ]
+      }
+    ]
+  },
+  "6123159861": {
+    "name": "株式会社大川電機製作所",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "マシニングセンタ",
+        "maker": "牧野フライス",
+        "model": "a120nx",
+        "count": 1,
+        "shape": "角",
+        "x": 1900,
+        "y": 1600,
+        "z": 1700,
+        "note": "ヘール機能付",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "門型マシニングセンタ",
+        "maker": "オークマ",
+        "model": "MCR-BIII",
+        "count": 1,
+        "shape": "角",
+        "x": 4000,
+        "y": 2000,
+        "z": 800,
+        "note": "W軸1000mm",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "5軸マシニングセンタ",
+        "maker": "DMG MORI",
+        "model": "NMV3000DCG",
+        "count": 2,
+        "shape": "角",
+        "x": 500,
+        "y": 350,
+        "z": 510,
+        "note": "34パレット、旋削機能付",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "門型マシニングセンタ",
+        "maker": "新日本工機",
+        "model": "RB-3M",
+        "count": 1,
+        "shape": "角",
+        "x": 3000,
+        "y": 1500,
+        "z": 600,
+        "note": "W軸1100mm",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "門型マシニングセンタ",
+        "maker": "新日本工機",
+        "model": "RB-200F",
+        "count": 1,
+        "shape": "角",
+        "x": 4000,
+        "y": 2000,
+        "z": 600,
+        "note": "W軸850mm、2面APC",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "門型マシニングセンタ",
+        "maker": "新日本工機",
+        "model": "RB-4VM",
+        "count": 1,
+        "shape": "角",
+        "x": 4000,
+        "y": 2000,
+        "z": 600,
+        "note": "W軸1100mm",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "オークマ",
+        "model": "V760EX",
+        "count": 1,
+        "shape": "丸",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "オークマ",
+        "model": "V920EX",
+        "count": 1,
+        "shape": "丸",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "オークマ",
+        "model": "V100R",
+        "count": 1,
+        "shape": "丸",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "オークマ",
+        "model": "LH55-N",
+        "count": 1,
+        "shape": "丸",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "オークマ",
+        "model": "LH35-N",
+        "count": 1,
+        "shape": "丸",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "DMG MORI",
+        "model": "NR23III",
+        "count": 1,
+        "shape": "丸",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "NC複合旋盤",
+        "maker": "オークマ",
+        "model": "MULTUS B300-W",
+        "count": 2,
+        "shape": "丸",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "NC複合旋盤",
+        "maker": "オークマ",
+        "model": "MULTUS B300",
+        "count": 3,
+        "shape": "丸",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "NC複合旋盤",
+        "maker": "オークマ",
+        "model": "MULTUS B200",
+        "count": 1,
+        "shape": "丸",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "NC放電加工機",
+        "maker": "三菱電機",
+        "model": "EA28VM",
+        "count": 1,
+        "shape": "角",
+        "x": 650,
+        "y": 450,
+        "z": 350,
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "NC放電加工機",
+        "maker": "牧野フライス",
+        "model": "EDNC43",
+        "count": 1,
+        "shape": "角",
+        "x": 450,
+        "y": 350,
+        "z": 350,
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      },
+      {
+        "proc": "形状測定機",
+        "maker": "ミツトヨ",
+        "model": "SV-C4500H",
+        "count": 1,
+        "note": "表面性状測定機",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/77880/equipment/"
+        ]
+      }
+    ]
+  },
+  "6115526266": {
+    "name": "株式会社金子製作所",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "マシニングセンタ(5軸)",
+        "maker": "不明(14台含む)",
+        "model": "V-33他",
+        "count": 30,
+        "note": "計30台うち5軸14台。V-33型確認",
+        "conf": "mid",
+        "src": [
+          "https://www.t-kaneko.co.jp/equipment/"
+        ]
+      },
+      {
+        "proc": "NC複合旋盤",
+        "maker": "スター精密",
+        "model": "SV-32",
+        "count": null,
+        "shape": "丸",
+        "conf": "high",
+        "src": [
+          "https://www.t-kaneko.co.jp/equipment/"
+        ]
+      },
+      {
+        "proc": "円筒研削盤",
+        "maker": "TOYODA",
+        "model": "GUD32-50",
+        "count": null,
+        "shape": "丸",
+        "conf": "high",
+        "src": [
+          "https://www.t-kaneko.co.jp/equipment/"
+        ]
+      },
+      {
+        "proc": "CNC3次元測定機",
+        "maker": "Renishaw",
+        "model": "Crista-Apex C9166/C7106",
+        "count": null,
+        "note": "JIS Q9100+ISO13485取得",
+        "conf": "high",
+        "src": [
+          "https://www.t-kaneko.co.jp/equipment/"
+        ]
+      }
+    ]
+  },
+  "6115754928": {
+    "name": "アイコクアルファ株式会社 AP事業部",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "同時5軸マシニングセンタ",
+        "maker": "各社",
+        "model": "(複数機種)",
+        "count": 135,
+        "note": "4000×2000mm / φ1700mm対応。航空機機体部品・エンジン部品・インペラー加工専業。AS9100D取得",
+        "shape": "角",
+        "x": 4000,
+        "y": 2000,
+        "z": null,
+        "conf": "mid",
+        "src": [
+          "https://www.aikoku.co.jp/ap/feature/"
+        ]
+      },
+      {
+        "proc": "CNC3次元測定機",
+        "maker": null,
+        "model": null,
+        "count": 8,
+        "note": "接触式5台・非接触式3台",
+        "conf": "high",
+        "src": [
+          "https://www.aikoku.co.jp/ap/feature/"
+        ]
+      }
+    ]
+  },
+  "6123323260": {
+    "name": "相互発條株式会社 岐阜支社",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "バネ製造(コイリング)",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "航空機用ばね専業（Boeing向けPMA認定取得）。宇宙ロケット(H-IIA/B,H3,Epsilon)・きぼう用。線径φ0.x〜9.2mm、自由長〜312mm、外径〜80mm",
+        "materials": [
+          "Ti合金",
+          "SUS",
+          "AMS材"
+        ],
+        "conf": "mid",
+        "src": [
+          "https://sogospring.co.jp/aviation-space/"
+        ]
+      },
+      {
+        "proc": "鋼の熱処理",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "Nadcap認証(AMS2759/3, AMS2750, AC7102)。大気炉・析出硬化処理",
+        "conf": "high",
+        "src": [
+          "https://sogospring.co.jp/aviation-space/"
+        ]
+      },
+      {
+        "proc": "磁粉探傷検査",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "Nadcap認証(AC7114, ASTM E1444)。蛍光性湿式法",
+        "conf": "high",
+        "src": [
+          "https://sogospring.co.jp/aviation-space/"
+        ]
+      },
+      {
+        "proc": "ショットピーニング",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "Nadcap認証(AMS2430, AMS-S-13165, MIL-S-13165)。遠心式",
+        "conf": "high",
+        "src": [
+          "https://sogospring.co.jp/aviation-space/"
+        ]
+      }
+    ]
+  },
+  "6121472809": {
+    "name": "住友精密工業株式会社 航空宇宙事業部 滋賀工場",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "油圧機器製造・組立",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "航空機用油圧アクチュエータ・フライトコントロール機器製造。防衛省・民間機向け。JISQ9100取得",
+        "conf": "low",
+        "src": [
+          "https://www.spp.co.jp/business/aerospace/"
+        ]
+      }
+    ]
+  },
+  "6124168301": {
+    "name": "株式会社IHIキャスティングス 松本工場",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "インベストメント鋳造(ロストワックス)",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "航空機ジェットエンジン用タービン部品精密鋳造素材。粉末冶金・積層造型も対応。JISQ9100取得",
+        "materials": [
+          "Ni合金",
+          "Co合金",
+          "Ti合金"
+        ],
+        "conf": "mid",
+        "src": [
+          "https://www.ihi.co.jp/icc/"
+        ]
+      }
+    ]
+  },
+  "6114150866": {
+    "name": "瑞浪精機株式会社 本社工場",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "NC横型中ぐり盤",
+        "maker": "東芝機械",
+        "model": "BTD-200QH",
+        "count": null,
+        "note": "ヘリコプター・旅客機・ロケット部品精密加工・組立。JISQ9100取得",
+        "conf": "mid",
+        "src": [
+          "http://www.mizunami-seiki.co.jp/"
+        ]
+      },
+      {
+        "proc": "精密機械加工・組立",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "FMS(フレキシブル自動化生産システム)搭載。大物部品(2m超)〜小物部品一貫対応。3次元測定機保有",
+        "conf": "low",
+        "src": [
+          "http://www.mizunami-seiki.co.jp/business/aircraft-parts/"
+        ]
+      }
+    ]
+  },
+  "6116173760": {
+    "name": "ＡＰＣエアロスペシャルティ株式会社 岐阜工場本館",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "精密電解加工(PECM)",
+        "maker": "INDEC(露)",
+        "model": "PECM機",
+        "count": null,
+        "note": "精密電解加工機。航空機エンジン・医療・電子機器向け。ロシアINDEC社との代理店契約",
+        "conf": "mid",
+        "src": [
+          "https://www.apc-aero.co.jp/"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "Nadcap認証取得(各務原工場)",
+        "conf": "high",
+        "src": [
+          "https://www.apc-aero.co.jp/"
+        ]
+      },
+      {
+        "proc": "大型塗装(ペイントブース)",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "ヒートポンプ式空調システム採用大型塗装ブース。コンテナ・航空宇宙関連大型製品対応",
+        "conf": "mid",
+        "src": [
+          "https://www.apc-aero.co.jp/"
+        ]
+      },
+      {
+        "proc": "大型コンテナ製造",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "ロケット・衛星輸送用大型特殊コンテナ製造(JAXA向け実績)",
+        "conf": "high",
+        "src": [
+          "https://www.apc-aero.co.jp/"
+        ]
+      }
+    ]
+  },
+  "6114992024": {
+    "name": "株式会社島津製作所 三条工場 航空機器事業部",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "精密ギア加工",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "航空機用フライトコントロール機器・高揚力装置(Boeing747-8等)・ラック&ピニオン製造。機械加工と表面処理が強み",
+        "materials": [
+          "チタン",
+          "アルミ",
+          "鋼"
+        ],
+        "conf": "low",
+        "src": [
+          "https://newswitch.jp/p/8698"
+        ]
+      }
+    ]
+  },
+  "6115300505": {
+    "name": "株式会社プロテリアル 桶川工場",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "特殊合金素材製造(溶解・鍛造・熱間加工)",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "航空宇宙向けNi合金・Ti合金・Co合金の一貫製造。売上過半が航空宇宙向け素材。JIS Q9100取得",
+        "materials": [
+          "Ni合金",
+          "Ti合金",
+          "Co合金"
+        ],
+        "conf": "mid",
+        "src": [
+          "https://www.proterial.com/corp/bases/main_bases.html"
+        ]
+      }
+    ]
+  },
+  "6115321089": {
+    "name": "NTN株式会社 桑名製作所",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "ベアリング精密研削・組立",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "日本初の航空宇宙用ベアリング専門工場(1986年建設)。超精密加工クリーン環境。航空機・ロケット用軸受製造",
+        "conf": "low",
+        "src": [
+          "https://www.ntn.co.jp/japan/corporate/domestic_network/production_network.html"
+        ]
+      }
+    ]
+  },
+  "6115315244": {
+    "name": "輸送機工業株式会社",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "ストレッチフォーミング(板金)",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "Boeing777/787胴体外板・ストリンガー製造。ストレッチフォーミング・ドロップフォーミング・熱処理一貫。JISQ9100/Nadcap(熱処理)取得",
+        "materials": [
+          "Al合金"
+        ],
+        "conf": "mid",
+        "src": [
+          "https://yusoki.subaru.co.jp/"
+        ]
+      },
+      {
+        "proc": "5軸マシニングセンタ",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "NC5軸加工設備保有",
+        "conf": "low",
+        "src": [
+          "https://yusoki.subaru.co.jp/"
+        ]
+      }
+    ]
+  },
+  "6121282044": {
+    "name": "川崎重工業株式会社 名古屋第一工場",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "航空機機体部品加工・組立",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "航空機主翼・胴体部品製造(Boeing787など)。大型構造物の機械加工・組立。JISQ9100取得",
+        "conf": "low",
+        "src": [
+          "https://www.khi.co.jp/"
+        ]
+      }
+    ]
+  },
+  "6121328186": {
+    "name": "ミネベアミツミ株式会社 軽井沢工場 ロッドエンド・ファスナー事業ユニット",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "ロッドエンド・ファスナー精密加工",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "航空宇宙用ロッドエンドベアリング・ファスナー精密製造。超精密研削・旋削工程。JISQ9100取得",
+        "conf": "low",
+        "src": [
+          "https://www.minebeamitsumi.com/"
+        ]
+      }
+    ]
+  },
+  "6121289801": {
+    "name": "東京計器株式会社 電子システムカンパニー 那須工場",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "電子機器組立・製造",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "航空機・艦船用慣性航法装置(INS)・レーダー・電子制御機器製造。JISQ9100取得",
+        "conf": "low",
+        "src": [
+          "https://www.tokyokeiki.jp/"
+        ]
+      }
+    ]
+  },
+  "6121274120": {
+    "name": "株式会社IHI 呉第二工場 航空・宇宙・防衛事業領域",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "航空エンジン部品加工・組立",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "航空機ジェットエンジン部品製造。タービン・コンプレッサーブレード等。JISQ9100取得",
+        "conf": "low",
+        "src": [
+          "https://www.ihi.co.jp/"
+        ]
+      }
+    ]
+  },
+  "6122249921": {
+    "name": "三菱重工業株式会社 民間航空機セグメント 下関地区",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "航空機機体部品加工・組立",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "民間航空機機体部品製造。JISQ9100取得",
+        "conf": "low",
+        "src": [
+          "https://www.mhi.com/"
+        ]
+      }
+    ]
+  },
+  "6123322889": {
+    "name": "三菱電機株式会社 鎌倉製作所 相模事業所",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "電子・防衛機器製造",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "防衛・航空宇宙向け電子機器・誘導制御システム製造。JISQ9100取得",
+        "conf": "low",
+        "src": [
+          "https://www.mitsubishielectric.co.jp/"
+        ]
+      }
+    ]
+  },
+  "6116138284": {
+    "name": "立川精密工業株式会社 本社/第1工場",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "NC旋盤・マシニングセンタ精密切削",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "難削材・複雑形状・精密加工専業。70名。設備一覧PDF公開中。JISQ9100取得",
+        "conf": "low",
+        "src": [
+          "https://www.tachikawa-sk.co.jp/"
+        ]
+      }
+    ]
+  },
+  "6114138804": {
+    "name": "株式会社ジャムコ 航空機整備・製造グループ 製造事業部 (調布地域)",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "CFRP複合材成形(オートクレーブ)",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "炭素繊維複合材(CFRP)連続成形製法(独自特許)。航空機内装・ADP製法一次構造部材製造",
+        "materials": [
+          "CFRP",
+          "複合材"
+        ],
+        "conf": "low",
+        "src": [
+          "https://www.jamco.co.jp/ja/technology.html"
+        ]
+      }
+    ]
+  },
+  "6121328940": {
+    "name": "株式会社YDKテクノロジーズ 本社",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "センサー・計測機器製造・組立",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "航空エンジン/ロケット用センサー・圧力計測機器・油圧制御機器・ケーブルハーネス製造。企画〜生産一貫。JISQ9100取得",
+        "conf": "low",
+        "src": [
+          "https://www.ydktechs.co.jp/jp/business/index.html"
+        ]
+      }
+    ]
+  },
+  "6130621162": {
+    "name": "多摩川精機株式会社 第二工場",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "精密センサー・モーター製造",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "航空宇宙・防衛向け角度センサー(レゾルバ)・サーボモーター・慣性計測装置製造。JISQ9100取得",
+        "conf": "low",
+        "src": [
+          "https://www.tamagawa-seiki.co.jp/"
+        ]
+      }
+    ]
+  },
+  "6128274741": {
+    "name": "高崎金属株式会社 製造課（HC工場）",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "金属加工",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "航空宇宙向け金属部品製造。JISQ9100取得。公式HP未取得、設備詳細不明",
+        "conf": "low",
+        "src": [
+          "note:OASIS登録のみ、HP不明"
+        ]
+      }
+    ]
+  },
+  "6116492140": {
+    "name": "東京航空計器株式会社 本社工場",
+    "updated": "2026-06-04T18:28:08Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "航空計器・制御機器製造",
+        "maker": null,
+        "model": null,
+        "count": null,
+        "note": "航空機用高度計・速度計・姿勢計器・飛行訓練装置製造。JISQ9100取得",
+        "conf": "low",
+        "src": [
+          "https://www.tkk-air.co.jp/"
+        ]
+      }
+    ]
+  },
+  "6156078029": {
+    "name": "神田工業株式会社 秋田工場",
+    "updated": "2026-06-04T19:24:43Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "MC(立型)",
+        "maker": "ヤマザキマザック",
+        "model": "AJV-32-605N",
+        "count": 1,
+        "shape": "角",
+        "x": 1500,
+        "y": 700,
+        "z": 360,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "チタン",
+          "タングステン"
+        ],
+        "note": "航空機用部品加工実績",
+        "conf": "high",
+        "src": [
+          "http://www.kanda-k.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "MC(立型)",
+        "maker": "日立精機",
+        "model": "VK55",
+        "count": 1,
+        "shape": "角",
+        "x": 1000,
+        "y": 560,
+        "z": 400,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "http://www.kanda-k.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "MC(立型)",
+        "maker": "日立精機",
+        "model": "VM40",
+        "count": 1,
+        "shape": "角",
+        "x": 560,
+        "y": 410,
+        "z": 350,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "http://www.kanda-k.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "MC(立型)",
+        "maker": "三菱重工",
+        "model": "M-V4B",
+        "count": 2,
+        "shape": "角",
+        "x": 560,
+        "y": 410,
+        "z": 350,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "http://www.kanda-k.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "MC(横型)",
+        "maker": "オークマ",
+        "model": "MA-500HB",
+        "count": 1,
+        "shape": "角",
+        "x": 700,
+        "y": 900,
+        "z": 780,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "6パレット",
+        "conf": "high",
+        "src": [
+          "http://www.kanda-k.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "NCフライス盤",
+        "maker": "日立精機",
+        "model": "PNCMFU",
+        "count": 2,
+        "shape": "角",
+        "x": 710,
+        "y": 280,
+        "z": 400,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "http://www.kanda-k.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "旋盤(CNC)",
+        "maker": "日立精機",
+        "model": "MR-20",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 200,
+        "len": 400,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "http://www.kanda-k.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "旋盤(CNC)",
+        "maker": "ヤマザキマザック",
+        "model": "SMART300M",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 420,
+        "len": 250,
+        "materials": [],
+        "note": "CNC複合旋盤",
+        "conf": "high",
+        "src": [
+          "http://www.kanda-k.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "旋盤(CNC複合)",
+        "maker": "オークマ",
+        "model": "LB300-MY",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 300,
+        "len": 400,
+        "materials": [],
+        "note": "Y軸付",
+        "conf": "high",
+        "src": [
+          "http://www.kanda-k.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "平面研削盤",
+        "maker": "日立精工",
+        "model": "-",
+        "count": 1,
+        "shape": "角",
+        "x": 600,
+        "y": 250,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "http://www.kanda-k.co.jp/facility.html"
+        ]
+      }
+    ]
+  },
+  "6150819860": {
+    "name": "徳田工業株式会社 第二工場（可児第二工場）",
+    "updated": "2026-06-04T19:24:43Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "MC(ガントリー5軸)",
+        "maker": "EEW",
+        "model": "HSM-Modal",
+        "count": 1,
+        "shape": "角",
+        "x": 17000,
+        "y": 5000,
+        "z": 3000,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "CFRP",
+          "木材"
+        ],
+        "note": "超大型ガントリー型5軸MC。風洞試験模型・大型航空機部品加工",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(門型5軸)",
+        "maker": "新日本工機",
+        "model": "RB-200F",
+        "count": 1,
+        "shape": "角",
+        "x": 10250,
+        "y": 2900,
+        "z": 1250,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "大型門型5軸MC",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(横型5軸)",
+        "maker": "新日本工機",
+        "model": "HPS-4B",
+        "count": 1,
+        "shape": "角",
+        "x": 10160,
+        "y": 2286,
+        "z": 762,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "超長尺横型5軸MC",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(横型5軸)",
+        "maker": "新日本工機",
+        "model": "HPS-4B",
+        "count": 1,
+        "shape": "角",
+        "x": 4000,
+        "y": 2286,
+        "z": 762,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "横型5軸MC",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(門型3軸)",
+        "maker": "新日本工機",
+        "model": "RB-6VM",
+        "count": 1,
+        "shape": "角",
+        "x": 8000,
+        "y": 3500,
+        "z": 1800,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "大型門型3軸MC",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(ガントリー5軸)",
+        "maker": "サワイリエンジニアリング",
+        "model": "SWMG5-3020-24ATC",
+        "count": 1,
+        "shape": "角",
+        "x": 4050,
+        "y": 2800,
+        "z": 1000,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "ガントリー5軸MC",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(横型5軸)",
+        "maker": "新日本工機",
+        "model": "HPS-150B",
+        "count": 1,
+        "shape": "角",
+        "x": 6150,
+        "y": 1800,
+        "z": 1000,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "横型5軸MC",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(横型5軸)",
+        "maker": "新日本工機",
+        "model": "HPS-120B",
+        "count": 1,
+        "shape": "角",
+        "x": 4460,
+        "y": 1400,
+        "z": 700,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(門型3軸)",
+        "maker": "新日本工機",
+        "model": "DC-3FSM",
+        "count": 1,
+        "shape": "角",
+        "x": 3300,
+        "y": 1800,
+        "z": 1000,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "複合5軸加工機",
+        "maker": "ヤマザキマザック",
+        "model": "INTEGREX e-1060V/8",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 1250,
+        "len": 1250,
+        "materials": [],
+        "note": "旋削・5軸MC複合",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(門型5軸)",
+        "maker": "セキテック",
+        "model": "MM2600",
+        "count": 1,
+        "shape": "角",
+        "x": 4000,
+        "y": 2000,
+        "z": 1000,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(門型5軸)",
+        "maker": "セキテック",
+        "model": "MM2000",
+        "count": 1,
+        "shape": "角",
+        "x": 3500,
+        "y": 1950,
+        "z": 900,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(門型5軸)",
+        "maker": "菊川鉄工所",
+        "model": "MCS-48-1",
+        "count": 1,
+        "shape": "角",
+        "x": 2900,
+        "y": 1800,
+        "z": 668,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(横型5軸)",
+        "maker": "安田工業",
+        "model": "YBM-800N",
+        "count": 1,
+        "shape": "角",
+        "x": 1100,
+        "y": 800,
+        "z": 800,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(立形4軸)",
+        "maker": "ヤマザキマザック",
+        "model": "AJV-25-404",
+        "count": 1,
+        "shape": "角",
+        "x": 1000,
+        "y": 508,
+        "z": 550,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(横型4軸)",
+        "maker": "牧野フライス製作所",
+        "model": "a-81M",
+        "count": 1,
+        "shape": "角",
+        "x": 900,
+        "y": 800,
+        "z": 1020,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "NCフライス盤",
+        "maker": "オークマ豊和",
+        "model": "FMB-40",
+        "count": 1,
+        "shape": "角",
+        "x": 800,
+        "y": 400,
+        "z": 400,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(立形5軸)",
+        "maker": "HERMLE",
+        "model": "C30U",
+        "count": 1,
+        "shape": "角",
+        "x": 650,
+        "y": 600,
+        "z": 500,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "ドイツ製高精度5軸MC",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "複合5軸加工機",
+        "maker": "ヤマザキマザック",
+        "model": "INTEGREX 300-III",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 630,
+        "len": 1095,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "複合5軸加工機",
+        "maker": "ヤマザキマザック",
+        "model": "INTEGREX 300-IV",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 630,
+        "len": 1095,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "複合5軸加工機",
+        "maker": "ヤマザキマザック",
+        "model": "INTEGREX i200S",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 615,
+        "len": 1077,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "複合5軸加工機",
+        "maker": "ヤマザキマザック",
+        "model": "INTEGREX 300-IIy",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 580,
+        "len": 1095,
+        "materials": [],
+        "note": "Y軸付",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(横型4軸)",
+        "maker": "牧野フライス製作所",
+        "model": "A55",
+        "count": 1,
+        "shape": "角",
+        "x": 560,
+        "y": 560,
+        "z": 560,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(立形5軸)",
+        "maker": "三井精機工業",
+        "model": "VERTEX550",
+        "count": 1,
+        "shape": "角",
+        "x": 550,
+        "y": 600,
+        "z": 500,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(立形5軸)",
+        "maker": "FANUC",
+        "model": "D21MiB5",
+        "count": 1,
+        "shape": "角",
+        "x": 500,
+        "y": 400,
+        "z": 330,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(横型5軸)",
+        "maker": "キタムラ機械",
+        "model": "Mycenter-H300SC",
+        "count": 1,
+        "shape": "角",
+        "x": 400,
+        "y": 425,
+        "z": 400,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(横型5軸・パラレルリンク)",
+        "maker": "LOXIN",
+        "model": "PKM Tricept T805",
+        "count": 1,
+        "shape": "角",
+        "x": 200,
+        "y": 500,
+        "z": 152,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "スペイン製パラレルリンク機構5軸MC",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "複合5軸加工機",
+        "maker": "ブラザー工業",
+        "model": "M140X1",
+        "count": 1,
+        "shape": "角",
+        "x": 200,
+        "y": 440,
+        "z": 305,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "旋盤(NC)",
+        "maker": "北村製作所",
+        "model": "KNC-20G",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 200,
+        "len": 180,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(長尺4軸)",
+        "maker": "ウィンテック静岡",
+        "model": "PZ-CNC8000",
+        "count": 1,
+        "shape": "角",
+        "x": 8000,
+        "y": 450,
+        "z": 450,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "長尺加工用",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      },
+      {
+        "proc": "MC(長尺4軸)",
+        "maker": "サワイリエンジニアリング",
+        "model": "SWS17550",
+        "count": 1,
+        "shape": "角",
+        "x": 8000,
+        "y": 100,
+        "z": 100,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "超長尺加工用",
+        "conf": "high",
+        "src": [
+          "https://www.tokuda.co.jp/facility/processing/"
+        ]
+      }
+    ]
+  },
+  "6151692727": {
+    "name": "神和アルミ工業株式会社 永田第二工場",
+    "updated": "2026-06-04T19:24:43Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "MC(5軸立形トラベリング)",
+        "maker": "DMG森精機",
+        "model": "DMF260/110",
+        "count": 1,
+        "shape": "角",
+        "x": 2600,
+        "y": 1100,
+        "z": 900,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "航空機部品"
+        ],
+        "note": "立形トラベリングタイプ 5軸",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "MC(5軸横形)",
+        "maker": "DMG森精機",
+        "model": "DMC125FD duo BLOCK",
+        "count": 1,
+        "shape": "角",
+        "x": 1250,
+        "y": 1250,
+        "z": 1000,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "2パレ φ1100旋回機能付(S500) A軸仕様",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "MC(5軸立形トラニオン)",
+        "maker": "DMG森精機",
+        "model": "DMU105 mono BLOCK",
+        "count": 1,
+        "shape": "角",
+        "x": 1050,
+        "y": 1050,
+        "z": 750,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "立形トラニオンタイプ 5軸",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "MC(5軸立形)",
+        "maker": "大隈豊和",
+        "model": "VMP-16",
+        "count": 1,
+        "shape": "角",
+        "x": 2450,
+        "y": 2000,
+        "z": 1400,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "2パレ □1200×2",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "MC(5面門型)",
+        "maker": "三菱重工",
+        "model": "MVR 40",
+        "count": 1,
+        "shape": "角",
+        "x": 8000,
+        "y": 4400,
+        "z": 700,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ"
+        ],
+        "note": "門幅3750 アングルヘッド・ユニバーサルヘッド・エクステンション",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "MC(5面門型)",
+        "maker": "三菱重工",
+        "model": "MVR-40",
+        "count": 1,
+        "shape": "角",
+        "x": 5000,
+        "y": 4400,
+        "z": 700,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "門幅3750 アングルヘッド・エクステンション",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "MC(5面門型)",
+        "maker": "三菱重工",
+        "model": "MVR-40EX",
+        "count": 1,
+        "shape": "角",
+        "x": 5200,
+        "y": 4400,
+        "z": 800,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "門幅3750 アングルヘッド",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "MC(5面門型)",
+        "maker": "NIDEC",
+        "model": "MVR-25HX",
+        "count": 1,
+        "shape": "角",
+        "x": 4000,
+        "y": 2500,
+        "z": 800,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "門幅1800 アングルヘッド・ユニバーサルヘッド・ヘール加工対応",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "MC(門型3軸)",
+        "maker": "オークマ",
+        "model": "MCV-AII",
+        "count": 1,
+        "shape": "角",
+        "x": 4000,
+        "y": 2000,
+        "z": 450,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "最大高さ1500",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "MC(横型)",
+        "maker": "倉敷機械",
+        "model": "KBT-13EA",
+        "count": 1,
+        "shape": "角",
+        "x": 3000,
+        "y": 2050,
+        "z": 1350,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "回転テーブル付 W650",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "MC(横型)",
+        "maker": "ヤマザキマザック",
+        "model": "FH-1080",
+        "count": 1,
+        "shape": "角",
+        "x": 1640,
+        "y": 1300,
+        "z": 1220,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "2パレ S7000 F20000",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "MC(横型)",
+        "maker": "牧野フライス製作所",
+        "model": "V33",
+        "count": 1,
+        "shape": "角",
+        "x": 600,
+        "y": 400,
+        "z": 450,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "S20000 F20000",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "MC(横型トラベリング)",
+        "maker": "DMG森精機",
+        "model": "DMF180",
+        "count": 1,
+        "shape": "角",
+        "x": 1800,
+        "y": 700,
+        "z": 700,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "S:4000 F40000 トラベリングタイプ",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "MC(立型)",
+        "maker": "ブラザー工業",
+        "model": "TC-S2DN",
+        "count": 1,
+        "shape": "角",
+        "x": 500,
+        "y": 400,
+        "z": 300,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "S:6000 F30000",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "ガンドリル",
+        "maker": "シンテック",
+        "model": "BN-110WR",
+        "count": 1,
+        "shape": "丸",
+        "x": 3000,
+        "y": 800,
+        "z": 1400,
+        "dia": 30,
+        "len": null,
+        "materials": [],
+        "note": "孔径φ3~30 □400回転テーブル",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      },
+      {
+        "proc": "ガンドリル",
+        "maker": "河原",
+        "model": "KS-1316",
+        "count": 1,
+        "shape": "丸",
+        "x": 1500,
+        "y": 500,
+        "z": 1600,
+        "dia": 20,
+        "len": null,
+        "materials": [],
+        "note": "孔径φ4~20 1400×1600テーブル",
+        "conf": "high",
+        "src": [
+          "https://www.shinwa-al.co.jp/machining_equipment/"
+        ]
+      }
+    ]
+  },
+  "6153857104": {
+    "name": "佐藤精機株式会社 第二工場（たつのテクニカルセンター）",
+    "updated": "2026-06-04T19:24:43Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "MC(5軸)",
+        "maker": "DMG MORI",
+        "model": "DMU60 eVo linear",
+        "count": 1,
+        "shape": "角",
+        "x": 600,
+        "y": 500,
+        "z": 500,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "チタン",
+          "ステンレス",
+          "インコネル"
+        ],
+        "note": "5軸MC JISQ9100工場 JAXA・SUPER GT部品実績",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "MC(5軸)",
+        "maker": "DMG MORI",
+        "model": "DMU80P DUO Black",
+        "count": 1,
+        "shape": "角",
+        "x": 800,
+        "y": 1050,
+        "z": 850,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "5軸MC 2パレット",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "MC(5軸)",
+        "maker": "DMG MORI",
+        "model": "DMC125U duoBLOCK",
+        "count": 1,
+        "shape": "角",
+        "x": 1250,
+        "y": 1250,
+        "z": 1000,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "5軸MC",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "MC(5軸)",
+        "maker": "ヤマザキマザック",
+        "model": "VARIAXIS 630-5X II T",
+        "count": 1,
+        "shape": "角",
+        "x": 630,
+        "y": 765,
+        "z": 500,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "5軸MC",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "MC(5軸)",
+        "maker": "ヤマザキマザック",
+        "model": "VARIAX i600",
+        "count": 1,
+        "shape": "角",
+        "x": 510,
+        "y": 910,
+        "z": 510,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "5軸MC",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "CNCジグボーラー",
+        "maker": "安田工業",
+        "model": "YBM640V",
+        "count": 1,
+        "shape": "角",
+        "x": 600,
+        "y": 400,
+        "z": 500,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "CNCジグボーラー",
+        "maker": "安田工業",
+        "model": "YBM950V",
+        "count": 1,
+        "shape": "角",
+        "x": 900,
+        "y": 500,
+        "z": 550,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "MC(5面)",
+        "maker": "ヤマザキマザック",
+        "model": "VARIAXIS 200",
+        "count": 1,
+        "shape": "角",
+        "x": 510,
+        "y": 510,
+        "z": 460,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "5面加工機",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "MC(立型)",
+        "maker": "DMG MORI",
+        "model": "eco MILL 800V",
+        "count": 1,
+        "shape": "角",
+        "x": 800,
+        "y": 560,
+        "z": 510,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "MC(立型)",
+        "maker": "DMG MORI",
+        "model": "CMXV600",
+        "count": 1,
+        "shape": "角",
+        "x": 1600,
+        "y": 820,
+        "z": 720,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "MC(立型)",
+        "maker": "ヤマザキマザック",
+        "model": "NEXUS410A-II",
+        "count": 1,
+        "shape": "角",
+        "x": 580,
+        "y": 410,
+        "z": 350,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "MC(立型)",
+        "maker": "ヤマザキマザック",
+        "model": "VQC-15",
+        "count": 1,
+        "shape": "角",
+        "x": 560,
+        "y": 410,
+        "z": 400,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "MC(立型)",
+        "maker": "ヤマザキマザック",
+        "model": "ASV18N",
+        "count": 1,
+        "shape": "角",
+        "x": 720,
+        "y": 520,
+        "z": 520,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "MC(立型)",
+        "maker": "ヤマザキマザック",
+        "model": "VQC-20/50B",
+        "count": 1,
+        "shape": "角",
+        "x": 1000,
+        "y": 500,
+        "z": 400,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "MC(立型)",
+        "maker": "ヤマザキマザック",
+        "model": "VCN530C",
+        "count": 1,
+        "shape": "角",
+        "x": 1050,
+        "y": 530,
+        "z": 510,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "MC(門型)",
+        "maker": "ヤマザキマザック",
+        "model": "AJV50/80",
+        "count": 1,
+        "shape": "角",
+        "x": 550,
+        "y": 400,
+        "z": 510,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "MC(門型)",
+        "maker": "ヤマザキマザック",
+        "model": "FJV-60/80",
+        "count": 1,
+        "shape": "角",
+        "x": 2000,
+        "y": 1400,
+        "z": 585,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "旋盤(CNC複合)",
+        "maker": "中村留精密工業",
+        "model": "WT150II",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 190,
+        "len": 515,
+        "materials": [],
+        "note": "複合CNC旋盤",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "旋盤(CNC)",
+        "maker": "オークマ",
+        "model": "LB4000",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 400,
+        "len": 1200,
+        "materials": [],
+        "note": "超高圧クーラント14MPA",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "旋盤(CNC)",
+        "maker": "ヤマザキマザック",
+        "model": "QTS200L",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 350,
+        "len": 541,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "旋盤(CNC5軸複合)",
+        "maker": "ヤマザキマザック",
+        "model": "INTEGREX400IV",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 760,
+        "len": 1014,
+        "materials": [],
+        "note": "CNC 5軸複合旋盤",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "旋盤(CNC5面複合)",
+        "maker": "ヤマザキマザック",
+        "model": "INTEGREX100II",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 470,
+        "len": 727,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "旋盤(CNC)",
+        "maker": "ヤマザキマザック",
+        "model": "QUICK TURN NEXUS350",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 420,
+        "len": 612,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      },
+      {
+        "proc": "旋盤(CNC)",
+        "maker": "ヤマザキマザック",
+        "model": "QUICK TURN 15N",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 350,
+        "len": 541,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.ssc-e.co.jp/TOP/machine/"
+        ]
+      }
+    ]
+  },
+  "6141400343": {
+    "name": "加古川金属工業株式会社 高砂工場",
+    "updated": "2026-06-04T19:24:43Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "研磨(大型自動)",
+        "maker": "-",
+        "model": "大型自動研磨機",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン",
+          "チタン合金"
+        ],
+        "note": "チタンインゴット研磨。PT（浸透探傷試験）対応。1/100mm以下の研磨精度",
+        "conf": "high",
+        "src": [
+          "https://kakokin.jp/equipment.html"
+        ]
+      },
+      {
+        "proc": "研磨(小型自動)",
+        "maker": "-",
+        "model": "小型自動研磨機",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン"
+        ],
+        "note": "棒状細径チタン材研磨",
+        "conf": "high",
+        "src": [
+          "https://kakokin.jp/equipment.html"
+        ]
+      },
+      {
+        "proc": "研磨(内径)",
+        "maker": "-",
+        "model": "内径加工用自動グラインダー",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン"
+        ],
+        "note": "円筒形ビレット内径研磨",
+        "conf": "high",
+        "src": [
+          "https://kakokin.jp/equipment.html"
+        ]
+      },
+      {
+        "proc": "研磨(湿式)",
+        "maker": "-",
+        "model": "鋼板研磨装置（湿式）",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン"
+        ],
+        "note": "水冷却湿式研磨。チタン板用",
+        "conf": "high",
+        "src": [
+          "https://kakokin.jp/equipment.html"
+        ]
+      }
+    ]
+  },
+  "6150203722": {
+    "name": "大同メタル工業犬山事業所（軸受専門製造）",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "大同メタル工業犬山事業所（軸受専門製造）=JISQ9100取得。すべり軸受世界シェア約33.5%。設備は特殊プレス/成形設備主体で公式非公開"
+  },
+  "6152882109": {
+    "name": "中条ジャムコ",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "中条ジャムコ=JAMCO航空機機械加工カンパニー。機械加工設備公式非公開（中条/三鷹）"
+  },
+  "6138926649": {
+    "name": "ジャムコ三鷹事業所",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "ジャムコ三鷹事業所=機械加工カンパニー。設備公式非公開"
+  },
+  "6140309144": {
+    "name": "ニテラマテリアルズ",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "ニテラマテリアルズ=旧日本バルカー工業。シール材・産業資材素材メーカー→OOS"
+  },
+  "6141679307": {
+    "name": "カルモ鋳工",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "カルモ鋳工=アルミ・銅合金鋳造+5軸MC保有。型番公式非公開"
+  },
+  "6136423267": {
+    "name": "有沢製作所中田原",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "有沢製作所中田原=FRP成形（プレス/FW/引抜）。設備型番公式非公開"
+  },
+  "6123716408": {
+    "name": "IHIキャスティングス",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "IHIキャスティングス=Ni合金DS/SC精密鋳造。設備型番公式非公開"
+  },
+  "6154430245": {
+    "name": "太陽鉱工",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "太陽鉱工=Mo/V/レアアース等素材メーカー→OOS"
+  },
+  "6132400666": {
+    "name": "瀬尾精機",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "瀬尾精機=航空機プロペラ・エンジン・降着装置部品。設備型番公式非公開"
+  },
+  "700041021": {
+    "name": "中央銘板製作所",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "中央銘板製作所=銘板・プレート製造。航空機設備なし"
+  },
+  "6129643067": {
+    "name": "池辺製作所",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "池辺製作所=千葉・JISQ9100確認。5軸MC+CAD/CAM。型番詳細非公開"
+  },
+  "6141592125": {
+    "name": "大槹精機",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "大槹精機=高品位鋳造+5軸加工。設備型番取得不可"
+  },
+  "6121328966": {
+    "name": "YDKテクノロジーズ入間",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "YDKテクノロジーズ入間=旧横河電機。航空燃焼関連製品。設備型番非公開"
+  },
+  "6154305309": {
+    "name": "日生工業",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "日生工業=JISQ9100/ISO14001。NC旋盤/クランク専用/MC/研削/複合旋盤。型番未公開"
+  },
+  "6153248409": {
+    "name": "オシダ精機",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "オシダ精機=埼玉越谷。航空機向け。設備型番未取得"
+  },
+  "6155489208": {
+    "name": "サンノハシ",
+    "updated": "2026-06-04T20:19:32.559749+00:00",
+    "round": 1,
+    "devices": [],
+    "note": "サンノハシ=精密冷間鍛造ボルト。鍛造設備型番非公開"
+  },
+  "6139221084": {
+    "name": "日本エアロフォージ株式会社",
+    "updated": "2026-06-04T20:22:51.561254+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "鍛造",
+        "maker": "不明（国内最大級）",
+        "model": "50,000トン鍛造プレス",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "ニッケル合金"
+        ],
+        "note": "最大加圧力50,000トン、機械自重6,600トン。世界5か国保有の大型鍛造プレス。JISQ9100/Nadcap取得",
+        "conf": "high",
+        "src": [
+          "https://japan-aeroforge.com/product/"
+        ]
+      }
+    ]
+  },
+  "6154087009": {
+    "name": "株式会社木村鋳造所 アドバンスト・プロセス・テクノロジー・センター",
+    "updated": "2026-06-04T20:22:51.561254+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "5軸機械加工",
+        "maker": "オークマ",
+        "model": "MU-5000V-L",
+        "count": 3,
+        "shape": "丸",
+        "x": 800,
+        "y": 1050,
+        "z": 600,
+        "dia": 500,
+        "len": null,
+        "materials": [
+          "鋳鉄",
+          "アルミ",
+          "鋼"
+        ],
+        "note": "φ500テーブル、5軸アタッチメントあり",
+        "conf": "high",
+        "src": [
+          "https://kimuragrp.co.jp/company/facilities.html"
+        ]
+      },
+      {
+        "proc": "5軸機械加工",
+        "maker": "オークマ",
+        "model": "MU-6300V-L",
+        "count": 1,
+        "shape": "丸",
+        "x": 925,
+        "y": 1050,
+        "z": 600,
+        "dia": 630,
+        "len": null,
+        "materials": [
+          "鋳鉄",
+          "鋼"
+        ],
+        "note": "φ630テーブル、5軸アタッチメントあり",
+        "conf": "high",
+        "src": [
+          "https://kimuragrp.co.jp/company/facilities.html"
+        ]
+      },
+      {
+        "proc": "立旋盤",
+        "maker": "芝浦機械",
+        "model": "TSS 30/55",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 3000,
+        "len": null,
+        "materials": [
+          "鋳鉄"
+        ],
+        "note": "テーブルφ3000",
+        "conf": "high",
+        "src": [
+          "https://kimuragrp.co.jp/company/facilities.html"
+        ]
+      },
+      {
+        "proc": "門型機械加工（群馬）",
+        "maker": "オークマ",
+        "model": "MCV-A 20×40",
+        "count": 1,
+        "shape": "角",
+        "x": 4000,
+        "y": 1500,
+        "z": 4000,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋳鉄"
+        ],
+        "note": "有効門幅2850mm、最大積載10,000kg",
+        "conf": "high",
+        "src": [
+          "https://kimuragrp.co.jp/company/facilities.html"
+        ]
+      },
+      {
+        "proc": "門型機械加工（御前崎）",
+        "maker": "オークマ",
+        "model": "MCR-BⅡ 2500×5000",
+        "count": 2,
+        "shape": "角",
+        "x": 5000,
+        "y": 2500,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋳鉄"
+        ],
+        "note": "1台はパレットチェンジャー付き",
+        "conf": "high",
+        "src": [
+          "https://kimuragrp.co.jp/company/facilities.html"
+        ]
+      },
+      {
+        "proc": "門型機械加工（御前崎）",
+        "maker": "オークマ",
+        "model": "MCR-BⅡ 3000×10000",
+        "count": 1,
+        "shape": "角",
+        "x": 10000,
+        "y": 3000,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋳鉄"
+        ],
+        "note": "ディーゼルエンジンフレーム鋳物加工用10m門型",
+        "conf": "high",
+        "src": [
+          "https://kimuragrp.co.jp/company/facilities.html"
+        ]
+      },
+      {
+        "proc": "門型機械加工（御前崎）",
+        "maker": "オークマ",
+        "model": "MCM-30 2500×8000",
+        "count": 1,
+        "shape": "角",
+        "x": 8000,
+        "y": 2500,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋳鉄"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://kimuragrp.co.jp/company/facilities.html"
+        ]
+      },
+      {
+        "proc": "門型機械加工（御前崎）",
+        "maker": "芝浦機械",
+        "model": "MPE-2160-5H 2000×6000",
+        "count": 1,
+        "shape": "角",
+        "x": 6000,
+        "y": 2000,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋳鉄"
+        ],
+        "note": "パレットチェンジャー付き量産対応",
+        "conf": "high",
+        "src": [
+          "https://kimuragrp.co.jp/company/facilities.html"
+        ]
+      },
+      {
+        "proc": "門型機械加工（御前崎）",
+        "maker": "新日本工機",
+        "model": "HF-5M 2500×7300",
+        "count": 1,
+        "shape": "角",
+        "x": 7300,
+        "y": 2500,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋳鉄"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://kimuragrp.co.jp/company/facilities.html"
+        ]
+      },
+      {
+        "proc": "門型機械加工（御前崎）",
+        "maker": "オークマ",
+        "model": "MCR-C 7000×3200",
+        "count": 1,
+        "shape": "角",
+        "x": 7000,
+        "y": 3200,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋳鉄"
+        ],
+        "note": "門高3600mm",
+        "conf": "high",
+        "src": [
+          "https://kimuragrp.co.jp/company/facilities.html"
+        ]
+      },
+      {
+        "proc": "門型機械加工（群馬）",
+        "maker": "芝浦機械",
+        "model": "MPC3160-B 6000×2700",
+        "count": 1,
+        "shape": "角",
+        "x": 6000,
+        "y": 2700,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋳鉄"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://kimuragrp.co.jp/company/facilities.html"
+        ]
+      }
+    ]
+  },
+  "6158082709": {
+    "name": "株式会社大同キャスティングス 生産統括部 中津川事業所",
+    "updated": "2026-06-04T20:22:51.561254+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "精密鋳造（CLA法）",
+        "maker": "自社",
+        "model": "CLA高周波誘導炉",
+        "count": 3,
+        "shape": "丸/角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "ニッケル合金",
+          "チタン合金",
+          "コバルト合金"
+        ],
+        "note": "300kg×1+100kg×2。減圧吸引鋳造法。JISQ9100/IATF16949取得",
+        "conf": "high",
+        "src": [
+          "http://www.d-cast.jp/equipment/nakatsu/index.html"
+        ]
+      },
+      {
+        "proc": "精密鋳造（CLV法）",
+        "maker": "自社",
+        "model": "CLV高周波誘導炉",
+        "count": 2,
+        "shape": "丸/角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "ニッケル合金"
+        ],
+        "note": "80kg×2",
+        "conf": "high",
+        "src": [
+          "http://www.d-cast.jp/equipment/nakatsu/index.html"
+        ]
+      },
+      {
+        "proc": "精密鋳造（CLI法）",
+        "maker": "自社",
+        "model": "CLI高周波誘導炉",
+        "count": 4,
+        "shape": "丸/角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "ニッケル合金"
+        ],
+        "note": "340kg×4。Counter gravity Low pressure Inert gas",
+        "conf": "high",
+        "src": [
+          "http://www.d-cast.jp/equipment/nakatsu/index.html"
+        ]
+      },
+      {
+        "proc": "チタン精密鋳造（レビキャスト法）",
+        "maker": "自社",
+        "model": "レビテーション高周波誘導炉",
+        "count": 1,
+        "shape": "丸/角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金"
+        ],
+        "note": "30kg×1。浮遊溶解・減圧吸引鋳造。世界初量産化",
+        "conf": "high",
+        "src": [
+          "http://www.d-cast.jp/equipment/nakatsu/index.html"
+        ]
+      },
+      {
+        "proc": "ロストワックス自動成型",
+        "maker": "自社",
+        "model": "自動成型・組立装置",
+        "count": 53,
+        "shape": "丸/角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "世界初ロボット化自動ライン（成型×36+組立×9+成型組立×8）",
+        "conf": "high",
+        "src": [
+          "http://www.d-cast.jp/equipment/nakatsu/index.html"
+        ]
+      },
+      {
+        "proc": "機械加工（ターボハウジングライン）",
+        "maker": "複数",
+        "model": "ターボハウジング加工ライン",
+        "count": 2,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋳鉄",
+          "ステンレス"
+        ],
+        "note": "5軸MC×1+MC×6+立旋盤×4×2本ライン",
+        "conf": "high",
+        "src": [
+          "http://www.d-cast.jp/equipment/nakatsu/index.html"
+        ]
+      },
+      {
+        "proc": "機械加工（ノズルベーンライン）",
+        "maker": "複数",
+        "model": "ノズルベーン加工ライン",
+        "count": 8,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "ニッケル合金"
+        ],
+        "note": "MC×8+旋盤×16×8ライン。ガスタービン発電部品",
+        "conf": "high",
+        "src": [
+          "http://www.d-cast.jp/equipment/nakatsu/index.html"
+        ]
+      }
+    ]
+  },
+  "6134741064": {
+    "name": "有限会社西脇精機工作所",
+    "updated": "2026-06-04T20:22:51.561254+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "横型マシニングセンタ",
+        "maker": "不明",
+        "model": "横型MC X3000×Y2300×Z1600",
+        "count": 1,
+        "shape": "角",
+        "x": 3000,
+        "y": 2300,
+        "z": 1600,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "鋳鉄",
+          "ステンレス"
+        ],
+        "note": "ATC40本。発電所タービン・ジェットエンジン・ロケット大型部品対応",
+        "conf": "high",
+        "src": [
+          "https://nishiwaki-seiki.jp/equipment"
+        ]
+      },
+      {
+        "proc": "横型マシニングセンタ（ガンドリル）",
+        "maker": "不明",
+        "model": "横型MC X2000×Y1800×Z1450",
+        "count": 1,
+        "shape": "角",
+        "x": 2000,
+        "y": 1800,
+        "z": 1450,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "鋳鉄"
+        ],
+        "note": "ATC40本、ガンドリル仕様",
+        "conf": "high",
+        "src": [
+          "https://nishiwaki-seiki.jp/equipment"
+        ]
+      },
+      {
+        "proc": "5面加工門型マシニングセンタ",
+        "maker": "不明",
+        "model": "門型5面MC X5500×Y4400×Z2250",
+        "count": 1,
+        "shape": "角",
+        "x": 5500,
+        "y": 4400,
+        "z": 2250,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "鋳鉄"
+        ],
+        "note": "門幅3600mm、ATC90本",
+        "conf": "high",
+        "src": [
+          "https://nishiwaki-seiki.jp/equipment"
+        ]
+      },
+      {
+        "proc": "立型マシニングセンタ",
+        "maker": "OKK",
+        "model": "VM7Ⅲ X800×Y650×Z300",
+        "count": 1,
+        "shape": "角",
+        "x": 800,
+        "y": 650,
+        "z": 300,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼"
+        ],
+        "note": "",
+        "conf": "mid",
+        "src": [
+          "https://nishiwaki-seiki.jp/factory",
+          "https://nishiwaki-seiki.jp/equipment"
+        ]
+      },
+      {
+        "proc": "CNC旋盤",
+        "maker": "不明",
+        "model": "CNCターニング Φ356×L510",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 356,
+        "len": 510,
+        "materials": [
+          "鋼"
+        ],
+        "note": "ATC12本",
+        "conf": "high",
+        "src": [
+          "https://nishiwaki-seiki.jp/equipment"
+        ]
+      },
+      {
+        "proc": "立型旋盤（CNC）",
+        "maker": "不明",
+        "model": "立旋盤 Φ3000×H2215",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 3000,
+        "len": null,
+        "materials": [
+          "鋳鉄",
+          "鋼"
+        ],
+        "note": "最大切削径3000mm、切削高2215mm、ATC12本",
+        "conf": "high",
+        "src": [
+          "https://nishiwaki-seiki.jp/equipment"
+        ]
+      }
+    ]
+  },
+  "6133602366": {
+    "name": "株式会社オオナガ",
+    "updated": "2026-06-04T20:22:51.561254+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "旋盤",
+        "maker": "オークマ",
+        "model": "LB25",
+        "count": 1,
+        "shape": "丸",
+        "x": 370,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": 1250,
+        "materials": [
+          "チタン",
+          "インコネル",
+          "鉄粉焼結"
+        ],
+        "note": "X370×Z1250",
+        "conf": "high",
+        "src": [
+          "https://www.oonaga.jp/business"
+        ]
+      },
+      {
+        "proc": "複合加工機（旋削+ミリング）",
+        "maker": "森精機",
+        "model": "NL2500Y",
+        "count": 2,
+        "shape": "丸",
+        "x": 370,
+        "y": 100,
+        "z": null,
+        "dia": null,
+        "len": 1250,
+        "materials": [
+          "チタン",
+          "インコネル"
+        ],
+        "note": "X370×Y100×Z1250",
+        "conf": "high",
+        "src": [
+          "https://www.oonaga.jp/business"
+        ]
+      },
+      {
+        "proc": "立型マシニングセンタ",
+        "maker": "オークマ",
+        "model": "MX-55VB",
+        "count": 1,
+        "shape": "角",
+        "x": 1050,
+        "y": 560,
+        "z": 450,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン",
+          "インコネル",
+          "アルミ"
+        ],
+        "note": "JISQ9100認証",
+        "conf": "high",
+        "src": [
+          "https://www.oonaga.jp/business"
+        ]
+      },
+      {
+        "proc": "横型マシニングセンタ",
+        "maker": "オークマ",
+        "model": "MA-600HA",
+        "count": 1,
+        "shape": "角",
+        "x": 1000,
+        "y": 900,
+        "z": 1000,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン",
+          "インコネル"
+        ],
+        "note": "□630パレット×X1000×Y900×Z1000",
+        "conf": "high",
+        "src": [
+          "https://www.oonaga.jp/business"
+        ]
+      },
+      {
+        "proc": "横フライス盤",
+        "maker": "大隈豊和",
+        "model": "FM-30H",
+        "count": 1,
+        "shape": "角",
+        "x": 710,
+        "y": 320,
+        "z": 410,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.oonaga.jp/business"
+        ]
+      },
+      {
+        "proc": "三次元測定機",
+        "maker": "Mitutoyo",
+        "model": "CMM",
+        "count": 1,
+        "shape": "角",
+        "x": 900,
+        "y": 1600,
+        "z": 600,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "X900×Y1600×Z600",
+        "conf": "high",
+        "src": [
+          "https://www.oonaga.jp/business"
+        ]
+      }
+    ]
+  },
+  "6152005821": {
+    "name": "株式会社富士精機製作所",
+    "updated": "2026-06-04T20:22:51.561254+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "5軸立型マシニングセンタ",
+        "maker": "松浦機械",
+        "model": "MX520",
+        "count": 9,
+        "shape": "角",
+        "x": 630,
+        "y": 560,
+        "z": 510,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "チタン",
+          "鋼"
+        ],
+        "note": "田無・桶川・日高3工場。X630×Y560×Z510",
+        "conf": "high",
+        "src": [
+          "https://www.fujiss.net/facilities"
+        ]
+      },
+      {
+        "proc": "5軸立型マシニングセンタ",
+        "maker": "松浦機械",
+        "model": "MX850",
+        "count": 7,
+        "shape": "角",
+        "x": 900,
+        "y": 780,
+        "z": 650,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "チタン",
+          "鋼"
+        ],
+        "note": "田無・桶川・日高3工場。X900×Y780×Z650",
+        "conf": "high",
+        "src": [
+          "https://www.fujiss.net/facilities"
+        ]
+      },
+      {
+        "proc": "5軸横型マシニングセンタ",
+        "maker": "牧野フライス",
+        "model": "a500Z",
+        "count": 2,
+        "shape": "角",
+        "x": 730,
+        "y": 750,
+        "z": 500,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "チタン"
+        ],
+        "note": "田無・日高。アングルヘッド付き（田無）裏座グリ対応",
+        "conf": "high",
+        "src": [
+          "https://www.fujiss.net/facilities"
+        ]
+      },
+      {
+        "proc": "門型マシニングセンタ",
+        "maker": "Mazak",
+        "model": "FJV5Face60/120",
+        "count": 1,
+        "shape": "角",
+        "x": 3200,
+        "y": 1400,
+        "z": 660,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "鋼"
+        ],
+        "note": "日高工場。4面連続加工。EVバッテリーケース等大型部品向け",
+        "conf": "high",
+        "src": [
+          "https://www.fujiss.net/facilities"
+        ]
+      },
+      {
+        "proc": "5軸複合マシニングセンタ",
+        "maker": "オークマ",
+        "model": "MU-6300VL",
+        "count": 2,
+        "shape": "丸",
+        "x": 794,
+        "y": null,
+        "z": 450,
+        "dia": 830,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "チタン"
+        ],
+        "note": "日高工場。φ830×W794×H450",
+        "conf": "high",
+        "src": [
+          "https://www.fujiss.net/facilities"
+        ]
+      },
+      {
+        "proc": "立型マシニングセンタ",
+        "maker": "松浦機械",
+        "model": "VX1000",
+        "count": 1,
+        "shape": "角",
+        "x": 1020,
+        "y": 610,
+        "z": 610,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "鋼"
+        ],
+        "note": "桶川工場。2026年4月新規導入",
+        "conf": "high",
+        "src": [
+          "https://www.fujiss.net/blog/20260414160536",
+          "https://www.fujiss.net/facilities"
+        ]
+      }
+    ]
+  },
+  "6124440346": {
+    "name": "株式会社タカトモインダストリ 5axis LAB+本社",
+    "updated": "2026-06-04T20:22:51.561254+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "同時5軸マシニングセンタ",
+        "maker": "ヤマザキマザック",
+        "model": "VTC-800/30SR",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "チタン"
+        ],
+        "note": "34パレットチェンジャー付き。夜間・休日自動運転",
+        "conf": "high",
+        "src": [
+          "http://www.takatomo-inc.com/about/main-machine"
+        ]
+      },
+      {
+        "proc": "同時5軸マシニングセンタ",
+        "maker": "ヤマザキマザック",
+        "model": "VARIAXIS i-700MPP",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "チタン",
+          "Mg"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "http://www.takatomo-inc.com/about/main-machine"
+        ]
+      },
+      {
+        "proc": "同時5軸マシニングセンタ",
+        "maker": "DMG森精機",
+        "model": "DMU105monoBLOCK",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "チタン"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "http://www.takatomo-inc.com/about/main-machine"
+        ]
+      },
+      {
+        "proc": "同時5軸マシニングセンタ",
+        "maker": "DMG森精機",
+        "model": "NMV3000DCG",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "チタン"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "http://www.takatomo-inc.com/about/main-machine"
+        ]
+      },
+      {
+        "proc": "同時5軸マシニングセンタ",
+        "maker": "ヤマザキマザック",
+        "model": "VARIAXIS-630",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ"
+        ],
+        "note": "18パレットチェンジャー付き",
+        "conf": "high",
+        "src": [
+          "http://www.takatomo-inc.com/about/main-machine"
+        ]
+      },
+      {
+        "proc": "立型マシニングセンタ",
+        "maker": "ヤマザキマザック",
+        "model": "VARIAXIS-630-2PC",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "http://www.takatomo-inc.com/about/main-machine"
+        ]
+      },
+      {
+        "proc": "立型マシニングセンタ",
+        "maker": "ヤマザキマザック",
+        "model": "FJV25",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "http://www.takatomo-inc.com/about/main-machine"
+        ]
+      },
+      {
+        "proc": "門型マシニングセンタ",
+        "maker": "ヤマザキマザック",
+        "model": "FJV35/60",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "http://www.takatomo-inc.com/about/main-machine"
+        ]
+      },
+      {
+        "proc": "立型マシニングセンタ",
+        "maker": "ヤマザキマザック",
+        "model": "FJV250-2PC",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "http://www.takatomo-inc.com/about/main-machine"
+        ]
+      },
+      {
+        "proc": "自動旋盤",
+        "maker": "シチズンマシナリー",
+        "model": "B16EZJ-5",
+        "count": 2,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 16,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "鋼"
+        ],
+        "note": "CNC自動旋盤",
+        "conf": "high",
+        "src": [
+          "http://www.takatomo-inc.com/about/main-machine"
+        ]
+      },
+      {
+        "proc": "三次元測定機",
+        "maker": "Mitutoyo",
+        "model": "Crysta-Apex C900",
+        "count": 1,
+        "shape": "角",
+        "x": 900,
+        "y": 900,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "http://www.takatomo-inc.com/about/main-machine"
+        ]
+      }
+    ]
+  },
+  "6121574105": {
+    "name": "株式会社二光製作所",
+    "updated": "2026-06-04T20:22:51.561254+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "5軸マシニングセンタ",
+        "maker": "HERMLE他",
+        "model": "5軸MC",
+        "count": 3,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ",
+          "チタン",
+          "鋼"
+        ],
+        "note": "HERMLE社含む。JISQ9100取得。航空宇宙・防衛省向け",
+        "conf": "mid",
+        "src": [
+          "https://www.nikoss.co.jp/facility.html",
+          "https://compalyze.co.jp/company/5030001076585"
+        ]
+      },
+      {
+        "proc": "マシニングセンタ",
+        "maker": "不明",
+        "model": "MC",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "アルミ"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.nikoss.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "旋盤（複合）",
+        "maker": "不明",
+        "model": "Y軸旋盤（ターニングセンタ）",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.nikoss.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "電子ビーム溶接",
+        "maker": "不明",
+        "model": "電子ビーム加工機（真空炉中溶接）",
+        "count": 1,
+        "shape": "丸/角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン",
+          "ステンレス"
+        ],
+        "note": "航空機製品向け特殊工程",
+        "conf": "high",
+        "src": [
+          "https://www.nikoss.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "板金（プレス）",
+        "maker": "AMADA他",
+        "model": "プレス（12〜300トン）",
+        "count": 22,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "熱間圧延鋼板",
+          "冷間圧延鋼板",
+          "アルミ"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.nikoss.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "板金（曲げ）",
+        "maker": "AMADA他",
+        "model": "ベンダー（25〜300トン）",
+        "count": 16,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "熱間圧延鋼板",
+          "冷間圧延鋼板"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.nikoss.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "溶接（ファイバーレーザー）",
+        "maker": "不明",
+        "model": "ファイバーレーザー溶接機（6軸ロボット）",
+        "count": 2,
+        "shape": "丸/角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "ステンレス"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.nikoss.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "溶接（スポット）MIL規格",
+        "maker": "不明",
+        "model": "特殊工程スポット溶接機（MIL-STD-6858D）",
+        "count": 4,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "アルミ"
+        ],
+        "note": "航空機向けMIL規格スポット溶接",
+        "conf": "high",
+        "src": [
+          "https://www.nikoss.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "非破壊検査（X線）",
+        "maker": "不明",
+        "model": "X線透過検査装置",
+        "count": 1,
+        "shape": "丸/角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.nikoss.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "非破壊検査（蛍光浸透）",
+        "maker": "不明",
+        "model": "蛍光浸透探傷装置",
+        "count": 1,
+        "shape": "丸/角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.nikoss.co.jp/facility.html"
+        ]
+      },
+      {
+        "proc": "三次元測定機",
+        "maker": "不明",
+        "model": "3D CMM（CAV対応・非接触センサ搭載）",
+        "count": 2,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "1台はCAV対応・非接触式センサ搭載",
+        "conf": "high",
+        "src": [
+          "https://www.nikoss.co.jp/facility.html"
+        ]
+      }
+    ]
+  },
+  "6139339086": {
+    "name": "株式会社大村製作所",
+    "updated": "2026-06-04T20:22:51.561254+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "5軸マシニングセンタ",
+        "maker": "地頭力（CHITEKIKA）",
+        "model": "YBN-80N",
+        "count": 1,
+        "shape": "角",
+        "x": 800,
+        "y": 800,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "インコネル",
+          "ハステロイ",
+          "チタン"
+        ],
+        "note": "JISQ9100認証（航空宇宙向け機械加工）。IHI/JAXA/本田技研向け",
+        "conf": "mid",
+        "src": [
+          "http://ohmurasei.co.jp/about.html"
+        ]
+      },
+      {
+        "proc": "5軸マシニングセンタ",
+        "maker": "地頭力",
+        "model": "YBN-800N",
+        "count": 1,
+        "shape": "角",
+        "x": 630,
+        "y": 630,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "インコネル",
+          "チタン"
+        ],
+        "note": "",
+        "conf": "mid",
+        "src": [
+          "http://ohmurasei.co.jp/about.html"
+        ]
+      },
+      {
+        "proc": "マシニングセンタ",
+        "maker": "地頭力",
+        "model": "YBN-600N",
+        "count": 2,
+        "shape": "角",
+        "x": 500,
+        "y": 500,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "アルミ"
+        ],
+        "note": "",
+        "conf": "mid",
+        "src": [
+          "http://ohmurasei.co.jp/about.html"
+        ]
+      },
+      {
+        "proc": "立旋盤（CNC）",
+        "maker": "オオエ",
+        "model": "VTP-12 Φ1200",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 1200,
+        "len": null,
+        "materials": [
+          "鋼",
+          "鋳鉄"
+        ],
+        "note": "",
+        "conf": "mid",
+        "src": [
+          "http://ohmurasei.co.jp/about.html"
+        ]
+      },
+      {
+        "proc": "立旋盤（CNC）",
+        "maker": "オオエ",
+        "model": "Omega50 Φ1000",
+        "count": 1,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": 1000,
+        "len": null,
+        "materials": [
+          "鋼"
+        ],
+        "note": "",
+        "conf": "mid",
+        "src": [
+          "http://ohmurasei.co.jp/about.html"
+        ]
+      },
+      {
+        "proc": "横型マシニングセンタ",
+        "maker": "不明",
+        "model": "HB-750",
+        "count": 2,
+        "shape": "角",
+        "x": 750,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "インコネル"
+        ],
+        "note": "",
+        "conf": "mid",
+        "src": [
+          "http://ohmurasei.co.jp/about.html"
+        ]
+      },
+      {
+        "proc": "CNC旋盤",
+        "maker": "不明",
+        "model": "SL-6/SL-65",
+        "count": 3,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鋼",
+          "インコネル"
+        ],
+        "note": "SL-6×2, SL-65×1",
+        "conf": "mid",
+        "src": [
+          "http://ohmurasei.co.jp/about.html"
+        ]
+      }
+    ]
   }
 }
