@@ -1164,6 +1164,11 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
       <div class="pw-log-ttl">▣ 更新履歴 / CHANGELOG</div>
       <div class="pw-log-item">
         <div class="pw-log-date">2026-06</div>
+        <div class="pw-log-h">絞り込み／一覧のタブ化・企業情報の拡充・地図操作の改善</div>
+        <div class="pw-log-b">左側パネルを「クイック絞り込み」と「メーカー一覧」のタブ構成に刷新し、操作性を高めました。各社の企業情報（従業員数・資本金・売上高・関連事業等）を大幅に拡充。メーカー一覧から社名を選択すると、地図が当該拠点へ滑らかにクローズアップし、対象のピンを強調表示します。</div>
+      </div>
+      <div class="pw-log-item">
+        <div class="pw-log-date">2026-06</div>
         <div class="pw-log-h">認証根拠の表示・掲載拡充・検索と選定の改善</div>
         <div class="pw-log-b">全掲載社にJIS Q 9100の認証番号・認証機関を表示しました。掲載をOASIS登録のほぼ全量（約1,600社）に拡充。検索バーの日本語入力の不具合を修正し、メーカー選定のサイズ判定（過大な設備を除外）を改善しました。</div>
       </div>
@@ -5091,6 +5096,23 @@ function openDrawer(origIdx){
   document.querySelectorAll('.company-card').forEach(el=>el.classList.remove('active'));
   document.getElementById(`card-${origIdx}`)?.classList.add('active');
   document.getElementById(`card-${origIdx}`)?.scrollIntoView({behavior:'smooth',block:'nearest'});
+  // 地図を軽くクローズアップ＋選択ピンを強調（PATCH:focus-map）
+  try{
+    if(typeof map!=='undefined' && map && c.lat && c.lng){
+      if(window._focusIdx!=null && window._focusIdx!==origIdx && !selectedIdxs.has(window._focusIdx)){
+        var _pm=leafletMarkers[window._focusIdx];
+        if(_pm) _pm.setZIndexOffset(0);
+      }
+      window._focusIdx=origIdx;
+      var _fz=Math.max((map.getZoom?map.getZoom():8),10);
+      map.flyTo([c.lat,c.lng],_fz,{duration:.7});
+      var _fm=leafletMarkers[origIdx];
+      if(_fm){
+        _fm.setZIndexOffset(2000);
+        if(_fm.openPopup) setTimeout(function(){try{_fm.openPopup();}catch(_e){}},720);
+      }
+    }
+  }catch(_e){}
 
   document.getElementById('drawer-label').textContent=`${c.pref} / 小牧から${c._dist}km`;
   document.getElementById('drawer-name').textContent=c.name.replace(/\n/g,' ');
