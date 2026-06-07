@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- OTP-AUTH-1780818751 --><!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -1160,6 +1160,7 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
     <div class="pw-title">メーカー<span>マップ</span></div>
     <div class="pw-sub">メールでログイン（フル機能） ／ または お試しで</div>
     <div class="beta-badge" style="display:inline-block;background:rgba(0,212,255,.12);border:1px solid #00d4ff;color:#00d4ff;font-size:10px;font-family:'Share Tech Mono',monospace;letter-spacing:2px;padding:3px 12px;border-radius:3px;margin:8px 0 4px;">β VERSION — 試験運用中</div>
+    <div style="text-align:center;margin-top:6px;"><a href="guide.html" target="_blank" style="color:#2dd4aa;font-size:12px;text-decoration:none;opacity:.8;">📖 使い方ガイド</a></div>
     <div id="pw-form">
       <div id="pw-step-email">
         <div class="pw-field">
@@ -1168,15 +1169,24 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
         <div class="pw-error" id="pw-error"></div>
         <button class="pw-btn" onclick="sendOtp()">認証コードを送信</button>
         <button class="pw-trial" onclick="enterTrial()">▶ お試しで見てみる（無料）</button>
+        <div style="margin-top:8px;text-align:center;font-size:11px;color:#666;">パスワードをお持ちの方は<span onclick="document.getElementById('pw-step-email').style.display='none';document.getElementById('pw-step-pw').style.display='';" style="color:var(--accent);cursor:pointer;text-decoration:underline;">こちら</span></div>
       </div>
       <div id="pw-step-otp" style="display:none">
         <div style="color:var(--accent);font-size:12px;margin-bottom:8px;text-align:center">📧 認証コードをメールに送信しました</div>
         <div class="pw-field">
-          <input type="text" id="pw-otp-input" placeholder="6桁の認証コード" maxlength="6" autocomplete="one-time-code" inputmode="numeric" style="letter-spacing:4px;font-size:20px;text-align:center"/>
+          <input type="text" id="pw-otp-input" placeholder="認証コード" maxlength="8" inputmode="numeric" style="letter-spacing:4px;font-size:20px;text-align:center"/>
         </div>
         <div class="pw-error" id="pw-otp-error"></div>
         <button class="pw-btn" onclick="verifyOtp()">ログイン</button>
         <button class="pw-trial" onclick="document.getElementById('pw-step-email').style.display='';document.getElementById('pw-step-otp').style.display='none'" style="margin-top:4px;font-size:11px;opacity:.7">← メールアドレスを変更</button>
+      </div>
+      <div id="pw-step-pw" style="display:none">
+        <div class="pw-field">
+          <input type="password" id="pw-pw-input" placeholder="パスワード" autocomplete="current-password" autofocus/>
+        </div>
+        <div class="pw-error" id="pw-pw-error"></div>
+        <button class="pw-btn" onclick="checkPw()">ログイン</button>
+        <button class="pw-trial" onclick="document.getElementById('pw-step-pw').style.display='none';document.getElementById('pw-step-email').style.display='';" style="margin-top:4px;font-size:11px;opacity:.7">← メールでログイン</button>
       </div>
     </div>
     <div class="pw-log">
@@ -5193,6 +5203,7 @@ function openDrawer(origIdx){
   if(isUnlocked&&_sb&&c.oin){
     var _sbOin=String(c.oin).replace(/\.0+$/,'');
     var _sbIdx=origIdx;
+    if(_sbUser){_sb.from('user_activity').insert({user_id:_sbUser.id,oin:_sbOin,action:'drawer_open'}).then(function(){});}
     Promise.all([
       _sb.from('companies_detail').select('*').eq('oin',_sbOin).maybeSingle(),
       _sb.from('equip_devices').select('*').eq('oin',_sbOin).order('proc')
@@ -6318,10 +6329,10 @@ function flyToJapan(){  map.flyToBounds([[26.0,127.5],[45.3,145.5]],{duration:.8
 // ================================================================
 // パスワード
 // ================================================================
-const PW='bupakan';
 // ── Supabase 認証 ─────────────────────────────────────────────────────────
-let isUnlocked=false;
+let isUnlocked=sessionStorage.getItem('mfr_map_v2_auth')==='1';
 let _sbUser=null;
+const PW='bupakan';const SK='mfr_map_v2_auth';
 
 function _dismissPwScreen(){var s=document.getElementById('pw-screen');if(s){s.classList.add('unlocked');setTimeout(function(){if(s)s.style.display='none';},520);}}
 function applyUnlockState(){
@@ -6341,7 +6352,7 @@ if(_sb){
     _sb.auth.onAuthStateChange(function(event,session){
       var wasLocked=!isUnlocked;
       _sbUser=session?session.user:null;
-      isUnlocked=!!session;
+      isUnlocked=!!session||sessionStorage.getItem('mfr_map_v2_auth')==='1';
       applyUnlockState();
       if(event==='SIGNED_IN'&&wasLocked){_dismissPwScreen();setTimeout(function(){try{startTutorial(false);}catch(e){}},1100);}
       if(event==='SIGNED_OUT'){isUnlocked=false;unlockPrompt();}
@@ -6350,6 +6361,32 @@ if(_sb){
 }
 
 var _otpEmail='';
+// #pw= hash deep-link login
+(function(){
+  if(location.hash.startsWith('#pw=')){
+    var _h=decodeURIComponent(location.hash.slice(4));
+    if(_h===PW){sessionStorage.setItem('mfr_map_v2_auth','1');isUnlocked=true;history.replaceState(null,null,location.pathname+location.search);}
+  }
+})();
+async function checkPw(){
+  const v=(document.getElementById('pw-pw-input')||{}).value||'';
+  const e=document.getElementById('pw-pw-error');
+  if(v===PW){
+    sessionStorage.setItem('mfr_map_v2_auth','1');
+    isUnlocked=true;
+    applyUnlockState();
+    _dismissPwScreen();
+    setTimeout(function(){try{startTutorial(false);}catch(e){}},1100);
+  } else {
+    const i=document.getElementById('pw-pw-input');
+    if(e)e.textContent='パスワードが違います';
+    if(i){i.classList.add('pw-input-error');setTimeout(function(){i.classList.remove('pw-input-error');i.value='';i.focus();if(e)e.textContent='';},700);}
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var pi=document.getElementById('pw-pw-input');
+  if(pi)pi.addEventListener('keydown',function(e){if(e.key==='Enter')checkPw();});
+});
 async function sendOtp(){
   const emailEl=document.getElementById('pw-email-input');
   const email=emailEl?emailEl.value.trim():'';
@@ -6373,7 +6410,7 @@ async function sendOtp(){
 async function verifyOtp(){
   const token=(document.getElementById('pw-otp-input')||{}).value||'';
   const errEl=document.getElementById('pw-otp-error');
-  if(token.length!==6){if(errEl)errEl.textContent='6桁のコードを入力してください';return;}
+  if(token.length<6||token.length>8){if(errEl)errEl.textContent='コードを入力してください';return;}
   if(errEl)errEl.textContent='';
   const btn=document.querySelector('#pw-step-otp .pw-btn');
   if(btn){btn.disabled=true;btn.textContent='確認中…';}
@@ -7077,7 +7114,7 @@ let _tutStep = 0;
 
 function startTutorial(force){
   // PW認証前のチュートリアル誤発火を防ぐ（修正）
-  if(sessionStorage.getItem(SK)!=='1') return;
+  if(sessionStorage.getItem('mfr_map_v2_auth')!=='1') return;
   if(!force && localStorage.getItem(TUTORIAL_KEY)) return;
   _tutStep = 0;
   document.getElementById('tutorial-overlay').classList.add('show');
