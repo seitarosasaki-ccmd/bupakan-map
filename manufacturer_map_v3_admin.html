@@ -1167,6 +1167,7 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
         <div class="pw-error" id="pw-error"></div>
         <button class="pw-btn" onclick="sendOtp()">認証コードを送信</button>
         <button class="pw-trial" onclick="enterTrial()">▶ お試しで見てみる（無料）</button>
+        <div style="margin-top:8px;text-align:center;font-size:11px;color:#666;">パスワードをお持ちの方は<span onclick="document.getElementById('pw-step-email').style.display='none';document.getElementById('pw-step-pw').style.display='';" style="color:var(--accent);cursor:pointer;text-decoration:underline;">こちら</span></div>
       </div>
       <div id="pw-step-otp" style="display:none">
         <div style="color:var(--accent);font-size:12px;margin-bottom:8px;text-align:center">📧 認証コードをメールに送信しました</div>
@@ -1176,6 +1177,14 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
         <div class="pw-error" id="pw-otp-error"></div>
         <button class="pw-btn" onclick="verifyOtp()">ログイン</button>
         <button class="pw-trial" onclick="document.getElementById('pw-step-email').style.display='';document.getElementById('pw-step-otp').style.display='none'" style="margin-top:4px;font-size:11px;opacity:.7">← メールアドレスを変更</button>
+      </div>
+      <div id="pw-step-pw" style="display:none">
+        <div class="pw-field">
+          <input type="password" id="pw-pw-input" placeholder="パスワード" autocomplete="current-password" autofocus/>
+        </div>
+        <div class="pw-error" id="pw-pw-error"></div>
+        <button class="pw-btn" onclick="checkPw()">ログイン</button>
+        <button class="pw-trial" onclick="document.getElementById('pw-step-pw').style.display='none';document.getElementById('pw-step-email').style.display='';" style="margin-top:4px;font-size:11px;opacity:.7">← メールでログイン</button>
       </div>
     </div>
     <div class="pw-log">
@@ -6319,8 +6328,9 @@ function flyToJapan(){  map.flyToBounds([[26.0,127.5],[45.3,145.5]],{duration:.8
 // ================================================================
 const PW='bupakan';
 // ── Supabase 認証 ─────────────────────────────────────────────────────────
-let isUnlocked=false;
+let isUnlocked=sessionStorage.getItem('mfr_map_v2_auth')==='1';
 let _sbUser=null;
+const PW='bupakan';const SK='mfr_map_v2_auth';
 
 function _dismissPwScreen(){var s=document.getElementById('pw-screen');if(s){s.classList.add('unlocked');setTimeout(function(){if(s)s.style.display='none';},520);}}
 function applyUnlockState(){
@@ -6349,7 +6359,26 @@ if(_sb){
 }
 
 var _otpEmail='';
-async function sendOtp(){
+async function checkPw(){
+  const v=(document.getElementById('pw-pw-input')||{}).value||'';
+  const e=document.getElementById('pw-pw-error');
+  if(v===PW){
+    sessionStorage.setItem(SK,'1');
+    isUnlocked=true;
+    applyUnlockState();
+    _dismissPwScreen();
+    setTimeout(function(){try{startTutorial(false);}catch(e){}},1100);
+  } else {
+    const i=document.getElementById('pw-pw-input');
+    if(e)e.textContent='パスワードが違います';
+    if(i){i.classList.add('pw-input-error');setTimeout(function(){i.classList.remove('pw-input-error');i.value='';i.focus();if(e)e.textContent='';},700);}
+  }
+}
+document.addEventListener('DOMContentLoaded',function(){
+  var pi=document.getElementById('pw-pw-input');
+  if(pi)pi.addEventListener('keydown',function(e){if(e.key==='Enter')checkPw();});
+});
+function sendOtp(){
   const emailEl=document.getElementById('pw-email-input');
   const email=emailEl?emailEl.value.trim():'';
   const errEl=document.getElementById('pw-error');
