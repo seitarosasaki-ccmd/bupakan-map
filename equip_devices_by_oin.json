@@ -96655,5 +96655,627 @@
         ]
       }
     ]
+  },
+  "6144199266": {
+    "name": "福伸電機株式会社",
+    "updated": "2026-06-07T06:20:10+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "プレス加工",
+        "maker": "",
+        "model": "1200tトランスファープレス",
+        "count": 1,
+        "shape": "角",
+        "note": "高精度板鍛造・深絞り対応",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "プレス加工",
+        "maker": "",
+        "model": "400tトランスファープレス",
+        "count": 1,
+        "shape": "角",
+        "note": "トランスファー・深絞り加工",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "プレス加工",
+        "maker": "",
+        "model": "サーボプレス",
+        "count": null,
+        "shape": "角",
+        "note": "高精度板鍛造・切削工程レス化",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "プレス加工",
+        "maker": "",
+        "model": "ガトリングプレスセンタ",
+        "count": null,
+        "shape": "角",
+        "note": "精密板金",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "プレス加工",
+        "maker": "",
+        "model": "自動プレスライン",
+        "count": null,
+        "shape": "角",
+        "note": "ロボットプレスライン含む",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": "",
+        "model": "TIGロボット溶接機",
+        "count": null,
+        "shape": "角",
+        "note": "ファイバーレーザー溶接・アーク溶接ラインも併設",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": "",
+        "model": "ファイバーレーザー溶接機",
+        "count": null,
+        "shape": "角",
+        "note": "最新鋭ロボットによる溶接加工",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": "",
+        "model": "連続水素炉",
+        "count": null,
+        "shape": "角",
+        "note": "ろう接加工（水素雰囲気）",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "切削",
+        "maker": "",
+        "model": "横型マシニングセンタ",
+        "count": null,
+        "shape": "角",
+        "note": "自動化された切削加工",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "切削",
+        "maker": "",
+        "model": "5軸加工機",
+        "count": null,
+        "shape": "角",
+        "note": "5軸同時制御",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "切削",
+        "maker": "",
+        "model": "ボブ盤",
+        "count": null,
+        "shape": "丸",
+        "note": "歯車加工",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "切削",
+        "maker": "",
+        "model": "円筒研削盤",
+        "count": null,
+        "shape": "丸",
+        "note": "精密研磨・ラップ加工・鏡面仕上げ（恒温室管理）",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "熱処理/表面処理",
+        "maker": "",
+        "model": "浸炭窒化処理炉",
+        "count": null,
+        "shape": "角",
+        "note": "浸炭窒化処理・溶剤塗装・粉体塗装",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "熱処理/表面処理",
+        "maker": "",
+        "model": "炭化水素洗浄機",
+        "count": null,
+        "shape": "角",
+        "note": "マイクロバブル洗浄も使用",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "樹脂成形",
+        "maker": "",
+        "model": "自動成形機",
+        "count": null,
+        "shape": "角",
+        "note": "樹脂成形金型設計・製作から成形まで",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      },
+      {
+        "proc": "放電加工",
+        "maker": "",
+        "model": "ワイヤーカット放電加工機",
+        "count": null,
+        "shape": "角",
+        "note": "金型製作用",
+        "conf": "mid",
+        "src": [
+          "https://www.felco.co.jp/technology/index.html",
+          "https://www.himeji-cci.or.jp/monohimeji/detail.html?i=38"
+        ]
+      }
+    ]
+  },
+  "6154120665": {
+    "name": "パールライト工業株式会社",
+    "updated": "2026-06-07T06:20:10+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "レーザー切断",
+        "maker": "三菱",
+        "model": "2DレーザーFO-6000",
+        "count": 1,
+        "shape": "角",
+        "x": 1524,
+        "y": 3048,
+        "note": "6.0kW 巻支社工場",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "レーザー切断",
+        "maker": "三菱",
+        "model": "2DレーザーFO-2000",
+        "count": 1,
+        "shape": "角",
+        "x": 1524,
+        "y": 3048,
+        "note": "2.0kW 巻支社工場",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "レーザー切断",
+        "maker": "TRUMPF",
+        "model": "2DレーザーTruLaser",
+        "count": 1,
+        "shape": "角",
+        "x": 1524,
+        "y": 3048,
+        "note": "4.0kW 巻支社工場",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "レーザー切断",
+        "maker": "サルバニーニ",
+        "model": "2DレーザーS1",
+        "count": 1,
+        "shape": "角",
+        "x": 1524,
+        "y": 3048,
+        "note": "3.0kW 本社工場",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "3Dレーザー切断",
+        "maker": "日平トヤマ",
+        "model": "3DレーザーHTC-1",
+        "count": 3,
+        "shape": "角",
+        "x": 1900,
+        "y": 3100,
+        "note": "2.0/2.5/3.3kW各1台",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "3Dレーザー切断",
+        "maker": "レーザーネクスト",
+        "model": "LN4kW",
+        "count": 1,
+        "shape": "角",
+        "x": 1630,
+        "y": 3670,
+        "note": "4kW 両ゾーン1630×3670 / 片1230×1630",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "レーザーパンチプレス",
+        "maker": "村田機械",
+        "model": "レーザーパンチプレス複合機",
+        "count": 1,
+        "shape": "角",
+        "x": 1524,
+        "y": 2500,
+        "note": "250kN 2.0kW",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "曲げ",
+        "maker": "TRUMPF",
+        "model": "プレスブレーキ 50t/1530",
+        "count": 1,
+        "shape": "角",
+        "note": "50ton 1530mm 巻支社工場",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "曲げ",
+        "maker": "TRUMPF",
+        "model": "プレスブレーキ 85t/2500",
+        "count": 2,
+        "shape": "角",
+        "note": "85ton 2500mm×2台 巻支社工場",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "曲げ",
+        "maker": "TRUMPF",
+        "model": "プレスブレーキ 130t/3000",
+        "count": 1,
+        "shape": "角",
+        "note": "130ton 3000mm 巻支社工場",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "曲げ",
+        "maker": "ムラタ",
+        "model": "プレスブレーキ 135t/3000",
+        "count": 1,
+        "shape": "角",
+        "note": "135ton 3000mm 巻支社工場",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": "DAIHEN",
+        "model": "welbee A350P TIG",
+        "count": 4,
+        "shape": "角",
+        "note": "TIG溶接機 巻支社工場",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": "DAIHEN",
+        "model": "welbee 350L 半自動",
+        "count": 2,
+        "shape": "角",
+        "note": "半自動溶接機",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": "DAIHEN",
+        "model": "FD-V8 ロボットTIG",
+        "count": 1,
+        "shape": "角",
+        "note": "ロボットTIG溶接機",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": "DAIHEN",
+        "model": "FD-B6 ロボット半自動",
+        "count": 1,
+        "shape": "角",
+        "note": "ロボット半自動溶接機",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": "Panasonic",
+        "model": "300B P4 TIG",
+        "count": 5,
+        "shape": "角",
+        "note": "TIG溶接機",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": "Panasonic",
+        "model": "350G R3 MAG",
+        "count": 1,
+        "shape": "角",
+        "note": "MAG溶接機",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": "向洋技研",
+        "model": "NK-21HEV810-M-KG-EZK テーブルスポット",
+        "count": 1,
+        "shape": "角",
+        "note": "スポット溶接机",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": "住友重機械工業",
+        "model": "LS-550 YAG",
+        "count": 1,
+        "shape": "角",
+        "note": "YAGレーザー溶接機",
+        "conf": "high",
+        "src": [
+          "https://www.pearl-light.jp/machine",
+          "https://www.pearl-light.jp/company"
+        ]
+      }
+    ]
+  },
+  "6152842466": {
+    "name": "ゴコー電工株式会社",
+    "updated": "2026-06-07T06:20:10+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "電機巻線",
+        "maker": "",
+        "model": "集中巻線機",
+        "count": null,
+        "shape": "丸",
+        "note": "分割コア/一体コア対応 航空機・自動車・工作機械用特殊モータ",
+        "conf": "mid",
+        "src": [
+          "https://www.goko-denko.co.jp/technology-en/",
+          "https://suwa.monozukuri.or.jp/detail/00119/"
+        ]
+      },
+      {
+        "proc": "電機巻線",
+        "maker": "",
+        "model": "分布巻線機",
+        "count": null,
+        "shape": "丸",
+        "note": "同心巻/重ね巻 高スペースファクタ",
+        "conf": "mid",
+        "src": [
+          "https://www.goko-denko.co.jp/technology-en/",
+          "https://suwa.monozukuri.or.jp/detail/00119/"
+        ]
+      },
+      {
+        "proc": "樹脂含浸",
+        "maker": "",
+        "model": "真空含浸装置",
+        "count": null,
+        "shape": "丸",
+        "note": "ディップ/ドリップ/真空含浸対応 絶縁・固着",
+        "conf": "mid",
+        "src": [
+          "https://www.goko-denko.co.jp/technology-en/",
+          "https://suwa.monozukuri.or.jp/detail/00119/"
+        ]
+      },
+      {
+        "proc": "樹脂成形",
+        "maker": "",
+        "model": "BMC射出成形機",
+        "count": null,
+        "shape": "丸",
+        "note": "BMC樹脂モールド（射出/注型）真空成形対応",
+        "conf": "mid",
+        "src": [
+          "https://www.goko-denko.co.jp/technology-en/",
+          "https://suwa.monozukuri.or.jp/detail/00119/"
+        ]
+      },
+      {
+        "proc": "ロータ組立",
+        "maker": "",
+        "model": "ロータ組立設備",
+        "count": null,
+        "shape": "丸",
+        "note": "SPM/IPM/ハルバック配列マグネット接着・バランス修正",
+        "conf": "mid",
+        "src": [
+          "https://www.goko-denko.co.jp/technology-en/",
+          "https://suwa.monozukuri.or.jp/detail/00119/"
+        ]
+      },
+      {
+        "proc": "モータ組立",
+        "maker": "",
+        "model": "精密モータ組立設備",
+        "count": null,
+        "shape": "丸",
+        "note": "航空機搭載モータ・オルタネータステータ・ロボットアクチュエータ製造",
+        "conf": "mid",
+        "src": [
+          "https://www.goko-denko.co.jp/technology-en/",
+          "https://suwa.monozukuri.or.jp/detail/00119/"
+        ]
+      }
+    ]
+  },
+  "6152403423": {
+    "name": "平沢電機株式会社",
+    "updated": "2026-06-07T06:20:10+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "5軸加工",
+        "maker": "",
+        "model": "5軸加工機 RB-350F",
+        "count": null,
+        "shape": "角",
+        "materials": [
+          "アルミ",
+          "ジュラルミン"
+        ],
+        "note": "精度±0.02 航空機部品・光学部品加工",
+        "conf": "mid",
+        "src": [
+          "https://hirasawadenki.com/",
+          "https://ja.nc-net.or.jp/company/71173/product/1/class/2/"
+        ]
+      },
+      {
+        "proc": "切削",
+        "maker": "",
+        "model": "大型門形マシニングセンタ",
+        "count": null,
+        "shape": "角",
+        "note": "大型・長尺部品加工対応 最大5m",
+        "conf": "mid",
+        "src": [
+          "https://hirasawadenki.com/",
+          "https://ja.nc-net.or.jp/company/71173/product/1/class/2/"
+        ]
+      },
+      {
+        "proc": "切削",
+        "maker": "",
+        "model": "大型複合旋盤",
+        "count": null,
+        "shape": "丸",
+        "materials": [
+          "アルミ",
+          "ステンレス"
+        ],
+        "note": "大型旋削加工",
+        "conf": "mid",
+        "src": [
+          "https://hirasawadenki.com/",
+          "https://ja.nc-net.or.jp/company/71173/product/1/class/2/"
+        ]
+      }
+    ]
   }
 }
