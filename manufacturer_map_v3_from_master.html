@@ -1159,7 +1159,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
       <button class="pw-toggle" onclick="document.getElementById('pw-input').type=document.getElementById('pw-input').type==='password'?'text':'password'" tabindex="-1">👁</button>
     </div>
     <div class="pw-error" id="pw-error"></div>
-    <button class="pw-btn" onclick="checkPw()">フル機能をアンロック</button>
+    <button class="pw-btn" onclick="checkPw()">ログイン（フル機能版）</button>
     <button class="pw-trial" onclick="enterTrial()">▶ お試しで見てみる（無料）</button>
     <div class="pw-log">
       <div class="pw-log-ttl">▣ 更新履歴 / CHANGELOG</div>
@@ -1206,7 +1206,7 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   </div>
   <div class="h-right">
     <span id="trial-badge" style="font-size:10px;color:var(--warn);border:1px solid rgba(255,214,10,.4);background:rgba(255,214,10,.08);border-radius:3px;padding:3px 8px;font-family:'Share Tech Mono',monospace;white-space:nowrap">お試し版</span>
-    <button id="unlock-btn" onclick="unlockPrompt()" style="background:linear-gradient(135deg,var(--accent),#0098c7);color:#06121c;border:none;font-weight:900;font-size:11px;padding:6px 12px;border-radius:4px;cursor:pointer;box-shadow:0 0 10px rgba(0,212,255,.3);white-space:nowrap">🔓 フル機能</button>
+    <button id="unlock-btn" onclick="unlockPrompt()" style="background:linear-gradient(135deg,var(--accent),#0098c7);color:#06121c;border:none;font-weight:900;font-size:11px;padding:6px 12px;border-radius:4px;cursor:pointer;box-shadow:0 0 10px rgba(0,212,255,.3);white-space:nowrap">🔓 ログイン</button>
     <div id="active-maker" style="display:none;background:rgba(199,125,255,.12);border:1px solid #c77dff;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:3px;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title=""><span style="color:#c77dff;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;margin-right:6px">SELECTED</span><span id="active-maker-name">—</span></div>
     <div class="h-count"><strong id="shown-count">—</strong>件表示</div>
     <button class="btn-hdr" onclick="flyToKomaki()">東海</button>
@@ -7960,12 +7960,13 @@ function wireMatrix(host){
  var thead=host.querySelector('.wo-mt thead');
  if(thead){Array.prototype.forEach.call(thead.querySelectorAll('th[data-w]'),function(th){th.onclick=function(){var w=th.getAttribute('data-w');if(mode==='c')selectCProc(w);else selectProc(w);};});}
 }
-function lockResultRows(host,sel,keepN){
+function lockResultRows(host,sel,keepN,labelN){
  if(!host)return;var rows=host.querySelectorAll(sel);if(rows.length<=keepN)return;
  for(var i=keepN;i<rows.length;i++)rows[i].style.display='none';
- var hidden=rows.length-keepN;
+ var hidden=rows.length-keepN;var shown=labelN||keepN;
+ if(host.querySelector('.wo-lock-ov'))return;
  var ov=document.createElement('div');ov.className='wo-lock-ov';
- ov.innerHTML='<span>🔒 '+keepN+'社を表示中・残り'+hidden+'社と全判定は</span><button onclick="unlockPrompt()" class="dd-cta-b">🔓 全社を見る</button>';
+ ov.innerHTML='<span>🔒 近い'+shown+'社を表示中・残り'+hidden+'社と全判定は</span><button onclick="unlockPrompt()" class="dd-cta-b">🔓 全社を見る</button>';
  host.insertAdjacentElement('beforeend',ov);
 }
 function renderMatrix(md){
@@ -8082,6 +8083,7 @@ function evalA(){
  h+='</table>';
  if(!rows.length)h='<div style="color:#7a8aa0;font-size:11px">寸法を入力してください</div>';
  document.getElementById('wo-a-results').innerHTML=h;
+ if(typeof isUnlocked!=='undefined' && !isUnlocked) lockResultRows(document.getElementById('wo-a-results'),'table tr',6,5);
  var n={ok:0,wn:0,ng:0};rows.forEach(function(r){n[r.j.cls]++;});
  document.getElementById('wo-a-summary').innerHTML='<span style="color:#5dcaa5">○'+n.ok+'</span> ／ <span style="color:#ffb300">△'+n.wn+'</span> ／ <span style="color:#f09595">×'+n.ng+'</span>（全'+rows.length+'社中・上位60社表示）';
  var hset=new Set();rows.forEach(function(r){if(r.j.mark==='○'||r.j.mark==='△')hset.add(String(r.oin));});
