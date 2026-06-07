@@ -8375,24 +8375,11 @@
     "name": "山本金属テクノス株式会社"
   },
   "6148108062": {
-    "name": "大阪冶金興業株式会社",
-    "machines": [
-      {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 2500.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 0.0,
-    "my": 0.0,
-    "mz": 2500.0,
-    "mdia": 0.0,
-    "ok": "ステンレス;ニッケル系合金;チタン合金;特殊鋼",
-    "ng": "",
-    "conf": "mid",
-    "nonmc": false,
-    "raw": "Z:2500"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6142911640": {
     "name": "白銅株式会社",
@@ -8991,24 +8978,11 @@
     "raw": "ハニカム原紙 約2000×1000"
   },
   "6154210384": {
-    "name": "日本電波工業株式会社",
-    "machines": [
-      {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 2500.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 0.0,
-    "my": 0.0,
-    "mz": 2500.0,
-    "mdia": 0.0,
-    "ok": "人工水晶(α-クォーツ);水晶ウェハ",
-    "ng": "",
-    "conf": "mid",
-    "nonmc": false,
-    "raw": "Z:2500"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6114138448": {
     "name": "三菱重工業株式会社 大江工場",
@@ -9113,24 +9087,11 @@
     "raw": "X:1500 Y:1000 Z:500"
   },
   "6147596183": {
-    "name": "株式会社光電製作所 多摩川事業所",
-    "machines": [
-      {
-        "x": 3100.0,
-        "y": 2100.0,
-        "z": 2450.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 3100.0,
-    "my": 2100.0,
-    "mz": 2450.0,
-    "mdia": 0.0,
-    "ok": "アルミ合金;ステンレス;銅;真鍮",
-    "ng": "",
-    "conf": "mid",
-    "nonmc": false,
-    "raw": "X:3100 Y:2100 Z:2450"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6140600801": {
     "mx": 0.0,
@@ -10225,24 +10186,11 @@
     "raw": "X1000/Y1000/Z3000（加熱炉基準・標準）; Z6000（簡易熱処理炉最大）"
   },
   "6149924601": {
-    "name": "日本冶金工業株式会社 川崎製造所",
-    "machines": [
-      {
-        "x": 3100.0,
-        "y": 2100.0,
-        "z": 2450.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 3100.0,
-    "my": 2100.0,
-    "mz": 2450.0,
-    "mdia": 0.0,
-    "ok": "ステンレス鋼;高ニッケル合金;インコネル;耐熱鋼",
-    "ng": "",
-    "conf": "mid",
-    "nonmc": false,
-    "raw": "X:3100 Y:2100 Z:2450"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6140967803": {
     "name": "二光光学株式会社",
@@ -14258,24 +14206,11 @@
     "name_ref": "YZ1621ATC"
   },
   "6142369221": {
-    "name": "株式会社フクイ金属",
-    "machines": [
-      {
-        "x": 1000.0,
-        "y": 500.0,
-        "z": 500.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 1000.0,
-    "my": 500.0,
-    "mz": 500.0,
-    "mdia": 0.0,
-    "ok": "Ti合金;ステンレス;Ni合金;Al合金",
-    "ng": "",
-    "conf": "mid",
-    "nonmc": true,
-    "raw": "TIG溶接 ~1000×500×500"
+    "maxX": 450,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "700096545": {
     "mx": 3100.0,
@@ -14305,44 +14240,18 @@
     "raw": "X:3100.0 Y:2100.0 Z:2450.0"
   },
   "6122386444": {
-    "name": "日本マルコ株式会社",
-    "machines": [
-      {
-        "x": 3100.0,
-        "y": 2100.0,
-        "z": 2450.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 3100.0,
-    "my": 2100.0,
-    "mz": 2450.0,
-    "mdia": 0.0,
-    "ok": "アルミ合金;ステンレス;銅;真鍮",
-    "ng": "",
-    "conf": "mid",
-    "nonmc": false,
-    "raw": "X:3100.0 Y:2100.0 Z:2450.0"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6138931566": {
-    "name": "日本アビオニクス株式会社 政府システム事業部",
-    "machines": [
-      {
-        "x": 1500.0,
-        "y": 1000.0,
-        "z": 500.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 1500.0,
-    "my": 1000.0,
-    "mz": 500.0,
-    "mdia": 0.0,
-    "ok": "Ti合金（6Al-4V等）;Ni合金（耐熱合金）",
-    "ng": "",
-    "conf": "mid",
-    "nonmc": false,
-    "raw": "X:1500 Y:1000 Z:500"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6139611306": {
     "name": "シリコンセンシングプロダクツ",
@@ -14365,24 +14274,11 @@
     "raw": "X:1500 Y:1000 Z:500"
   },
   "6138302645": {
-    "name": "NECネットワーク・センサ株式会社",
-    "machines": [
-      {
-        "x": 1500.0,
-        "y": 1000.0,
-        "z": 500.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 1500.0,
-    "my": 1000.0,
-    "mz": 500.0,
-    "mdia": 0.0,
-    "ok": "Ti合金（6Al-4V等）;Ni合金（耐熱合金）",
-    "ng": "",
-    "conf": "mid",
-    "nonmc": false,
-    "raw": "X:1500 Y:1000 Z:500"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6149700249": {
     "name": "日本電気航空宇宙システム株式会社 本社",
@@ -14545,24 +14441,11 @@
     "raw": "X:1500 Y:1000 Z:500"
   },
   "6149117269": {
-    "name": "信州航空電子株式会社",
-    "machines": [
-      {
-        "x": 1500.0,
-        "y": 1000.0,
-        "z": 500.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 1500.0,
-    "my": 1000.0,
-    "mz": 500.0,
-    "mdia": 0.0,
-    "ok": "アルミ合金;チタン合金;ステンレス",
-    "ng": "",
-    "conf": "high",
-    "nonmc": true,
-    "raw": "X:1500 Y:1000 Z:500"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6115496244": {
     "name": "株式会社小糸製作所 静岡工場",
@@ -17350,24 +17233,11 @@
     "raw": "X:1500 Y:1000 Z:500"
   },
   "6141104788": {
-    "name": "KOBE MATERIAL TESTING LABORATORY CO.,LTD.: IBARAKI OFFICE",
-    "machines": [
-      {
-        "x": 1500.0,
-        "y": 1000.0,
-        "z": 500.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 1500.0,
-    "my": 1000.0,
-    "mz": 500.0,
-    "mdia": 0.0,
-    "ok": "金属材料(試験対象), 試験片用各種材料",
-    "ng": "",
-    "conf": "mid",
-    "nonmc": true,
-    "raw": "X:1500 Y:1000 Z:500"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6141104762": {
     "name": "KOBE MATERIAL TESTING LABORATORY CO.,LTD.: KOBE OFFICE",
@@ -17390,24 +17260,11 @@
     "raw": "X:1500 Y:1000 Z:500"
   },
   "6122521461": {
-    "name": "KOBE MATERIAL TESTING LABORATORY CO.,LTD.: NAGOYA OFFICE",
-    "machines": [
-      {
-        "x": 1500.0,
-        "y": 1000.0,
-        "z": 500.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 1500.0,
-    "my": 1000.0,
-    "mz": 500.0,
-    "mdia": 0.0,
-    "ok": "金属材料(試験対象), 試験片用各種材料",
-    "ng": "",
-    "conf": "mid",
-    "nonmc": true,
-    "raw": "X:1500 Y:1000 Z:500"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6153545047": {
     "name": "Kobe Plant, MHI",
@@ -17769,24 +17626,11 @@
     "raw": "X:1500 Y:1000 Z:500"
   },
   "6136817145": {
-    "name": "NIHON TOKUSHU TORYO CO.,LTD. HIRATSUKA PLANT",
-    "machines": [
-      {
-        "x": 1500.0,
-        "y": 1000.0,
-        "z": 500.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 1500.0,
-    "my": 1000.0,
-    "mz": 500.0,
-    "mdia": 0.0,
-    "ok": "アルミ合金;チタン合金;ステンレス",
-    "ng": "",
-    "conf": "mid",
-    "nonmc": false,
-    "raw": "X:1500 Y:1000 Z:500"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6152086426": {
     "name": "NIKKO SANGYO Co. Ltd. Fukushima Plant",
@@ -17904,44 +17748,18 @@
     "name": "有限会社野中製作所（飯田市桐林）"
   },
   "6157601725": {
-    "name": "North Laboratory in North Factory, Toyo Forging Works Co. Ltd. Aerospace Production Control",
-    "machines": [
-      {
-        "x": 1500.0,
-        "y": 1000.0,
-        "z": 500.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 1500.0,
-    "my": 1000.0,
-    "mz": 500.0,
-    "mdia": 0.0,
-    "ok": "アルミ合金;チタン合金;ステンレス",
-    "ng": "",
-    "conf": "high",
-    "nonmc": false,
-    "raw": "X:1500 Y:1000 Z:500"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6138447542": {
-    "name": "Nose Kozai Inc. Shiga Factory",
-    "machines": [
-      {
-        "x": 1500.0,
-        "y": 1000.0,
-        "z": 500.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 1500.0,
-    "my": 1000.0,
-    "mz": 500.0,
-    "mdia": 0.0,
-    "ok": "アルミ合金;チタン合金;ステンレス",
-    "ng": "",
-    "conf": "high",
-    "nonmc": false,
-    "raw": "X:1500 Y:1000 Z:500"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6134554840": {
     "name": "NSK Ltd. Fujisawa Plant kirihara building (F2 Fujisawa 2nd Plant)",
@@ -18106,24 +17924,11 @@
     "name": "大阪富士工業株式会社 泉北工場（大阪府高石市）"
   },
   "6136332785": {
-    "name": "OYAMA PLANT, FUJITSU LIMITED NATIONAL SECURITY DIV. and NATIONAL SECURITY Related DIV.",
-    "machines": [
-      {
-        "x": 5000.0,
-        "y": 3000.0,
-        "z": 2500.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 5000.0,
-    "my": 3000.0,
-    "mz": 2500.0,
-    "mdia": 0.0,
-    "ok": "アルミ合金;チタン合金;ステンレス",
-    "ng": "",
-    "conf": "mid",
-    "nonmc": false,
-    "raw": "X:5000 Y:3000 Z:2500"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6138940340": {
     "name": "Oye nishi Plant (in the MHI Oye nishi Plant), TOHMEI INDUSTRIES CO., LTD.",
@@ -18331,24 +18136,11 @@
     "name": "高崎金属株式会社 製造課（HC工場）"
   },
   "6147442567": {
-    "name": "SEKIYAMA CO., LTD. TOBISHIMA FACTORY",
-    "machines": [
-      {
-        "x": 1500.0,
-        "y": 1000.0,
-        "z": 500.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 1500.0,
-    "my": 1000.0,
-    "mz": 500.0,
-    "mdia": 0.0,
-    "ok": "アルミ合金;チタン合金;ステンレス;特殊鋼;Ni系;Ti系(取引先想定)",
-    "ng": "",
-    "conf": "mid",
-    "nonmc": false,
-    "raw": "X:1500 Y:1000 Z:500"
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   },
   "6127553285": {
     "name": "株式会社松原製作所 板金工場",
@@ -19828,5 +19620,61 @@
     "mdia": 380.0,
     "mlen": 535.0,
     "name": "MAZAK QTN-2002MSY"
+  },
+  "6132962065": {
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
+  },
+  "6141379348": {
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
+  },
+  "6149093626": {
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
+  },
+  "6154210449": {
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
+  },
+  "6136387361": {
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
+  },
+  "6158597540": {
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
+  },
+  "700082973": {
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
+  },
+  "700100197": {
+    "maxX": null,
+    "maxY": null,
+    "maxZ": null,
+    "maxDia": null,
+    "maxLen": null
   }
 }
