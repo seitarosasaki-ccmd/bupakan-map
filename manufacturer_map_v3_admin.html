@@ -1169,13 +1169,9 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
         <button class="pw-trial" onclick="enterTrial()">▶ お試しで見てみる（無料）</button>
       </div>
       <div id="pw-step-otp" style="display:none">
-        <div style="color:var(--accent);font-size:12px;margin-bottom:8px;text-align:center">📧 認証コードをメールに送信しました</div>
-        <div class="pw-field">
-          <input type="text" id="pw-otp-input" placeholder="認証コード" maxlength="8" inputmode="numeric" style="letter-spacing:4px;font-size:20px;text-align:center"/>
-        </div>
-        <div class="pw-error" id="pw-otp-error"></div>
-        <button class="pw-btn" onclick="verifyOtp()">ログイン</button>
-        <button class="pw-trial" onclick="document.getElementById('pw-step-email').style.display='';document.getElementById('pw-step-otp').style.display='none'" style="margin-top:4px;font-size:11px;opacity:.7">← メールアドレスを変更</button>
+        <div style="color:var(--accent);font-size:13px;margin-bottom:12px;text-align:center">📧 ログインリンクをメールに送信しました</div>
+        <div style="color:#aaa;font-size:12px;text-align:center;line-height:1.6">メール内の「ログインする」をクリックしてください。<br>このページは開いたままにしてください。</div>
+        <button class="pw-trial" onclick="document.getElementById('pw-step-email').style.display='';document.getElementById('pw-step-otp').style.display='none'" style="margin-top:12px;font-size:11px;opacity:.7">← メールアドレスを変更</button>
       </div>
     </div>
     <div class="pw-log">
@@ -6357,7 +6353,7 @@ async function sendOtp(){
   if(errEl)errEl.textContent='';
   const btn=document.querySelector('#pw-step-email .pw-btn');
   if(btn){btn.disabled=true;btn.textContent='送信中…';}
-  const {error}=await _sb.auth.signInWithOtp({email,options:{shouldCreateUser:true}});
+  const {error}=await _sb.auth.signInWithOtp({email,options:{shouldCreateUser:true,emailRedirectTo:'https://oasis-map.com/manufacturer_map_v3_admin.html'}});
   if(error){
     if(errEl)errEl.textContent=error.message;
     if(btn){btn.disabled=false;btn.textContent='認証コードを送信';}
