@@ -17226,24 +17226,11 @@
     "maxLen": null
   },
   "6141104762": {
-    "name": "KOBE MATERIAL TESTING LABORATORY CO.,LTD.: KOBE OFFICE",
-    "machines": [
-      {
-        "x": 1500.0,
-        "y": 1000.0,
-        "z": 500.0,
-        "dia": 0.0
-      }
-    ],
-    "mx": 1500.0,
-    "my": 1000.0,
-    "mz": 500.0,
-    "mdia": 0.0,
-    "ok": "金属材料(試験対象), 試験片用各種材料",
-    "ng": "",
-    "conf": "mid",
-    "nonmc": true,
-    "raw": "X:1500 Y:1000 Z:500"
+    "mx": null,
+    "my": null,
+    "mz": null,
+    "mdia": null,
+    "name": "6141104762"
   },
   "6122521461": {
     "maxX": null,
@@ -19662,5 +19649,12 @@
     "maxZ": null,
     "maxDia": null,
     "maxLen": null
+  },
+  "6154905000": {
+    "mx": null,
+    "my": null,
+    "mz": null,
+    "mdia": null,
+    "name": "6154905000"
   }
 }
