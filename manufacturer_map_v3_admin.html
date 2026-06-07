@@ -7623,7 +7623,7 @@ fetch('./manufacturers.json')
 <!-- ===== ワーク起点メーカー選定（2026-05-31統合・外部JSON fetch） ===== -->
 <style>
 #wo-fab{display:none !important;position:fixed;right:18px;bottom:18px;z-index:9000;background:#0d1b2a;color:#39ff14;border:1px solid #39ff14;border-radius:24px;padding:10px 16px;font-size:14px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.4);font-family:inherit;}
-#wo-panel{position:fixed;right:18px;bottom:70px;z-index:9000;width:362px;max-height:84vh;overflow:auto;background:#0d1b2a;color:#e6eef5;border:1px solid #2a3f55;border-radius:10px;padding:0 14px 14px;box-shadow:0 4px 24px rgba(0,0,0,.5);font-size:13px;transition:width .18s ease;}
+#wo-panel{position:fixed;right:18px;bottom:70px;z-index:9000;width:440px;max-height:84vh;overflow:auto;background:#0d1b2a;color:#e6eef5;border:1px solid #2a3f55;border-radius:10px;padding:0 14px 14px;box-shadow:0 4px 24px rgba(0,0,0,.5);font-size:13px;transition:width .18s ease;}
 #wo-panel.wo-wide{width:min(92vw,940px);}
 #wo-panel.wo-big{width:96vw;max-height:94vh;right:2vw;bottom:2vh;}
 #wo-panel h3{margin:0;font-size:15px;color:#39ff14;}
@@ -7986,8 +7986,9 @@ function evalA(){
     precInline='<div style="margin-top:3px"><span style="font-size:10px;background:'+bg2+';color:'+fc2+';border-radius:6px;padding:0 5px">'+r.tier+'</span></div>';
    }
   }
+    var c9a=CERT&&CERT[r.oin]?'<span class="c9100" style="font-size:10px;border-radius:6px;padding:1px 5px;margin-left:4px">9100</span>':'';
   h+='<tr><td><span class="wo-mark wo-'+r.j.cls+'">'+r.j.mark+'</span></td>'+
-   '<td><div style="font-weight:bold;word-break:break-all">'+esc(r.name)+'</div>'+precInline+'<div style="font-size:10px;color:#7a8aa0">'+r.j.note+'</div></td>'+
+   '<td><div style="font-weight:bold;word-break:break-all">'+esc(r.name)+c9a+'</div>'+precInline+'<div style="font-size:10px;color:#7a8aa0">'+r.j.note+'</div></td>'+
    '<td style="font-family:monospace;font-size:10px;color:#9fb2c8;vertical-align:top">'+r.j.label+'</td>'+
    '<td style="text-align:right;color:#7a8aa0;vertical-align:top">'+(r.km!=null?r.km+'km':'—')+'</td></tr>';
  });
@@ -8167,15 +8168,17 @@ function buildPrecResults(cat, sc, procName, precFilter){
  rows.forEach(function(r){
   var lbl=(sc&&sc.labels[r.tier])||{l:r.tier,r:'',c:'#666'};
   var fc=TIER_COLOR[r.tier]||'#555';var bg=TIER_BG[r.tier]||'rgba(80,80,80,0.1)';
-  var badge='<span style="display:inline-block;padding:1px 8px;border-radius:10px;background:'+bg+';color:'+fc+';font-size:11px;font-weight:500">'+lbl.l+'</span>';
-  var range=lbl.r?'<div style="font-size:10px;color:#5a7090;margin-top:1px">'+lbl.r+'</div>':'';
+  var catShortB=cat.replace('加工','').replace('マシニング','MC').replace('5軸MC','5軸').replace('放電','EDM').replace('歯車','歯車');
+  var badge='<span style="font-size:11px;background:'+bg+';color:'+fc+';border-radius:6px;padding:1px 8px;font-weight:500;white-space:nowrap">'+catShortB+' '+lbl.l+'</span>';
+  var range=lbl.r?'<div style="font-size:10px;color:#5a7090;margin-top:2px">'+lbl.r+'</div>':'';
   var others=r.otherProcs.slice(0,3).map(function(op){
    var ofc=TIER_COLOR[op.tier]||'#555';var obg=TIER_BG[op.tier]||'rgba(80,80,80,0.1)';
    return '<div style="display:flex;gap:4px;align-items:center;margin-bottom:2px"><span style="font-size:10px;color:#5a7090;min-width:48px">'+op.cat+'</span>'
     +'<span style="display:inline-block;padding:0px 6px;border-radius:8px;background:'+obg+';color:'+ofc+';font-size:10px">'+op.info.l+'</span></div>';
   }).join('');
   h+='<tr style="border-bottom:1px solid #152030">';
-  h+='<td style="padding:7px 8px;vertical-align:top"><div style="font-weight:500;color:#c8d8e8">'+r.name+'</div><div style="font-size:10px;color:#5a7090">'+r.pref+'</div></td>';
+  var c9b=CERT&&CERT[r.oin]?'<span class="c9100" style="font-size:10px;border-radius:6px;padding:1px 5px;margin-left:4px">9100</span>':'';
+  h+='<td style="padding:7px 8px;vertical-align:top"><div style="font-weight:500;color:#c8d8e8">'+r.name+c9b+'</div><div style="font-size:10px;color:#5a7090">'+r.pref+'</div></td>';
   h+='<td style="padding:7px 8px;vertical-align:top">'+badge+range+'</td>';
   if(Object.keys(PREC).length>0) h+='<td style="padding:7px 8px;vertical-align:top;font-size:10px;color:#6a8090">'+r.evidence+'</td>';
   h+='<td style="padding:7px 8px;vertical-align:top">'+others+'</td>';
