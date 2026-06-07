@@ -92193,5 +92193,2136 @@
         ]
       }
     ]
+  },
+  "700083900": {
+    "name": "サワダ精密株式会社",
+    "updated": "2026-06-07T01:34:17Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "FJV-35/80",
+        "count": 2,
+        "shape": "角",
+        "x": 2000.0,
+        "y": 800.0,
+        "z": 660.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "NEXUS410B-HS",
+        "count": 1,
+        "shape": "角",
+        "x": 760.0,
+        "y": 410.0,
+        "z": 510.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "NEXUS700D-II",
+        "count": 1,
+        "shape": "角",
+        "x": 1530.0,
+        "y": 700.0,
+        "z": 650.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "VCN-535C",
+        "count": 2,
+        "shape": "角",
+        "x": 1050.0,
+        "y": 530.0,
+        "z": 560.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "NEXUS410A",
+        "count": 3,
+        "shape": "角",
+        "x": 560.0,
+        "y": 410.0,
+        "z": 500.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "VCN-510C",
+        "count": 1,
+        "shape": "角",
+        "x": 1050.0,
+        "y": 510.0,
+        "z": 510.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "VTC-530/20",
+        "count": 1,
+        "shape": "角",
+        "x": 1950.0,
+        "y": 530.0,
+        "z": 510.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "VTC-200C",
+        "count": 1,
+        "shape": "角",
+        "x": 1950.0,
+        "y": 510.0,
+        "z": 510.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "MOLDMAKER2000",
+        "count": 1,
+        "shape": "角",
+        "x": 560.0,
+        "y": 410.0,
+        "z": 410.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "NEXUS410A-II",
+        "count": 1,
+        "shape": "角",
+        "x": 560.0,
+        "y": 410.0,
+        "z": 500.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "三菱重工",
+        "model": "M-V4CN",
+        "count": 1,
+        "shape": "角",
+        "x": 560.0,
+        "y": 410.0,
+        "z": 460.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "牧野フライス",
+        "model": "MSA40",
+        "count": 1,
+        "shape": "角",
+        "x": 600.0,
+        "y": 300.0,
+        "z": 400.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "OKK",
+        "model": "VP400",
+        "count": 1,
+        "shape": "角",
+        "x": 600.0,
+        "y": 410.0,
+        "z": 460.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "brother",
+        "model": "S500X2",
+        "count": 1,
+        "shape": "角",
+        "x": 500.0,
+        "y": 400.0,
+        "z": 300.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "brother",
+        "model": "S650X2",
+        "count": 1,
+        "shape": "角",
+        "x": 650.0,
+        "y": 400.0,
+        "z": 435.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "牧野フライス",
+        "model": "GF-6",
+        "count": 1,
+        "shape": "角",
+        "x": 1050.0,
+        "y": 600.0,
+        "z": 560.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "牧野フライス",
+        "model": "GF-8",
+        "count": 1,
+        "shape": "角",
+        "x": 1250.0,
+        "y": 800.0,
+        "z": 700.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "VCN-530C",
+        "count": 1,
+        "shape": "角",
+        "x": 1050.0,
+        "y": 530.0,
+        "z": 510.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "5軸立型MC",
+        "maker": "MAZAK",
+        "model": "VARIAXIS i-800",
+        "count": 2,
+        "shape": "角",
+        "x": 750.0,
+        "y": 890.0,
+        "z": 600.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "NEO含む",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "5軸立型MC",
+        "maker": "MAZAK",
+        "model": "VARIAXIS i-300 AWC",
+        "count": 1,
+        "shape": "角",
+        "x": 350.0,
+        "y": 350.0,
+        "z": 315.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "5軸立型MC",
+        "maker": "松浦機械",
+        "model": "MAM72-35V",
+        "count": 3,
+        "shape": "角",
+        "x": 680.0,
+        "y": 385.0,
+        "z": 625.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "5軸立型MC",
+        "maker": "松浦機械",
+        "model": "CUBLEX-63",
+        "count": 1,
+        "shape": "角",
+        "x": 760.0,
+        "y": 845.0,
+        "z": 660.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "横型MC",
+        "maker": "MAZAK",
+        "model": "H500/50N",
+        "count": 1,
+        "shape": "角",
+        "x": 720.0,
+        "y": 700.0,
+        "z": 800.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "横型MC",
+        "maker": "MAZAK",
+        "model": "HCN-5000/50",
+        "count": 1,
+        "shape": "角",
+        "x": 730.0,
+        "y": 730.0,
+        "z": 800.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "横型MC",
+        "maker": "オークマ",
+        "model": "MILLAC525H",
+        "count": 1,
+        "shape": "角",
+        "x": 520.0,
+        "y": 450.0,
+        "z": 520.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "横型MC",
+        "maker": "森精機",
+        "model": "NHX5500",
+        "count": 1,
+        "shape": "角",
+        "x": 800.0,
+        "y": 800.0,
+        "z": 800.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "横型MC",
+        "maker": "三井精機",
+        "model": "HU50A",
+        "count": 1,
+        "shape": "角",
+        "x": 720.0,
+        "y": 700.0,
+        "z": 650.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "横型MC",
+        "maker": "MAZAK",
+        "model": "NEXUS 6000-II",
+        "count": 1,
+        "shape": "角",
+        "x": 800.0,
+        "y": 800.0,
+        "z": 800.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "MAZAK",
+        "model": "QT15N",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 254.0,
+        "len": 444.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "MAZAK",
+        "model": "QT200",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 350.0,
+        "len": 285.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "オークマ",
+        "model": "LB2000EX",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 360.0,
+        "len": 300.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "森精機",
+        "model": "NRX2000",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 180.0,
+        "len": 100.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "森精機",
+        "model": "SL-25MC-500",
+        "count": 2,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 340.0,
+        "len": 540.0,
+        "materials": [],
+        "note": "ミル機能付",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "自動旋盤",
+        "maker": "TSUGAMI",
+        "model": "B0265-II",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 26.0,
+        "len": 200.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "自動旋盤",
+        "maker": "TSUGAMI",
+        "model": "B0266-III",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 26.0,
+        "len": 200.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "複合加工機",
+        "maker": "MAZAK",
+        "model": "INTEGREX200III",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 660.0,
+        "len": 1016.0,
+        "materials": [],
+        "note": "Y160",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "複合加工機",
+        "maker": "MAZAK",
+        "model": "INTEGREX i-150",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 340.0,
+        "len": 385.0,
+        "materials": [],
+        "note": "Y200",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "複合加工機",
+        "maker": "MAZAK",
+        "model": "INTEGREX200-IV",
+        "count": 2,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 660.0,
+        "len": 995.0,
+        "materials": [],
+        "note": "Y160",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "複合加工機",
+        "maker": "MAZAK",
+        "model": "INTEGREX i-300S",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 658.0,
+        "len": 1019.0,
+        "materials": [],
+        "note": "Y260",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "複合加工機",
+        "maker": "MAZAK",
+        "model": "INTEGREX i-200S",
+        "count": 2,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 685.0,
+        "len": 1011.0,
+        "materials": [],
+        "note": "Y250",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "複合加工機",
+        "maker": "MAZAK",
+        "model": "INTEGREX i-200H S",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 600.0,
+        "len": 850.0,
+        "materials": [],
+        "note": "Y210",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "ワイヤ放電加工機",
+        "maker": "三菱電機",
+        "model": "FA20-P",
+        "count": 1,
+        "shape": "角",
+        "x": 500.0,
+        "y": 350.0,
+        "z": 300.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "ワイヤ放電加工機",
+        "maker": "三菱電機",
+        "model": "FA20-PS",
+        "count": 1,
+        "shape": "角",
+        "x": 500.0,
+        "y": 350.0,
+        "z": 300.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "ワイヤ放電加工機",
+        "maker": "三菱電機",
+        "model": "PA20",
+        "count": 1,
+        "shape": "角",
+        "x": 500.0,
+        "y": 350.0,
+        "z": 300.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "ワイヤ放電加工機",
+        "maker": "タイナテック",
+        "model": "DKV7725",
+        "count": 1,
+        "shape": "角",
+        "x": 320.0,
+        "y": 250.0,
+        "z": 300.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "型彫放電加工機",
+        "maker": "三菱電機",
+        "model": "EZ12E",
+        "count": 1,
+        "shape": "角",
+        "x": 400.0,
+        "y": 300.0,
+        "z": 480.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "型彫放電加工機",
+        "maker": "三菱電機",
+        "model": "EZ12V",
+        "count": 1,
+        "shape": "角",
+        "x": 400.0,
+        "y": 300.0,
+        "z": 430.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "型彫放電加工機",
+        "maker": "三菱電機",
+        "model": "EA8PV",
+        "count": 1,
+        "shape": "角",
+        "x": 300.0,
+        "y": 250.0,
+        "z": 250.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "平面研削盤",
+        "maker": "岡本",
+        "model": "PFG500",
+        "count": 1,
+        "shape": "角",
+        "x": 380.0,
+        "y": 110.0,
+        "z": 150.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "平面研削盤",
+        "maker": "岡本",
+        "model": "PSG105DX",
+        "count": 1,
+        "shape": "角",
+        "x": 1000.0,
+        "y": 500.0,
+        "z": 300.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "平面研削盤",
+        "maker": "長嶋精工",
+        "model": "NP515-F",
+        "count": 1,
+        "shape": "角",
+        "x": 500.0,
+        "y": 150.0,
+        "z": 330.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "平面研削盤",
+        "maker": "ナガセ",
+        "model": "SGM52-E2",
+        "count": 1,
+        "shape": "角",
+        "x": 500.0,
+        "y": 200.0,
+        "z": 240.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "NC成形研削盤",
+        "maker": "ナガセ",
+        "model": "SGE63-PCNC",
+        "count": 1,
+        "shape": "角",
+        "x": 600.0,
+        "y": 300.0,
+        "z": 250.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "NC成形研削盤",
+        "maker": "長嶋精工",
+        "model": "NAS630-CNC",
+        "count": 1,
+        "shape": "角",
+        "x": 600.0,
+        "y": 300.0,
+        "z": 300.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "円筒研削盤",
+        "maker": "ジェイテクト",
+        "model": "GUP32-100",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 400.0,
+        "len": 1000.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "内径研削盤",
+        "maker": "TOYO",
+        "model": "T-1334",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 500.0,
+        "len": 1000.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      },
+      {
+        "proc": "NCフライス盤",
+        "maker": "OKK",
+        "model": "MHA300II",
+        "count": 1,
+        "shape": "角",
+        "x": 720.0,
+        "y": 310.0,
+        "z": 360.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.swdpre.co.jp/machinery.asp"
+        ]
+      }
+    ]
+  },
+  "6132286440": {
+    "name": "古谷鉄工株式会社",
+    "updated": "2026-06-07T01:34:17Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "ターニングセンタ",
+        "maker": "OM製作所",
+        "model": "TM2-10N",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 1000.0,
+        "len": 800.0,
+        "materials": [],
+        "note": "テーブル径1000mm",
+        "conf": "high",
+        "src": [
+          "https://fiw.co.jp/machine"
+        ]
+      },
+      {
+        "proc": "横型MC",
+        "maker": "オークマ",
+        "model": "MA-600HB",
+        "count": 1,
+        "shape": "角",
+        "x": 630.0,
+        "y": 630.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "B軸1°割出",
+        "conf": "high",
+        "src": [
+          "https://fiw.co.jp/machine"
+        ]
+      },
+      {
+        "proc": "横型MC",
+        "maker": "ツガミ",
+        "model": "FMA5",
+        "count": 1,
+        "shape": "角",
+        "x": 450.0,
+        "y": 450.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "2024年8月導入・B軸1°割出",
+        "conf": "high",
+        "src": [
+          "https://fiw.co.jp/machine"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "エンシュウ",
+        "model": "VMC40",
+        "count": 1,
+        "shape": "角",
+        "x": 1000.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "テーブル1000mm・同時3軸",
+        "conf": "high",
+        "src": [
+          "https://fiw.co.jp/machine"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "オークマ",
+        "model": "LB4000EX",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 480.0,
+        "len": 1500.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://fiw.co.jp/machine"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "マザック",
+        "model": "NEXUS 350",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 420.0,
+        "len": 650.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://fiw.co.jp/machine"
+        ]
+      },
+      {
+        "proc": "複合旋盤",
+        "maker": "オークマ",
+        "model": "MULTUS B250",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 750.0,
+        "materials": [],
+        "note": "Y軸200mm",
+        "conf": "high",
+        "src": [
+          "https://fiw.co.jp/machine"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "マザック",
+        "model": "M-5N",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 610.0,
+        "len": 2000.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://fiw.co.jp/machine"
+        ]
+      },
+      {
+        "proc": "NC立型フライス",
+        "maker": "静岡鉄工所",
+        "model": "SMV-410PA",
+        "count": 1,
+        "shape": "角",
+        "x": 710.0,
+        "y": 410.0,
+        "z": 500.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://fiw.co.jp/machine"
+        ]
+      },
+      {
+        "proc": "汎用旋盤",
+        "maker": "滝沢鉄工所",
+        "model": "TAL-510",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 650.0,
+        "len": 1200.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://fiw.co.jp/machine"
+        ]
+      },
+      {
+        "proc": "汎用旋盤",
+        "maker": "ワシノ機械",
+        "model": "LE-19J",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 500.0,
+        "len": 800.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://fiw.co.jp/machine"
+        ]
+      },
+      {
+        "proc": "汎用旋盤",
+        "maker": "オークマ",
+        "model": "LP",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 340.0,
+        "len": 800.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://fiw.co.jp/machine"
+        ]
+      },
+      {
+        "proc": "ラジアルボール盤",
+        "maker": "和歌山鉄工",
+        "model": "(汎用)",
+        "count": 1,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "アーム1200mm",
+        "conf": "high",
+        "src": [
+          "https://fiw.co.jp/machine"
+        ]
+      },
+      {
+        "proc": "三次元測定器",
+        "maker": "ミツトヨ",
+        "model": "CRYSTA-Apex S776",
+        "count": 1,
+        "shape": "角",
+        "x": 705.0,
+        "y": 705.0,
+        "z": 605.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://fiw.co.jp/machine"
+        ]
+      }
+    ]
+  },
+  "6121860945": {
+    "name": "近江鍛工株式会社 信楽工場",
+    "updated": "2026-06-07T01:34:17Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "油圧プレス",
+        "maker": "近江鍛工",
+        "model": "15000t油圧プレス",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "大型油圧鍛造プレス",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "油圧プレス",
+        "maker": "近江鍛工",
+        "model": "2000t油圧プレス",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "リングミル",
+        "maker": "近江鍛工",
+        "model": "φ3000リングミル",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 3000.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "リングミル",
+        "maker": "近江鍛工",
+        "model": "φ4000リングミル",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 4000.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "リングミル",
+        "maker": "近江鍛工",
+        "model": "φ4500リングミル",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 4500.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "加熱炉",
+        "maker": "近江鍛工",
+        "model": "4300mmバッチ式加熱炉",
+        "count": 1,
+        "shape": "角",
+        "x": 4300.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "加熱炉",
+        "maker": "近江鍛工",
+        "model": "φ5000回転式加熱炉",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 5000.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "鍛伸プレス",
+        "maker": "近江鍛工",
+        "model": "鍛伸プレス",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "焼入設備",
+        "maker": "近江鍛工",
+        "model": "φ7000×3800焼入用油槽",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 7000.0,
+        "len": 3800.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "焼入炉",
+        "maker": "近江鍛工",
+        "model": "φ4500×1500ピット型焼入炉",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 4500.0,
+        "len": 1500.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "焼鈍炉",
+        "maker": "近江鍛工",
+        "model": "台車式焼鈍炉",
+        "count": 1,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "ショットブラスト",
+        "maker": "近江鍛工",
+        "model": "バケット式ショットブラスト機",
+        "count": 1,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "近江鍛工",
+        "model": "TUE-150(S) NC旋盤",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "大型鍛造品後処理",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "大型NCターニング",
+        "maker": "近江鍛工",
+        "model": "TDM-50/55N",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "鋸盤",
+        "maker": "近江鍛工",
+        "model": "HA-300鋸盤",
+        "count": 1,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      },
+      {
+        "proc": "鋸盤",
+        "maker": "近江鍛工",
+        "model": "H-1300鋸盤",
+        "count": 1,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://www.omitanko.co.jp/equipment/shigaraki"
+        ]
+      }
+    ],
+    "note": "最大サイズ: φ5000mm×1600mm×25t。JQA-AS0030(JIS Q 9100)航空宇宙用途ローリング鍛造"
+  },
+  "6142104101": {
+    "name": "株式会社前田精密製作所",
+    "updated": "2026-06-07T01:34:17Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "NC旋盤",
+        "maker": "オークマ",
+        "model": "LB3000EX II",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "計30台中・JS-rendered page",
+        "conf": "mid",
+        "src": [
+          "https://maeda-mss.com/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "オークマ",
+        "model": "LB4000",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "計30台中",
+        "conf": "mid",
+        "src": [
+          "https://maeda-mss.com/equipment/"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "牧野フライス",
+        "model": "DA300",
+        "count": 1,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "計27台中",
+        "conf": "mid",
+        "src": [
+          "https://maeda-mss.com/equipment/"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "牧野フライス",
+        "model": "a500Z",
+        "count": 1,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "計27台中",
+        "conf": "mid",
+        "src": [
+          "https://maeda-mss.com/equipment/"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "牧野フライス",
+        "model": "D500",
+        "count": 1,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "計27台中",
+        "conf": "mid",
+        "src": [
+          "https://maeda-mss.com/equipment/"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "牧野フライス",
+        "model": "A-55",
+        "count": 1,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "計27台中",
+        "conf": "mid",
+        "src": [
+          "https://maeda-mss.com/equipment/"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "牧野フライス",
+        "model": "a51",
+        "count": 1,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "計27台中",
+        "conf": "mid",
+        "src": [
+          "https://maeda-mss.com/equipment/"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "牧野フライス",
+        "model": "a61nx",
+        "count": 1,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "計27台中",
+        "conf": "mid",
+        "src": [
+          "https://maeda-mss.com/equipment/"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "牧野フライス",
+        "model": "V56i",
+        "count": 1,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "計27台中",
+        "conf": "mid",
+        "src": [
+          "https://maeda-mss.com/equipment/"
+        ]
+      },
+      {
+        "proc": "5軸横型MC",
+        "maker": "牧野フライス",
+        "model": "横型5軸",
+        "count": 1,
+        "shape": "角",
+        "x": 1400.0,
+        "y": 1200.0,
+        "z": 1265.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "計27台中",
+        "conf": "mid",
+        "src": [
+          "https://maeda-mss.com/equipment/"
+        ]
+      },
+      {
+        "proc": "ホブ歯切盤",
+        "maker": "MIKRON",
+        "model": "(型番不明)",
+        "count": 20,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "20台",
+        "conf": "mid",
+        "src": [
+          "https://maeda-mss.com/equipment/"
+        ]
+      },
+      {
+        "proc": "研削盤",
+        "maker": "(各社)",
+        "model": "(研削盤17台)",
+        "count": 17,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "17台詳細不明",
+        "conf": "mid",
+        "src": [
+          "https://maeda-mss.com/equipment/"
+        ]
+      },
+      {
+        "proc": "放電加工機",
+        "maker": "(各社)",
+        "model": "(放電加工機)",
+        "count": 6,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "6台詳細不明",
+        "conf": "mid",
+        "src": [
+          "https://maeda-mss.com/equipment/"
+        ]
+      },
+      {
+        "proc": "ジグボーラー",
+        "maker": "(各社)",
+        "model": "ジグボーラー",
+        "count": 1,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "mid",
+        "src": [
+          "https://maeda-mss.com/equipment/"
+        ]
+      }
+    ]
+  },
+  "6156377788": {
+    "name": "高橋精機株式会社",
+    "updated": "2026-06-07T01:34:17Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "横型MC",
+        "maker": "MAZAK",
+        "model": "HCN-5000III",
+        "count": 2,
+        "shape": "角",
+        "x": 730.0,
+        "y": 730.0,
+        "z": 800.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "NEXUS5000-Ⅲ",
+        "conf": "high",
+        "src": [
+          "https://takahashiseiki.com/equipment.html"
+        ]
+      },
+      {
+        "proc": "横型MC",
+        "maker": "MAZAK",
+        "model": "HCN-5000II",
+        "count": 1,
+        "shape": "角",
+        "x": 730.0,
+        "y": 730.0,
+        "z": 740.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "NEXUS5000-Ⅱ",
+        "conf": "high",
+        "src": [
+          "https://takahashiseiki.com/equipment.html"
+        ]
+      },
+      {
+        "proc": "横型MC",
+        "maker": "MAZAK",
+        "model": "HCN-5000",
+        "count": 2,
+        "shape": "角",
+        "x": 730.0,
+        "y": 730.0,
+        "z": 740.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "NEXUS5000",
+        "conf": "high",
+        "src": [
+          "https://takahashiseiki.com/equipment.html"
+        ]
+      },
+      {
+        "proc": "横型MC",
+        "maker": "MAZAK",
+        "model": "PFH-4800",
+        "count": 1,
+        "shape": "角",
+        "x": 560.0,
+        "y": 630.0,
+        "z": 600.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://takahashiseiki.com/equipment.html"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "VCN510C",
+        "count": 2,
+        "shape": "角",
+        "x": 1050.0,
+        "y": 510.0,
+        "z": 510.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "NEXUS510C",
+        "conf": "high",
+        "src": [
+          "https://takahashiseiki.com/equipment.html"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "VCS530C",
+        "count": 3,
+        "shape": "角",
+        "x": 1050.0,
+        "y": 530.0,
+        "z": 510.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "SMART530C",
+        "conf": "high",
+        "src": [
+          "https://takahashiseiki.com/equipment.html"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "FJV50/80",
+        "count": 2,
+        "shape": "角",
+        "x": 2000.0,
+        "y": 1150.0,
+        "z": 585.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://takahashiseiki.com/equipment.html"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "FJV-20",
+        "count": 1,
+        "shape": "角",
+        "x": 560.0,
+        "y": 410.0,
+        "z": 410.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://takahashiseiki.com/equipment.html"
+        ]
+      },
+      {
+        "proc": "立型MC",
+        "maker": "MAZAK",
+        "model": "MT-V-414",
+        "count": 1,
+        "shape": "角",
+        "x": 560.0,
+        "y": 410.0,
+        "z": 410.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "V-414",
+        "conf": "high",
+        "src": [
+          "https://takahashiseiki.com/equipment.html"
+        ]
+      },
+      {
+        "proc": "複合旋盤",
+        "maker": "MAZAK",
+        "model": "QTN-2002MSY",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 380.0,
+        "len": 350.0,
+        "materials": [],
+        "note": "QTN-200-Ⅱ MSY",
+        "conf": "high",
+        "src": [
+          "https://takahashiseiki.com/equipment.html"
+        ]
+      },
+      {
+        "proc": "NC旋盤",
+        "maker": "MAZAK",
+        "model": "QTS200",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 360.0,
+        "len": 535.0,
+        "materials": [],
+        "note": "SMART200",
+        "conf": "high",
+        "src": [
+          "https://takahashiseiki.com/equipment.html"
+        ]
+      },
+      {
+        "proc": "汎用旋盤",
+        "maker": "MAZAK",
+        "model": "QY-8",
+        "count": 3,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 160.0,
+        "len": 285.0,
+        "materials": [],
+        "note": "QT-8",
+        "conf": "high",
+        "src": [
+          "https://takahashiseiki.com/equipment.html"
+        ]
+      },
+      {
+        "proc": "自動旋盤",
+        "maker": "CITIZEN",
+        "model": "A220AJ-7PL",
+        "count": 2,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 20.0,
+        "len": 200.0,
+        "materials": [],
+        "note": "A20",
+        "conf": "high",
+        "src": [
+          "https://takahashiseiki.com/equipment.html"
+        ]
+      }
+    ]
+  },
+  "6136068907": {
+    "name": "株式会社中谷鉄工所",
+    "updated": "2026-06-07T01:34:17Z",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "立型MC",
+        "maker": "マキノ",
+        "model": "T1",
+        "count": 2,
+        "shape": "角",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 0.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "MAKINO T1×2台。川重協力工場・ジェットエンジン部品10μm精度",
+        "conf": "mid",
+        "src": [
+          "https://www.kawajuu.co.jp/"
+        ]
+      },
+      {
+        "proc": "大型立旋盤",
+        "maker": "(不明)",
+        "model": "立旋盤Φ2m以上",
+        "count": 1,
+        "shape": "丸",
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "dia": 2000.0,
+        "len": 0.0,
+        "materials": [],
+        "note": "Φ2m以上の大型立旋盤",
+        "conf": "mid",
+        "src": [
+          "https://www.kawajuu.co.jp/"
+        ]
+      }
+    ]
   }
 }
