@@ -5201,6 +5201,7 @@ function openDrawer(origIdx){
   if(isUnlocked&&_sb&&c.oin){
     var _sbOin=String(c.oin).replace(/\.0+$/,'');
     var _sbIdx=origIdx;
+    if(_sbUser){_sb.from('user_activity').insert({user_id:_sbUser.id,oin:_sbOin,action:'drawer_open'}).then(function(){});}
     Promise.all([
       _sb.from('companies_detail').select('*').eq('oin',_sbOin).maybeSingle(),
       _sb.from('equip_devices').select('*').eq('oin',_sbOin).order('proc')
