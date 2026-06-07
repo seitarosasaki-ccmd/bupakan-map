@@ -6328,7 +6328,6 @@ function flyToJapan(){  map.flyToBounds([[26.0,127.5],[45.3,145.5]],{duration:.8
 // ================================================================
 // パスワード
 // ================================================================
-const PW='bupakan';
 // ── Supabase 認証 ─────────────────────────────────────────────────────────
 let isUnlocked=sessionStorage.getItem('mfr_map_v2_auth')==='1';
 let _sbUser=null;
@@ -6352,7 +6351,7 @@ if(_sb){
     _sb.auth.onAuthStateChange(function(event,session){
       var wasLocked=!isUnlocked;
       _sbUser=session?session.user:null;
-      isUnlocked=!!session||sessionStorage.getItem(SK)==='1';
+      isUnlocked=!!session||sessionStorage.getItem('mfr_map_v2_auth')==='1';
       applyUnlockState();
       if(event==='SIGNED_IN'&&wasLocked){_dismissPwScreen();setTimeout(function(){try{startTutorial(false);}catch(e){}},1100);}
       if(event==='SIGNED_OUT'){isUnlocked=false;unlockPrompt();}
@@ -6361,11 +6360,18 @@ if(_sb){
 }
 
 var _otpEmail='';
+// #pw= hash deep-link login
+(function(){
+  if(location.hash.startsWith('#pw=')){
+    var _h=decodeURIComponent(location.hash.slice(4));
+    if(_h===PW){sessionStorage.setItem('mfr_map_v2_auth','1');isUnlocked=true;history.replaceState(null,null,location.pathname+location.search);}
+  }
+})();
 async function checkPw(){
   const v=(document.getElementById('pw-pw-input')||{}).value||'';
   const e=document.getElementById('pw-pw-error');
   if(v===PW){
-    sessionStorage.setItem(SK,'1');
+    sessionStorage.setItem('mfr_map_v2_auth','1');
     isUnlocked=true;
     applyUnlockState();
     _dismissPwScreen();
@@ -6380,7 +6386,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var pi=document.getElementById('pw-pw-input');
   if(pi)pi.addEventListener('keydown',function(e){if(e.key==='Enter')checkPw();});
 });
-function sendOtp(){
+async function sendOtp(){
   const emailEl=document.getElementById('pw-email-input');
   const email=emailEl?emailEl.value.trim():'';
   const errEl=document.getElementById('pw-error');
@@ -7107,7 +7113,7 @@ let _tutStep = 0;
 
 function startTutorial(force){
   // PW認証前のチュートリアル誤発火を防ぐ（修正）
-  if(sessionStorage.getItem(SK)!=='1') return;
+  if(sessionStorage.getItem('mfr_map_v2_auth')!=='1') return;
   if(!force && localStorage.getItem(TUTORIAL_KEY)) return;
   _tutStep = 0;
   document.getElementById('tutorial-overlay').classList.add('show');
