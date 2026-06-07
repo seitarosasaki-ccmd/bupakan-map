@@ -8183,7 +8183,7 @@ function buildPrecResults(cat, sc, procName, precFilter){
   }).join('');
   h+='<tr style="border-bottom:1px solid #152030">';
   var c9b=CERT&&CERT[r.oin]?'<span class="c9100" style="font-size:10px;border-radius:6px;padding:1px 5px;margin-left:4px">9100</span>':'';
-  h+='<td style="padding:7px 8px;vertical-align:top"><div style="font-weight:500;color:#c8d8e8">'+r.name+c9b+'</div><div style="font-size:10px;color:#5a7090">'+r.pref+'</div></td>';
+  h+='<td style="padding:7px 8px;vertical-align:top"><div style="font-weight:bold">'+r.name+c9b+'</div><div style="font-size:10px;color:#5a7090">'+r.pref+'</div></td>';
   h+='<td style="padding:7px 8px;vertical-align:top">'+badge+range+'</td>';
   if(Object.keys(PREC).length>0) h+='<td style="padding:7px 8px;vertical-align:top;font-size:10px;color:#6a8090">'+r.evidence+'</td>';
   h+='<td style="padding:7px 8px;vertical-align:top">'+others+'</td>';
