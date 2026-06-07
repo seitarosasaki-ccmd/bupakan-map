@@ -1191,11 +1191,10 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     <div class="h-title">航空宇宙<span>メーカー</span>選定マップ</div>
   </div>
   <div class="h-base">
-    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-      <circle cx="5" cy="4" r="2.5" stroke="currentColor" stroke-width="1.2"/>
-      <path d="M5 7.5 L5 9.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-    </svg>
-    拠点：小牧市
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="4" r="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M5 7.5 L5 9.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+    <span style="font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;margin-right:1px">起点</span>
+    <select id="origin-pref" class="origin-sel" onchange="onOriginPref()" title="あなたの拠点（都道府県）"></select>
+    <select id="origin-city" class="origin-sel" onchange="onOriginCity()" title="あなたの拠点（市区町村）"></select>
   </div>
   <div class="h-dist-btns">
     <button class="dist-btn" onclick="setDistFilter(50)" id="dist-50">50km圏</button>
@@ -1304,6 +1303,8 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     .work-dim input{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--border2);color:var(--text);padding:5px 6px;border-radius:3px;font-size:11px;outline:none;box-sizing:border-box}
     .work-dim input:focus{border-color:var(--accent)}
     #dist-slider{width:100%;accent-color:var(--accent);margin-top:4px}
+    .origin-sel{background:#0b1322;border:1px solid var(--border2);color:var(--text);border-radius:3px;padding:3px 5px;font-size:11px;font-family:'Share Tech Mono',monospace;cursor:pointer;outline:none;max-width:120px}
+    .origin-sel:focus{border-color:var(--accent)}
     .fp-tabs{display:flex;flex-shrink:0;border-bottom:1px solid var(--border);background:var(--panel2)}
     .fp-tab{flex:1;padding:11px 6px;background:transparent;border:none;border-bottom:2px solid transparent;color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:6px}
     .fp-tab:hover{color:var(--text)}
@@ -4157,6 +4158,9 @@ const EQUIP_DB = {
 
 // 小牧拠点座標
 const KOMAKI = { lat: 35.294, lng: 136.970 };
+// ===== 起点（訪問者が選べる。未設定なら小牧） =====
+let ORIGIN = { lat: KOMAKI.lat, lng: KOMAKI.lng, label: '小牧市', pref: '愛知県' };
+const ORIGIN_CITIES = {"兵庫県":{"神戸市":[34.7995,135.3655],"姫路市":[34.8173,134.689],"尼崎市":[34.7381,135.4151],"明石市":[34.6607,134.9652],"中央区":[34.685,135.4371],"西宮市":[34.7378,135.3399],"宝塚市":[34.7307,135.1757],"川崎市":[34.6518,134.9953],"加古川市":[34.7776,134.8764],"伊丹市":[34.7758,135.4011]},"東京都":{"港区":[35.6538,139.7496],"千代田区":[35.686,139.7581],"大田区":[35.5879,139.7561],"品川区":[35.6191,139.7251],"江東区":[35.6594,139.8078],"中央区":[35.6754,139.7725],"昭島市":[35.6865,139.6662],"渋谷区":[35.6614,139.699],"台東区":[35.7086,139.7813],"府中市":[35.667,139.4545],"立川市":[35.7074,139.4089],"中野区":[35.7049,139.6679],"世田谷区":[35.6272,139.648],"新宿区":[35.6958,139.7026],"墨田区":[35.7042,139.8086],"八王子市":[35.6467,139.5716],"北区":[35.763,139.7386],"町田市":[35.5515,139.423],"三鷹市":[35.6785,139.6884],"小金井市":[35.6946,139.5118],"文京区":[35.708,139.7523],"調布市":[35.6728,139.817],"葛飾区":[35.7357,139.8342],"目黒区":[35.6414,139.6981]},"埼玉県":{"さいたま市":[35.8912,139.7534],"入間市":[35.848,139.5424],"越谷市":[35.8732,139.7375],"川口市":[35.8119,139.7163],"新座市":[35.7934,139.5449],"飯能市":[35.857,139.649],"朝霞市":[35.8616,139.6456],"坂戸市":[35.9717,139.4094]},"山口県":{"下関市":[34.0129,130.9509],"宇部市":[33.9589,131.2287],"下松市":[33.9988,131.8738]},"岡山県":{"岡山市":[34.6636,133.939],"倉敷市":[34.5947,133.7632]},"愛知県":{"名古屋市":[35.14,136.9007],"小牧市":[35.305,136.9376],"春日井市":[35.1788,136.6091],"半田市":[34.8965,136.9396],"安城市":[34.9093,137.0304],"豊川市":[34.9214,137.2854],"稲沢市":[35.2361,136.8189],"犬山市":[35.3227,137.0042],"一宮市":[35.3059,136.8063],"知多市":[35.097,136.9724],"岡崎市":[35.0893,137.1237],"刈谷市":[34.9929,137.0128],"豊田市":[35.0834,137.1564],"碧南市":[34.865,136.9845],"瀬戸市":[35.2239,137.084],"岐阜県可児郡":[35.4316,137.1296],"北名古屋市":[35.2507,136.8957]},"大阪府":{"大阪市":[34.6698,135.4928],"東大阪市":[34.6801,135.6103],"門真市":[34.7111,135.5656],"堺市":[34.5806,135.4743],"吹田市":[34.7594,135.5173],"泉南郡":[34.3914,135.3461],"八尾市":[34.627,135.6012]},"京都府":{"京都市":[35.8623,136.7755],"京丹後市":[35.614,135.059]},"神奈川県":{"横浜市":[35.4543,139.6135],"川崎市":[35.5545,139.6831],"相模原市":[35.5356,139.3727],"平塚市":[35.34,139.3329],"藤沢市":[35.4356,139.539],"大和市":[35.3764,138.6137],"厚木市":[35.4194,139.3625],"横須賀市":[35.3002,139.6502],"伊勢原市":[35.4183,139.2663],"小田原市":[35.2785,139.1903],"麻生区":[35.5361,139.6699],"中原区":[35.5758,139.657],"海老名市":[35.4469,139.3902]},"茨城県":{"つくば市":[36.0811,140.1248],"水戸市":[36.3766,140.4701]},"三重県":{"松阪市":[34.5734,136.5377],"桑名市":[35.1176,136.6435],"鈴鹿市":[34.8817,136.5837]},"千葉県":{"船橋市":[35.6946,139.9825],"市川市":[35.7197,139.9318]},"栃木県":{"宇都宮市":[36.5567,139.8918],"足利市":[36.4364,139.4939],"小山市":[36.4387,139.8422],"松山市":[36.4394,140.0028]},"群馬県":{"高崎市":[36.3089,138.9801],"伊勢崎市":[36.3123,139.1874],"千代田区":[36.2519,139.4603],"前橋市":[36.3893,139.0633],"渋川市":[36.3915,139.0644]},"広島県":{"広島市":[34.3804,132.4388],"呉市":[34.2538,132.567],"福山市":[34.5549,133.3168],"三原市":[34.3917,132.4527],"尾道市":[34.4178,133.2347],"江田島市":[34.2279,132.4557],"東広島市":[34.4262,132.7434]},"長崎県":{"長崎市":[33.296,131.8131],"つくば市":[34.6052,129.3706],"佐世保市":[33.1641,129.7277]},"北海道":{"札幌市":[40.4344,139.8783]},"宮城県":{"仙台市":[36.4691,138.2321],"岩沼市":[38.1015,140.8577]},"宮崎県":{"宮崎市":[33.0455,133.1366]},"富山県":{"高岡市":[36.7362,137.0187],"富山市":[36.5751,137.2002]},"岐阜県":{"各務原市":[35.4001,136.847],"関市":[35.5126,136.9019],"可児市":[35.4266,137.0651],"安八郡":[35.3415,136.6752],"羽島市":[35.4093,136.8099],"中津川市":[35.4876,137.5005],"大垣市":[35.3674,136.6401],"海津市":[35.2205,136.6372],"美濃加茂市":[35.4407,137.0155],"瑞浪市":[35.362,137.2542],"岐阜市":[35.4039,136.731],"不破郡":[35.3621,136.5282],"郡上市":[35.7484,136.9643],"羽島郡":[35.3898,136.7825]},"愛媛県":{"松山市":[33.8161,132.7538]},"新潟県":{"新潟市":[37.8868,139.0501],"長岡市":[37.447,138.8512],"上越市":[37.159,138.2185],"村上市":[37.902,139.024]},"石川県":{"金沢市":[36.5724,136.6467],"かほく市":[36.7597,136.7547]},"福岡県":{"福岡市":[33.6913,130.5637],"北九州市":[33.891,130.8993],"遠賀郡":[33.7247,130.5312],"太宰府市":[33.5059,130.5259],"行橋市":[33.6081,130.4198],"久留米市":[33.3154,130.5158],"筑後市":[33.2008,130.4833]},"福島県":{"相馬市":[37.5577,140.9097],"福島市":[37.692,140.458],"郡山市":[37.4023,140.3582],"いわき市":[37.1242,140.9757]},"秋田県":{"由利本荘市":[39.4414,140.0534],"能代市":[40.2118,140.0272]},"長野県":{"飯田市":[35.4759,137.884],"上田市":[36.4365,138.2447],"長野市":[36.412,138.1877],"松本市":[36.221,137.9429],"駒ヶ根市":[35.7274,137.9296],"中野市":[36.738,138.3239]},"静岡県":{"浜松市":[34.7609,137.7808],"静岡市":[34.9751,138.3833],"浜名区":[34.7916,137.7831],"富士市":[35.1784,138.6541],"沼津市":[35.1319,138.8812],"富士宮市":[34.9752,138.3832],"中央区":[34.7118,137.7237],"掛川市":[34.6639,138.0732],"磐田市":[34.7184,137.8513]},"香川県":{"高松市":[34.2891,133.9862]},"滋賀県":{"大津市":[35.0181,135.8547],"草津市":[35.0162,135.9644]},"青森県":{"五所川原市":[40.8056,140.4427]},"鳥取県":{"鳥取市":[35.4958,134.226]},"山梨県":{"中央区":[35.6149,138.5493]}};
 
 // ================================================================
 // 企業データ（カテゴリ・設備IDを追加）
@@ -4193,7 +4197,30 @@ function haversineKm(lat1,lng1,lat2,lng2) {
   return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
 }
 // 小牧からの距離をキャッシュ
-companies.forEach(c => { c._dist = Math.round(haversineKm(KOMAKI.lat,KOMAKI.lng,c.lat,c.lng)); });
+function recomputeDistances(){ companies.forEach(c => { if(c.lat&&c.lng) c._dist = Math.round(haversineKm(ORIGIN.lat,ORIGIN.lng,c.lat,c.lng)); }); }
+recomputeDistances();
+// ===== 起点セレクタ =====
+function initOriginSelector(){
+  var ps=document.getElementById('origin-pref'); if(!ps) return;
+  var prefs=Object.keys(ORIGIN_CITIES).sort();
+  ps.innerHTML=prefs.map(function(p){return '<option'+(p===ORIGIN.pref?' selected':'')+'>'+p+'</option>';}).join('');
+  fillOriginCities(true);
+}
+function fillOriginCities(initial){
+  var p=document.getElementById('origin-pref').value;
+  var cs=document.getElementById('origin-city'); if(!cs) return;
+  var cities=Object.keys(ORIGIN_CITIES[p]||{});
+  cs.innerHTML=cities.map(function(c){return '<option'+((initial&&p===ORIGIN.pref&&c===ORIGIN.label)?' selected':'')+'>'+c+'</option>';}).join('');
+}
+function onOriginPref(){ fillOriginCities(false); onOriginCity(); }
+function onOriginCity(){
+  var p=document.getElementById('origin-pref').value, c=document.getElementById('origin-city').value;
+  var co=(ORIGIN_CITIES[p]||{})[c]; if(!co) return;
+  ORIGIN={lat:co[0],lng:co[1],label:c,pref:p};
+  recomputeDistances();
+  if(typeof distCircle!=='undefined' && distCircle && typeof map!=='undefined'){ try{ map.removeLayer(distCircle); distCircle=null; if(filterDist>0) setDistFilter(filterDist); }catch(e){} }
+  if(typeof applyFilters==='function') applyFilters();
+}
 
 // 物流コスト概算（km→目安金額）
 function logisticsCostHint(km) {
@@ -7613,6 +7640,7 @@ fetch('./manufacturers.json')
     initCatChips();
     initPrefSelect();
     initOasisCatChips();
+    initOriginSelector();
     initLegend();
     updateEquipCounts();
     applyFilters();
