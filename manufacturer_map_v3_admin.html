@@ -7733,6 +7733,7 @@ table.wo-mt{border-collapse:separate;border-spacing:0;width:max-content;min-widt
     <div id="wo-b-list">
       <div id="wo-flow"></div>
       <div id="wo-prec-info" style="display:none;margin:8px 0"></div>
+      <div id="wo-prec-results" style="display:none;margin-top:8px"></div>
       <div style="font-size:10px;color:#7a8aa0;margin-top:8px;line-height:1.5">工程をクリック→その工程の対応メーカーを地図にハイライト。<span style="color:#ffb300">&#9679;</span>=ボトルネック(20社未満)。付帯=単独発注しない工程(自社実施・他工程内包)。</div>
     </div>
     <div id="wo-mtx-b" style="display:none"></div>
@@ -8006,9 +8007,11 @@ function build(){
     });
     _fb+='</div><div style="font-size:10px;color:#5a7090;background:#0a1520;border-left:2px solid #2a4060;padding:3px 8px;border-radius:0 4px 4px 0;line-height:1.5">'+_sc.note+'</div>';
     pi.innerHTML=_fb;pi.style.display='block';
+    buildPrecResults(_cat,_sc,curProc,curPrecFilter);
     Array.prototype.forEach.call(pi.querySelectorAll('[data-pf2]'),function(btn){
      btn.onclick=function(){
       curPrecFilter=btn.getAttribute('data-pf2');
+      buildPrecResults(_cat,_sc,curProc,curPrecFilter);
       var _minR=(_sc.tierMin&&_sc.tierMin[curPrecFilter])||0;
       var _mk=pmakers(curProc);
       if(_minR>0){
@@ -8026,7 +8029,7 @@ function build(){
      };
     });
    }else{pi.style.display='none';pi.innerHTML='';}
-  }else{pi.style.display='none';pi.innerHTML='';}
+  }else{pi.style.display='none';pi.innerHTML='';var pr=document.getElementById('wo-prec-results');if(pr){pr.style.display='none';pr.innerHTML='';} }
  }
 }
 
@@ -8069,6 +8072,70 @@ var PROC_SCALES={
    '一般精密':{l:'標準歯車',r:'JIS 4〜6級',c:'#875a0a'},'一般':{l:'汎用歯車',r:'JIS 7級〜',c:'#4a4a4a'},'不明':{l:'不明',r:'',c:'#666'}}}
 };
 var TIER_RANK_P={'超精密':4,'精密':3,'一般精密':2,'一般':1,'不明':0};
+
+function buildPrecResults(cat, sc, procName, precFilter){
+ var pr=document.getElementById('wo-prec-results');
+ if(!pr)return;
+ var minR=(sc&&sc.tierMin&&sc.tierMin[precFilter])||0;
+ var makers=pmakers(procName);
+ var ci=coIdx();
+ var rows=makers.map(function(m){
+  var oin=String(m.oin).replace(/\.0+$/,'');
+  var pd=PREC[oin];
+  var tier=(pd&&pd.proc_tiers&&pd.proc_tiers[cat]&&pd.proc_tiers[cat].tier)
+    ||(pd&&pd.overall_tier)||'不明';
+  var evidence=(pd&&pd.proc_tiers&&pd.proc_tiers[cat]&&pd.proc_tiers[cat].evidence)||'';
+  var co=ci[oin]&&ci[oin].c;
+  var pref=(co&&co.pref)||'';
+  // 他の工程
+  var otherProcs=[];
+  if(pd&&pd.proc_tiers){
+   Object.keys(pd.proc_tiers).forEach(function(c2){
+    if(c2!==cat){
+     var t2=pd.proc_tiers[c2].tier;
+     var info2=(sc&&PROC_SCALES[c2]&&PROC_SCALES[c2].labels[t2])||{l:t2,r:'',c:'#666'};
+     otherProcs.push({cat:c2,tier:t2,info:info2});
+    }
+   });
+  }
+  return {oin:oin,name:m.name||'',pref:pref,tier:tier,evidence:evidence,otherProcs:otherProcs};
+ }).filter(function(r){
+  return minR===0||(TIER_RANK_P[r.tier]||0)>=minR;
+ }).sort(function(a,b){
+  return (TIER_RANK_P[b.tier]||0)-(TIER_RANK_P[a.tier]||0);
+ });
+ if(!rows.length){pr.innerHTML='<div style="font-size:12px;color:#7a8aa0;padding:8px 0">条件に合うメーカーなし</div>';pr.style.display='block';return;}
+ // テーブル構築
+ var TIER_COLOR={'超精密':'#1a6ea8','精密':'#0d7a5f','一般精密':'#875a0a','一般':'#4a4a4a','不明':'#555'};
+ var TIER_BG={'超精密':'rgba(26,110,168,0.15)','精密':'rgba(13,122,95,0.15)','一般精密':'rgba(135,90,10,0.15)','一般':'rgba(74,74,74,0.15)','不明':'rgba(80,80,80,0.1)'};
+ var h='<div style="font-size:12px;color:#8a9ab0;margin-bottom:6px">'+rows.length+'社（'+procName+'）</div>';
+ h+='<table style="width:100%;border-collapse:collapse;font-size:12px">';
+ h+='<thead><tr>';
+ h+='<th style="text-align:left;padding:5px 8px;font-size:10px;color:#5a7090;font-weight:400;border-bottom:1px solid #1e3048">会社名</th>';
+ h+='<th style="text-align:left;padding:5px 8px;font-size:10px;color:#5a7090;font-weight:400;border-bottom:1px solid #1e3048">'+procName+'精度</th>';
+ if(Object.keys(PREC).length>0) h+='<th style="text-align:left;padding:5px 8px;font-size:10px;color:#5a7090;font-weight:400;border-bottom:1px solid #1e3048">根拠機種</th>';
+ h+='<th style="text-align:left;padding:5px 8px;font-size:10px;color:#5a7090;font-weight:400;border-bottom:1px solid #1e3048">他の工程</th>';
+ h+='</tr></thead><tbody>';
+ rows.forEach(function(r){
+  var lbl=(sc&&sc.labels[r.tier])||{l:r.tier,r:'',c:'#666'};
+  var fc=TIER_COLOR[r.tier]||'#555';var bg=TIER_BG[r.tier]||'rgba(80,80,80,0.1)';
+  var badge='<span style="display:inline-block;padding:1px 8px;border-radius:10px;background:'+bg+';color:'+fc+';font-size:11px;font-weight:500">'+lbl.l+'</span>';
+  var range=lbl.r?'<div style="font-size:10px;color:#5a7090;margin-top:1px">'+lbl.r+'</div>':'';
+  var others=r.otherProcs.slice(0,3).map(function(op){
+   var ofc=TIER_COLOR[op.tier]||'#555';var obg=TIER_BG[op.tier]||'rgba(80,80,80,0.1)';
+   return '<div style="display:flex;gap:4px;align-items:center;margin-bottom:2px"><span style="font-size:10px;color:#5a7090;min-width:48px">'+op.cat+'</span>'
+    +'<span style="display:inline-block;padding:0px 6px;border-radius:8px;background:'+obg+';color:'+ofc+';font-size:10px">'+op.info.l+'</span></div>';
+  }).join('');
+  h+='<tr style="border-bottom:1px solid #152030">';
+  h+='<td style="padding:7px 8px;vertical-align:top"><div style="font-weight:500;color:#c8d8e8">'+r.name+'</div><div style="font-size:10px;color:#5a7090">'+r.pref+'</div></td>';
+  h+='<td style="padding:7px 8px;vertical-align:top">'+badge+range+'</td>';
+  if(Object.keys(PREC).length>0) h+='<td style="padding:7px 8px;vertical-align:top;font-size:10px;color:#6a8090">'+r.evidence+'</td>';
+  h+='<td style="padding:7px 8px;vertical-align:top">'+others+'</td>';
+  h+='</tr>';
+ });
+ h+='</tbody></table>';
+ pr.innerHTML=h;pr.style.display='block';
+}
 function renderPrecInfo(procName){
  var cat=PROC_TO_CAT[procName]||null;
  var sc=cat?PROC_SCALES[cat]:null;
