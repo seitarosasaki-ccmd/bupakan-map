@@ -6372,7 +6372,7 @@ async function sendOtp(){
 async function verifyOtp(){
   const token=(document.getElementById('pw-otp-input')||{}).value||'';
   const errEl=document.getElementById('pw-otp-error');
-  if(token.length!==6){if(errEl)errEl.textContent='6桁のコードを入力してください';return;}
+  if(token.length<6||token.length>8){if(errEl)errEl.textContent='コードを入力してください';return;}
   if(errEl)errEl.textContent='';
   const btn=document.querySelector('#pw-step-otp .pw-btn');
   if(btn){btn.disabled=true;btn.textContent='確認中…';}
