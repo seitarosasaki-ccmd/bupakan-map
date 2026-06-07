@@ -1152,13 +1152,14 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   <div class="pw-box">
     <div class="pw-logo">AEROSPACE SUPPLIER</div>
     <div class="pw-title">メーカー<span>マップ</span></div>
-    <div class="pw-sub">AUTHORIZED ACCESS ONLY</div>
+    <div class="pw-sub">パスワードでフル機能 ／ または お試しで</div>
     <div class="pw-field">
       <input type="password" id="pw-input" placeholder="PASSWORD" autocomplete="off" autofocus/>
       <button class="pw-toggle" onclick="document.getElementById('pw-input').type=document.getElementById('pw-input').type==='password'?'text':'password'" tabindex="-1">👁</button>
     </div>
     <div class="pw-error" id="pw-error"></div>
-    <button class="pw-btn" onclick="checkPw()">ENTER</button>
+    <button class="pw-btn" onclick="checkPw()">フル機能をアンロック</button>
+    <button class="pw-trial" onclick="enterTrial()">▶ お試しで見てみる（無料）</button>
     <div class="pw-log">
       <div class="pw-log-ttl">▣ 更新履歴 / CHANGELOG</div>
       <div class="pw-log-item">
@@ -1203,6 +1204,8 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     <button class="dist-btn active" onclick="setDistFilter(0)" id="dist-all">全国</button>
   </div>
   <div class="h-right">
+    <span id="trial-badge" style="font-size:10px;color:var(--warn);border:1px solid rgba(255,214,10,.4);background:rgba(255,214,10,.08);border-radius:3px;padding:3px 8px;font-family:'Share Tech Mono',monospace;white-space:nowrap">お試し版</span>
+    <button id="unlock-btn" onclick="unlockPrompt()" style="background:linear-gradient(135deg,var(--accent),#0098c7);color:#06121c;border:none;font-weight:900;font-size:11px;padding:6px 12px;border-radius:4px;cursor:pointer;box-shadow:0 0 10px rgba(0,212,255,.3);white-space:nowrap">🔓 フル機能</button>
     <div id="active-maker" style="display:none;background:rgba(199,125,255,.12);border:1px solid #c77dff;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:3px;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title=""><span style="color:#c77dff;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;margin-right:6px">SELECTED</span><span id="active-maker-name">—</span></div>
     <div class="h-count"><strong id="shown-count">—</strong>件表示</div>
     <button class="btn-hdr" onclick="flyToKomaki()">東海</button>
@@ -1305,6 +1308,22 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     #dist-slider{width:100%;accent-color:var(--accent);margin-top:4px}
     .origin-sel{background:#0b1322;border:1px solid var(--border2);color:var(--text);border-radius:3px;padding:3px 5px;font-size:11px;font-family:'Share Tech Mono',monospace;cursor:pointer;outline:none;max-width:120px}
     .origin-sel:focus{border-color:var(--accent)}
+    .pw-trial{width:100%;margin-top:10px;padding:11px;background:transparent;border:1px solid var(--border2);color:var(--text);font-size:13px;border-radius:2px;cursor:pointer;font-family:'Noto Sans JP',sans-serif;transition:.2s}
+    .pw-trial:hover{border-color:var(--accent);color:var(--accent)}
+    .dd-peek{position:relative}
+    .dd-cta{display:none}
+    .is-trial .dd-peek{max-height:var(--ddmax,96px);overflow:hidden;border-radius:5px}
+    .is-trial .dd-peek .dd-peek-body{-webkit-mask-image:linear-gradient(180deg,#000 32%,transparent);mask-image:linear-gradient(180deg,#000 32%,transparent)}
+    .is-trial .dd-cta{display:flex;align-items:center;justify-content:space-between;gap:8px;position:absolute;left:0;right:0;bottom:0;padding:7px 9px;background:linear-gradient(180deg,rgba(15,22,40,0),rgba(15,22,40,.97) 62%)}
+    .dd-cta-t{font-size:10px;color:var(--text);font-weight:700}
+    .dd-cta-s{color:var(--muted);font-weight:400;font-size:9px}
+    .dd-cta-b{background:linear-gradient(135deg,var(--accent),#0098c7);color:#06121c;border:none;font-weight:900;font-size:10px;padding:5px 11px;border-radius:4px;cursor:pointer;white-space:nowrap}
+    .is-trial .dd-cardsize{filter:blur(4px);opacity:.55}
+    .dd-flwrap{position:relative}
+    .dd-flov{display:none}
+    .is-trial .dd-flbody{filter:blur(4px);opacity:.45;pointer-events:none;user-select:none}
+    .is-trial .dd-flov{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:absolute;inset:0;text-align:center;padding:8px;background:rgba(15,22,40,.4);border-radius:5px}
+    .wo-lock-ov{display:flex;align-items:center;justify-content:center;gap:10px;padding:13px 10px;color:var(--muted);font-size:11px;border-top:1px solid var(--border);background:linear-gradient(180deg,rgba(15,22,40,0),rgba(15,22,40,.5))}
     .fp-tabs{display:flex;flex-shrink:0;border-bottom:1px solid var(--border);background:var(--panel2)}
     .fp-tab{flex:1;padding:11px 6px;background:transparent;border:none;border-bottom:2px solid transparent;color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:2px;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:6px}
     .fp-tab:hover{color:var(--text)}
@@ -1337,6 +1356,8 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
     <!-- ワーク寸法 -->
     <div class="fp-section">
       <span class="fp-label">ワーク寸法でしぼる</span>
+      <div class="dd-flwrap">
+      <div class="dd-flbody">
       <div style="display:flex;gap:6px;margin-bottom:8px">
         <button id="work-shape-kaku" class="work-shape-btn on" onclick="setWorkShape('kaku')">角物</button>
         <button id="work-shape-maru" class="work-shape-btn" onclick="setWorkShape('maru')">丸物</button>
@@ -1351,6 +1372,9 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
         <label class="work-dim"><span>L (mm)</span><input type="number" id="work-L" min="0" placeholder="0" oninput="onWorkInput()"/></label>
       </div>
       <div style="font-size:9px;color:var(--muted);margin-top:6px;line-height:1.5">寸法を入力すると、収まる設備を持つメーカーのみ表示します（寸法未確認の社は除外）。基準は選定#10と同一。</div>
+      </div>
+      <div class="dd-flov"><span style="font-size:11px;font-weight:700">🔒 寸法でしぼる</span><span style="font-size:9px;color:var(--muted)">あなたのワークが収まる社だけに絞り込み</span><button class="dd-cta-b" onclick="unlockPrompt()">🔓 フルで使う</button></div>
+      </div>
     </div>
 
     <!-- OASIS 業種 -->
@@ -4831,7 +4855,7 @@ function renderAll(filtered){
           ${c.equipCount>0?`<span style="font-size:9px;color:var(--accent);font-family:monospace">設${c.equipCount}</span>`:''}
           <span class="card-cat-tag" style="background:${color}15;color:${color}">${c.category||CATEGORIES[mainCat]?.label||'その他'}</span>
         </div>
-        ${(c.maxX||c.maxY||c.maxZ)?`<div class="card-size">最大: ${c.maxX||'?'}×${c.maxY||'?'}×${c.maxZ||'?'}mm</div>`:''}
+        ${(c.maxX||c.maxY||c.maxZ)?`<div class="card-size dd-cardsize">最大: ${c.maxX||'?'}×${c.maxY||'?'}×${c.maxZ||'?'}mm</div>`:''}
       </div>`;
     card.onclick=(e)=>{
       const realIdx=companies.indexOf(c);
@@ -5289,6 +5313,11 @@ function buildEquipV2(c){
   }
   return html;
 }
+function ddLock(inner,title,sub,maxh){
+  return '<div class="dd-peek" style="--ddmax:'+(maxh||96)+'px"><div class="dd-peek-body">'+inner+'</div>'+
+    '<div class="dd-cta"><span class="dd-cta-t">🔒 '+title+(sub?' <span class="dd-cta-s">'+sub+'</span>':'')+'</span>'+
+    '<button class="dd-cta-b" onclick="unlockPrompt()">🔓 フルで見る</button></div></div>';
+}
 function renderDrawer(c){
   const body=document.getElementById('drawer-body');
 
@@ -5431,15 +5460,18 @@ function renderDrawer(c){
     <div class="info-row"><span class="info-key">工程</span><span class="info-val">
       ${c.cats.map(k=>`<span style="margin-right:4px;font-size:10px;padding:2px 6px;border-radius:3px;background:${CATEGORIES[k]?.color||'#3a86ff'}20;color:${CATEGORIES[k]?.color||'#3a86ff'}">${CATEGORIES[k]?.label||k}</span>`).join('')}
     </span></div>
-    ${bizBadge}${certBadge}${certEviBlock}${urlBadge}${epBadge}${noteBadge}
+    ${bizBadge}${certBadge}${noteBadge}
     ${renderCorpSection(c)}
+    ${(function(){var _ct=(''+certEviBlock+urlBadge+epBadge);return (isUnlocked||!_ct.trim())?_ct:ddLock(_ct,'連絡先・認証詳細','HP/設備URL・認証番号/機関',74);})()}
     <div class="divider"></div>`;
-  // 設備セクションv2（機種別構造化テーブル＋認証＋表面処理＋出典集約）。旧researchBanner/equipText/xyz/SCHEDULED DATAを統合。
-  html += buildEquipV2(c);
+  // 設備セクションv2（お試し時はチラ見せロック）
+  var _eqv2 = buildEquipV2(c);
+  html += (isUnlocked || !_eqv2.trim()) ? _eqv2 : ddLock(_eqv2,'保有設備（機種別）','型番・台数・対応寸法・出典',112);
 
-  // 設備サイズ判定UI（EQUIP_DB保有の詳細社のみ）。機種一覧・出典は buildEquipV2 が担当。
+  // 設備サイズ判定UI（お試し時は精密判定をロック）
   if(c.equipId && EQUIP_DB[c.equipId]){
-    html += renderEquipSection(c);
+    var _eqs = renderEquipSection(c);
+    html += (isUnlocked || !_eqs.trim()) ? _eqs : ddLock(_eqs,'ワーク寸法の精密判定','○△×・余裕%・最大対応寸法',86);
   }
 
 
@@ -6246,13 +6278,25 @@ function flyToJapan(){  map.flyToBounds([[26.0,127.5],[45.3,145.5]],{duration:.8
 // ================================================================
 const PW='bupakan';
 const SK='mfr_map_v2_auth';
+let isUnlocked=false;
+function _dismissPwScreen(){var s=document.getElementById('pw-screen');if(s){s.classList.add('unlocked');setTimeout(function(){if(s)s.style.display='none';},520);}}
+function applyUnlockState(){
+  document.body.classList.toggle('is-unlocked',isUnlocked);
+  document.body.classList.toggle('is-trial',!isUnlocked);
+  var tb=document.getElementById('trial-badge');if(tb)tb.style.display=isUnlocked?'none':'';
+  var ub=document.getElementById('unlock-btn');if(ub)ub.style.display=isUnlocked?'none':'';
+  try{if(typeof applyFilters==='function')applyFilters();}catch(e){}
+  try{if(typeof activeCard!=='undefined'&&activeCard>=0&&typeof openDrawer==='function')openDrawer(activeCard);}catch(e){}
+}
 function checkPw(){
   const v=document.getElementById('pw-input').value;
-  if(v===PW){sessionStorage.setItem(SK,'1');const s=document.getElementById('pw-screen');s.classList.add('unlocked');setTimeout(()=>s.remove(),520);setTimeout(()=>startTutorial(false),1100);/* 認証後にチュート発火（修正） */}
+  if(v===PW){sessionStorage.setItem(SK,'1');isUnlocked=true;_dismissPwScreen();applyUnlockState();setTimeout(function(){try{startTutorial(false);}catch(e){}},1100);}
   else{const i=document.getElementById('pw-input');const e=document.getElementById('pw-error');i.classList.add('pw-input-error');e.textContent='パスワードが違います';setTimeout(()=>{i.classList.remove('pw-input-error');i.value='';i.focus();e.textContent=''},700);}
 }
+function enterTrial(){isUnlocked=false;_dismissPwScreen();applyUnlockState();}
+function unlockPrompt(){var s=document.getElementById('pw-screen');if(s){s.style.display='flex';s.classList.remove('unlocked');var i=document.getElementById('pw-input');if(i){i.value='';setTimeout(function(){i.focus();},60);}}}
 document.getElementById('pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw();});
-if(sessionStorage.getItem(SK)==='1') document.getElementById('pw-screen').remove();
+if(sessionStorage.getItem(SK)==='1'){isUnlocked=true;var _ps=document.getElementById('pw-screen');if(_ps)_ps.style.display='none';}
 
 // ================================================================
 // CSVエクスポート（パスワード保護）
@@ -7641,6 +7685,7 @@ fetch('./manufacturers.json')
     initPrefSelect();
     initOasisCatChips();
     initOriginSelector();
+    applyUnlockState();
     initLegend();
     updateEquipCounts();
     applyFilters();
@@ -7910,12 +7955,21 @@ function wireMatrix(host){
  var thead=host.querySelector('.wo-mt thead');
  if(thead){Array.prototype.forEach.call(thead.querySelectorAll('th[data-w]'),function(th){th.onclick=function(){var w=th.getAttribute('data-w');if(mode==='c')selectCProc(w);else selectProc(w);};});}
 }
+function lockResultRows(host,sel,keepN){
+ if(!host)return;var rows=host.querySelectorAll(sel);if(rows.length<=keepN)return;
+ for(var i=keepN;i<rows.length;i++)rows[i].style.display='none';
+ var hidden=rows.length-keepN;
+ var ov=document.createElement('div');ov.className='wo-lock-ov';
+ ov.innerHTML='<span>🔒 '+keepN+'社を表示中・残り'+hidden+'社と全判定は</span><button onclick="unlockPrompt()" class="dd-cta-b">🔓 全社を見る</button>';
+ host.insertAdjacentElement('beforeend',ov);
+}
 function renderMatrix(md){
  var host=document.getElementById('wo-mtx-'+md);if(!host)return;
  if(md==='a')host.innerHTML=matrixA_HTML();
  else if(md==='b')host.innerHTML=matrixProcHTML(bColsFor());
  else host.innerHTML=matrixProcHTML(cPick.filter(function(w){return PI&&PI[w];}));
  wireMatrix(host);
+ if(typeof isUnlocked!=='undefined' && !isUnlocked) lockResultRows(host,'tbody tr',5);
 }
 function applyView(md){
  var isM=(matView[md]==='mat');
