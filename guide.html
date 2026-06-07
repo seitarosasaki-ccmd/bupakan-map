@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>使い方ガイド｜OASISメーカーマップ</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Hiragino Sans','Meiryo',sans-serif;background:#f7f8fa;color:#1a2233;line-height:1.7;}
+  header{background:#12202e;padding:16px 32px;display:flex;align-items:center;gap:16px;}
+  header a{color:#2dd4aa;text-decoration:none;font-size:13px;}
+  header .logo{color:#fff;font-size:16px;font-weight:700;letter-spacing:1px;}
+  header .accent{color:#2dd4aa;}
+  .container{max-width:820px;margin:0 auto;padding:40px 24px 80px;}
+  h1{font-size:26px;font-weight:700;margin-bottom:8px;color:#12202e;}
+  .lead{color:#555;font-size:15px;margin-bottom:48px;border-left:3px solid #2dd4aa;padding-left:12px;}
+  section{margin-bottom:48px;}
+  h2{font-size:19px;font-weight:700;color:#12202e;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #2dd4aa;}
+  h3{font-size:15px;font-weight:700;color:#2dd4aa;margin:20px 0 8px;}
+  p{font-size:14px;color:#333;margin-bottom:12px;}
+  .card-row{display:flex;gap:16px;margin-top:16px;flex-wrap:wrap;}
+  .card{flex:1;min-width:220px;background:#fff;border-radius:10px;padding:20px;border:1px solid #e0e4ea;}
+  .card .tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;margin-bottom:10px;}
+  .tag-free{background:#e8f5f1;color:#1a8a6a;}
+  .tag-full{background:#12202e;color:#2dd4aa;}
+  .card ul{font-size:13px;color:#444;padding-left:18px;}
+  .card ul li{margin-bottom:5px;}
+  .step{display:flex;gap:14px;margin-bottom:16px;align-items:flex-start;}
+  .step-num{width:28px;height:28px;border-radius:50%;background:#2dd4aa;color:#12202e;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+  .step-body{flex:1;}
+  .step-body strong{font-size:14px;display:block;margin-bottom:3px;}
+  .step-body span{font-size:13px;color:#555;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px;}
+  th{background:#12202e;color:#2dd4aa;padding:9px 12px;text-align:left;font-weight:600;}
+  td{padding:9px 12px;border-bottom:1px solid #e8eaf0;color:#333;}
+  tr:nth-child(even) td{background:#f2f4f8;}
+  .badge{display:inline-block;font-size:11px;padding:2px 7px;border-radius:3px;font-weight:700;}
+  .b-lock{background:#ffe0e0;color:#c00;}
+  .b-open{background:#e0f5ec;color:#1a8a6a;}
+  footer{background:#12202e;color:#aaa;text-align:center;padding:20px;font-size:12px;}
+  footer a{color:#2dd4aa;text-decoration:none;}
+</style>
+</head>
+<body>
+<header>
+  <span class="logo">OASIS <span class="accent">メーカーマップ</span></span>
+  <a href="manufacturer_map_v3_from_master.html">← マップに戻る</a>
+</header>
+
+<div class="container">
+  <h1>使い方ガイド</h1>
+  <p class="lead">国内航空宇宙サプライヤー約1,600社をインタラクティブマップで検索・選定できるツールです。OASISデータベースをベースに、JIS Q 9100認証情報・設備情報・ワーク対応寸法を統合しています。</p>
+
+  <!-- 概要 -->
+  <section>
+    <h2>マップでできること</h2>
+    <p>地図上のピンをクリックすると各社の詳細情報が表示されます。左パネルから絞り込み・メーカー選定ができます。</p>
+    <table>
+      <tr><th>機能</th><th>内容</th></tr>
+      <tr><td>地図表示</td><td>国内約1,600社の拠点をピン表示。クリックで企業情報を確認。</td></tr>
+      <tr><td>フリーワード検索</td><td>社名・業種・設備名などで絞り込み。</td></tr>
+      <tr><td>フィルター絞り込み</td><td>ワーク寸法・距離・認証・業種で絞り込み。</td></tr>
+      <tr><td>メーカー選定</td><td>寸法・工程・工程の組み合わせで発注先候補を抽出。〇×マトリクス表示。</td></tr>
+      <tr><td>メーカー一覧</td><td>絞り込み結果を一覧で確認。社名クリックで地図がズームイン。</td></tr>
+    </table>
+  </section>
+
+  <!-- フィルター・選定機能 -->
+  <section>
+    <h2>フィルター・メーカー選定の使い方</h2>
+
+    <h3>基本フィルター（左パネル）</h3>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><strong>ワーク寸法で絞り込む</strong><span>X・Y・Z（mm）を入力すると、対応可能な寸法を持つメーカーのみ表示されます。</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><strong>距離スライダー</strong><span>地図中心からの距離（km）で表示範囲を制限できます。</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body"><strong>認証・業種で絞り込む</strong><span>JIS Q 9100 / NADCAP認証の有無、業種分類で絞り込めます。</span></div>
+    </div>
+
+    <h3>メーカー選定ウィザード</h3>
+    <div class="step">
+      <div class="step-num">A</div>
+      <div class="step-body"><strong>寸法で絞る</strong><span>ワークのX・Y・Z寸法を入力し、対応メーカーを抽出します。</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num">B</div>
+      <div class="step-body"><strong>工程で絞る</strong><span>単一の製造工程（旋削・研削など）を選択し、対応メーカーを抽出します。</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num">C</div>
+      <div class="step-body"><strong>工程を組み合わせる</strong><span>複数工程の組み合わせで発注先を検索。各社の〇×マトリクスで一覧比較できます。</span></div>
+    </div>
+  </section>
+
+  <!-- お試し vs フル -->
+  <section>
+    <h2>お試し機能 vs フル機能</h2>
+    <p>メールアドレスで登録（無料）するとフル機能が解放されます。登録情報はログイン認証・サービスご案内にのみ使用します。</p>
+    <div class="card-row">
+      <div class="card">
+        <span class="tag tag-free">お試し（登録不要）</span>
+        <ul>
+          <li>地図・ピン表示</li>
+          <li>フリーワード検索</li>
+          <li>基本フィルター</li>
+          <li>企業名・所在地の確認</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="tag tag-full">フル機能（メール登録・無料）</span>
+        <ul>
+          <li>上記すべて＋</li>
+          <li>公式HP・連絡先</li>
+          <li>ワーク対応寸法（X/Y/Z）</li>
+          <li>設備機種・メーカー詳細</li>
+          <li>JIS Q 9100 / NADCAP認証番号</li>
+          <li>メーカー選定ウィザード（A/B/C）</li>
+          <li>〇×マトリクス比較</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  &copy; 2026 OASISメーカーマップ &nbsp;|&nbsp;
+  <a href="manufacturer_map_v3_from_master.html">マップに戻る</a>
+</footer>
+</body>
+</html>
