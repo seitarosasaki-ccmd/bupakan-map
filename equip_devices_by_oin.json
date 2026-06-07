@@ -94324,5 +94324,1210 @@
         ]
       }
     ]
+  },
+  "6132962065": {
+    "name": "菅澤製機株式会社",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "精密旋削",
+        "maker": "",
+        "model": "NC旋盤",
+        "count": null,
+        "shape": "円筒",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス",
+          "鉄鋼"
+        ],
+        "note": "油圧アクチュエータ部品用",
+        "conf": "medium",
+        "src": [
+          "https://sugasawa.com/business/"
+        ]
+      },
+      {
+        "proc": "フライス",
+        "maker": "",
+        "model": "マシニングセンタ",
+        "count": null,
+        "shape": "角材",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス"
+        ],
+        "note": "複合形状部品",
+        "conf": "medium",
+        "src": [
+          "https://sugasawa.com/business/"
+        ]
+      },
+      {
+        "proc": "研削",
+        "maker": "",
+        "model": "円筒研削盤",
+        "count": null,
+        "shape": "円筒",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス"
+        ],
+        "note": "高精度仕上げ",
+        "conf": "medium",
+        "src": [
+          "https://sugasawa.com/business/"
+        ]
+      },
+      {
+        "proc": "研削",
+        "maker": "",
+        "model": "平面研削盤",
+        "count": null,
+        "shape": "平板",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金"
+        ],
+        "note": "",
+        "conf": "medium",
+        "src": [
+          "https://sugasawa.com/business/"
+        ]
+      },
+      {
+        "proc": "ホーニング",
+        "maker": "",
+        "model": "ホーニング盤",
+        "count": null,
+        "shape": "円筒（内径）",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鉄鋼"
+        ],
+        "note": "油圧シリンダ内径仕上げ",
+        "conf": "medium",
+        "src": [
+          "https://sugasawa.com/business/"
+        ]
+      },
+      {
+        "proc": "放電加工",
+        "maker": "",
+        "model": "放電加工機(EDM)",
+        "count": null,
+        "shape": "複雑形状",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "medium",
+        "src": [
+          "https://sugasawa.com/business/"
+        ]
+      }
+    ]
+  },
+  "6157601725": {
+    "name": "東洋鍛工株式会社 北工場",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "スクリュープレス鍛造",
+        "maker": "",
+        "model": "スクリュープレス 6,300t",
+        "count": 1,
+        "shape": "鍛造品",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "Ti合金",
+          "Al合金",
+          "Ni合金"
+        ],
+        "note": "大型航空機部品鍛造",
+        "conf": "high",
+        "src": [
+          "https://forging.jp/ja/facility.html"
+        ]
+      },
+      {
+        "proc": "スクリュープレス鍛造",
+        "maker": "",
+        "model": "スクリュープレス 4,000t",
+        "count": 1,
+        "shape": "鍛造品",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "Ti合金",
+          "Al合金"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://forging.jp/ja/facility.html"
+        ]
+      },
+      {
+        "proc": "スクリュープレス鍛造",
+        "maker": "",
+        "model": "スクリュープレス 2,500t",
+        "count": 1,
+        "shape": "鍛造品",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "Ti合金",
+          "Al合金"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://forging.jp/ja/facility.html"
+        ]
+      },
+      {
+        "proc": "スクリュープレス鍛造",
+        "maker": "",
+        "model": "スクリュープレス 1,600t",
+        "count": 1,
+        "shape": "鍛造品",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "Al合金"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://forging.jp/ja/facility.html"
+        ]
+      },
+      {
+        "proc": "非破壊検査",
+        "maker": "",
+        "model": "超音波探傷装置(UT)",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "北実験室 航空宇宙品質管理",
+        "conf": "medium",
+        "src": [
+          "https://forging.jp/ja/facility.html"
+        ]
+      }
+    ]
+  },
+  "6138447542": {
+    "name": "能勢鋼材株式会社 滋賀工場",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "ウォータージェット切断",
+        "maker": "",
+        "model": "ウォータージェット切断機",
+        "count": null,
+        "shape": "板材",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "ステンレス",
+          "チタン",
+          "特殊鋼"
+        ],
+        "note": "熱影響なし、精密切断",
+        "conf": "high",
+        "src": [
+          "https://nose-sus.co.jp/factory/"
+        ]
+      },
+      {
+        "proc": "プラズマ切断",
+        "maker": "",
+        "model": "プラズマ切断機",
+        "count": null,
+        "shape": "板材",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "ステンレス",
+          "特殊鋼"
+        ],
+        "note": "厚板対応",
+        "conf": "high",
+        "src": [
+          "https://nose-sus.co.jp/factory/"
+        ]
+      },
+      {
+        "proc": "せん断",
+        "maker": "",
+        "model": "シャーリングマシン",
+        "count": null,
+        "shape": "板材",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "ステンレス",
+          "鉄鋼"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://nose-sus.co.jp/factory/"
+        ]
+      },
+      {
+        "proc": "切断",
+        "maker": "",
+        "model": "バンドソー",
+        "count": null,
+        "shape": "棒・管材",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "ステンレス",
+          "特殊鋼"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://nose-sus.co.jp/factory/"
+        ]
+      }
+    ]
+  },
+  "6122386444": {
+    "name": "日本マルコ株式会社",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "ハーネス組立",
+        "maker": "",
+        "model": "自動電線切断圧着機",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "航空宇宙用ハーネス製造",
+        "conf": "medium",
+        "src": [
+          "https://nihon-maruko.jp/feature/facilities/"
+        ]
+      },
+      {
+        "proc": "クリーンルーム製造",
+        "maker": "",
+        "model": "クリーンルーム設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "衛星搭載ハーネス向けクリーンルーム",
+        "conf": "medium",
+        "src": [
+          "https://nihon-maruko.jp/feature/facilities/"
+        ]
+      },
+      {
+        "proc": "電気試験",
+        "maker": "",
+        "model": "電気試験機/BERT",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "ビット誤り率試験・通電試験",
+        "conf": "medium",
+        "src": [
+          "https://nihon-maruko.jp/feature/facilities/"
+        ]
+      }
+    ]
+  },
+  "6141379348": {
+    "name": "株式会社オージック",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "歯切り",
+        "maker": "",
+        "model": "ホブ盤",
+        "count": null,
+        "shape": "歯車",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "特殊鋼",
+          "ステンレス",
+          "Ti合金"
+        ],
+        "note": "精密歯車加工",
+        "conf": "high",
+        "src": [
+          "https://ogic-gears.com/facility"
+        ]
+      },
+      {
+        "proc": "歯車研削",
+        "maker": "",
+        "model": "歯車研削盤",
+        "count": null,
+        "shape": "歯車",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "特殊鋼"
+        ],
+        "note": "高精度仕上げ研削",
+        "conf": "high",
+        "src": [
+          "https://ogic-gears.com/facility"
+        ]
+      },
+      {
+        "proc": "旋削",
+        "maker": "",
+        "model": "NC旋盤",
+        "count": null,
+        "shape": "円筒",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "特殊鋼",
+          "ステンレス"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://ogic-gears.com/facility"
+        ]
+      },
+      {
+        "proc": "フライス",
+        "maker": "",
+        "model": "マシニングセンタ",
+        "count": null,
+        "shape": "角材",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "特殊鋼"
+        ],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://ogic-gears.com/facility"
+        ]
+      },
+      {
+        "proc": "歯車測定",
+        "maker": "",
+        "model": "歯車測定機",
+        "count": null,
+        "shape": "歯車",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://ogic-gears.com/facility"
+        ]
+      }
+    ]
+  },
+  "6148108062": {
+    "name": "大阪冶金興業株式会社",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "真空熱処理",
+        "maker": "",
+        "model": "真空熱処理炉",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "Ti合金",
+          "Ni合金",
+          "特殊鋼"
+        ],
+        "note": "航空機部品熱処理",
+        "conf": "medium",
+        "src": [
+          "https://osakayakin.co.jp/"
+        ]
+      },
+      {
+        "proc": "浸炭焼入",
+        "maker": "",
+        "model": "ガス雰囲気炉",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "特殊鋼"
+        ],
+        "note": "",
+        "conf": "medium",
+        "src": [
+          "https://osakayakin.co.jp/"
+        ]
+      },
+      {
+        "proc": "MIM成形",
+        "maker": "",
+        "model": "MIM射出成形機",
+        "count": null,
+        "shape": "複雑3D形状",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "Ti合金",
+          "ステンレス"
+        ],
+        "note": "金属射出成形",
+        "conf": "medium",
+        "src": [
+          "https://osakayakin.co.jp/"
+        ]
+      },
+      {
+        "proc": "粉末床AM",
+        "maker": "",
+        "model": "SLM装置",
+        "count": null,
+        "shape": "複雑3D形状",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "Ti合金",
+          "Al合金",
+          "Ni合金"
+        ],
+        "note": "選択的レーザー溶融",
+        "conf": "medium",
+        "src": [
+          "https://osakayakin.co.jp/"
+        ]
+      }
+    ]
+  },
+  "6149093626": {
+    "name": "株式会社岡崎製作所",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "クリーンルーム組立",
+        "maker": "",
+        "model": "クリーンルーム設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "宇宙搭載センサ製造用クリーンルーム",
+        "conf": "medium",
+        "src": [
+          "https://okazaki-mfg.com/About_us/Space.html"
+        ]
+      },
+      {
+        "proc": "環境試験",
+        "maker": "",
+        "model": "真空試験設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "宇宙環境模擬試験",
+        "conf": "medium",
+        "src": [
+          "https://okazaki-mfg.com/About_us/Space.html"
+        ]
+      },
+      {
+        "proc": "精密組立",
+        "maker": "",
+        "model": "精密組立設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "JISQ9100認証品製造",
+        "conf": "medium",
+        "src": [
+          "https://okazaki-mfg.com/About_us/Space.html"
+        ]
+      }
+    ]
+  },
+  "6142369221": {
+    "name": "株式会社フクイ金属",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "NC旋削",
+        "maker": "DMG森",
+        "model": "CL-20",
+        "count": 2,
+        "shape": "円筒",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス",
+          "Ti合金",
+          "難削材"
+        ],
+        "note": "8インチチャック ガントリーローダー付き",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋削",
+        "maker": "DMG森",
+        "model": "AL-20",
+        "count": 1,
+        "shape": "円筒",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス",
+          "難削材"
+        ],
+        "note": "6インチチャック",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋削",
+        "maker": "DMG森",
+        "model": "CL-2000",
+        "count": 8,
+        "shape": "円筒",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス",
+          "難削材"
+        ],
+        "note": "6インチチャック ガントリーローダー付き",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋削",
+        "maker": "DMG森",
+        "model": "CL-1500",
+        "count": 4,
+        "shape": "円筒",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス",
+          "難削材"
+        ],
+        "note": "6インチチャック ガントリーローダー付き",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋削",
+        "maker": "DMG森",
+        "model": "J1",
+        "count": 3,
+        "shape": "円筒",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス"
+        ],
+        "note": "6インチチャック ローダー付き",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋削",
+        "maker": "ミヤノ",
+        "model": "LX-01",
+        "count": 25,
+        "shape": "円筒",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス",
+          "難削材"
+        ],
+        "note": "6インチチャック ローダー付き。主力機種",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋削",
+        "maker": "ミヤノ",
+        "model": "LZ-0",
+        "count": 3,
+        "shape": "円筒",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス"
+        ],
+        "note": "5インチチャック ローダー付き",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋削",
+        "maker": "ミヤノ",
+        "model": "GN-3",
+        "count": 2,
+        "shape": "円筒",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス"
+        ],
+        "note": "コレットチャック",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋削",
+        "maker": "タカマツ",
+        "model": "X-10",
+        "count": 4,
+        "shape": "円筒",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス"
+        ],
+        "note": "6インチチャック ローダー付き",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "NC旋削",
+        "maker": "タカマツ",
+        "model": "X-100",
+        "count": 1,
+        "shape": "円筒",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス"
+        ],
+        "note": "6インチチャック ローダー付き",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "フライス",
+        "maker": "ファナック",
+        "model": "ロボドリル",
+        "count": 2,
+        "shape": "角材",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "ステンレス"
+        ],
+        "note": "30番 マシニングセンタ",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "フライス",
+        "maker": "ファナック",
+        "model": "ドリルメイト",
+        "count": 1,
+        "shape": "角材",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金"
+        ],
+        "note": "30番",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "工具研削",
+        "maker": "ワイダ",
+        "model": "ワイダ",
+        "count": 2,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "自社バイト製作用",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "平面研削",
+        "maker": "オカモト",
+        "model": "PFG450DAC",
+        "count": 1,
+        "shape": "平板",
+        "x": 450,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "旋削(汎用)",
+        "maker": "ワシノ",
+        "model": "19J",
+        "count": 1,
+        "shape": "円筒",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "6インチチャック 汎用旋盤",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "プレス",
+        "maker": "コマツ",
+        "model": "OBS25",
+        "count": 2,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      },
+      {
+        "proc": "測定",
+        "maker": "ミツトヨ",
+        "model": "PJF30D",
+        "count": 1,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "投影機",
+        "conf": "high",
+        "src": [
+          "https://fukui-material.com/equipment/"
+        ]
+      }
+    ]
+  },
+  "6149924601": {
+    "name": "日本冶金工業株式会社 川崎製造所",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "冷間圧延",
+        "maker": "",
+        "model": "20段ゼンジミアミル",
+        "count": null,
+        "shape": "コイル/板",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "ステンレス",
+          "高ニッケル合金"
+        ],
+        "note": "薄板精密圧延",
+        "conf": "high",
+        "src": [
+          "https://www.japanmetal.com/news-t20220126114495.html"
+        ]
+      },
+      {
+        "proc": "連続鋳造",
+        "maker": "",
+        "model": "連続鋳造設備",
+        "count": null,
+        "shape": "スラブ",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "ステンレス",
+          "高ニッケル合金"
+        ],
+        "note": "1965年導入、一貫製造の中核",
+        "conf": "medium",
+        "src": [
+          "https://www.japanmetal.com/news-t20220126114495.html"
+        ]
+      },
+      {
+        "proc": "熱間圧延",
+        "maker": "",
+        "model": "熱間圧延機",
+        "count": null,
+        "shape": "コイル/板",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "ステンレス",
+          "高ニッケル合金"
+        ],
+        "note": "",
+        "conf": "medium",
+        "src": [
+          "https://www.japanmetal.com/news-t20220126114495.html"
+        ]
+      }
+    ]
+  },
+  "6141104788": {
+    "name": "株式会社神戸工業試験場 茨城事業所",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": []
+  },
+  "6122521461": {
+    "name": "株式会社神戸工業試験場 名古屋事業所",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": []
+  },
+  "6154210449": {
+    "name": "日本電波工業株式会社 先端機材事業部(千歳TC)",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "水晶育成・加工",
+        "maker": "",
+        "model": "人工水晶育成・加工装置",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "石英(SiO2)"
+        ],
+        "note": "人工水晶製造（社内一貫）",
+        "conf": "low",
+        "src": [
+          "https://www.ndk.com/jp/products/crystal/products/oscillator.html"
+        ]
+      },
+      {
+        "proc": "マイクロ波機器製造",
+        "maker": "",
+        "model": "マイクロ波合成器製造設備",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "送受信ユニット・センサ製造",
+        "conf": "low",
+        "src": [
+          "https://www.chitose-yuuchi.jp/database/5664.html"
+        ]
+      }
+    ]
+  },
+  "6154210384": {
+    "name": "日本電波工業株式会社",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": []
+  },
+  "6136387361": {
+    "name": "中国化薬株式会社 本社（購買部・総務部）",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": []
+  },
+  "6158597540": {
+    "name": "中国化薬株式会社 第1試験場",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": []
+  },
+  "6136817145": {
+    "name": "日本特殊塗料株式会社 平塚工場",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": []
+  },
+  "6138302645": {
+    "name": "NECネットワーク・センサ株式会社",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": []
+  },
+  "6147596183": {
+    "name": "株式会社光電製作所 多摩川事業所",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": []
+  },
+  "6149117269": {
+    "name": "信州航空電子株式会社",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": []
+  },
+  "6136332785": {
+    "name": "富士通株式会社 小山工場（ナショナルセキュリティ事業本部）",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": []
+  },
+  "6138931566": {
+    "name": "日本アビオニクス株式会社 政府システム事業部",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": []
+  },
+  "700082973": {
+    "name": "株式会社ジェイ・シー・エレクトロニクス",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": []
+  },
+  "700100197": {
+    "name": "Shinkoki Co., Ltd.",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": []
+  },
+  "6147442567": {
+    "name": "株式会社関山 飛島工場",
+    "updated": "2026-06-07T03:49:34+00:00",
+    "round": 1,
+    "devices": []
   }
 }
