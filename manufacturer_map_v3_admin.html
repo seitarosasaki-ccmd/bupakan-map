@@ -7732,6 +7732,7 @@ table.wo-mt{border-collapse:separate;border-spacing:0;width:max-content;min-widt
     <div class="wo-view" id="wo-b-view"><button data-md="b" data-v="list" class="on">縦リスト</button><button data-md="b" data-v="mat">マトリクス</button></div>
     <div id="wo-b-list">
       <div id="wo-flow"></div>
+      <div id="wo-prec-info" style="display:none;margin:8px 0"></div>
       <div style="font-size:10px;color:#7a8aa0;margin-top:8px;line-height:1.5">工程をクリック→その工程の対応メーカーを地図にハイライト。<span style="color:#ffb300">&#9679;</span>=ボトルネック(20社未満)。付帯=単独発注しない工程(自社実施・他工程内包)。</div>
     </div>
     <div id="wo-mtx-b" style="display:none"></div>
@@ -7764,7 +7765,7 @@ table.wo-mt{border-collapse:separate;border-spacing:0;width:max-content;min-widt
 </div>
 <script>
 (function(){
-var WE=null,PI=null,BP=null,curMat='アルミ',curShp='角',curProc=null;
+var WE=null,PI=null,BP=null,PREC={},curMat='アルミ',curShp='角',curProc=null,curPrecFilter='all';
 var mode='a';
 var PHS=['荒加工','熱処理','仕上加工','検査(探傷)','表面処理','最終検査'];
 var PHORD={'荒加工':0,'熱処理':1,'仕上加工':2,'検査(探傷)':3,'表面処理':4,'最終検査':5};
@@ -7801,8 +7802,9 @@ Promise.all([
  fetch('work_envelope_by_oin.json').then(function(r){return r.json();}).catch(function(){return{};}),
  fetch('process_maker_index.json').then(function(r){return r.json();}).catch(function(){return{};}),
  fetch('b_presets.json').then(function(r){return r.json();}).catch(function(){return{};}),
- fetch('cert_by_oin.json').then(function(r){return r.json();}).catch(function(){return{};})
-]).then(function(a){WE=a[0];PI=a[1];BP=(a[2]&&a[2].presets)||a[2]||{};CERT=a[3]||{};setMode('a');});
+ fetch('cert_by_oin.json').then(function(r){return r.json();}).catch(function(){return{};}),
+ fetch('precision_by_oin.json').then(function(r){return r.json();}).catch(function(){return{};})
+]).then(function(a){WE=a[0];PI=a[1];BP=(a[2]&&a[2].presets)||a[2]||{};CERT=a[3]||{};PREC=a[4]||{};setMode('a');});
 function chips(id,arr,cur,fn){var el=document.getElementById(id);el.innerHTML='';arr.forEach(function(v){var b=document.createElement('button');b.className='wo-chip'+(v===cur?' on':'');b.textContent=v;b.onclick=function(){fn(v);};el.appendChild(b);});}
 
 /* ===== マトリクス表示（縦リスト⇄マトリクス切替・2026-06-02統合） ===== */
@@ -7975,8 +7977,8 @@ function kmOf(oin){
  return null;
 }
 function build(){
- chips('wo-mat',MATS,curMat,function(v){curMat=v;curProc=null;build();});
- chips('wo-shp',SHPS,curShp,function(v){curShp=v;curProc=null;build();});
+ chips('wo-mat',MATS,curMat,function(v){curMat=v;curProc=null;curPrecFilter='all';var pi=document.getElementById('wo-prec-info');if(pi){pi.style.display='none';pi.innerHTML='';}build();});
+ chips('wo-shp',SHPS,curShp,function(v){curShp=v;curProc=null;curPrecFilter='all';var pi=document.getElementById('wo-prec-info');if(pi){pi.style.display='none';pi.innerHTML='';}build();});
  var key=curMat+'|'+curShp;
  document.getElementById('wo-title').textContent=curMat+' × '+curShp+'（'+(MATD[curMat]||'')+' / '+(SHPD[curShp]||'')+'）';
  var pre=(BP[key]&&BP[key].phases)||{};
@@ -7989,10 +7991,148 @@ function build(){
  document.getElementById('wo-flow').innerHTML=html||'<div style="color:#7a8aa0">この組み合わせのプリセット未登録</div>';
  Array.prototype.forEach.call(document.querySelectorAll('#wo-flow .wo-step[data-w]'),function(el){el.onclick=function(){selectProc(el.getAttribute('data-w'));};});
  refreshMatrix('b');
+ // 精度フィルター表示
+ var pi=document.getElementById('wo-prec-info');
+ if(pi){
+  if(curProc){
+   var _cat=PROC_TO_CAT[curProc]||null;
+   var _sc=_cat?PROC_SCALES[_cat]:null;
+   if(_sc){
+    var _fb='<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-bottom:4px">'
+     +'<span style="font-size:11px;color:#7a8aa0;white-space:nowrap">'+curProc+'精度：</span>';
+    _sc.filters.forEach(function(fv){
+     var _on=(curPrecFilter===fv[0]);
+     _fb+='<button style="padding:2px 10px;border-radius:12px;border:1px solid '+(_on?'#5dcaa5':'#2a3f55')+';background:'+(_on?'rgba(93,202,165,0.12)':'transparent')+';color:'+(_on?'#5dcaa5':'#8a9ab0')+';font-size:11px;cursor:pointer;font-family:inherit" data-pf2="'+fv[0]+'">'+fv[1]+'</button>';
+    });
+    _fb+='</div><div style="font-size:10px;color:#5a7090;background:#0a1520;border-left:2px solid #2a4060;padding:3px 8px;border-radius:0 4px 4px 0;line-height:1.5">'+_sc.note+'</div>';
+    pi.innerHTML=_fb;pi.style.display='block';
+    Array.prototype.forEach.call(pi.querySelectorAll('[data-pf2]'),function(btn){
+     btn.onclick=function(){
+      curPrecFilter=btn.getAttribute('data-pf2');
+      var _minR=(_sc.tierMin&&_sc.tierMin[curPrecFilter])||0;
+      var _mk=pmakers(curProc);
+      if(_minR>0){
+       window.selOinSet=new Set(_mk.filter(function(m){
+        var _oin=String(m.oin).replace(/\.0+$/,'');
+        var _pd=PREC[_oin];
+        var _t=(_pd&&_pd.proc_tiers&&_pd.proc_tiers[_cat]&&_pd.proc_tiers[_cat].tier)||(_pd&&_pd.overall_tier)||'不明';
+        return (TIER_RANK_P[_t]||0)>=_minR;
+       }).map(function(m){return String(m.oin);}));
+      }else{
+       window.selOinSet=new Set(_mk.map(function(m){return String(m.oin);}));
+      }
+      if(typeof applyFilters==='function')applyFilters();
+      build();
+     };
+    });
+   }else{pi.style.display='none';pi.innerHTML='';}
+  }else{pi.style.display='none';pi.innerHTML='';}
+ }
+}
+
+/* ===== 工程別精度スケール表示 ===== */
+var PROC_TO_CAT={'研削':'研削','平面研削':'研削','円筒研削':'研削','内面研削':'研削',
+ 'フライス加工':'MC加工','マシニング加工':'MC加工','5軸マシニング加工':'5軸MC',
+ 'NC旋盤':'旋削','複合旋盤':'旋削','旋盤加工':'旋削',
+ '放電加工':'放電加工','ワイヤ放電':'放電加工','形彫放電':'放電加工',
+ '歯車加工':'歯車加工','ホブ加工':'歯車加工','歯車研削':'歯車加工'};
+var PROC_SCALES={
+ '研削':{note:'研削精度基準 ※研削はMCより1桁高精度。標準研削でも±2〜5μm',
+  filters:[['all','すべて'],['精密以上','精密研削以上'],['超精密のみ','超精密研削のみ']],
+  tierMin:{'精密以上':3,'超精密のみ':4},
+  labels:{'超精密':{l:'超精密研削',r:'≤0.1μm',c:'#1a6ea8'},'精密':{l:'精密研削',r:'±1〜2μm',c:'#0d7a5f'},
+   '一般精密':{l:'標準研削',r:'±2〜5μm',c:'#875a0a'},'一般':{l:'汎用研削',r:'±5μm〜',c:'#4a4a4a'},'不明':{l:'不明',r:'',c:'#666'}}},
+ '5軸MC':{note:'5軸MCは精密加工主体。超精密は温度管理+専用機要',
+  filters:[['all','すべて'],['精密以上','精密以上'],['超精密のみ','超精密のみ']],
+  tierMin:{'精密以上':3,'超精密のみ':4},
+  labels:{'超精密':{l:'超精密',r:'≤0.5μm',c:'#1a6ea8'},'精密':{l:'精密',r:'±1〜2μm',c:'#0d7a5f'},
+   '一般精密':{l:'一般精密',r:'±3〜10μm',c:'#875a0a'},'一般':{l:'一般',r:'±10μm〜',c:'#4a4a4a'},'不明':{l:'不明',r:'',c:'#666'}}},
+ 'MC加工':{note:'汎用MC。高精度化は治具+恒温環境が要件',
+  filters:[['all','すべて'],['精密以上','精密以上'],['一般精密以上','一般精密以上']],
+  tierMin:{'精密以上':3,'一般精密以上':2},
+  labels:{'超精密':{l:'超精密',r:'≤0.5μm',c:'#1a6ea8'},'精密':{l:'精密',r:'±1〜2μm',c:'#0d7a5f'},
+   '一般精密':{l:'一般精密',r:'±3〜10μm',c:'#875a0a'},'一般':{l:'一般',r:'±10μm〜',c:'#4a4a4a'},'不明':{l:'不明',r:'',c:'#666'}}},
+ '旋削':{note:'旋削精度基準（超精密は研削併用が前提）',
+  filters:[['all','すべて'],['精密以上','精密旋削以上'],['一般精密以上','標準旋削以上']],
+  tierMin:{'精密以上':3,'一般精密以上':2},
+  labels:{'超精密':{l:'超精密旋削',r:'≤0.5μm',c:'#1a6ea8'},'精密':{l:'精密旋削',r:'±1〜3μm',c:'#0d7a5f'},
+   '一般精密':{l:'標準旋削',r:'±5〜20μm',c:'#875a0a'},'一般':{l:'汎用旋削',r:'±20μm〜',c:'#4a4a4a'},'不明':{l:'不明',r:'',c:'#666'}}},
+ '放電加工':{note:'放電加工精度基準',
+  filters:[['all','すべて'],['精密以上','高精度EDM以上']],
+  tierMin:{'精密以上':3},
+  labels:{'超精密':{l:'精密EDM',r:'≤1μm',c:'#1a6ea8'},'精密':{l:'高精度EDM',r:'±1〜3μm',c:'#0d7a5f'},
+   '一般精密':{l:'標準EDM',r:'±3〜10μm',c:'#875a0a'},'一般':{l:'汎用EDM',r:'±10μm〜',c:'#4a4a4a'},'不明':{l:'不明',r:'',c:'#666'}}},
+ '歯車加工':{note:'歯車精度はJIS等級で評価',
+  filters:[['all','すべて'],['精密以上','精密歯車以上']],
+  tierMin:{'精密以上':3},
+  labels:{'精密':{l:'精密歯車',r:'JIS 1〜3級',c:'#0d7a5f'},
+   '一般精密':{l:'標準歯車',r:'JIS 4〜6級',c:'#875a0a'},'一般':{l:'汎用歯車',r:'JIS 7級〜',c:'#4a4a4a'},'不明':{l:'不明',r:'',c:'#666'}}}
+};
+var TIER_RANK_P={'超精密':4,'精密':3,'一般精密':2,'一般':1,'不明':0};
+function renderPrecInfo(procName){
+ var cat=PROC_TO_CAT[procName]||null;
+ var sc=cat?PROC_SCALES[cat]:null;
+ var pi=document.getElementById('wo-prec-info');
+ if(!pi)return;
+ if(!sc){pi.style.display='none';pi.innerHTML='';return;}
+ // フィルターバー
+ var fbHtml='<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-bottom:4px">'
+  +'<span style="font-size:11px;color:#7a8aa0;white-space:nowrap">'+procName+'精度：</span>';
+ sc.filters.forEach(function(fv){
+  var active=(curPrecFilter===fv[0]);
+  fbHtml+='<button style="padding:2px 10px;border-radius:12px;border:1px solid '+(active?'#5dcaa5':'#2a3f55')+';background:'+(active?'rgba(93,202,165,0.12)':'transparent')+';color:'+(active?'#5dcaa5':'#8a9ab0')+';font-size:11px;cursor:pointer;font-family:inherit" data-pf="'+fv[0]+'">'+fv[1]+'</button>';
+ });
+ fbHtml+='</div>';
+ // スケール注釈
+ fbHtml+='<div style="font-size:10px;color:#5a7090;background:#0a1520;border-left:2px solid #2a4060;padding:3px 8px;border-radius:0 4px 4px 0;line-height:1.5">'+sc.note+'</div>';
+ pi.innerHTML=fbHtml;
+ pi.style.display='block';
+ // フィルターボタンにイベント
+ Array.prototype.forEach.call(pi.querySelectorAll('[data-pf]'),function(btn){
+  btn.onclick=function(){
+   curPrecFilter=btn.getAttribute('data-pf');
+   renderPrecInfo(procName);
+   renderPrecResults(procName);
+  };
+ });
+ renderPrecResults(procName);
+}
+function renderPrecResults(procName){
+ // mo-flowの各ステップに精度バッジ付与
+ var cat=PROC_TO_CAT[procName]||null;
+ var sc=cat?PROC_SCALES[cat]:null;
+ if(!sc||!PREC||Object.keys(PREC).length===0)return;
+ var minRank=(curPrecFilter!=='all'&&sc.tierMin[curPrecFilter])||0;
+ // 選択工程のpmakers (pmakers関数利用)
+ var makers=pmakers(procName);
+ var filtered=makers.filter(function(m){
+  var oin=String(m.oin).replace(/\.0+$/,'');
+  var pd=PREC[oin];
+  if(!pd||!pd.proc_tiers)return minRank===0;
+  var tier=(pd.proc_tiers[cat]&&pd.proc_tiers[cat].tier)||pd.overall_tier||'不明';
+  var rank=TIER_RANK_P[tier]||0;
+  return rank>=minRank;
+ });
+ // selOinSetを精度フィルター後に絞り込む
+ if(minRank>0){
+  window.selOinSet=new Set(filtered.map(function(m){return String(m.oin);}));
+  if(typeof applyFilters==='function')applyFilters();
+ } else {
+  window.selOinSet=new Set(makers.map(function(m){return String(m.oin);}));
+  if(typeof applyFilters==='function')applyFilters();
+ }
+ // フロー表示件数を更新（count in badge）
+ var flowEl=document.getElementById('wo-flow');
+ if(!flowEl)return;
+ var step=flowEl.querySelector('.wo-step.on[data-w]');
+ if(step){
+  var wc=step.querySelector('.wc');
+  if(wc)wc.textContent=(minRank>0?filtered.length:makers.length)+'社';
+ }
 }
 function selectProc(w){
  if(!PI[w]){return;}
- curProc=w;
+ curProc=w;curPrecFilter='all';
  window.selOinSet=new Set(pmakers(w).map(function(m){return String(m.oin);}));
  if(typeof applyFilters==='function')applyFilters();
  build();
