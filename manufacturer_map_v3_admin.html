@@ -7966,7 +7966,7 @@ function evalA(){
  var TIER_COLOR={'超精密':'#1a6ea8','精密':'#0d7a5f','一般精密':'#875a0a','一般':'#4a4a4a','不明':'#555'};
  var TIER_BG={'超精密':'rgba(26,110,168,0.15)','精密':'rgba(13,122,95,0.15)','一般精密':'rgba(135,90,10,0.15)','一般':'rgba(74,74,74,0.15)','不明':'rgba(80,80,80,0.08)'};
  var h='<table class="wo-jt"><tr style="color:#7a8aa0;font-size:11px"><td style="width:30px">判定</td><td>企業名</td>';
- if(hasPrecData)h+='<td style="width:90px">精度</td>';
+ if(hasPrecData)h+='<td style="width:72px">精度</td>';
  h+='<td style="width:128px">最大対応寸法</td><td style="width:42px;text-align:right">小牧</td></tr>';
  top.forEach(function(r){
   var precCell='';
@@ -7978,10 +7978,11 @@ function evalA(){
     var t=procTiers[cat].tier;
     var sc=PROC_SCALES[cat];var lbl=sc&&sc.labels[t]?sc.labels[t].l:t;
     var pfc=TIER_COLOR[t]||'#555',pbg=TIER_BG[t]||'rgba(80,80,80,0.08)';
-    return '<div style="display:flex;gap:4px;align-items:center;margin-bottom:2px"><span style="font-size:9px;color:#5a7090;min-width:36px">'+cat+'</span>'
-     +'<span style="display:inline-block;padding:0 5px;border-radius:7px;background:'+pbg+';color:'+pfc+';font-size:10px;font-weight:500">'+lbl+'</span></div>';
+    return '<div style="white-space:nowrap;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis">'
+     +'<span style="font-size:9px;color:#5a7090">'+cat.replace('加工','').replace('マシニング','MC')+'</span> '
+     +'<span style="display:inline-block;padding:0 5px;border-radius:7px;background:'+pbg+';color:'+pfc+';font-size:10px;font-weight:500;white-space:nowrap">'+lbl+'</span></div>';
    }).join('');
-   precCell='<td style="vertical-align:top;padding:4px 6px">'+(badgeH||('<span style="display:inline-block;padding:1px 7px;border-radius:8px;background:'+bg+';color:'+fc+';font-size:10px">'+r.tier+'</span>'))+'</td>';
+   precCell='<td style="vertical-align:top;padding:4px 6px;overflow:hidden">'+(badgeH||('<span style="display:inline-block;padding:1px 7px;border-radius:8px;background:'+bg+';color:'+fc+';font-size:10px;white-space:nowrap">'+r.tier+'</span>'))+'</td>';
   }
   h+='<tr><td><span class="wo-mark wo-'+r.j.cls+'">'+r.j.mark+'</span></td>'+
    '<td><div style="font-weight:bold">'+esc(r.name)+'</div><div style="font-size:10px;color:#7a8aa0">'+r.j.note+'</div></td>'+
