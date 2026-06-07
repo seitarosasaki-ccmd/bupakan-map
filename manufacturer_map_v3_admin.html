@@ -7715,6 +7715,7 @@ table.wo-mt{border-collapse:separate;border-spacing:0;width:max-content;min-widt
     <div id="wo-a-shp"></div>
     <div id="wo-a-dims" style="margin-top:8px"></div>
     <div id="wo-a-hint" style="font-size:10px;color:#7a8aa0;margin-top:5px"></div>
+    <div id="wo-a-prec-filter" style="margin:8px 0 4px"></div>
     <div class="wo-view" id="wo-a-view"><button data-md="a" data-v="list" class="on">縦リスト</button><button data-md="a" data-v="mat">マトリクス</button></div>
     <div id="wo-a-list">
       <div id="wo-a-summary" style="font-size:12px;color:#9fb2c8;margin:10px 0 6px"></div>
@@ -7766,7 +7767,7 @@ table.wo-mt{border-collapse:separate;border-spacing:0;width:max-content;min-widt
 </div>
 <script>
 (function(){
-var WE=null,PI=null,BP=null,PREC={},curMat='アルミ',curShp='角',curProc=null,curPrecFilter='all';
+var WE=null,PI=null,BP=null,PREC={},curMat='アルミ',curShp='角',curProc=null,curPrecFilter='all',aPrecFilter='all';
 var mode='a';
 var PHS=['荒加工','熱処理','仕上加工','検査(探傷)','表面処理','最終検査'];
 var PHORD={'荒加工':0,'熱処理':1,'仕上加工':2,'検査(探傷)':3,'表面処理':4,'最終検査':5};
@@ -7942,20 +7943,49 @@ function judgeA(c){
 }
 function evalA(){
  if(!WE){return;}
+ // 精度フィルターUI描画
+ renderAPrecFilter();
  var order={'○':0,'△':1,'×':2},rows=[];
  for(var oin in WE){if(!WE.hasOwnProperty(oin))continue;var c=WE[oin];
   if(aShape==='角'&&c.nonmc)continue;
   if(aShape==='丸'&&(!c.mdia||c.mdia<=0))continue;
   var j=judgeA(c);if(j.mark==='×'&&!(c.mx||c.mdia))continue;
-  rows.push({oin:oin,name:c.name||'',km:kmOf(oin),j:j});
+  // 精度フィルター適用
+  var _oin=String(oin).replace(/\.0+$/,'');
+  var _pd=PREC[_oin];
+  var _tier=(_pd&&_pd.overall_tier)||'不明';
+  var _rank=TIER_RANK_P[_tier]||0;
+  if(aPrecFilter==='精密以上'&&_rank>0&&_rank<3)return;
+  if(aPrecFilter==='一般精密以上'&&_rank>0&&_rank<2)return;
+  rows.push({oin:oin,name:c.name||'',km:kmOf(oin),j:j,tier:_tier,pd:_pd});
  }
  rows.sort(function(a,b){var d=order[a.j.mark]-order[b.j.mark];if(d!==0)return d;return (a.km==null?9e9:a.km)-(b.km==null?9e9:b.km);});
  aLast=rows;
  var top=rows.slice(0,60);
- var h='<table class="wo-jt"><tr style="color:#7a8aa0;font-size:11px"><td style="width:30px">判定</td><td>企業名</td><td style="width:128px">最大対応寸法</td><td style="width:42px;text-align:right">小牧</td></tr>';
+ var hasPrecData=Object.keys(PREC).length>0;
+ var TIER_COLOR={'超精密':'#1a6ea8','精密':'#0d7a5f','一般精密':'#875a0a','一般':'#4a4a4a','不明':'#555'};
+ var TIER_BG={'超精密':'rgba(26,110,168,0.15)','精密':'rgba(13,122,95,0.15)','一般精密':'rgba(135,90,10,0.15)','一般':'rgba(74,74,74,0.15)','不明':'rgba(80,80,80,0.08)'};
+ var h='<table class="wo-jt"><tr style="color:#7a8aa0;font-size:11px"><td style="width:30px">判定</td><td>企業名</td>';
+ if(hasPrecData)h+='<td style="width:90px">精度</td>';
+ h+='<td style="width:128px">最大対応寸法</td><td style="width:42px;text-align:right">小牧</td></tr>';
  top.forEach(function(r){
+  var precCell='';
+  if(hasPrecData){
+   var fc=TIER_COLOR[r.tier]||'#555',bg=TIER_BG[r.tier]||'rgba(80,80,80,0.08)';
+   var procTiers=r.pd&&r.pd.proc_tiers?r.pd.proc_tiers:{};
+   var topProcs=Object.keys(procTiers).sort(function(a,b){return (TIER_RANK_P[procTiers[b].tier]||0)-(TIER_RANK_P[procTiers[a].tier]||0);}).slice(0,2);
+   var badgeH=topProcs.map(function(cat){
+    var t=procTiers[cat].tier;
+    var sc=PROC_SCALES[cat];var lbl=sc&&sc.labels[t]?sc.labels[t].l:t;
+    var pfc=TIER_COLOR[t]||'#555',pbg=TIER_BG[t]||'rgba(80,80,80,0.08)';
+    return '<div style="display:flex;gap:4px;align-items:center;margin-bottom:2px"><span style="font-size:9px;color:#5a7090;min-width:36px">'+cat+'</span>'
+     +'<span style="display:inline-block;padding:0 5px;border-radius:7px;background:'+pbg+';color:'+pfc+';font-size:10px;font-weight:500">'+lbl+'</span></div>';
+   }).join('');
+   precCell='<td style="vertical-align:top;padding:4px 6px">'+(badgeH||('<span style="display:inline-block;padding:1px 7px;border-radius:8px;background:'+bg+';color:'+fc+';font-size:10px">'+r.tier+'</span>'))+'</td>';
+  }
   h+='<tr><td><span class="wo-mark wo-'+r.j.cls+'">'+r.j.mark+'</span></td>'+
    '<td><div style="font-weight:bold">'+esc(r.name)+'</div><div style="font-size:10px;color:#7a8aa0">'+r.j.note+'</div></td>'+
+   precCell+
    '<td style="font-family:monospace;font-size:11px;color:#9fb2c8">'+r.j.label+'</td>'+
    '<td style="text-align:right;color:#7a8aa0">'+(r.km!=null?r.km+'km':'—')+'</td></tr>';
  });
@@ -7968,6 +7998,22 @@ function evalA(){
  window.selOinSet=hset.size?hset:null;curProc=null;
  if(typeof applyFilters==='function')applyFilters();
  refreshMatrix('a');
+}
+function renderAPrecFilter(){
+ var el=document.getElementById('wo-a-prec-filter');if(!el)return;
+ if(Object.keys(PREC).length===0){el.innerHTML='';return;}
+ var filters=[['all','すべて'],['精密以上','精密以上'],['一般精密以上','一般精密以上']];
+ var h='<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap">'
+  +'<span style="font-size:11px;color:#7a8aa0;white-space:nowrap">精度：</span>';
+ filters.forEach(function(fv){
+  var on=(aPrecFilter===fv[0]);
+  h+='<button style="padding:2px 10px;border-radius:12px;border:1px solid '+(on?'#5dcaa5':'#2a3f55')+';background:'+(on?'rgba(93,202,165,0.12)':'transparent')+';color:'+(on?'#5dcaa5':'#8a9ab0')+';font-size:11px;cursor:pointer;font-family:inherit" data-apf="'+fv[0]+'">'+fv[1]+'</button>';
+ });
+ h+='</div>';
+ el.innerHTML=h;
+ Array.prototype.forEach.call(el.querySelectorAll('[data-apf]'),function(btn){
+  btn.onclick=function(){aPrecFilter=btn.getAttribute('data-apf');evalA();};
+ });
 }
 function kmOf(oin){
  try{
