@@ -1161,15 +1161,23 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
     <div class="pw-sub">メールでログイン（フル機能） ／ または お試しで</div>
     <div class="beta-badge" style="display:inline-block;background:rgba(0,212,255,.12);border:1px solid #00d4ff;color:#00d4ff;font-size:10px;font-family:'Share Tech Mono',monospace;letter-spacing:2px;padding:3px 12px;border-radius:3px;margin:8px 0 4px;">β VERSION — 試験運用中</div>
     <div id="pw-form">
-      <div class="pw-field">
-        <input type="email" id="pw-email-input" placeholder="メールアドレス" autocomplete="email" autofocus/>
+      <div id="pw-step-email">
+        <div class="pw-field">
+          <input type="email" id="pw-email-input" placeholder="メールアドレス" autocomplete="email" autofocus/>
+        </div>
+        <div class="pw-error" id="pw-error"></div>
+        <button class="pw-btn" onclick="sendOtp()">認証コードを送信</button>
+        <button class="pw-trial" onclick="enterTrial()">▶ お試しで見てみる（無料）</button>
       </div>
-      <div class="pw-error" id="pw-error"></div>
-      <button class="pw-btn" onclick="sendMagicLink()">ログイン（フル機能版）</button>
-      <button class="pw-trial" onclick="enterTrial()">▶ お試しで見てみる（無料）</button>
-    </div>
-    <div id="pw-sent" style="display:none;color:var(--accent);padding:16px 0;font-size:13px;line-height:1.7;text-align:center">
-      📧 ログインリンクを送信しました。<br>受信ボックスを確認し、メール内のリンクをクリックしてください。<br><span style="color:var(--muted);font-size:11px">届かない場合はスパムフォルダもご確認ください</span>
+      <div id="pw-step-otp" style="display:none">
+        <div style="color:var(--accent);font-size:12px;margin-bottom:8px;text-align:center">📧 認証コードをメールに送信しました</div>
+        <div class="pw-field">
+          <input type="text" id="pw-otp-input" placeholder="6桁の認証コード" maxlength="6" autocomplete="one-time-code" inputmode="numeric" style="letter-spacing:4px;font-size:20px;text-align:center"/>
+        </div>
+        <div class="pw-error" id="pw-otp-error"></div>
+        <button class="pw-btn" onclick="verifyOtp()">ログイン</button>
+        <button class="pw-trial" onclick="document.getElementById('pw-step-email').style.display='';document.getElementById('pw-step-otp').style.display='none'" style="margin-top:4px;font-size:11px;opacity:.7">← メールアドレスを変更</button>
+      </div>
     </div>
     <div class="pw-log">
       <div class="pw-log-ttl">▣ 更新履歴 / CHANGELOG</div>
@@ -6341,37 +6349,57 @@ if(_sb){
   })();
 }
 
-async function sendMagicLink(){
+var _otpEmail='';
+async function sendOtp(){
   const emailEl=document.getElementById('pw-email-input');
   const email=emailEl?emailEl.value.trim():'';
   const errEl=document.getElementById('pw-error');
   if(!email||!email.includes('@')){if(errEl)errEl.textContent='メールアドレスを入力してください';return;}
   if(errEl)errEl.textContent='';
-  const btn=document.querySelector('#pw-form .pw-btn');
+  const btn=document.querySelector('#pw-step-email .pw-btn');
   if(btn){btn.disabled=true;btn.textContent='送信中…';}
-  const redirectTo=location.href.split('#')[0].split('?')[0];
-  const {error}=await _sb.auth.signInWithOtp({email,options:{emailRedirectTo:redirectTo}});
+  const {error}=await _sb.auth.signInWithOtp({email,options:{shouldCreateUser:false}});
   if(error){
     if(errEl)errEl.textContent=error.message;
-    if(btn){btn.disabled=false;btn.textContent='ログイン（フル機能版）';}
+    if(btn){btn.disabled=false;btn.textContent='認証コードを送信';}
   } else {
-    var f=document.getElementById('pw-form');var sv=document.getElementById('pw-sent');
-    if(f)f.style.display='none';if(sv)sv.style.display='block';
+    _otpEmail=email;
+    document.getElementById('pw-step-email').style.display='none';
+    document.getElementById('pw-step-otp').style.display='';
+    setTimeout(function(){var i=document.getElementById('pw-otp-input');if(i)i.focus();},60);
+    if(btn){btn.disabled=false;btn.textContent='認証コードを送信';}
   }
+}
+async function verifyOtp(){
+  const token=(document.getElementById('pw-otp-input')||{}).value||'';
+  const errEl=document.getElementById('pw-otp-error');
+  if(token.length!==6){if(errEl)errEl.textContent='6桁のコードを入力してください';return;}
+  if(errEl)errEl.textContent='';
+  const btn=document.querySelector('#pw-step-otp .pw-btn');
+  if(btn){btn.disabled=true;btn.textContent='確認中…';}
+  const {error}=await _sb.auth.verifyOtp({email:_otpEmail,token,type:'email'});
+  if(error){
+    if(errEl)errEl.textContent='コードが正しくありません（'+error.message+')';
+    if(btn){btn.disabled=false;btn.textContent='ログイン';}
+  }
+  // 成功時はonAuthStateChangeで自動処理
 }
 function enterTrial(){isUnlocked=false;_dismissPwScreen();applyUnlockState();}
 function unlockPrompt(){
   var s=document.getElementById('pw-screen');
   if(s){
     s.style.display='flex';s.classList.remove('unlocked');
-    var f=document.getElementById('pw-form');var sv=document.getElementById('pw-sent');
-    if(f)f.style.display='block';if(sv)sv.style.display='none';
+    var se=document.getElementById('pw-step-email');var so=document.getElementById('pw-step-otp');
+    if(se)se.style.display='';if(so)so.style.display='none';
     var err=document.getElementById('pw-error');if(err)err.textContent='';
+    var err2=document.getElementById('pw-otp-error');if(err2)err2.textContent='';
     setTimeout(function(){var i=document.getElementById('pw-email-input');if(i)i.focus();},60);
   }
 }
 document.addEventListener('keydown',function(e){
-  if(e.key==='Enter'&&document.activeElement&&document.activeElement.id==='pw-email-input')sendMagicLink();
+  if(e.key!=='Enter') return;
+  if(document.activeElement&&document.activeElement.id==='pw-email-input')sendOtp();
+  if(document.activeElement&&document.activeElement.id==='pw-otp-input')verifyOtp();
 });
 
 // ================================================================
