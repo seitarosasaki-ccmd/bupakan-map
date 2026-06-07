@@ -6352,7 +6352,7 @@ if(_sb){
     _sb.auth.onAuthStateChange(function(event,session){
       var wasLocked=!isUnlocked;
       _sbUser=session?session.user:null;
-      isUnlocked=!!session;
+      isUnlocked=!!session||sessionStorage.getItem(SK)==='1';
       applyUnlockState();
       if(event==='SIGNED_IN'&&wasLocked){_dismissPwScreen();setTimeout(function(){try{startTutorial(false);}catch(e){}},1100);}
       if(event==='SIGNED_OUT'){isUnlocked=false;unlockPrompt();}
