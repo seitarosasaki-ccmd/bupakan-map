@@ -8174,7 +8174,7 @@ function buildPrecResults(cat, sc, procName, precFilter){
   var lbl=(sc&&sc.labels[r.tier])||{l:r.tier,r:'',c:'#666'};
   var fc=TIER_COLOR[r.tier]||'#555';var bg=TIER_BG[r.tier]||'rgba(80,80,80,0.1)';
   var catShortB=cat.replace('加工','').replace('マシニング','MC').replace('5軸MC','5軸').replace('放電','EDM').replace('歯車','歯車');
-  var badge='<span style="font-size:11px;background:'+bg+';color:'+fc+';border-radius:6px;padding:1px 8px;font-weight:500;white-space:nowrap">'+catShortB+' '+lbl.l+'</span>';
+  var badge='<span style="font-size:10px;background:'+bg+';color:'+fc+';border-radius:6px;padding:0 5px;white-space:nowrap">'+catShortB+' '+lbl.l+'</span>';
   var range=lbl.r?'<div style="font-size:10px;color:#5a7090;margin-top:2px">'+lbl.r+'</div>':'';
   var others=r.otherProcs.slice(0,3).map(function(op){
    var ofc=TIER_COLOR[op.tier]||'#555';var obg=TIER_BG[op.tier]||'rgba(80,80,80,0.1)';
