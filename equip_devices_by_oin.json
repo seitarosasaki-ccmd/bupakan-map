@@ -96356,5 +96356,304 @@
         ]
       }
     ]
+  },
+  "6141104762": {
+    "name": "株式会社神戸工業試験場 神戸事業所",
+    "updated": "2026-06-07T05:16:43+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "疲労試験",
+        "maker": "MTS",
+        "model": "",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般",
+          "複合材"
+        ],
+        "note": "ねじり疲労試験機 ±5kN·m",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/64045/equipment/"
+        ]
+      },
+      {
+        "proc": "疲労試験",
+        "maker": "MTS",
+        "model": "",
+        "count": 6,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般"
+        ],
+        "note": "引張・圧縮疲労試験機 ±98kN 電気油圧サーボ",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/64045/equipment/"
+        ]
+      },
+      {
+        "proc": "疲労試験",
+        "maker": "MTS",
+        "model": "",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般"
+        ],
+        "note": "引張・圧縮疲労試験機 ±245kN",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/64045/equipment/"
+        ]
+      },
+      {
+        "proc": "疲労試験",
+        "maker": "MTS",
+        "model": "",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般"
+        ],
+        "note": "引張・圧縮疲労試験機 ±490kN",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/64045/equipment/"
+        ]
+      },
+      {
+        "proc": "強度試験",
+        "maker": "島津製作所",
+        "model": "オートグラフ",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般",
+          "複合材"
+        ],
+        "note": "引張(曲げ)試験機 1000kN (油圧式)",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/64045/equipment/"
+        ]
+      },
+      {
+        "proc": "強度試験",
+        "maker": "島津製作所",
+        "model": "",
+        "count": 12,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般"
+        ],
+        "note": "回転曲げ疲労試験機 600～850℃ 小野式高温",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/64045/equipment/"
+        ]
+      },
+      {
+        "proc": "強度試験",
+        "maker": "アカシ",
+        "model": "",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般"
+        ],
+        "note": "ビッカース硬さ試験機",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/64045/equipment/"
+        ]
+      },
+      {
+        "proc": "強度試験",
+        "maker": "アカシ",
+        "model": "",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般"
+        ],
+        "note": "マイクロビッカース硬さ試験機",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/64045/equipment/"
+        ]
+      },
+      {
+        "proc": "金属組織観察",
+        "maker": "日本電子",
+        "model": "JSM-6100",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般",
+          "複合材"
+        ],
+        "note": "走査型電子顕微鏡(SEM)",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/64045/equipment/"
+        ]
+      },
+      {
+        "proc": "金属組織観察",
+        "maker": "ニコン",
+        "model": "",
+        "count": 7,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般"
+        ],
+        "note": "光学顕微鏡 25～1000倍 正立型",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/64045/equipment/"
+        ]
+      },
+      {
+        "proc": "表面粗さ測定",
+        "maker": "小坂研究所",
+        "model": "SE40",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般"
+        ],
+        "note": "表面粗さ測定機 200～50,000倍 触針式",
+        "conf": "high",
+        "src": [
+          "https://ja.nc-net.or.jp/company/64045/equipment/"
+        ]
+      }
+    ]
+  },
+  "6154905000": {
+    "name": "中国化薬株式会社 本社",
+    "updated": "2026-06-07T05:16:43+00:00",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "火工品製造",
+        "maker": "不明",
+        "model": "雷管自動製造装置",
+        "count": 1,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "火薬",
+          "金属（弾体）"
+        ],
+        "note": "雷管自動製造装置。防衛火工品・宇宙火工品製造",
+        "conf": "mid",
+        "src": [
+          "https://www.chugokukayaku.co.jp/products/category01.html"
+        ]
+      },
+      {
+        "proc": "火工品検査",
+        "maker": "不明",
+        "model": "X線照射装置",
+        "count": 1,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "火薬",
+          "金属（弾体）"
+        ],
+        "note": "弾薬のX線検査装置",
+        "conf": "mid",
+        "src": [
+          "https://www.chugokukayaku.co.jp/products/category01.html"
+        ]
+      },
+      {
+        "proc": "爆発試験",
+        "maker": "自社製",
+        "model": "静爆試験壕",
+        "count": 1,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "火薬"
+        ],
+        "note": "静爆試験設備（壕）。トンネル内射撃試験設備",
+        "conf": "mid",
+        "src": [
+          "https://www.chugokukayaku.co.jp/products/category01.html"
+        ]
+      }
+    ]
   }
 }
