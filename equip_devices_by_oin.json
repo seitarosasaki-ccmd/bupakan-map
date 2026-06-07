@@ -95529,5 +95529,832 @@
     "updated": "2026-06-07T03:49:34+00:00",
     "round": 1,
     "devices": []
+  },
+  "6121328801": {
+    "name": "榎本ビーエー株式会社 戸門工場",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "5軸マシニング",
+        "maker": "不明",
+        "model": "大型5軸マシニングセンタ（複数台）",
+        "count": null,
+        "shape": "角",
+        "x": 6000,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "チタン合金",
+          "複合材"
+        ],
+        "note": "6mクラスの大型5軸加工設備を多数保有。航空機構造部品・薄肉部品の精密5軸加工を得意とする",
+        "conf": "mid",
+        "src": [
+          "https://enomotoweb.com/"
+        ]
+      }
+    ]
+  },
+  "6123159829": {
+    "name": "大喜産業株式会社 木曽崎工場",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": []
+  },
+  "6124168424": {
+    "name": "株式会社IHIエアロマニュファクチャリング",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "5軸マシニング",
+        "maker": "不明",
+        "model": "5軸マシニングセンタ（ジェットエンジン翼部品専用）",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "ニッケル合金"
+        ],
+        "note": "ファン動翼・圧縮機動翼・静翼を製造。難削材の5軸加工を30年以上実施",
+        "conf": "mid",
+        "src": [
+          "https://www.ihi.co.jp/iam/technology/equipment/index.html"
+        ]
+      },
+      {
+        "proc": "研磨",
+        "maker": "IHI（自社製）",
+        "model": "自社製研磨装置",
+        "count": null,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "ニッケル合金"
+        ],
+        "note": "航空機に求められる耐久性向上のための特殊研磨工程",
+        "conf": "mid",
+        "src": [
+          "https://www.ihi.co.jp/iam/technology/equipment/index.html"
+        ]
+      }
+    ]
+  },
+  "6134479420": {
+    "name": "新明和工業",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "複合材加工",
+        "maker": "不明",
+        "model": "複合材加工設備（FRP/CFRP）",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "CFRP",
+          "FRP",
+          "アルミ合金"
+        ],
+        "note": "US-2飛行艇・航空機構造部品製造。複合材・機体構造加工・MRO",
+        "conf": "low",
+        "src": [
+          "https://www.shinmaywa.co.jp/english/products/aircraft/"
+        ]
+      }
+    ]
+  },
+  "6133757305": {
+    "name": "新潟メタリコン工業株式会社 材木町工場",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "溶射",
+        "maker": "不明",
+        "model": "高速フレーム溶射（HVOF）装置",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般"
+        ],
+        "note": "材木町工場での高速フレーム溶射（HVOF）による耐摩耗・肉盛り溶射",
+        "conf": "mid",
+        "src": [
+          "https://www.nii-meta.jp/",
+          "https://www.processing-thermalspray.com/company/nii-meta.html"
+        ]
+      },
+      {
+        "proc": "溶射",
+        "maker": "不明",
+        "model": "プラズマ溶射装置",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般",
+          "セラミック系"
+        ],
+        "note": "プラズマ溶射対応",
+        "conf": "mid",
+        "src": [
+          "https://www.nii-meta.jp/"
+        ]
+      },
+      {
+        "proc": "溶射",
+        "maker": "不明",
+        "model": "アーク溶射装置",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般"
+        ],
+        "note": "アーク溶射対応",
+        "conf": "mid",
+        "src": [
+          "https://www.nii-meta.jp/"
+        ]
+      },
+      {
+        "proc": "研磨",
+        "maker": "不明",
+        "model": "円筒研磨機",
+        "count": null,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般"
+        ],
+        "note": "溶射後の円筒研磨による仕上げ工程",
+        "conf": "mid",
+        "src": [
+          "https://www.processing-thermalspray.com/company/nii-meta.html"
+        ]
+      },
+      {
+        "proc": "旋盤加工",
+        "maker": "不明",
+        "model": "NC旋盤",
+        "count": null,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属全般"
+        ],
+        "note": "前加工・旋盤加工対応",
+        "conf": "mid",
+        "src": [
+          "https://www.processing-thermalspray.com/company/nii-meta.html"
+        ]
+      }
+    ]
+  },
+  "6135465006": {
+    "name": "株式会社IHIエアロスペース",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "旋盤加工",
+        "maker": "不明",
+        "model": "ターニング加工機（大型）",
+        "count": null,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "CFRP",
+          "カーボン/カーボンコンポジット"
+        ],
+        "note": "固体燃料ロケット・宇宙機器部品のターニング加工。富岡事業所に設置確認",
+        "conf": "low",
+        "src": [
+          "https://nihonsanki-shimbun.com/161215report-ihi/",
+          "https://www.ihi.co.jp/ia/"
+        ]
+      }
+    ]
+  },
+  "6138489005": {
+    "name": "Hironaga Factory, TOYO KOGYO CO., LTD.",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": []
+  },
+  "6139089420": {
+    "name": "株式会社雀宮産業",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": []
+  },
+  "6140137044": {
+    "name": "株式会社テックササキ",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "プレス加工",
+        "maker": "不明",
+        "model": "プレス機（金型一貫加工）",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "金属板材"
+        ],
+        "note": "金型設計・製作からプレス加工まで一貫対応",
+        "conf": "low",
+        "src": [
+          "https://tec-sasaki.com/"
+        ]
+      }
+    ]
+  },
+  "6141224008": {
+    "name": "鳥羽工産株式会社",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "等圧プレス",
+        "maker": "Quintus Technologies",
+        "model": "Quintus等圧プレス機",
+        "count": null,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "アルミ合金"
+        ],
+        "note": "航空宇宙向けチタン板金・深絞り成形用Quintus等圧プレス",
+        "conf": "mid",
+        "src": [
+          "https://www.tobakosan.co.jp/"
+        ]
+      },
+      {
+        "proc": "熱処理",
+        "maker": "不明",
+        "model": "アルミ熱処理炉",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金"
+        ],
+        "note": "航空宇宙向けアルミ熱処理対応",
+        "conf": "mid",
+        "src": [
+          "https://www.tobakosan.co.jp/"
+        ]
+      }
+    ]
+  },
+  "6141224105": {
+    "name": "桜井製作所",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "フライス加工",
+        "maker": "桜井製作所（自社製）",
+        "model": "ロータリーフライス盤",
+        "count": null,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鉄鋼",
+          "アルミ合金"
+        ],
+        "note": "国内唯一のロータリーフライス盤メーカー。エンジン部品・トランスミッション部品の加工",
+        "conf": "mid",
+        "src": [
+          "https://sakurai-net.co.jp/",
+          "https://monoto.co.jp/manufacturer-sakurainet/"
+        ]
+      },
+      {
+        "proc": "マシニング",
+        "maker": "不明",
+        "model": "多軸マシニングセンタ",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鉄鋼",
+          "アルミ合金"
+        ],
+        "note": "大型ラインシステム・5軸デリバリングセンターも製造",
+        "conf": "mid",
+        "src": [
+          "https://sakurai-net.co.jp/"
+        ]
+      }
+    ]
+  },
+  "6141897024": {
+    "name": "菱輝金型工業株式会社 稲沢工場",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "5軸マシニング",
+        "maker": "不明",
+        "model": "大型5軸マシニングセンタ",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "チタン合金",
+          "鉄鋼"
+        ],
+        "note": "稲沢工場刷新で航空機治工具大型品を強化。大型・高精度機械加工専門",
+        "conf": "mid",
+        "src": [
+          "https://www.ryoki.co.jp/",
+          "https://www.nikkan.co.jp/articles/view/00336615"
+        ]
+      },
+      {
+        "proc": "ウォータージェット切断",
+        "maker": "不明",
+        "model": "ウォータージェット切断機",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "複合材",
+          "チタン",
+          "アルミ"
+        ],
+        "note": "ウォータージェット（イーカット）による切断加工",
+        "conf": "mid",
+        "src": [
+          "https://www.ryoki.co.jp/"
+        ]
+      },
+      {
+        "proc": "三次元測定",
+        "maker": "不明",
+        "model": "三次元測定機",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [],
+        "note": "委託測定サービスも提供",
+        "conf": "mid",
+        "src": [
+          "https://www.ryoki.co.jp/"
+        ]
+      }
+    ]
+  },
+  "6142351103": {
+    "name": "ハシダ技研工業株式会社 名阪工場",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "プレス加工",
+        "maker": "不明",
+        "model": "3000tプレス機",
+        "count": 1,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鉄鋼",
+          "ステンレス",
+          "ニッケル合金"
+        ],
+        "note": "3000t大型プレス機による成型。三菱重工ガスタービン用インサート量産",
+        "conf": "mid",
+        "src": [
+          "https://www.hashida-giken.co.jp/factory/meihan/"
+        ]
+      },
+      {
+        "proc": "レーザー加工",
+        "maker": "不明",
+        "model": "ファイバーレーザー加工機",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鉄鋼",
+          "ステンレス",
+          "ニッケル合金"
+        ],
+        "note": "ファイバーレーザーによる精密加工",
+        "conf": "mid",
+        "src": [
+          "https://www.hashida-giken.co.jp/factory/meihan/"
+        ]
+      },
+      {
+        "proc": "溶接",
+        "maker": "不明",
+        "model": "自動溶接機（CO2溶接、耐荷重3000kg）",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "鉄鋼",
+          "ステンレス"
+        ],
+        "note": "耐荷重3t対応の自動溶接機。板厚0.5mm〜のTIG溶接も対応",
+        "conf": "mid",
+        "src": [
+          "https://www.hashida-giken.co.jp/factory/meihan/"
+        ]
+      }
+    ]
+  },
+  "6143180849": {
+    "name": "株式会社 有沢製作所",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": []
+  },
+  "6144296389": {
+    "name": "新日エコー株式会社 中条工場",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": []
+  },
+  "6146853649": {
+    "name": "山本精機株式会社",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "マシニング",
+        "maker": "不明",
+        "model": "マシニングセンタ（ミーリング加工）",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "ニッケル合金",
+          "アルミ合金"
+        ],
+        "note": "航空機エンジン部品・宇宙ロケット部品のミーリング加工。IHI等へ供給",
+        "conf": "mid",
+        "src": [
+          "https://www.yskjet.com/",
+          "https://www.nikkei.com/article/DGXLZO02174370R10C16A5L01000/"
+        ]
+      },
+      {
+        "proc": "旋盤加工",
+        "maker": "不明",
+        "model": "NC旋盤",
+        "count": null,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "ニッケル合金"
+        ],
+        "note": "航空機エンジン用旋盤・研磨加工",
+        "conf": "mid",
+        "src": [
+          "https://www.yskjet.com/"
+        ]
+      },
+      {
+        "proc": "放電加工",
+        "maker": "不明",
+        "model": "放電加工機",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "超硬",
+          "チタン合金"
+        ],
+        "note": "難削材の放電加工対応",
+        "conf": "mid",
+        "src": [
+          "https://www.yskjet.com/"
+        ]
+      }
+    ]
+  },
+  "6146917721": {
+    "name": "株式会社共進精工",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": []
+  },
+  "6147429344": {
+    "name": "株式会社井部製作所",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "5軸マシニング",
+        "maker": "不明",
+        "model": "大型5軸マシニングセンタ（日本屈指）",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "ニッケル合金",
+          "アルミ合金"
+        ],
+        "note": "日本屈指の大型5軸マシニングによる航空機エンジン・ロケット・半導体製造装置部品",
+        "conf": "mid",
+        "src": [
+          "http://www.ibeseisakujyo.co.jp/",
+          "https://arwrk.net/recruit/ibeseisakujyo/"
+        ]
+      },
+      {
+        "proc": "旋盤加工",
+        "maker": "不明",
+        "model": "大型旋盤",
+        "count": null,
+        "shape": "丸",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "ニッケル合金"
+        ],
+        "note": "大型旋盤加工。JIS Q 9100 / ISO 9001取得",
+        "conf": "mid",
+        "src": [
+          "http://www.ibeseisakujyo.co.jp/"
+        ]
+      }
+    ]
+  },
+  "6147526302": {
+    "name": "株式会社IHIエアロマニュファクチャリング（辰野事業所）",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "5軸マシニング",
+        "maker": "不明",
+        "model": "5軸マシニングセンタ（ジェットエンジン翼部品専用）",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "ニッケル合金"
+        ],
+        "note": "ファン動翼・圧縮機動翼・静翼を製造。長野県辰野町拠点",
+        "conf": "mid",
+        "src": [
+          "https://www.ihi.co.jp/iam/technology/equipment/index.html",
+          "https://www.ihi.co.jp/iam/company/base/index.html"
+        ]
+      }
+    ]
+  },
+  "6147596248": {
+    "name": "株式会社光電製作所",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": []
+  },
+  "6148466429": {
+    "name": "日本飛行機株式会社",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "マシニング",
+        "maker": "不明",
+        "model": "マシニングセンタ（Nadcap認定）",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "アルミ合金",
+          "チタン合金",
+          "CFRP"
+        ],
+        "note": "Nadcap従来型機械加工（穴明け・フライス・旋盤）認定取得。B787主要構造複合材加工",
+        "conf": "mid",
+        "src": [
+          "https://www.nippi.co.jp/jp/yokohama_manufacturing_list.html"
+        ]
+      },
+      {
+        "proc": "複合材加工",
+        "maker": "不明",
+        "model": "複合材加工設備（オートクレーブ等）",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "CFRP",
+          "複合材"
+        ],
+        "note": "B787主要構造の約50%を複合材で製造。川崎重工100%子会社",
+        "conf": "mid",
+        "src": [
+          "https://ja.wikipedia.org/wiki/%E6%97%A5%E6%9C%AC%E9%A3%9B%E8%A1%8C%E6%A9%9F"
+        ]
+      }
+    ]
+  },
+  "6149254025": {
+    "name": "株式会社カネシカ",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": []
+  },
+  "6149911106": {
+    "name": "知多鋼業株式会社",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "ばね製造",
+        "maker": "不明",
+        "model": "線ばね・薄板ばね製造機",
+        "count": null,
+        "shape": null,
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "ピアノ線",
+          "ばね鋼",
+          "ステンレス"
+        ],
+        "note": "自動車・産業機械向け線ばね・薄板ばね・パイプ曲げ機械加工部品",
+        "conf": "low",
+        "src": [
+          "http://www.chitakogyo.co.jp/"
+        ]
+      }
+    ]
+  },
+  "6152004725": {
+    "name": "三共鋼機株式会社 安来工場",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": []
+  },
+  "6153844007": {
+    "name": "三菱重工航空製造株式会社 龍宮町事業所",
+    "updated": "2026-06-07",
+    "round": 1,
+    "devices": [
+      {
+        "proc": "機械加工",
+        "maker": "不明",
+        "model": "精密機械加工設備（エンジン部品）",
+        "count": null,
+        "shape": "角",
+        "x": null,
+        "y": null,
+        "z": null,
+        "dia": null,
+        "len": null,
+        "materials": [
+          "チタン合金",
+          "ニッケル合金",
+          "アルミ合金"
+        ],
+        "note": "三菱重工系航空製造子会社。愛知県名古屋市でのエンジン部品・機体部品精密加工",
+        "conf": "low",
+        "src": [
+          "https://www.mhi.com/jp/company/location/nagoyaaerow"
+        ]
+      }
+    ]
   }
 }
