@@ -8211,9 +8211,10 @@ var PROC_SCALES={
 };
 var TIER_RANK_P={'超精密':4,'精密':3,'一般精密':2,'一般':1,'不明':0};
 
-function buildPrecResults(cat, sc, procName, precFilter){
- var pr=document.getElementById('wo-prec-results');
+function buildPrecResults(cat, sc, procName, precFilter, targetId){
+ var pr=document.getElementById(targetId||'wo-prec-results');
  if(!pr)return;
+ cat=cat||procName||''; sc=sc||{labels:{},tierMin:{}};
  var minR=(sc&&sc.tierMin&&sc.tierMin[precFilter])||0;
  var makers=pmakers(procName);
  var ci=coIdx();
@@ -8275,6 +8276,7 @@ function buildPrecResults(cat, sc, procName, precFilter){
  });
  h+='</tbody></table>';
  pr.innerHTML=h;pr.style.display='block';
+ if(typeof isUnlocked!=='undefined' && !isUnlocked) lockResultRows(pr,'tbody tr',5,5);
 }
 function renderPrecInfo(procName){
  var cat=PROC_TO_CAT[procName]||null;
@@ -8370,6 +8372,10 @@ function selectCProc(w){
  window.selOinSet=new Set(pmakers(w).map(function(m){return String(m.oin);}));
  if(typeof applyFilters==='function')applyFilters();
  buildC();
+ // 選んだ工程の対応メーカーをC結果に表示（A/B同様）→お試し時はロック
+ var _ccat=(typeof PROC_TO_CAT!=='undefined'&&PROC_TO_CAT[w])||w;
+ var _csc=(typeof PROC_SCALES!=='undefined'&&PROC_SCALES[_ccat])||null;
+ buildPrecResults(_ccat,_csc,w,'all','wo-c-result');
 }
 document.getElementById('wo-reset').onclick=function(){window.selOinSet=null;curProc=null;cProc=null;if(typeof applyFilters==='function')applyFilters();if(mode==='a')evalA();else if(mode==='b')build();else buildC();};
 document.getElementById('wo-csv').onclick=function(){
