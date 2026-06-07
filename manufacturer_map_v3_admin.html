@@ -1171,7 +1171,7 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
       <div id="pw-step-otp" style="display:none">
         <div style="color:var(--accent);font-size:12px;margin-bottom:8px;text-align:center">📧 認証コードをメールに送信しました</div>
         <div class="pw-field">
-          <input type="text" id="pw-otp-input" placeholder="認証コード" maxlength="8" autocomplete="one-time-code" inputmode="numeric" style="letter-spacing:4px;font-size:20px;text-align:center"/>
+          <input type="text" id="pw-otp-input" placeholder="認証コード" maxlength="8" inputmode="numeric" style="letter-spacing:4px;font-size:20px;text-align:center"/>
         </div>
         <div class="pw-error" id="pw-otp-error"></div>
         <button class="pw-btn" onclick="verifyOtp()">ログイン</button>
