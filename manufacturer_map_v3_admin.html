@@ -7965,30 +7965,31 @@ function evalA(){
  var hasPrecData=Object.keys(PREC).length>0;
  var TIER_COLOR={'超精密':'#1a6ea8','精密':'#0d7a5f','一般精密':'#875a0a','一般':'#4a4a4a','不明':'#555'};
  var TIER_BG={'超精密':'rgba(26,110,168,0.15)','精密':'rgba(13,122,95,0.15)','一般精密':'rgba(135,90,10,0.15)','一般':'rgba(74,74,74,0.15)','不明':'rgba(80,80,80,0.08)'};
- var h='<table class="wo-jt"><tr style="color:#7a8aa0;font-size:11px"><td style="width:30px">判定</td><td>企業名</td>';
- if(hasPrecData)h+='<td style="width:72px">精度</td>';
- h+='<td style="width:128px">最大対応寸法</td><td style="width:42px;text-align:right">小牧</td></tr>';
+ var h='<table class="wo-jt"><tr style="color:#7a8aa0;font-size:11px"><td style="width:26px">判定</td><td>企業名 / 精度</td><td style="width:110px">最大対応寸法</td><td style="width:38px;text-align:right">小牧</td></tr>';
  top.forEach(function(r){
-  var precCell='';
+  var precInline='';
   if(hasPrecData){
-   var fc=TIER_COLOR[r.tier]||'#555',bg=TIER_BG[r.tier]||'rgba(80,80,80,0.08)';
    var procTiers=r.pd&&r.pd.proc_tiers?r.pd.proc_tiers:{};
-   var topProcs=Object.keys(procTiers).sort(function(a,b){return (TIER_RANK_P[procTiers[b].tier]||0)-(TIER_RANK_P[procTiers[a].tier]||0);}).slice(0,2);
-   var badgeH=topProcs.map(function(cat){
-    var t=procTiers[cat].tier;
-    var sc=PROC_SCALES[cat];var lbl=sc&&sc.labels[t]?sc.labels[t].l:t;
-    var pfc=TIER_COLOR[t]||'#555',pbg=TIER_BG[t]||'rgba(80,80,80,0.08)';
-    return '<div style="white-space:nowrap;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis">'
-     +'<span style="font-size:9px;color:#5a7090">'+cat.replace('加工','').replace('マシニング','MC')+'</span> '
-     +'<span style="display:inline-block;padding:0 5px;border-radius:7px;background:'+pbg+';color:'+pfc+';font-size:10px;font-weight:500;white-space:nowrap">'+lbl+'</span></div>';
-   }).join('');
-   precCell='<td style="vertical-align:top;padding:4px 6px;overflow:hidden">'+(badgeH||('<span style="display:inline-block;padding:1px 7px;border-radius:8px;background:'+bg+';color:'+fc+';font-size:10px;white-space:nowrap">'+r.tier+'</span>'))+'</td>';
+   var topProcs=Object.keys(procTiers).sort(function(a,b){return (TIER_RANK_P[procTiers[b].tier]||0)-(TIER_RANK_P[procTiers[a].tier]||0);}).slice(0,3);
+   if(topProcs.length){
+    precInline='<div style="margin-top:3px;display:flex;flex-wrap:wrap;gap:3px">';
+    topProcs.forEach(function(cat){
+     var t=procTiers[cat].tier;
+     var sc=PROC_SCALES[cat];var lbl=sc&&sc.labels[t]?sc.labels[t].l:t;
+     var pfc=TIER_COLOR[t]||'#555',pbg=TIER_BG[t]||'rgba(80,80,80,0.08)';
+     var catShort=cat.replace('加工','').replace('マシニング','MC').replace('5軸MC','5軸').replace('放電','EDM').replace('歯車','歯車');
+     precInline+='<span style="font-size:10px;background:'+pbg+';color:'+pfc+';border-radius:6px;padding:0 5px;white-space:nowrap">'+catShort+' '+lbl+'</span>';
+    });
+    precInline+='</div>';
+   } else if(r.tier&&r.tier!=='不明'){
+    var fc2=TIER_COLOR[r.tier]||'#555',bg2=TIER_BG[r.tier]||'rgba(80,80,80,0.08)';
+    precInline='<div style="margin-top:3px"><span style="font-size:10px;background:'+bg2+';color:'+fc2+';border-radius:6px;padding:0 5px">'+r.tier+'</span></div>';
+   }
   }
   h+='<tr><td><span class="wo-mark wo-'+r.j.cls+'">'+r.j.mark+'</span></td>'+
-   '<td><div style="font-weight:bold">'+esc(r.name)+'</div><div style="font-size:10px;color:#7a8aa0">'+r.j.note+'</div></td>'+
-   precCell+
-   '<td style="font-family:monospace;font-size:11px;color:#9fb2c8">'+r.j.label+'</td>'+
-   '<td style="text-align:right;color:#7a8aa0">'+(r.km!=null?r.km+'km':'—')+'</td></tr>';
+   '<td><div style="font-weight:bold;word-break:break-all">'+esc(r.name)+'</div>'+precInline+'<div style="font-size:10px;color:#7a8aa0">'+r.j.note+'</div></td>'+
+   '<td style="font-family:monospace;font-size:10px;color:#9fb2c8;vertical-align:top">'+r.j.label+'</td>'+
+   '<td style="text-align:right;color:#7a8aa0;vertical-align:top">'+(r.km!=null?r.km+'km':'—')+'</td></tr>';
  });
  h+='</table>';
  if(!rows.length)h='<div style="color:#7a8aa0;font-size:11px">寸法を入力してください</div>';
