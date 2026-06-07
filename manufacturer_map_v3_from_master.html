@@ -6358,7 +6358,7 @@ async function sendOtp(){
   if(errEl)errEl.textContent='';
   const btn=document.querySelector('#pw-step-email .pw-btn');
   if(btn){btn.disabled=true;btn.textContent='送信中…';}
-  const {error}=await _sb.auth.signInWithOtp({email,options:{shouldCreateUser:false}});
+  const {error}=await _sb.auth.signInWithOtp({email,options:{shouldCreateUser:true}});
   if(error){
     if(errEl)errEl.textContent=error.message;
     if(btn){btn.disabled=false;btn.textContent='認証コードを送信';}
