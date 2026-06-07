@@ -1144,6 +1144,12 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
 #map[data-zl="lg"] .leaflet-div-icon>svg{transform:scale(0.85);transform-origin:center bottom}
 #map[data-zl="xl"] .leaflet-div-icon>svg{transform:scale(1.0);transform-origin:center bottom}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script>
+const _SB_URL='https://rvmdfzjnzaxtuzkfsids.supabase.co';
+const _SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ2bWRmempuemF4dHV6a2ZzaWRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA4MDUwMTYsImV4cCI6MjA5NjM4MTAxNn0.i8IC7uN-0g7F2j1svELGVKr-ah-xcQlftBofMV_JnNY';
+const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
+</script>
 </head>
 <body>
 
@@ -1152,15 +1158,19 @@ details[open] .add-sec-head::before{transform:rotate(90deg)}
   <div class="pw-box">
     <div class="pw-logo">AEROSPACE SUPPLIER</div>
     <div class="pw-title">メーカー<span>マップ</span></div>
-    <div class="pw-sub">パスワードでフル機能 ／ または お試しで</div>
+    <div class="pw-sub">メールでログイン（フル機能） ／ または お試しで</div>
     <div class="beta-badge" style="display:inline-block;background:rgba(0,212,255,.12);border:1px solid #00d4ff;color:#00d4ff;font-size:10px;font-family:'Share Tech Mono',monospace;letter-spacing:2px;padding:3px 12px;border-radius:3px;margin:8px 0 4px;">β VERSION — 試験運用中</div>
-    <div class="pw-field">
-      <input type="password" id="pw-input" placeholder="PASSWORD" autocomplete="off" autofocus/>
-      <button class="pw-toggle" onclick="document.getElementById('pw-input').type=document.getElementById('pw-input').type==='password'?'text':'password'" tabindex="-1">👁</button>
+    <div id="pw-form">
+      <div class="pw-field">
+        <input type="email" id="pw-email-input" placeholder="メールアドレス" autocomplete="email" autofocus/>
+      </div>
+      <div class="pw-error" id="pw-error"></div>
+      <button class="pw-btn" onclick="sendMagicLink()">ログイン（フル機能版）</button>
+      <button class="pw-trial" onclick="enterTrial()">▶ お試しで見てみる（無料）</button>
     </div>
-    <div class="pw-error" id="pw-error"></div>
-    <button class="pw-btn" onclick="checkPw()">ログイン（フル機能版）</button>
-    <button class="pw-trial" onclick="enterTrial()">▶ お試しで見てみる（無料）</button>
+    <div id="pw-sent" style="display:none;color:var(--accent);padding:16px 0;font-size:13px;line-height:1.7;text-align:center">
+      📧 ログインリンクを送信しました。<br>受信ボックスを確認し、メール内のリンクをクリックしてください。<br><span style="color:var(--muted);font-size:11px">届かない場合はスパムフォルダもご確認ください</span>
+    </div>
     <div class="pw-log">
       <div class="pw-log-ttl">▣ 更新履歴 / CHANGELOG</div>
       <div class="pw-log-item">
@@ -5171,6 +5181,29 @@ function openDrawer(origIdx){
   // PATCH:openDrawer-extras モバイルbackdrop表示
   const _bd=document.getElementById('drawer-backdrop'); if(_bd){_bd.style.display=window.innerWidth<=768?'block':'none';}
   renderDrawer(c);
+  // Supabase lazy fetch: 認証済みの場合のみ深掘りデータを取得して再描画
+  if(isUnlocked&&_sb&&c.oin){
+    var _sbOin=String(c.oin).replace(/\.0+$/,'');
+    var _sbIdx=origIdx;
+    Promise.all([
+      _sb.from('companies_detail').select('*').eq('oin',_sbOin).maybeSingle(),
+      _sb.from('equip_devices').select('*').eq('oin',_sbOin).order('proc')
+    ]).then(function(results){
+      var dr=results[0],er=results[1];
+      if(dr&&dr.data){var d=dr.data;
+        if(d.hp)c.hp=d.hp;
+        if(d.max_x!=null)c.maxX=d.max_x;
+        if(d.max_y!=null)c.maxY=d.max_y;
+        if(d.max_z!=null)c.maxZ=d.max_z;
+        if(d.equip_text)c.equipText=d.equip_text;
+        if(d.vendor_text)c.vendorText=d.vendor_text;
+        if(d.material_text)c.materialText=d.material_text;
+        if(d.shape_text)c.shapeText=d.shape_text;
+      }
+      if(er&&er.data&&er.data.length>0)EQUIP_DEV_BY_OIN[_sbOin]={devices:er.data};
+      if(activeCard===_sbIdx)renderDrawer(c);
+    }).catch(function(e){console.log('SB lazy fetch error:',e);});
+  }
   // ドロワーを必ず先頭にスクロール
   const _db=document.getElementById('drawer-body'); if(_db) _db.scrollTop=0;
   // キーボードフォーカスをドロワーに移動（アクセシビリティ）
@@ -6278,8 +6311,10 @@ function flyToJapan(){  map.flyToBounds([[26.0,127.5],[45.3,145.5]],{duration:.8
 // パスワード
 // ================================================================
 const PW='bupakan';
-const SK='mfr_map_v2_auth';
+// ── Supabase 認証 ─────────────────────────────────────────────────────────
 let isUnlocked=false;
+let _sbUser=null;
+
 function _dismissPwScreen(){var s=document.getElementById('pw-screen');if(s){s.classList.add('unlocked');setTimeout(function(){if(s)s.style.display='none';},520);}}
 function applyUnlockState(){
   document.body.classList.toggle('is-unlocked',isUnlocked);
@@ -6289,19 +6324,55 @@ function applyUnlockState(){
   try{if(typeof applyFilters==='function')applyFilters();}catch(e){}
   try{if(typeof activeCard!=='undefined'&&activeCard>=0&&typeof openDrawer==='function')openDrawer(activeCard);}catch(e){}
 }
-function checkPw(){
-  const v=document.getElementById('pw-input').value;
-  if(v===PW){sessionStorage.setItem(SK,'1');isUnlocked=true;_dismissPwScreen();applyUnlockState();setTimeout(function(){try{startTutorial(false);}catch(e){}},1100);}
-  else{const i=document.getElementById('pw-input');const e=document.getElementById('pw-error');i.classList.add('pw-input-error');e.textContent='パスワードが違います';setTimeout(()=>{i.classList.remove('pw-input-error');i.value='';i.focus();e.textContent=''},700);}
+
+// セッション確認＋変更リスナー
+if(_sb){
+  (async function(){
+    const {data:{session}}=await _sb.auth.getSession();
+    if(session){_sbUser=session.user;isUnlocked=true;_dismissPwScreen();applyUnlockState();}
+    _sb.auth.onAuthStateChange(function(event,session){
+      var wasLocked=!isUnlocked;
+      _sbUser=session?session.user:null;
+      isUnlocked=!!session;
+      applyUnlockState();
+      if(event==='SIGNED_IN'&&wasLocked){_dismissPwScreen();setTimeout(function(){try{startTutorial(false);}catch(e){}},1100);}
+      if(event==='SIGNED_OUT'){isUnlocked=false;unlockPrompt();}
+    });
+  })();
+}
+
+async function sendMagicLink(){
+  const emailEl=document.getElementById('pw-email-input');
+  const email=emailEl?emailEl.value.trim():'';
+  const errEl=document.getElementById('pw-error');
+  if(!email||!email.includes('@')){if(errEl)errEl.textContent='メールアドレスを入力してください';return;}
+  if(errEl)errEl.textContent='';
+  const btn=document.querySelector('#pw-form .pw-btn');
+  if(btn){btn.disabled=true;btn.textContent='送信中…';}
+  const redirectTo=location.href.split('#')[0].split('?')[0];
+  const {error}=await _sb.auth.signInWithOtp({email,options:{emailRedirectTo:redirectTo}});
+  if(error){
+    if(errEl)errEl.textContent=error.message;
+    if(btn){btn.disabled=false;btn.textContent='ログイン（フル機能版）';}
+  } else {
+    var f=document.getElementById('pw-form');var sv=document.getElementById('pw-sent');
+    if(f)f.style.display='none';if(sv)sv.style.display='block';
+  }
 }
 function enterTrial(){isUnlocked=false;_dismissPwScreen();applyUnlockState();}
-function unlockPrompt(){var s=document.getElementById('pw-screen');if(s){s.style.display='flex';s.classList.remove('unlocked');var i=document.getElementById('pw-input');if(i){i.value='';setTimeout(function(){i.focus();},60);}}}
-document.getElementById('pw-input').addEventListener('keydown',e=>{if(e.key==='Enter')checkPw();});
-if(sessionStorage.getItem(SK)==='1'){isUnlocked=true;var _ps=document.getElementById('pw-screen');if(_ps)_ps.style.display='none';}
-if(location.hash && location.hash.startsWith('#pw=')){
-  const hashPw = decodeURIComponent(location.hash.slice(4));
-  if(hashPw===PW){sessionStorage.setItem(SK,'1');isUnlocked=true;var _hs=document.getElementById('pw-screen');if(_hs)_hs.style.display='none';}
+function unlockPrompt(){
+  var s=document.getElementById('pw-screen');
+  if(s){
+    s.style.display='flex';s.classList.remove('unlocked');
+    var f=document.getElementById('pw-form');var sv=document.getElementById('pw-sent');
+    if(f)f.style.display='block';if(sv)sv.style.display='none';
+    var err=document.getElementById('pw-error');if(err)err.textContent='';
+    setTimeout(function(){var i=document.getElementById('pw-email-input');if(i)i.focus();},60);
+  }
 }
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&document.activeElement&&document.activeElement.id==='pw-email-input')sendMagicLink();
+});
 
 // ================================================================
 // CSVエクスポート（パスワード保護）
@@ -7672,7 +7743,7 @@ function toggleLogisticsMode(){
 // 初期化実行
 // ================================================================
 var EQUIP_DEV_BY_OIN = {};  // 機種別構造化設備データ（equip_devices_by_oin.json）
-fetch('./manufacturers.json')
+fetch('./manufacturers_slim.json')
   .then(r => { if(!r.ok) throw new Error('manufacturers.json HTTP ' + r.status); return r.json(); })
   .then(data => {
     companies = data;
