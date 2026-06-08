@@ -1321,10 +1321,28 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
              oncompositionend="onCompositionEnd()"/>
     </div>
 
-    <!-- カテゴリ -->
+    <!-- 業種（主フィルター・上） -->
+    <div class="fp-section" id="oasis-cat-section">
+      <span class="fp-label" style="display:flex;align-items:center;justify-content:space-between">
+        <span>業種（登録の主分類）</span>
+        <span style="display:flex;gap:4px">
+          <button onclick="selectAllOasisCats()" style="font-family:monospace;font-size:9px;padding:1px 5px;border-radius:2px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer">全ON</button>
+          <button onclick="clearAllOasisCats()" style="font-family:monospace;font-size:9px;padding:1px 5px;border-radius:2px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer">全OFF</button>
+        </span>
+      </span>
+      <div style="font-size:9px;color:var(--muted);margin-top:3px;line-height:1.5">登録上の主たる分類。1社につき1区分。</div>
+      <div id="oasis-cat-chips" style="display:flex;flex-wrap:wrap;gap:3px;margin-top:6px;max-height:180px;overflow-y:auto"></div>
+    </div>
+
+    <!-- 対応工程（副・暫定・既定折りたたみ） -->
     <div class="fp-section">
-      <span class="fp-label">工程カテゴリ</span>
-      <div class="cat-chips" id="cat-chips"></div>
+      <div id="proc-filter-toggle" onclick="toggleProcSection()" style="cursor:pointer;font-size:12px;color:#888;user-select:none;padding:2px 0;">
+        ▶ 対応工程でしぼる（暫定）
+      </div>
+      <div id="proc-filter-body" style="display:none;margin-top:6px;">
+        <div style="font-size:9px;color:var(--muted);margin-bottom:6px;line-height:1.5">現状は登録業種に近い暫定分類。保有設備からの自動再構築を予定。</div>
+        <div class="cat-chips" id="cat-chips"></div>
+      </div>
     </div>
 
     <!-- ワーク寸法/距離フィルタ用CSS -->
@@ -1407,17 +1425,7 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
       </div>
     </div>
 
-    <!-- 業種 -->
-    <div class="fp-section" id="oasis-cat-section">
-      <span class="fp-label" style="display:flex;align-items:center;justify-content:space-between">
-        <span>業種</span>
-        <span style="display:flex;gap:4px">
-          <button onclick="selectAllOasisCats()" style="font-family:monospace;font-size:9px;padding:1px 5px;border-radius:2px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer">全ON</button>
-          <button onclick="clearAllOasisCats()" style="font-family:monospace;font-size:9px;padding:1px 5px;border-radius:2px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer">全OFF</button>
-        </span>
-      </span>
-      <div id="oasis-cat-chips" style="display:flex;flex-wrap:wrap;gap:3px;margin-top:6px;max-height:180px;overflow-y:auto"></div>
-    </div>
+    <!-- 業種ブロックは上部（検索直下）へ移動済 -->
 
     <!-- PATCH:cert-filter-html -->
     <!-- 特殊工程認定フィルター -->
@@ -4529,6 +4537,14 @@ function toggleCertSection() {
   toggle.textContent = (open ? '▼' : '▶') + ' 特殊工程認定でしぼる';
 }
 
+function toggleProcSection() {
+  const body = document.getElementById('proc-filter-body');
+  const toggle = document.getElementById('proc-filter-toggle');
+  const open = body.style.display === 'none';
+  body.style.display = open ? 'block' : 'none';
+  toggle.textContent = (open ? '▼' : '▶') + ' 対応工程でしぼる（暫定）';
+}
+
 function toggleCertChip(el) {
   const key = el.dataset.key;
   if (filterCertKeys.has(key)) {
@@ -4675,6 +4691,8 @@ function getFilteredSorted(_qOv, _qeOv){
   const qVariants = expandQueryVariants(q);
   // 設備名称 検索クエリ取得（追加）
   const qe = normQ(_qeOv!==undefined?_qeOv:document.getElementById('q-equip')?.value);
+  // 検索文字（社名/設備名）がある間は分類フィルター（工程・業種）をバイパス（誤タグでヒットを取りこぼさない）
+  const isTextSearch = !!(q || qe);
   return companies
     .filter(c=>{
       // ワーク起点選定の結果ハイライト（selOinSet集合があればそのOINのみ表示）
@@ -4695,7 +4713,7 @@ function getFilteredSorted(_qOv, _qeOv){
         if(!nNote2.includes(qe) && !nEquip2.includes(qe)) return false;
       }
       // カテゴリ
-      if(Array.isArray(c.cats) && c.cats.length && !c.cats.some(k=>filterCats.has(k))) return false;
+      if(!isTextSearch && Array.isArray(c.cats) && c.cats.length && !c.cats.some(k=>filterCats.has(k))) return false;
       // 都道府県
       if(filterPref && c.pref!==filterPref) return false;
       // 距離
@@ -4717,7 +4735,7 @@ function getFilteredSorted(_qOv, _qeOv){
         }
       }
       // 業種フィルター（部分一致＝含む基準。GYOSHU_ORDERのキーで判定。どのキーにも該当しない社は無条件通過）
-      if(c.category){
+      if(!isTextSearch && c.category){
         var _mk=GYOSHU_ORDER.filter(function(k){return c.category.includes(k);});
         if(_mk.length && !_mk.some(function(k){return filterOasisCats.has(k);})) return false;
       }
