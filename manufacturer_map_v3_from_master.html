@@ -5344,7 +5344,7 @@ function buildEquipV2(c){
       var cf=(d.conf||'mid'),cfc=cf==='high'?'dv-cf-high':(cf==='low'?'dv-cf-low':'dv-cf-mid');
       var s0=(d.src&&d.src[0])?d.src[0]:'';
       var link=s0?(' <a class="dv-srclink" href="'+dvEsc(s0)+'" target="_blank" rel="noopener noreferrer" title="'+dvEsc(s0)+'">↗</a>'):'';
-      html+='<tr><td class="dv-proc">'+dvEsc(d.proc||'—')+'</td>'
+      html+='<tr><td class="dv-proc">'+hlText(dvEsc(d.proc||'—'),_kwEquip())+'</td>'
           +'<td><span class="dv-maker">'+hlText(dvEsc(d.maker||'—'),_kwEquip())+'</span>'+(d.model?'<br><span class="dv-model">'+hlText(dvEsc(d.model),_kwEquip())+'</span>':'')+'</td>'
           +'<td class="dv-cnt">'+dvEsc(d.count!=null?d.count:'—')+'</td>'
           +'<td class="dv-dim">'+dvDim(d)+'</td>'
@@ -6077,7 +6077,7 @@ function equipRow(d,vx,vy,vz,vm){
   const verdictLabel={ok:'✔ 推奨',cond:'△ 条件付',ng:'✘ 不適合',na:'—'}[overall];
   const verdictCls={ok:'v-ok',cond:'v-cond',ng:'v-ng',na:'v-na'}[overall];
   return `<tr>
-    <td><span class="e-cat">${d.cat}</span><div style="font-size:10px;color:var(--text);margin-top:2px">${hlText(d.name,_kwEquip())}</div></td>
+    <td><span class="e-cat">${hlText(d.cat,_kwEquip())}</span><div style="font-size:10px;color:var(--text);margin-top:2px">${hlText(d.name,_kwEquip())}</div></td>
     <td><span class="e-size">${sizeStr}</span></td>
     <td><span style="font-size:9px;color:var(--muted);line-height:1.6">${d.ok.slice(0,3).join('、')}${d.ok.length>3?'…':''}</span></td>
     <td><span class="e-verdict ${verdictCls}">${verdictLabel}</span></td>
