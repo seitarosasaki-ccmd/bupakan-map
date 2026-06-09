@@ -5226,7 +5226,7 @@ function openDrawer(origIdx){
   }catch(_e){}
 
   document.getElementById('drawer-label').textContent=`${c.pref} / 小牧から${c._dist}km`;
-  document.getElementById('drawer-name').textContent=c.name.replace(/\n/g,' ');
+  document.getElementById('drawer-name').innerHTML=hlText(dvEsc(c.name.replace(/\n/g,' ')),_kwName());
   document.getElementById('drawer').classList.add('open');
   // PATCH:openDrawer-extras モバイルbackdrop表示
   const _bd=document.getElementById('drawer-backdrop'); if(_bd){_bd.style.display=window.innerWidth<=768?'block':'none';}
@@ -5375,7 +5375,7 @@ function buildEquipV2(c){
     if(matList.length) html+='<div class="dv-matrow"><span class="dv-matlab">対応材料</span>'+matList.map(function(m){return '<span class="dv-chip">'+dvEsc(m)+'</span>';}).join('')+'</div>';
   }else{
     html+='<div class="dv-fallback">機種別の詳細データは未取得（深掘り調査の対象キュー）。';
-    html+= c.equipText? ('現時点の概要：<br>'+dvEsc(c.equipText)) : '現時点で公開設備情報は未収録。';
+    if(c.equipText){var _eqItems=(''+c.equipText).split(/\s*\/\s*/).map(function(s){return s.trim();}).filter(Boolean);html+= _eqItems.length>1 ? ('<div class="dv-eqlist" style="margin-top:6px;display:flex;flex-wrap:wrap;gap:4px">'+_eqItems.map(function(s){return '<span class="dv-chip">'+hlText(dvEsc(s),_kwEquip())+'</span>';}).join('')+'</div>') : ('現時点の概要：<br>'+hlText(dvEsc(c.equipText),_kwEquip()));}else{html+='現時点で公開設備情報は未収録。';}
     html+='</div>';
   }
   var surfRows='';
