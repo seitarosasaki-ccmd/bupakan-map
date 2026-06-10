@@ -4883,6 +4883,8 @@ function renderAll(filtered){
   if(!filtered) filtered=getFilteredSorted();
   const list = document.getElementById('company-list');
   list.innerHTML='';
+  /*PERF:2026-06-10*/ const _ciMap=new Map(); companies.forEach((cc,ii)=>_ciMap.set(cc,ii));
+  const _frag=document.createDocumentFragment();
   // 既存マーカー全削除
   Object.values(leafletMarkers).forEach(m=>map.removeLayer(m));
   leafletMarkers={};
@@ -4899,11 +4901,12 @@ function renderAll(filtered){
     const mainCat = c.cats[0]||'other';
     const color = CATEGORIES[mainCat]?.color||'#3a86ff';
     const hasEquip = !!c.equipId;
+    const origIdx=_ciMap.get(c); /*PERF: companies.indexOf O(n^2)解消*/
 
     // カード
     const card=document.createElement('div');
-    card.className='company-card'+(activeCard===companies.indexOf(c)?' active':'');
-    card.id=`card-${companies.indexOf(c)}`;
+    card.className='company-card'+(activeCard===origIdx?' active':'');
+    card.id=`card-${origIdx}`;
     const distColor = c._dist<50?'#39ff14':c._dist<100?'#ffd60a':c._dist<200?'#ff6b35':'#5a7090';
     card.innerHTML=`
       <div class="card-pin-dot" style="background:${color}20;border-color:${color}"></div>
@@ -4919,15 +4922,14 @@ function renderAll(filtered){
         ${(c.maxX||c.maxY||c.maxZ)?`<div class="card-size dd-cardsize">最大: ${c.maxX||'?'}×${c.maxY||'?'}×${c.maxZ||'?'}mm</div>`:''}
       </div>`;
     card.onclick=(e)=>{
-      const realIdx=companies.indexOf(c);
+      const realIdx=origIdx;
       if(e.shiftKey||e.ctrlKey||e.metaKey){toggleSelect(realIdx);}
       else{openDrawer(realIdx);}
     };
-    card.ondblclick=(e)=>{e.stopPropagation();toggleSelect(companies.indexOf(c));};
-    list.appendChild(card);
+    card.ondblclick=(e)=>{e.stopPropagation();toggleSelect(origIdx);};
+    _frag.appendChild(card);
 
     // マーカー
-    const origIdx=companies.indexOf(c);
     const icon=L.divIcon({
       className:'',
       html:makePinSvg(color,hasEquip),
@@ -4975,6 +4977,7 @@ function renderAll(filtered){
     });
     leafletMarkers[origIdx]=m;
   });
+  list.appendChild(_frag); /*PERF: カードDOM一括挿入*/
 
   document.getElementById('shown-count').textContent=filtered.length;
   // 選択状態の再適用
@@ -5034,7 +5037,9 @@ function onDistSlider(v){
   if(filterDist>0){
     distCircle=L.circle([KOMAKI.lat,KOMAKI.lng],{radius:filterDist*1000,color:'rgba(0,212,255,0.5)',fillColor:'rgba(0,212,255,0.04)',fillOpacity:1,weight:1.5,dashArray:'6 6'}).addTo(map);
   }
-  applyFilters();
+  /*PERF:2026-06-10 ドラッグ中の全再描画を抑制*/
+  clearTimeout(window._distSliderTimer);
+  window._distSliderTimer=setTimeout(applyFilters,120);
 }
 function setWorkShape(s){
   filterWork.shape=s;
@@ -8195,8 +8200,9 @@ function judgeA(c){
  }
  if(!((cx>=wx)&&(cy>=wy)&&(cz>=wz)))return {mark:'×',cls:'ng',label:lab,note:'収まる機種なし'};
  var mg=Math.min(cx/wx,cy/wy,cz/wz);
- if(mg>10)return {mark:'×',cls:'ng',label:lab,note:'過大すぎ（'+Math.round(mg)+'倍）'};
- if(mg>5)return {mark:'△',cls:'wn',label:lab,note:'過大（余裕'+Math.round((mg-1)*100)+'%）'};
+ var maxMg=Math.max(cx/wx,cy/wy,cz/wz);
+ if(maxMg>=10)return {mark:'×',cls:'ng',label:lab,note:'過大すぎ（'+Math.round(maxMg)+'倍）',skip:true};
+ if(maxMg>=5)return {mark:'△',cls:'wn',label:lab,note:'過大（最大'+Math.round(maxMg)+'倍）'};
  if(mg>=1.10)return {mark:'○',cls:'ok',label:lab,note:'余裕'+Math.round((mg-1)*100)+'%'};
  return {mark:'△',cls:'wn',label:lab,note:'ギリ（余裕'+Math.round((mg-1)*100)+'%）'};
 }
@@ -8208,14 +8214,14 @@ function evalA(){
  for(var oin in WE){if(!WE.hasOwnProperty(oin))continue;var c=WE[oin];
   if(aShape==='角'&&c.nonmc)continue;
   if(aShape==='丸'&&(!c.mdia||c.mdia<=0))continue;
-  var j=judgeA(c);if(j.mark==='×'&&!(c.mx||c.mdia))continue;
+  var j=judgeA(c);if(j.mark==='×'&&(!(c.mx||c.mdia)||j.skip))continue;
   // 精度フィルター適用
   var _oin=String(oin).replace(/\.0+$/,'');
   var _pd=PREC[_oin];
   var _tier=(_pd&&_pd.overall_tier)||'不明';
   var _rank=TIER_RANK_P[_tier]||0;
-  if(aPrecFilter==='精密以上'&&_rank>0&&_rank<3)return;
-  if(aPrecFilter==='一般精密以上'&&_rank>0&&_rank<2)return;
+  if(aPrecFilter==='精密以上'&&_rank>0&&_rank<3)continue;
+  if(aPrecFilter==='一般精密以上'&&_rank>0&&_rank<2)continue;
   rows.push({oin:oin,name:c.name||'',km:kmOf(oin),j:j,tier:_tier,pd:_pd});
  }
  rows.sort(function(a,b){var d=order[a.j.mark]-order[b.j.mark];if(d!==0)return d;return (a.km==null?9e9:a.km)-(b.km==null?9e9:b.km);});
