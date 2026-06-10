@@ -7964,11 +7964,13 @@ table.wo-mt{border-collapse:separate;border-spacing:0;width:max-content;min-widt
   </div>
 
   <div id="wo-mode-a">
-    <div class="wo-note"><span>&#9432;</span><span>この検索は<b>形状と寸法だけ</b>で、対応できる設備枠を持つメーカーを当てます。加工種類（マシニング／旋盤など）は問いません。マシニングで丸物を削る等もあるため、加工方法は各社の保有設備にお任せです。</span></div>
+    <div class="wo-note"><span>&#9432;</span><span>この検索は<b>形状と寸法</b>を基に、切削設備の保有根拠が確認できるメーカーの実機寸法と照合します。適合した実機の機種名と出典を判定根拠として表示します。丸物は旋削設備の保有が前提です。</span></div>
     <div class="wo-lab">形状</div>
     <div id="wo-a-shp"></div>
     <div id="wo-a-dims" style="margin-top:8px"></div>
     <div id="wo-a-hint" style="font-size:10px;color:#7a8aa0;margin-top:5px"></div>
+    <div class="wo-lab" style="margin-top:8px">材料（任意・適合注記）</div>
+    <div id="wo-a-mat"></div>
     <div id="wo-a-prec-filter" style="margin:8px 0 4px"></div>
     <div class="wo-view" id="wo-a-view"><button data-md="a" data-v="list" class="on">縦リスト</button><button data-md="a" data-v="mat">マトリクス</button></div>
     <div id="wo-a-list">
@@ -8029,7 +8031,7 @@ var MATS=['アルミ','鉄','耐熱・耐食鋼','チタン','インコネル'],
 var MATD={'アルミ':'軽量・非鉄','鉄':'鋼・強度','耐熱・耐食鋼':'ステンレス系','チタン':'難削・高比強度','インコネル':'耐熱合金'};
 var SHPD={'円筒':'丸物・回転体','角':'角物・板物','複雑':'複雑形状'};
 var SELF={'硬さ検査':'自社/検査','外観検査':'自社/検査','膜厚測定':'自社/検査','歪修正':'仕上に内包','ザイグロ前エッチング':'FPIに内包'};
-var aShape='角',aDim={X:300,Y:200,Z:150,D:120,L:400},aLast=null;
+var aShape='角',aDim={X:300,Y:200,Z:150,D:120,L:400},aLast=null,aMat='不問',aTol=0;
 var cPick=['フライス加工','5軸マシニング加工'],cProc=null;
 var C_PHASE={'フライス加工':'荒加工','マシニング加工':'仕上加工','5軸マシニング加工':'仕上加工','NC旋盤':'仕上加工','複合旋盤':'仕上加工','研削':'仕上加工','ブローチ加工':'仕上加工','ガンドリル':'仕上加工','BTA加工':'仕上加工','真空熱処理':'熱処理','焼入焼戻':'熱処理','時効処理':'熱処理','化成処理':'表面処理','塗装':'表面処理','アノダイズ':'表面処理','めっき':'表面処理','ショットピーニング':'表面処理','パシベート':'表面処理','浸透探傷検査(FPI)':'検査(探傷)','磁粉探傷検査(MPI)':'検査(探傷)','寸法検査(三次元測定)':'検査(探傷)'};
 
@@ -8172,6 +8174,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.ge
 
 function buildA(){
  chips('wo-a-shp',['角物','丸物'],aShape==='角'?'角物':'丸物',function(v){aShape=(v==='角物'?'角':'丸');buildA();});
+ chips('wo-a-mat',['不問','アルミ','ステンレス','チタン','耐熱合金','銅系','鋼','樹脂'],aMat,function(v){aMat=v;evalA();});
  var dh,hint;
  if(aShape==='角'){
   dh='<span style="font-size:12px;color:#9fb2c8">X</span><input class="wo-num" id="wo-X" type="number" value="'+aDim.X+'"> <span style="font-size:12px;color:#9fb2c8">Y</span><input class="wo-num" id="wo-Y" type="number" value="'+aDim.Y+'"> <span style="font-size:12px;color:#9fb2c8">Z</span><input class="wo-num" id="wo-Z" type="number" value="'+aDim.Z+'"> <span style="font-size:11px;color:#7a8aa0">mm</span>';
@@ -8184,6 +8187,38 @@ function buildA(){
  document.getElementById('wo-a-hint').textContent=hint;
  ['X','Y','Z','D','L'].forEach(function(k){var el=document.getElementById('wo-'+k);if(el)el.oninput=function(){aDim[k]=+el.value||0;evalA();};});
  evalA();
+}
+/* ③材料適合注記・④公差→設備精度tier変換 (2026-06-10) */
+var _A_MATRX={
+ 'アルミ':/アルミ|ジュラルミン|A[2567]0\d{2}|aluminum|aluminium/i,
+ 'ステンレス':/ステンレス|SUS\d*|stainless/i,
+ 'チタン':/チタン|titanium|Ti-?6/i,
+ '耐熱合金':/インコネル|ハステロイ|ワスパロイ|耐熱合金|超合金|Inconel|Hastelloy|Waspaloy|Ni基|ニッケル基|コバール/i,
+ '銅系':/[^合]銅|真鍮|黄銅|青銅|ベリリウム銅|copper|brass/i,
+ '鋼':/[^スの]鋼|S45C|SCM\d*|SKD\d*|SS400|炭素鋼|合金鋼|工具鋼|特殊鋼|steel/i,
+ '樹脂':/樹脂|プラスチック|PEEK|ナイロン|ジュラコン|POM|テフロン|PTFE|エンプラ/i
+};
+function _aMatOk(oin){
+ if(aMat==='不問')return null;
+ var rx=_A_MATRX[aMat];if(!rx)return null;
+ var hay='';
+ var E=(typeof EQUIP_DEV_BY_OIN!=='undefined'&&EQUIP_DEV_BY_OIN)?EQUIP_DEV_BY_OIN[String(oin).replace(/\.0+$/,'')]:null;
+ if(E)(E.devices||[]).forEach(function(d){if(d.materials&&d.materials.length)hay+=' '+d.materials.join(' ');});
+ var comp=_aComp(oin);
+ if(comp){hay+=' '+(comp.shtMatOk||'')+' '+(comp.materialText||'');}
+ if(!hay.replace(/\s+/g,''))return false;
+ return rx.test(hay);
+}
+function _aTolFilter(t){
+ if(!(t>0))return 'all';
+ if(t<=0.005)return '超精密以上';
+ if(t<=0.02)return '精密以上';
+ if(t<=0.05)return '一般精密以上';
+ return 'all';
+}
+function _aTolLabel(t){
+ var f=_aTolFilter(t);
+ return f==='all'?(t>0?'→ 全精度（±0.05超）':''):'→ '+f.replace('以上','')+'以上で絞り込み中';
 }
 /* judgeA v2.1 (2026-06-10): 実機単位照合＋X/Y回転許容＋切削根拠門番＋丸物救済＋確度注記 */
 var _A_MILL=/マシニング|フライス|門型|五面|5面|中ぐり|ボール盤|彫|切削|機械加工|milling|machining|MC|cut|研削/i;
@@ -8220,14 +8255,15 @@ function _aFitOrient(mx,my,mz,wx,wy,wz){
  return best;
 }
 function _aRank(mg,M){if(M>=10)return 3;if(M>=5)return 2;if(mg>=1.10)return 0;return 1;}
-function _aGrade(mg,M,model,lab){
+function _aGrade(mg,M,model,lab,src){
  var tag=model?('実機適合 '+model):'実機適合';
  var r=_aRank(mg,M);
  if(r===3)return {mark:'×',cls:'ng',label:lab,note:'過大すぎ（'+Math.round(M)+'倍）',skip:true};
  if(r===2)return {mark:'△',cls:'wn',label:lab,note:'過大（最大'+Math.round(M)+'倍）'};
- if(r===0)return {mark:'○',cls:'ok',label:lab,note:tag+' 余裕'+Math.round((mg-1)*100)+'%'};
- return {mark:'△',cls:'wn',label:lab,note:tag+'（ギリ）'};
+ if(r===0)return {mark:'○',cls:'ok',label:lab,note:tag+' 余裕'+Math.round((mg-1)*100)+'%',src:src||''};
+ return {mark:'△',cls:'wn',label:lab,note:tag+'（ギリ）',src:src||''};
 }
+function _aSrcOf(d){var u=(d&&d.src&&d.src.length)?String(d.src[0]):'';return u.indexOf('http')===0?u:'';}
 function judgeA(c,oin){
  var wx,wy,wz;
  if(aShape==='角'){wx=aDim.X;wy=aDim.Y;wz=aDim.Z;}else{wx=aDim.D;wy=aDim.D;wz=aDim.L;}
@@ -8256,7 +8292,7 @@ function judgeA(c,oin){
    }
    if(best){
     var bl='X'+Math.round(_aNum(best.d.x))+'×Y'+Math.round(_aNum(best.d.y))+'×Z'+Math.round(_aNum(best.d.z));
-    return _aGrade(best.mg,best.M,String(best.d.model||'').substring(0,16),bl);
+    return _aGrade(best.mg,best.M,String(best.d.model||'').substring(0,16),bl,_aSrcOf(best.d));
    }
    if(full.length&&full.length===devs.length){
     if(c.mx&&c.my&&c.mz&&_aFitOrient(c.mx,c.my,c.mz,wx,wy,wz))return {mark:'△',cls:'wn',label:envLab,note:'単一機適合未確認'+sfx};
@@ -8298,7 +8334,7 @@ function judgeA(c,oin){
     }else part=true;
    }else if(dia===0)part=true;
   });
-  if(tb)return _aGrade(tb.mg,tb.M,String(tb.d.model||'').substring(0,16),'φ'+Math.round(tb.dia)+'×L'+Math.round(tb.ln));
+  if(tb)return _aGrade(tb.mg,tb.M,String(tb.d.model||'').substring(0,16),'φ'+Math.round(tb.dia)+'×L'+Math.round(tb.ln),_aSrcOf(tb.d));
   if(hasMdia){
    var cx=c.mdia,cz=c.mz||0;
    if(cx>=D&&(cz===0||cz>=L)){
@@ -8316,6 +8352,23 @@ function judgeA(c,oin){
   return {mark:'△',cls:'wn',label:'φ?×L?',note:'旋盤保有・最大径未確認'};
  }
 }
+/* 回帰テスト用フック(2026-06-10): 現在のaShape/aDimで社名部分一致の判定を返す */
+window._woJudgeByName=function(sub){
+ var out=[];
+ if(!WE)return out;
+ for(var oin in WE){if(!WE.hasOwnProperty(oin))continue;var c=WE[oin];
+  if(String(c.name||'').indexOf(sub)<0)continue;
+  if(aShape==='角'&&c.nonmc){out.push({oin:oin,name:c.name,mark:'hidden',note:'nonmc'});continue;}
+  var j=judgeA(c,oin);
+  out.push({oin:oin,name:c.name,mark:(j.hidden?'hidden':j.mark),note:j.note});
+ }
+ return out;
+};
+window._woSetWork=function(shape,dims){
+ aShape=shape;
+ aDim={X:0,Y:0,Z:0,D:0,L:0};
+ for(var k in dims)aDim[k]=dims[k];
+};
 function evalA(){
  if(!WE){return;}
  // 精度フィルターUI描画
@@ -8331,11 +8384,14 @@ function evalA(){
   var _pd=PREC[_oin];
   var _tier=(_pd&&_pd.overall_tier)||'不明';
   var _rank=TIER_RANK_P[_tier]||0;
+  if(aPrecFilter==='超精密以上'&&_rank>0&&_rank<4)continue;
   if(aPrecFilter==='精密以上'&&_rank>0&&_rank<3)continue;
   if(aPrecFilter==='一般精密以上'&&_rank>0&&_rank<2)continue;
-  rows.push({oin:oin,name:c.name||'',km:kmOf(oin),j:j,tier:_tier,pd:_pd});
+  rows.push({oin:oin,name:c.name||'',km:kmOf(oin),j:j,tier:_tier,pd:_pd,mat:_aMatOk(_oin)});
  }
- rows.sort(function(a,b){var d=order[a.j.mark]-order[b.j.mark];if(d!==0)return d;return (a.km==null?9e9:a.km)-(b.km==null?9e9:b.km);});
+ rows.sort(function(a,b){var d=order[a.j.mark]-order[b.j.mark];if(d!==0)return d;
+  if(aMat!=='不問'){var ma=(a.mat===true)?0:1,mb=(b.mat===true)?0:1;if(ma!==mb)return ma-mb;}
+  return (a.km==null?9e9:a.km)-(b.km==null?9e9:b.km);});
  aLast=rows;
  var top=rows.slice(0,60);
  var hasPrecData=Object.keys(PREC).length>0;
@@ -8363,8 +8419,13 @@ function evalA(){
    }
   }
     var c9a=CERT&&CERT[r.oin]?'<span class="c9100" style="font-size:10px;border-radius:6px;padding:1px 5px;margin-left:4px">9100</span>':'';
+    var matChip='';
+    if(aMat!=='不問'){matChip=(r.mat===true)
+     ?'<span style="font-size:10px;border-radius:6px;padding:1px 5px;margin-left:4px;background:rgba(93,202,165,.15);color:#5dcaa5">'+esc(aMat)+'○</span>'
+     :'<span style="font-size:10px;border-radius:6px;padding:1px 5px;margin-left:4px;background:rgba(154,160,168,.12);color:#9aa0a8">材料未確認</span>';}
+    var srcA=(r.j.src)?'<a href="'+r.j.src+'" target="_blank" rel="noopener noreferrer" style="color:#00d4ff;font-size:10px;text-decoration:none;border:1px solid rgba(0,212,255,.3);border-radius:2px;padding:0 5px;margin-left:6px">出典</a>':'';
   h+='<tr><td><span class="wo-mark wo-'+r.j.cls+'">'+r.j.mark+'</span></td>'+
-   '<td><div style="font-weight:bold;word-break:break-all">'+esc(r.name)+c9a+'</div>'+precInline+'<div style="font-size:10px;color:#7a8aa0">'+r.j.note+'</div></td>'+
+   '<td><div style="font-weight:bold;word-break:break-all">'+esc(r.name)+c9a+matChip+'</div>'+precInline+'<div style="font-size:10px;color:#7a8aa0">'+r.j.note+srcA+'</div></td>'+
    '<td style="font-family:monospace;font-size:10px;color:#9fb2c8;vertical-align:top">'+r.j.label+'</td>'+
    '<td style="text-align:right;color:#7a8aa0;vertical-align:top">'+(r.km!=null?r.km+'km':'—')+'</td></tr>';
  });
@@ -8382,18 +8443,36 @@ function evalA(){
 function renderAPrecFilter(){
  var el=document.getElementById('wo-a-prec-filter');if(!el)return;
  if(Object.keys(PREC).length===0){el.innerHTML='';return;}
- var filters=[['all','すべて'],['精密以上','精密以上'],['一般精密以上','一般精密以上']];
+ /* 公差入力中はフル再描画しない（フォーカス保護）。情報表示とチップ状態のみ更新 */
+ if(document.activeElement&&document.activeElement.id==='wo-a-tol'&&el.querySelector('#wo-a-tol')){
+  var inf=el.querySelector('#wo-a-tol-info');if(inf)inf.textContent=_aTolLabel(aTol);
+  Array.prototype.forEach.call(el.querySelectorAll('[data-apf]'),function(btn){
+   var on=(aPrecFilter===btn.getAttribute('data-apf'));
+   btn.style.borderColor=on?'#5dcaa5':'#2a3f55';
+   btn.style.background=on?'rgba(93,202,165,0.12)':'transparent';
+   btn.style.color=on?'#5dcaa5':'#8a9ab0';
+  });
+  return;
+ }
+ var filters=[['all','すべて'],['一般精密以上','一般精密以上'],['精密以上','精密以上'],['超精密以上','超精密']];
  var h='<div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap">'
   +'<span style="font-size:11px;color:#7a8aa0;white-space:nowrap">精度：</span>';
  filters.forEach(function(fv){
   var on=(aPrecFilter===fv[0]);
   h+='<button style="padding:2px 10px;border-radius:12px;border:1px solid '+(on?'#5dcaa5':'#2a3f55')+';background:'+(on?'rgba(93,202,165,0.12)':'transparent')+';color:'+(on?'#5dcaa5':'#8a9ab0')+';font-size:11px;cursor:pointer;font-family:inherit" data-apf="'+fv[0]+'">'+fv[1]+'</button>';
  });
+ h+='<span style="font-size:11px;color:#7a8aa0;white-space:nowrap;margin-left:8px">要求公差 ±</span>'
+  +'<input id="wo-a-tol" type="number" step="0.001" min="0" placeholder="0.01" value="'+(aTol>0?aTol:'')+'" style="width:64px;background:#16283a;border:1px solid #2a3f55;color:#cfe0ee;border-radius:4px;padding:2px 6px;font-family:monospace;font-size:11px">'
+  +'<span style="font-size:11px;color:#7a8aa0">mm</span>'
+  +'<span id="wo-a-tol-info" style="font-size:11px;color:#5dcaa5;margin-left:4px">'+_aTolLabel(aTol)+'</span>';
  h+='</div>';
+ h+='<div style="font-size:10px;color:#7a8aa0;margin-top:3px">※精度は保有設備・工程能力に基づく目安（設備精度）であり、個別ワークの公差を保証するものではありません。</div>';
  el.innerHTML=h;
  Array.prototype.forEach.call(el.querySelectorAll('[data-apf]'),function(btn){
-  btn.onclick=function(){aPrecFilter=btn.getAttribute('data-apf');evalA();};
+  btn.onclick=function(){aPrecFilter=btn.getAttribute('data-apf');aTol=0;evalA();};
  });
+ var ti=el.querySelector('#wo-a-tol');
+ if(ti)ti.oninput=function(){aTol=parseFloat(ti.value)||0;aPrecFilter=_aTolFilter(aTol);evalA();};
 }
 function kmOf(oin){
  try{
