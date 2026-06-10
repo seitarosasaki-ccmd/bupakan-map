@@ -8185,26 +8185,136 @@ function buildA(){
  ['X','Y','Z','D','L'].forEach(function(k){var el=document.getElementById('wo-'+k);if(el)el.oninput=function(){aDim[k]=+el.value||0;evalA();};});
  evalA();
 }
-function judgeA(c){
+/* judgeA v2.1 (2026-06-10): 実機単位照合＋X/Y回転許容＋切削根拠門番＋丸物救済＋確度注記 */
+var _A_MILL=/マシニング|フライス|門型|五面|5面|中ぐり|ボール盤|彫|切削|機械加工|milling|machining|MC|cut|研削/i;
+var _A_TURN=/旋盤|旋削|ターニング|複合加工機|turning|lathe/i;
+var _A_EDM=/放電|ワイヤ|EDM/i;
+var _A_MCTXT=/マシニング|MC|旋盤|フライス|研削|放電|ワイヤ|中ぐり|門型|五面|切削|機械加工|turning|milling|lathe|machining/i;
+var _A_LATHETXT=/旋盤|ターニング|turning|lathe|複合加工機/i;
+var _aCompByOin=null;
+function _aComp(oin){
+ if(!_aCompByOin){_aCompByOin={};(typeof companies!=='undefined'?companies:[]).forEach(function(c){_aCompByOin[String(c.oin).replace(/\.0+$/,'')]=c;});}
+ return _aCompByOin[String(oin).replace(/\.0+$/,'')]||null;
+}
+function _aNum(x){var n=parseFloat(x);return (isFinite(n)&&n>0)?n:0;}
+function _aDevs(oin,fam){
+ var E=(typeof EQUIP_DEV_BY_OIN!=='undefined'&&EQUIP_DEV_BY_OIN)?EQUIP_DEV_BY_OIN:null;
+ if(!E)return null;
+ var v=E[String(oin).replace(/\.0+$/,'')];
+ if(!v)return null;
+ var out=[];
+ (v.devices||[]).forEach(function(d){
+  var p=String(d.proc||'');
+  var cls=_A_TURN.test(p)?'turn':((_A_MILL.test(p)||_A_EDM.test(p))?'mill':null);
+  if(cls===fam)out.push(d);
+ });
+ return out;
+}
+function _aFitOrient(mx,my,mz,wx,wy,wz){
+ var best=null,os=[[wx,wy],[wy,wx]];
+ for(var k=0;k<2;k++){var ox=os[k][0],oy=os[k][1];
+  if(mx>=ox&&my>=oy&&mz>=wz){
+   var mg=Math.min(mx/ox,my/oy,mz/wz),M=Math.max(mx/ox,my/oy,mz/wz);
+   if(!best||mg>best[0])best=[mg,M];
+  }}
+ return best;
+}
+function _aRank(mg,M){if(M>=10)return 3;if(M>=5)return 2;if(mg>=1.10)return 0;return 1;}
+function _aGrade(mg,M,model,lab){
+ var tag=model?('実機適合 '+model):'実機適合';
+ var r=_aRank(mg,M);
+ if(r===3)return {mark:'×',cls:'ng',label:lab,note:'過大すぎ（'+Math.round(M)+'倍）',skip:true};
+ if(r===2)return {mark:'△',cls:'wn',label:lab,note:'過大（最大'+Math.round(M)+'倍）'};
+ if(r===0)return {mark:'○',cls:'ok',label:lab,note:tag+' 余裕'+Math.round((mg-1)*100)+'%'};
+ return {mark:'△',cls:'wn',label:lab,note:tag+'（ギリ）'};
+}
+function judgeA(c,oin){
  var wx,wy,wz;
  if(aShape==='角'){wx=aDim.X;wy=aDim.Y;wz=aDim.Z;}else{wx=aDim.D;wy=aDim.D;wz=aDim.L;}
- var cx,cy,cz,unknown=false;
- if(aShape==='丸'&&c.mdia>0){cx=c.mdia;cy=c.mdia;cz=c.mz||0;}
- else if(aShape==='丸'){return {mark:'×',cls:'ng',label:'旋盤なし',note:'丸物は旋削設備が必要'};}
- else{cx=c.mx;cy=c.my;cz=c.mz;}
- if(!cx||!cy||!cz)unknown=true;
- var lab=(aShape==='丸'&&c.mdia>0)?('φ'+Math.round(c.mdia)+'×L'+Math.round(c.mz||0)):('X'+Math.round(c.mx||0)+'×Y'+Math.round(c.my||0)+'×Z'+Math.round(c.mz||0));
- if(unknown){
-  var fits=((cx||1e9)>=wx)&&((cy||1e9)>=wy)&&((cz||1e9)>=wz);
-  return {mark:fits?'△':'×',cls:fits?'wn':'ng',label:lab,note:'一部寸法未確認'};
+ var comp=_aComp(oin);
+ var et=(comp&&comp.equipText)?String(comp.equipText):'';
+ var cats=(comp&&comp.cats)||[];
+ var conf=c.conf||'';
+ var sfx=(conf==='high')?'':'・推定含む';
+ var envLab='X'+Math.round(c.mx||0)+'×Y'+Math.round(c.my||0)+'×Z'+Math.round(c.mz||0);
+ if(aShape==='角'){
+  var devs=_aDevs(oin,'mill');
+  var etOk=!!(et&&_A_MCTXT.test(et));
+  if(devs!==null&&devs.length===0&&!etOk)return {hidden:true,mark:'×',cls:'ng',label:'',note:'切削設備根拠なし'};
+  if(devs===null){
+   if(et&&!etOk)return {hidden:true,mark:'×',cls:'ng',label:'',note:'切削設備根拠なし'};
+   if(!et&&cats.length&&cats.indexOf('cut')<0&&cats.indexOf('edm')<0)return {hidden:true,mark:'×',cls:'ng',label:'',note:'切削設備根拠なし'};
+  }
+  if(devs&&devs.length){
+   var full=devs.filter(function(d){return _aNum(d.x)>0&&_aNum(d.y)>0&&_aNum(d.z)>0;});
+   var best=null;
+   for(var di=0;di<full.length;di++){var d=full[di];
+    var r=_aFitOrient(_aNum(d.x),_aNum(d.y),_aNum(d.z),wx,wy,wz);
+    if(!r)continue;
+    var key=[_aRank(r[0],r[1]),r[1]];
+    if(!best||key[0]<best.key[0]||(key[0]===best.key[0]&&key[1]<best.key[1]))best={key:key,mg:r[0],M:r[1],d:d};
+   }
+   if(best){
+    var bl='X'+Math.round(_aNum(best.d.x))+'×Y'+Math.round(_aNum(best.d.y))+'×Z'+Math.round(_aNum(best.d.z));
+    return _aGrade(best.mg,best.M,String(best.d.model||'').substring(0,16),bl);
+   }
+   if(full.length&&full.length===devs.length){
+    if(c.mx&&c.my&&c.mz&&_aFitOrient(c.mx,c.my,c.mz,wx,wy,wz))return {mark:'△',cls:'wn',label:envLab,note:'単一機適合未確認'+sfx};
+    return {mark:'×',cls:'ng',label:envLab,note:'収まる実機なし'};
+   }
+   return {mark:'△',cls:'wn',label:envLab,note:'切削設備あり・寸法一部未確認'};
+  }
+  var unknown=!(c.mx&&c.my&&c.mz);
+  if(unknown){
+   var f2=(((c.mx||1e9)>=wx&&(c.my||1e9)>=wy)||((c.mx||1e9)>=wy&&(c.my||1e9)>=wx))&&((c.mz||1e9)>=wz);
+   return {mark:f2?'△':'×',cls:f2?'wn':'ng',label:envLab,note:'一部寸法未確認'};
+  }
+  var re=_aFitOrient(c.mx,c.my,c.mz,wx,wy,wz);
+  if(!re)return {mark:'×',cls:'ng',label:envLab,note:'収まる機種なし'};
+  var rr=_aRank(re[0],re[1]);
+  if(rr===3)return {mark:'×',cls:'ng',label:envLab,note:'過大すぎ（'+Math.round(re[1])+'倍）',skip:true};
+  if(rr===2)return {mark:'△',cls:'wn',label:envLab,note:'過大（最大'+Math.round(re[1])+'倍）'};
+  if(rr===0)return {mark:'○',cls:'ok',label:envLab,note:'余裕'+Math.round((re[0]-1)*100)+'%（合算値）'+sfx};
+  return {mark:'△',cls:'wn',label:envLab,note:'ギリ（合算値）'+sfx};
+ }else{
+  var D=wx,L=wz;
+  var tdevs=_aDevs(oin,'turn');
+  var latheTxt=!!(et&&_A_LATHETXT.test(et));
+  var hasMdia=(c.mdia||0)>0;
+  var diaLab='φ'+Math.round(c.mdia||0)+'×L'+Math.round(c.mz||0);
+  if(tdevs!==null&&tdevs.length===0&&!latheTxt&&!hasMdia)return {hidden:true,mark:'×',cls:'ng',label:'',note:'対象外(旋盤なし)'};
+  if(tdevs===null&&!latheTxt&&!hasMdia)return {hidden:true,mark:'×',cls:'ng',label:'',note:'対象外(旋盤なし)'};
+  var tb=null,part=false;
+  (tdevs||[]).forEach(function(d){
+   var dia=_aNum(d.dia);
+   if(dia>=D){
+    var ln=_aNum(d.len)||_aNum(d.z);
+    if(ln>0){
+     if(ln>=L){
+      var mg=Math.min(dia/D,ln/L),M=Math.max(dia/D,ln/L);
+      var key=[_aRank(mg,M),M];
+      if(!tb||key[0]<tb.key[0]||(key[0]===tb.key[0]&&key[1]<tb.key[1]))tb={key:key,mg:mg,M:M,d:d,dia:dia,ln:ln};
+     }
+    }else part=true;
+   }else if(dia===0)part=true;
+  });
+  if(tb)return _aGrade(tb.mg,tb.M,String(tb.d.model||'').substring(0,16),'φ'+Math.round(tb.dia)+'×L'+Math.round(tb.ln));
+  if(hasMdia){
+   var cx=c.mdia,cz=c.mz||0;
+   if(cx>=D&&(cz===0||cz>=L)){
+    if(cz===0)return {mark:'△',cls:'wn',label:diaLab,note:'径適合・挽き長未確認（合算値）'+sfx};
+    var mg2=Math.min(cx/D,cz/L),M2=Math.max(cx/D,cz/L),r2=_aRank(mg2,M2);
+    if(r2===3)return {mark:'×',cls:'ng',label:diaLab,note:'過大すぎ（'+Math.round(M2)+'倍）',skip:true};
+    if(r2===2)return {mark:'△',cls:'wn',label:diaLab,note:'過大（最大'+Math.round(M2)+'倍）'};
+    if(r2===0)return {mark:'○',cls:'ok',label:diaLab,note:'余裕'+Math.round((mg2-1)*100)+'%（合算値）'+sfx};
+    return {mark:'△',cls:'wn',label:diaLab,note:'ギリ（合算値）'+sfx};
+   }
+   if(tdevs&&tdevs.length&&!part)return {mark:'×',cls:'ng',label:diaLab,note:'収まる実機なし'};
+   return {mark:'×',cls:'ng',label:diaLab,note:'収まる機種なし'};
+  }
+  if(part||(tdevs&&tdevs.length))return {mark:'△',cls:'wn',label:'φ?×L?',note:'旋盤保有・径/挽き長未確認'};
+  return {mark:'△',cls:'wn',label:'φ?×L?',note:'旋盤保有・最大径未確認'};
  }
- if(!((cx>=wx)&&(cy>=wy)&&(cz>=wz)))return {mark:'×',cls:'ng',label:lab,note:'収まる機種なし'};
- var mg=Math.min(cx/wx,cy/wy,cz/wz);
- var maxMg=Math.max(cx/wx,cy/wy,cz/wz);
- if(maxMg>=10)return {mark:'×',cls:'ng',label:lab,note:'過大すぎ（'+Math.round(maxMg)+'倍）',skip:true};
- if(maxMg>=5)return {mark:'△',cls:'wn',label:lab,note:'過大（最大'+Math.round(maxMg)+'倍）'};
- if(mg>=1.10)return {mark:'○',cls:'ok',label:lab,note:'余裕'+Math.round((mg-1)*100)+'%'};
- return {mark:'△',cls:'wn',label:lab,note:'ギリ（余裕'+Math.round((mg-1)*100)+'%）'};
 }
 function evalA(){
  if(!WE){return;}
@@ -8213,8 +8323,9 @@ function evalA(){
  var order={'○':0,'△':1,'×':2},rows=[];
  for(var oin in WE){if(!WE.hasOwnProperty(oin))continue;var c=WE[oin];
   if(aShape==='角'&&c.nonmc)continue;
-  if(aShape==='丸'&&(!c.mdia||c.mdia<=0))continue;
-  var j=judgeA(c);if(j.mark==='×'&&(!(c.mx||c.mdia)||j.skip))continue;
+  var j=judgeA(c,oin);
+  if(j.hidden)continue;
+  if(j.mark==='×'&&j.skip)continue;
   // 精度フィルター適用
   var _oin=String(oin).replace(/\.0+$/,'');
   var _pd=PREC[_oin];
