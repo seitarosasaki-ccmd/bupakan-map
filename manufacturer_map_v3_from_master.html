@@ -5256,7 +5256,7 @@ function openDrawer(origIdx){
         if(d.material_text)c.materialText=d.material_text;
         if(d.shape_text)c.shapeText=d.shape_text;
       }
-      if(er&&er.data&&er.data.length>0)EQUIP_DEV_BY_OIN[_sbOin]={devices:er.data};
+      if(er&&er.data&&er.data.some(function(d){return d.proc||d.maker||d.model;}))EQUIP_DEV_BY_OIN[_sbOin]={devices:er.data}; /* PATCH:equip-null-guard 実体ある行のみ上書き(空殻でリッチ静的を潰さない) */
       if(activeCard===_sbIdx)renderDrawer(c);
     }).catch(function(e){console.log('SB lazy fetch error:',e);});
   }
