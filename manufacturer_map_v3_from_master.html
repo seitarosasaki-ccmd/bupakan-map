@@ -4498,6 +4498,7 @@ function openDrawer(origIdx){
         if(d.precision_json){try{if(typeof PREC!=='undefined')PREC[_sbOin]=d.precision_json;}catch(_e){}}
         if(d.we_machines||d.we_raw){try{if(typeof WE!=='undefined')WE[_sbOin]=Object.assign({},WE[_sbOin]||{},{machines:d.we_machines,raw:d.we_raw});}catch(_e){}}
         if(d.note!=null)c.note=d.note;
+        if(d.surface_json){try{SURF2_BY_MID[_sbOin]=d.surface_json;}catch(_e){}}
       }
       if(er&&er.data&&er.data.some(function(d){return d.proc||d.maker||d.model;}))EQUIP_DEV_BY_OIN[_sbOin]={devices:er.data}; /* PATCH:equip-null-guard 実体ある行のみ上書き(空殻でリッチ静的を潰さない) */
       if(activeCard===_sbIdx)renderDrawer(c);
@@ -4659,6 +4660,31 @@ function ddLock(inner,title,sub,maxh){
     '<div class="dd-cta"><span class="dd-cta-t">🔒 '+title+(sub?' <span class="dd-cta-s">'+sub+'</span>':'')+'</span>'+
     '<button class="dd-cta-b" onclick="unlockPrompt()">🔓 フルで見る</button></div></div>';
 }
+function _surfChips(arr){return (arr||[]).filter(Boolean).map(function(x){return '<span class="dv-chip">'+dvEsc(x)+'</span>';}).join('');}
+function buildSurfaceV2(c){
+  var s=(typeof SURF2_BY_MID!=='undefined'&&SURF2_BY_MID)?SURF2_BY_MID[dvNorm(c.oin)]:null;
+  if(!s||s.exclude_candidate) return '';
+  var ce=s.certs||{},b=[];
+  if(ce.jis9100)b.push('JIS Q9100');if(ce.nadcap_cp)b.push('Nadcap CP');if(ce.nadcap_coat)b.push('Nadcap Coat');if(ce.nadcap_ht)b.push('Nadcap HT');if(ce.ams2750)b.push('AMS2750');if(ce.mil)b.push('MIL');if(ce.boeing)b.push('Boeing');if(ce.airbus)b.push('Airbus');
+  var h='<div class="dv-sec">SURFACE TREATMENT 表面処理'+(s.verified?' <span class="dv-badge dv-ver">✓ 検証済</span>':'')+(s.conf?' <span class="dv-badge dv-srcn">確度 '+dvEsc(s.conf)+'</span>':'')+'</div><table class="dv-surf">';
+  if((s.proc||[]).length)h+='<tr><td class="k">処理</td><td>'+_surfChips(s.proc)+'</td></tr>';
+  if((s.mat_ok||[]).length)h+='<tr><td class="k">対応材料</td><td>'+_surfChips(s.mat_ok)+'</td></tr>';
+  if(b.length)h+='<tr><td class="k">認証</td><td>'+b.map(function(x){return '<span class="dv-cert cnad">'+x+'</span>';}).join(' ')+'</td></tr>';
+  if(s.tank)h+='<tr><td class="k">槽/炉サイズ</td><td>'+dvEsc(s.tank)+'</td></tr>';
+  if(s.paint||((s.paint_types||[]).length))h+='<tr><td class="k">塗装</td><td>'+(s.paint?'対応 ':'')+_surfChips(s.paint_types)+'</td></tr>';
+  if((s.chem||[]).length)h+='<tr><td class="k">処理液/浴種</td><td>'+_surfChips(s.chem)+'</td></tr>';
+  if(s.thickness)h+='<tr><td class="k">膜厚</td><td>'+dvEsc(s.thickness)+'</td></tr>';
+  if((s.qc||[]).length)h+='<tr><td class="k">試験設備</td><td>'+_surfChips(s.qc)+'</td></tr>';
+  if((s.env||[]).length)h+='<tr><td class="k">環境/法規</td><td>'+_surfChips(s.env)+'</td></tr>';
+  if(s.bake===true)h+='<tr><td class="k">水素脆性除去</td><td>対応(ベーキング)</td></tr>';
+  if(s.capacity)h+='<tr><td class="k">量産/納期</td><td>'+dvEsc(s.capacity)+'</td></tr>';
+  h+='</table>';
+  var src=[].concat(s.src||[],s.p2_src||[]),seen={},u2=[];
+  src.forEach(function(u){u=(''+u).trim();if(/^https?:/.test(u)&&!seen[u]){seen[u]=1;u2.push(u);}});
+  if(u2.length){h+='<div class="dv-srcblk"><div class="sh">出典</div>'+u2.slice(0,6).map(function(u){var dom=u.replace(/^https?:\/\//,'').split('/')[0];return '<div class="dv-srcitem"><span class="tag">web</span><a href="'+dvEsc(u)+'" target="_blank" rel="noopener noreferrer">'+dvEsc(dom)+' ↗</a></div>';}).join('')+'</div>';}
+  return h;
+}
+
 function renderDrawer(c){
   const body=document.getElementById('drawer-body');
 
@@ -4805,6 +4831,8 @@ function renderDrawer(c){
   // 設備セクションv2（お試し時はチラ見せロック）
   var _eqv2 = buildEquipV2(c);
   html += isUnlocked ? _eqv2 : ddLock(_equipTeaser(c),'保有設備（機種別）','型番・台数・対応寸法・出典',112);
+  var _sv2 = buildSurfaceV2(c);
+  if(_sv2) html += _sv2;
 
   // 設備サイズ判定UI（お試し時は精密判定をロック）
   if(c.equipId && EQUIP_DB[c.equipId]){
@@ -6726,6 +6754,7 @@ function toggleLogisticsMode(){
 // ================================================================
 // 初期化実行
 // ================================================================
+var SURF2_BY_MID = {};  // 表面処理v2(companies_detail.surface_json・認証時)
 var EQUIP_DEV_BY_OIN = {};  // 機種別構造化設備データ（equip_devices_by_oin.json）
 fetch('./manufacturers_slim.json')
   .then(r => { if(!r.ok) throw new Error('manufacturers.json HTTP ' + r.status); return r.json(); })
