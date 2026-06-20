@@ -4665,18 +4665,18 @@ function buildSurfaceV2(c){
   var s=(typeof SURF2_BY_MID!=='undefined'&&SURF2_BY_MID)?SURF2_BY_MID[dvNorm(c.oin)]:null;
   if(!s||s.exclude_candidate) return '';
   var ce=s.certs||{},b=[];
-  if(ce.jis9100)b.push('JIS Q9100');if(ce.nadcap_cp)b.push('Nadcap CP');if(ce.nadcap_coat)b.push('Nadcap Coat');if(ce.nadcap_ht)b.push('Nadcap HT');if(ce.ams2750)b.push('AMS2750');if(ce.mil)b.push('MIL');if(ce.boeing)b.push('Boeing');if(ce.airbus)b.push('Airbus');
+  if(ce.nadcap_cp)b.push('Nadcap CP');if(ce.nadcap_coat)b.push('Nadcap Coat');if(ce.nadcap_ht)b.push('Nadcap HT');if(ce.ams2750)b.push('AMS2750');if(ce.boeing)b.push('Boeing');if(ce.airbus)b.push('Airbus');if(ce.mil)b.push('MIL');if(ce.jis9100)b.push('JIS Q9100');
   var h='<div class="dv-sec">SURFACE TREATMENT 表面処理'+(s.verified?' <span class="dv-badge dv-ver">✓ 検証済</span>':'')+(s.conf?' <span class="dv-badge dv-srcn">確度 '+dvEsc(s.conf)+'</span>':'')+'</div><table class="dv-surf">';
   if((s.proc||[]).length)h+='<tr><td class="k">処理</td><td>'+_surfChips(s.proc)+'</td></tr>';
   if((s.mat_ok||[]).length)h+='<tr><td class="k">対応材料</td><td>'+_surfChips(s.mat_ok)+'</td></tr>';
   if(b.length)h+='<tr><td class="k">認証</td><td>'+b.map(function(x){return '<span class="dv-cert cnad">'+x+'</span>';}).join(' ')+'</td></tr>';
+  if(s.bake===true)h+='<tr><td class="k">水素脆性除去</td><td><span class="dv-cert" style="background:rgba(255,107,53,.18);border-color:#ff6b35;color:#ffb38a">ベーキング対応</span></td></tr>';
   if(s.tank)h+='<tr><td class="k">槽/炉サイズ</td><td>'+dvEsc(s.tank)+'</td></tr>';
+  if((s.qc||[]).length)h+='<tr><td class="k">試験設備</td><td>'+_surfChips(s.qc)+'</td></tr>';
   if(s.paint||((s.paint_types||[]).length))h+='<tr><td class="k">塗装</td><td>'+(s.paint?'対応 ':'')+_surfChips(s.paint_types)+'</td></tr>';
   if((s.chem||[]).length)h+='<tr><td class="k">処理液/浴種</td><td>'+_surfChips(s.chem)+'</td></tr>';
   if(s.thickness)h+='<tr><td class="k">膜厚</td><td>'+dvEsc(s.thickness)+'</td></tr>';
-  if((s.qc||[]).length)h+='<tr><td class="k">試験設備</td><td>'+_surfChips(s.qc)+'</td></tr>';
   if((s.env||[]).length)h+='<tr><td class="k">環境/法規</td><td>'+_surfChips(s.env)+'</td></tr>';
-  if(s.bake===true)h+='<tr><td class="k">水素脆性除去</td><td>対応(ベーキング)</td></tr>';
   if(s.capacity)h+='<tr><td class="k">量産/納期</td><td>'+dvEsc(s.capacity)+'</td></tr>';
   h+='</table>';
   var src=[].concat(s.src||[],s.p2_src||[]),seen={},u2=[];
@@ -4684,7 +4684,6 @@ function buildSurfaceV2(c){
   if(u2.length){h+='<div class="dv-srcblk"><div class="sh">出典</div>'+u2.slice(0,6).map(function(u){var dom=u.replace(/^https?:\/\//,'').split('/')[0];return '<div class="dv-srcitem"><span class="tag">web</span><a href="'+dvEsc(u)+'" target="_blank" rel="noopener noreferrer">'+dvEsc(dom)+' ↗</a></div>';}).join('')+'</div>';}
   return h;
 }
-
 function renderDrawer(c){
   const body=document.getElementById('drawer-body');
 
