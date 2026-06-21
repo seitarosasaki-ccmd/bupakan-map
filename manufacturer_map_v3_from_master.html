@@ -4662,6 +4662,13 @@ function ddLock(inner,title,sub,maxh){
     '<button class="dd-cta-b" onclick="unlockPrompt()">🔓 フルで見る</button></div></div>';
 }
 function _surfChips(arr){return (arr||[]).filter(Boolean).map(function(x){return '<span class="dv-chip">'+dvEsc(x)+'</span>';}).join('');}
+function _surfTeaser(c){
+  return '<div class="dv-sec">SURFACE TREATMENT 表面処理</div>'
+    +'<div style="padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:rgba(57,255,20,0.03)">'
+    +'<div style="font-size:12px;color:var(--text);font-weight:600">✓ 表面処理データ登録済み</div>'
+    +'<div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.6">対応処理・認証(Nadcap/AMS等)・槽サイズ・処理液・膜厚・試験設備・出典を収録。ログイン（無料）で全件表示。</div>'
+    +'</div>';
+}
 function buildSurfaceV2(c){
   var s=(typeof SURF2_BY_MID!=='undefined'&&SURF2_BY_MID)?SURF2_BY_MID[dvNorm(c.oin)]:null;
   if(!s||s.exclude_candidate) return '';
@@ -4833,6 +4840,7 @@ function renderDrawer(c){
   html += isUnlocked ? _eqv2 : ddLock(_equipTeaser(c),'保有設備（機種別）','型番・台数・対応寸法・出典',112);
   var _sv2 = buildSurfaceV2(c);
   if(_sv2) html += _sv2;
+  else if(!isUnlocked && c.hasSurf) html += ddLock(_surfTeaser(c),'表面処理','処理/認証/槽/処理液/試験/出典',74);
 
   // 設備サイズ判定UI（お試し時は精密判定をロック）
   if(c.equipId && EQUIP_DB[c.equipId]){
