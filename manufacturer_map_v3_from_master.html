@@ -4673,7 +4673,7 @@ function buildSurfaceV2(c){
   var s=(typeof SURF2_BY_MID!=='undefined'&&SURF2_BY_MID)?SURF2_BY_MID[dvNorm(c.oin)]:null;
   if(!s||s.exclude_candidate) return '';
   var ce=s.certs||{},b=[];
-  if(ce.nadcap_cp)b.push('Nadcap CP');if(ce.nadcap_coat)b.push('Nadcap Coat');if(ce.nadcap_ht)b.push('Nadcap HT');if(ce.ams2750)b.push('AMS2750');if(ce.boeing)b.push('Boeing');if(ce.airbus)b.push('Airbus');if(ce.mil)b.push('MIL');if(ce.jis9100)b.push('JIS Q9100');
+  if(ce.nadcap_cp)b.push('Nadcap CP');if(ce.nadcap_coat)b.push('Nadcap Coat');if(ce.nadcap_ht)b.push('Nadcap HT');if(ce.nadcap_se)b.push('Nadcap SE');if(ce.nadcap_ndt)b.push('Nadcap NDT');if(ce.ams2750)b.push('AMS2750');if(ce.boeing)b.push('Boeing');if(ce.airbus)b.push('Airbus');if(ce.mil)b.push('MIL');if(ce.jis9100)b.push('JIS Q9100');
   var h='<div class="dv-sec">SURFACE TREATMENT 表面処理'+(s.verified?' <span class="dv-badge dv-ver">✓ 検証済</span>':'')+(s.conf?' <span class="dv-badge dv-srcn">確度 '+dvEsc(s.conf)+'</span>':'')+'</div><table class="dv-surf">';
   if((s.proc||[]).length)h+='<tr><td class="k">処理</td><td>'+_surfChips(s.proc)+'</td></tr>';
   if((s.mat_ok||[]).length)h+='<tr><td class="k">対応材料</td><td>'+_surfChips(s.mat_ok)+'</td></tr>';
@@ -6846,7 +6846,7 @@ fetch('./manufacturers_slim.json')
 .wo-bn{color:#ffb300;}
 .wo-btn{font-size:12px;padding:6px 10px;border-radius:6px;border:1px solid #2a3f55;background:transparent;color:#e6eef5;cursor:pointer;}
 .wo-tabs{display:flex;gap:5px;margin-bottom:12px;}
-.wo-tab{flex:1;text-align:center;padding:7px 4px;border-radius:6px;border:1px solid #2a3f55;background:transparent;color:#9fb2c8;font-size:12px;cursor:pointer;}
+.wo-tab{flex:1;text-align:center;padding:7px 4px;border-radius:6px;border:1px solid #2a3f55;background:transparent;color:#9fb2c8;font-size:12px;cursor:pointer;white-space:nowrap;}
 .wo-tab.on{border-color:#39ff14;color:#39ff14;background:rgba(57,255,20,.10);font-weight:bold;}
 .wo-note{display:flex;gap:7px;background:rgba(57,255,20,.06);border:1px solid rgba(57,255,20,.25);border-radius:6px;padding:7px 9px;margin-bottom:12px;font-size:11px;color:#bfe9c9;line-height:1.55;}
 .wo-lab{font-size:11px;color:#7a8aa0;margin:6px 0 4px;}
@@ -6911,6 +6911,7 @@ table.wo-mt{border-collapse:separate;border-spacing:0;width:max-content;min-widt
     <div class="wo-tab on" id="wo-tab-a" data-mode="a">寸法で探す</div>
     <div class="wo-tab" id="wo-tab-b" data-mode="b">工程で探す</div>
     <div class="wo-tab" id="wo-tab-c" data-mode="c">工程を組む</div>
+    <div class="wo-tab" id="wo-tab-d" data-mode="d">表面処理でしぼる</div>
   </div>
 
   <div id="wo-mode-a">
@@ -6966,6 +6967,15 @@ table.wo-mt{border-collapse:separate;border-spacing:0;width:max-content;min-widt
     <div id="wo-mtx-c" style="display:none"></div>
   </div>
 
+  <div id="wo-mode-d" style="display:none">
+    <div class="wo-note"><span>&#9432;</span><span>処理＋対応材料＋<b>向け先(認証ゲート)</b>で、航空宇宙の表面処理サプライヤを<b>&#9675;推奨 / &#9651;条件付 / &#10005;不適合</b>判定します。国内一般はNadcap不問、海外OEMは該当Nadcap必須、Boeing/Airbusは該当承認必須。高張力鋼・チタン×めっきは水素脆性除去ベーキングを確認。データは検証済みの登録社のみ・認証時に表示。</span></div>
+    <div id="sf-subtabs" class="sf-subtabs">
+      <button class="sf-st on" data-sf="1">スペックで探す</button>
+      <button class="sf-st" data-sf="2">規格番号で逆引き</button>
+      <button class="sf-st" data-sf="3">供給リスク</button>
+    </div>
+    <div id="sf-body"></div>
+  </div>
   <div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">
     <button class="wo-btn" id="wo-csv">CSV書き出し</button>
     <button class="wo-btn" id="wo-reset">選定をリセット</button>
@@ -7001,8 +7011,175 @@ function setMode(m){
  document.getElementById('wo-mode-a').style.display=(m==='a'?'block':'none');
  document.getElementById('wo-mode-b').style.display=(m==='b'?'block':'none');
  document.getElementById('wo-mode-c').style.display=(m==='c'?'block':'none');
- if(m==='a')buildA();else if(m==='b')build();else buildC();
- applyView(m);
+ document.getElementById('wo-mode-d').style.display=(m==='d'?'block':'none');
+ if(m==='a')buildA();else if(m==='b')build();else if(m==='c')buildC();else buildD();
+ if(m!=='d')applyView(m);
+}
+
+
+/* ===== 表面処理マッチング(タブd) 2026-06-21 ===== */
+var SURF_ROWS=null, SURF_STATE='idle', _surfCbs=[], _sfStyleDone=false, sfMode=1, sfPreset=null;
+var _SK='mid'; /* generate_beta: 公開は 'mid' に差替(c.oin=MID) */
+var SF_PROC=[['plate','めっき'],['anod','陽極酸化/アルマイト'],['conv','化成処理/クロメート'],['passiv','不動態化/パッシベート'],['paint','塗装'],['spray','溶射'],['heat','熱処理'],['peen','ショットピーニング']];
+var SF_PROC_RE={plate:/めっき|鍍金|めつき/,anod:/アルマイト|陽極|アノダイズ|BSAA/,conv:/化成|クロメート|アロジン|SurTec/,passiv:/不動態|パッシベ|パシベ|パッシベート/,paint:/塗装/,spray:/溶射|HVOF|プラズマ|SermeTel|コーティング/,heat:/熱処理|焼入|焼戻|浸炭|窒化|時効|固溶|焼鈍|焼準|HIP|CIP|真空炉|ろう付|拡散接合|析出硬化|サブゼロ/,peen:/ピーニング/};
+var SF_NAD={plate:'cp',anod:'cp',conv:'cp',passiv:'cp',paint:'coat',spray:'coat',heat:'ht',peen:'se'};
+var SF_MAT=[['alu','アルミ'],['ti','チタン'],['sus','ステンレス'],['steel','鋼/合金鋼'],['hss','高張力鋼'],['ni','Ni基超合金'],['mg','マグネシウム'],['cu','銅']];
+var SF_MAT_RE={alu:/アルミ|Al/,ti:/チタン|Ti/,sus:/ステンレス|SUS/,steel:/鋼|合金鋼|炭素鋼/,hss:/高張力|高強度/,ni:/Ni基|ニッケル|Inconel|インコネル|超合金|Hastelloy/,mg:/マグネ|Mg/,cu:/銅|Cu/};
+var SF_SPECDICT={
+ "AMS2700":{p:"passiv",t:"不動態化(Method1硝酸/Method2クエン酸)"},"ASTM A967":{p:"passiv",t:"不動態化"},
+ "MIL-A-8625":{p:"anod",t:"アルミ陽極酸化(TypeI/II/III)"},"AMS2471":{p:"anod",t:"硫酸陽極(非染色)"},"AMS2469":{p:"anod",t:"硬質陽極"},
+ "BAC5632":{p:"anod",t:"ホウ酸硫酸陽極(BSAA・Boeing)"},"BAC5555":{p:"anod",t:"リン酸陽極PAA(接着前処理・Boeing)"},"BAC5019":{p:"anod",t:"陽極(TypeIクロム酸/TypeII硫酸・Boeing)"},
+ "MIL-DTL-5541":{p:"conv",t:"化成処理(アロジン Class1A/3)"},"BAC5719":{p:"conv",t:"化成皮膜(Boeing)"},
+ "AMS-QQ-P-416":{p:"plate",t:"カドミウムめっき"},"AMS2417":{p:"plate",t:"亜鉛ニッケルめっき(Cd代替)"},"AMS2406":{p:"plate",t:"硬質クロムめっき"},"AMS2404":{p:"plate",t:"無電解ニッケルめっき"},
+ "AMS2750":{p:"heat",t:"高温計測pyrometry(熱処理の前提)"},"AMS2759":{p:"heat",t:"鋼の熱処理"},"AMS2759/9":{p:"heat",t:"水素脆性除去ベーキング"},
+ "AMS2430":{p:"peen",t:"ショットピーニング"},"AMS2447":{p:"spray",t:"HVOF溶射(WC)"},"AMS2435":{p:"spray",t:"溶射(WC-Co/D-Gun)"},
+ "MIL-PRF-23377":{p:"paint",t:"エポキシプライマー"},"MIL-PRF-85285":{p:"paint",t:"ポリウレタントップコート"}
+};
+function _sfStyle(){ if(_sfStyleDone)return; _sfStyleDone=true;
+ var st=document.createElement('style'); st.textContent=
+ '.sf-subtabs{display:flex;gap:6px;margin:6px 0 10px;flex-wrap:wrap}'+
+ '.sf-st{padding:5px 10px;background:#0e1a27;border:1px solid #2a3f55;color:#8aa0b5;border-radius:7px;font-size:11.5px;font-weight:700;cursor:pointer}'+
+ '.sf-st.on{border-color:#2dd4aa;color:#2dd4aa;background:rgba(45,212,170,.08)}'+
+ '.sf-frm{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;align-items:flex-end}'+
+ '.sf-f{display:flex;flex-direction:column;gap:2px}.sf-f label{font-size:10px;color:#8aa0b5}'+
+ '.sf-frm select,.sf-frm input{background:#0a1420;color:#e6eef5;border:1px solid #2a3f55;border-radius:6px;padding:6px 8px;font-size:12.5px;min-width:120px}'+
+ '.sf-go{background:#2dd4aa;color:#04221a;border:none;font-weight:800;padding:7px 14px;border-radius:7px;cursor:pointer}'+
+ '.sf-card{background:#0e1a27;border:1px solid #2a3f55;border-left-width:4px;border-radius:8px;padding:9px 11px;margin-bottom:8px}'+
+ '.sf-card.ok{border-left-color:#39d98a}.sf-card.cond{border-left-color:#ffb020}'+
+ '.sf-vd{font-weight:900;font-size:11.5px;padding:1px 7px;border-radius:5px;margin-right:7px}'+
+ '.sf-vok{background:rgba(57,217,138,.18);color:#39d98a}.sf-vcond{background:rgba(255,176,32,.18);color:#ffb020}'+
+ '.sf-nm{font-weight:800;cursor:pointer;text-decoration:underline dotted #2a3f55}'+
+ '.sf-chip{display:inline-block;background:#0a1420;border:1px solid #2a3f55;border-radius:10px;padding:0 7px;font-size:10.5px;margin:2px 3px 0 0;color:#bfd0df}'+
+ '.sf-bdg{display:inline-block;border:1px solid #2dd4aa;color:#2dd4aa;border-radius:4px;padding:0 6px;font-size:9.5px;margin:2px 3px 0 0;font-weight:700}.sf-bdg.b2{border-color:#ffb020;color:#ffb020}'+
+ '.sf-why{font-size:11px;color:#8aa0b5;margin-top:5px;border-top:1px dashed #2a3f55;padding-top:5px}.sf-why b{color:#e6eef5}.sf-wn{color:#ffb020;font-weight:700}'+
+ '.sf-risk{background:rgba(255,107,107,.12);border:1px solid #ff6b6b;color:#ffc4c4;border-radius:7px;padding:7px 11px;margin-bottom:9px;font-size:12px;font-weight:700}'+
+ '.sf-cnt{color:#8aa0b5;font-size:11.5px;margin-bottom:8px}'+
+ '.sf-lock{background:rgba(45,212,170,.05);border:1px dashed #2dd4aa;border-radius:9px;padding:16px;text-align:center;color:#bfe9dd;font-size:12.5px}'+
+ '.sf-lock b{color:#2dd4aa}.sf-lock button{margin-top:10px;background:#2dd4aa;color:#04221a;border:none;font-weight:800;padding:8px 16px;border-radius:7px;cursor:pointer}';
+ document.head.appendChild(st);
+}
+function sfFlush(){var cbs=_surfCbs.slice();_surfCbs=[];cbs.forEach(function(f){try{f&&f();}catch(_e){}});}
+function loadSurf(cb){
+ if(SURF_STATE==='ready'){cb&&cb();return;}
+ if(SURF_STATE==='loading'){if(cb)_surfCbs.push(cb);return;}
+ if(typeof _sb==='undefined'||!_sb||typeof isUnlocked==='undefined'||!isUnlocked){SURF_STATE='noauth';cb&&cb();return;}
+ SURF_STATE='loading';
+ _sb.from('companies_detail').select(_SK+',surface_json').not('surface_json','is',null).then(function(r){
+  var rows=(r&&r.data)||[];SURF_ROWS=[];
+  rows.forEach(function(row){
+   var sj=row.surface_json;if(!sj||sj.exclude_candidate)return;var ce=sj.certs||{};
+   var key=normOin(row[_SK]);
+   SURF_ROWS.push({oin:key,n:sj.name||((coIdx()[key]&&coIdx()[key].c.name)||key),
+    proc:sj.proc||[],mat:sj.mat_ok||[],
+    cert:{cp:!!ce.nadcap_cp,coat:!!ce.nadcap_coat,ht:!!ce.nadcap_ht,se:!!ce.nadcap_se,ndt:!!ce.nadcap_ndt,boeing:!!ce.boeing,airbus:!!ce.airbus,mil:!!ce.mil,ams2750:!!ce.ams2750,jis9100:!!ce.jis9100},
+    bake:sj.bake===true,tank:sj.tank||'',conf:sj.conf||'',clevel:(function(){var cf=(sj.conf||'').trim().toLowerCase();return cf.indexOf('high')===0?'high':cf.indexOf('low')===0?'low':cf.indexOf('med')===0?'mid':(cf?'?':'');})(),verified:!!sj.verified,paint:!!sj.paint});
+   try{if(typeof SURF2_BY_MID!=='undefined')SURF2_BY_MID[key]=sj;}catch(_e){}
+  });
+  SURF_STATE='ready';cb&&cb();sfFlush();
+ },function(e){console.log('surf load err',e);SURF_STATE='error';cb&&cb();sfFlush();});
+}
+function sfHasProc(s,pk){return s.proc.some(function(p){return SF_PROC_RE[pk].test(p);});}
+function sfHasMat(s,mk){if(mk==='hss')return s.mat.some(function(m){return SF_MAT_RE.steel.test(m);});return s.mat.some(function(m){return SF_MAT_RE[mk].test(m);});}
+function sfNadcapOK(s,pk){var need=SF_NAD[pk];return !!(s.cert&&s.cert[need]);}
+function sfCertGate(s,pk,dst){
+ if(dst==='dom')return{pass:true,note:'国内一般＝Nadcap要件なし'};
+ if(dst==='boeing')return{pass:!!s.cert.boeing,note:s.cert.boeing?'Boeing承認あり':'Boeing承認なし'};
+ if(dst==='airbus')return{pass:!!s.cert.airbus,note:s.cert.airbus?'Airbus承認あり':'Airbus承認なし'};
+ var need=SF_NAD[pk];var ok=!!s.cert[need];
+ return{pass:ok,note:ok?('Nadcap '+need.toUpperCase()+'相当あり'):('Nadcap '+need.toUpperCase()+'なし(海外OEMで必須)')};
+}
+function sfBakeNeed(pk,mk){return pk==='plate'&&(mk==='hss'||mk==='ti');}
+function sfCertBadges(s){var b=[],c=s.cert||{};if(c.boeing)b.push('Boeing');if(c.airbus)b.push('Airbus');if(c.cp)b.push('Nadcap CP');if(c.ht)b.push('Nadcap HT');if(c.coat)b.push('Nadcap Coat');if(c.se)b.push('Nadcap SE');if(c.ndt)b.push('Nadcap NDT');if(c.ams2750)b.push('AMS2750');if(c.mil)b.push('MIL');if(c.jis9100)b.push('JIS Q9100');return b;}
+function sfScore(s,pk,mk,dst){
+ var reasons=[],warns=[];
+ if(!sfHasProc(s,pk))return{v:'ng',reasons:[],warns:[]};
+ reasons.push('処理対応');
+ if(mk&&!sfHasMat(s,mk))return{v:'ng',reasons:[],warns:[]};
+ if(mk)reasons.push('材料対応');
+ var g=sfCertGate(s,pk,dst);var v='ok';
+ if(!g.pass){return{v:'ng',reasons:reasons,warns:warns};}
+ reasons.push(g.note);
+ if(sfBakeNeed(pk,mk)){if(s.bake){reasons.push('水素脆性除去ベーク対応');}else{v='cond';warns.push('高張力鋼/Ti×めっき→ベーキング必須だが対応未確認');}}
+ if(s.clevel&&s.clevel!=='high'){v=(v==='ok')?'cond':v;warns.push('データ確度 '+s.clevel);}
+ return{v:v,reasons:reasons,warns:warns};
+}
+function sfCard(s,res){
+ var lab={ok:'○ 推奨',cond:'△ 条件付'}[res.v]||'';var vc={ok:'sf-vok',cond:'sf-vcond'}[res.v]||'';
+ var bdg=sfCertBadges(s).map(function(x){return '<span class="sf-bdg'+(/Boeing|Airbus|MIL|AMS2750/.test(x)?' b2':'')+'">'+x+'</span>';}).join('');
+ var chips=(s.proc||[]).slice(0,6).map(function(p){return '<span class="sf-chip">'+dvEsc(p)+'</span>';}).join('');
+ return '<div class="sf-card '+res.v+'"><span class="sf-vd '+vc+'">'+lab+'</span><span class="sf-nm" data-oin="'+dvEsc(s.oin)+'">'+dvEsc(s.n)+'</span>'+
+  (s.verified?' <span class="sf-bdg">✓検証済</span>':'')+
+  '<div style="margin-top:4px">'+bdg+'</div><div style="margin-top:3px">'+chips+'</div>'+
+  '<div class="sf-why"><b>根拠:</b> '+res.reasons.join(' / ')+(res.warns.length?' ｜ <span class="sf-wn">注意: '+res.warns.join(' / ')+'</span>':'')+
+  (s.tank?'<br><b>槽/炉:</b> '+dvEsc(s.tank):'')+'</div></div>';
+}
+function sfHi(oins){try{window.selOinSet=oins&&oins.length?new Set(oins.map(String)):null;if(typeof applyFilters==='function')applyFilters();}catch(_e){}}
+function sfClick(host){Array.prototype.forEach.call(host.querySelectorAll('.sf-nm[data-oin]'),function(el){el.onclick=function(){flyToOin(el.getAttribute('data-oin'));};});}
+function sfOpt(arr){return arr.map(function(a){return '<option value="'+a[0]+'">'+a[1]+'</option>';}).join('');}
+function sfRun1(){
+ var pk=document.getElementById('sf1p').value,mk=document.getElementById('sf1m').value,dst=document.getElementById('sf1d').value;
+ var rows=SURF_ROWS.map(function(s){return{s:s,r:sfScore(s,pk,mk,dst)};}).filter(function(x){return x.r.v!=='ng';});
+ var ng=SURF_ROWS.length-rows.length;var ord={ok:0,cond:1};rows.sort(function(a,b){return ord[a.r.v]-ord[b.r.v];});
+ var dn={dom:'国内一般',osea:'海外OEM',boeing:'Boeing',airbus:'Airbus'}[dst];
+ var h='<div class="sf-cnt">適合 '+rows.length+' 社（○'+rows.filter(function(x){return x.r.v==='ok';}).length+' / △'+rows.filter(function(x){return x.r.v==='cond';}).length+'）・除外 '+ng+' 社 ｜ 向け先: '+dn+' ｜ <span style="color:#2dd4aa">地図に適合社をハイライト</span></div>';
+ if(rows.length<=2&&rows.length>0)h='<div class="sf-risk">⚠ 供給リスク: この条件の対応社が '+rows.length+' 社のみ（ソールソース傾向）</div>'+h;
+ var out=document.getElementById('sf1out');out.innerHTML=h+(rows.map(function(x){return sfCard(x.s,x.r);}).join('')||'<div class="sf-cnt">該当社なし</div>');
+ sfClick(out);sfHi(rows.map(function(x){return x.s.oin;}));
+}
+function sfRun2(){
+ var q=document.getElementById('sf2spec').value.trim();var hit=SF_SPECDICT[q]||SF_SPECDICT[q.toUpperCase()];
+ var out=document.getElementById('sf2out');
+ if(!hit){out.innerHTML='<div class="sf-cnt">辞書に未収録の番号です。例: AMS2700 / BAC5555 / MIL-A-8625 / AMS-QQ-P-416</div>';sfHi(null);return;}
+ var pk=hit.p;var rows=SURF_ROWS.map(function(s){return{s:s,r:sfScore(s,pk,'','dom')};}).filter(function(x){return x.r.v!=='ng';});
+ out.innerHTML='<div class="sf-cnt"><b>'+dvEsc(q)+'</b> → 処理: <b>'+dvEsc(hit.t)+'</b>（カテゴリ: '+(SF_PROC.filter(function(p){return p[0]===pk;})[0]||['',''])[1]+'）→ 対応社 '+rows.length+' ｜ <span style="color:#2dd4aa">地図にハイライト</span></div>'+rows.map(function(x){return sfCard(x.s,x.r);}).join('');
+ sfClick(out);sfHi(rows.map(function(x){return x.s.oin;}));
+}
+function sfRun3(){
+ var pk=document.getElementById('sf3p').value,mk=document.getElementById('sf3m').value,cert=document.getElementById('sf3c').value;
+ var rows=SURF_ROWS.filter(function(s){return sfHasProc(s,pk)&&(!mk||sfHasMat(s,mk));});
+ if(cert==='nadcap')rows=rows.filter(function(s){return sfNadcapOK(s,pk);});
+ else if(cert)rows=rows.filter(function(s){return s.cert[cert];});
+ var lab=(SF_PROC.filter(function(p){return p[0]===pk;})[0]||['',''])[1]+(mk?' × '+(SF_MAT.filter(function(m){return m[0]===mk;})[0]||['',''])[1]:'')+(cert?' × '+({nadcap:'Nadcap',boeing:'Boeing',airbus:'Airbus',ams2750:'AMS2750'})[cert]:'');
+ var h='';
+ if(rows.length===0)h='<div class="sf-risk">⚠ 該当社 0：この登録範囲では供給先なし（＝要新規開拓・最重要リスク）</div>';
+ else if(rows.length<=2)h='<div class="sf-risk">⚠ ソールソース: 「'+dvEsc(lab)+'」の対応社は '+rows.length+' 社のみ。供給途絶リスク・代替確保を推奨。</div>';
+ else h='<div class="sf-cnt">「'+dvEsc(lab)+'」対応: '+rows.length+' 社 ｜ <span style="color:#2dd4aa">地図にハイライト</span></div>';
+ var out=document.getElementById('sf3out');
+ out.innerHTML=h+rows.map(function(s){return '<div class="sf-card '+(rows.length<=2?'cond':'ok')+'"><span class="sf-nm" data-oin="'+dvEsc(s.oin)+'">'+dvEsc(s.n)+'</span>'+(s.verified?' <span class="sf-bdg">✓検証済</span>':'')+'<div style="margin-top:4px">'+sfCertBadges(s).map(function(b){return '<span class="sf-bdg">'+b+'</span>';}).join('')+'</div><div class="sf-why">'+(s.proc||[]).slice(0,5).map(dvEsc).join(' / ')+'</div></div>';}).join('');
+ sfClick(out);sfHi(rows.map(function(s){return s.oin;}));
+}
+function sfForm(){
+ if(sfMode===1)return '<div class="sf-frm">'+
+   '<div class="sf-f"><label>処理</label><select id="sf1p">'+sfOpt(SF_PROC)+'</select></div>'+
+   '<div class="sf-f"><label>対応材料</label><select id="sf1m"><option value="">指定なし</option>'+sfOpt(SF_MAT)+'</select></div>'+
+   '<div class="sf-f"><label>向け先(認証ゲート)</label><select id="sf1d"><option value="dom">国内一般</option><option value="osea">海外OEM(Boeing/Airbus/RR/GE/P&amp;W)</option><option value="boeing">特定: Boeing</option><option value="airbus">特定: Airbus</option></select></div>'+
+   '<button class="sf-go" onclick="sfRun1()">適合社を出す</button></div><div id="sf1out"></div>';
+ if(sfMode===2)return '<div class="sf-frm">'+
+   '<div class="sf-f"><label>規格番号(AMS/Boeing BAC/MIL/Airbus/ASTM)</label><input id="sf2spec" list="sf2list" placeholder="例: AMS2700 / BAC5555 / MIL-A-8625" style="min-width:240px"></div>'+
+   '<datalist id="sf2list">'+Object.keys(SF_SPECDICT).map(function(k){return '<option value="'+k+'">';}).join('')+'</datalist>'+
+   '<button class="sf-go" onclick="sfRun2()">処理を引いて適合社</button></div><div id="sf2out"></div>';
+ return '<div class="sf-frm">'+
+   '<div class="sf-f"><label>処理</label><select id="sf3p">'+sfOpt(SF_PROC)+'</select></div>'+
+   '<div class="sf-f"><label>対応材料</label><select id="sf3m"><option value="">指定なし</option>'+sfOpt(SF_MAT)+'</select></div>'+
+   '<div class="sf-f"><label>必要認証</label><select id="sf3c"><option value="">指定なし</option><option value="nadcap">Nadcap(該当工程)</option><option value="boeing">Boeing承認</option><option value="airbus">Airbus承認</option><option value="ams2750">AMS2750</option></select></div>'+
+   '<button class="sf-go" onclick="sfRun3()">供給リスクを見る</button></div><div id="sf3out"></div>';
+}
+function sfRenderBody(){
+ var host=document.getElementById('sf-body');if(!host)return;
+ if(typeof isUnlocked==='undefined'||!isUnlocked){
+  host.innerHTML='<div class="sf-lock">🔒 <b>表面処理でしぼる</b> はログインで利用できます。<br>処理×材料×向け先(認証ゲート)で航空宇宙の表面処理サプライヤを○△×判定します。<br><button onclick="(typeof unlockPrompt===\'function\')&&unlockPrompt()">ログイン / コードを入力</button></div>';
+  sfHi(null);return;
+ }
+ if(SURF_STATE!=='ready'){host.innerHTML='<div class="sf-cnt">表面処理データを読み込み中…</div>';loadSurf(function(){if(mode==='d')sfRenderBody();});return;}
+ host.innerHTML=sfForm();
+ if(sfMode===1){if(sfPreset){var e=document.getElementById('sf1p');if(e)e.value=sfPreset;sfPreset=null;}sfRun1();}
+}
+function sfSetMode(m){sfMode=m;Array.prototype.forEach.call(document.querySelectorAll('#sf-subtabs .sf-st'),function(b){b.className='sf-st'+(parseInt(b.getAttribute('data-sf'),10)===m?' on':'');});sfRenderBody();}
+function buildD(){
+ _sfStyle();
+ var sub=document.getElementById('sf-subtabs');
+ if(sub&&!sub._wired){sub._wired=true;Array.prototype.forEach.call(sub.querySelectorAll('.sf-st'),function(b){b.onclick=function(){sfSetMode(parseInt(b.getAttribute('data-sf'),10));};});}
+ sfRenderBody();
 }
 
 var CERT={};
@@ -7106,6 +7283,7 @@ function renderMatrix(md){
  if(typeof isUnlocked!=='undefined' && !isUnlocked) lockResultRows(host,'tbody tr',5);
 }
 function applyView(md){
+ if(md==='d')return;
  var isM=(matView[md]==='mat');
  var listEl=document.getElementById(md==='a'?'wo-a-list':(md==='b'?'wo-b-list':'wo-c-listwrap'));
  var mtxEl=document.getElementById('wo-mtx-'+md);
@@ -7662,7 +7840,30 @@ function selectProc(w){
  window.selOinSet=new Set(pmakers(w).map(function(m){return String(m.oin);}));
  if(typeof applyFilters==='function')applyFilters();
  build();
+ sfMaybeBridge(w);
 }
+/* 表面処理: inline onclick用グローバル公開 + パターンB(工程フロー内の入口) */
+window.sfRun1=sfRun1;window.sfRun2=sfRun2;window.sfRun3=sfRun3;
+function sfBridgeKey(w){return ({'めっき':'plate','アノダイズ':'anod','化成処理':'conv','パシベート':'passiv','塗装':'paint','ショットピーニング':'peen'})[w]||null;}
+function sfJump(key){sfMode=1;sfPreset=key;setMode('d');}
+window.sfJump=sfJump;
+function sfMaybeBridge(w){
+ _sfStyle();
+ var flowEl=document.getElementById('wo-flow');if(!flowEl)return;
+ var old=document.getElementById('sf-bridge');if(old&&old.parentNode)old.parentNode.removeChild(old);
+ var key=sfBridgeKey(w);if(!key)return;
+ var cnt='';
+ if(SURF_STATE==='ready'&&SURF_ROWS){var n=SURF_ROWS.filter(function(s){return sfHasProc(s,key);}).length;cnt='表面処理の検証済みサプライヤ <b style="color:#e6eef5">'+n+'</b> 社。';}
+ else if(typeof isUnlocked!=='undefined'&&isUnlocked){loadSurf(function(){if(curProc===w&&mode==='b')sfMaybeBridge(w);});cnt='表面処理データを読み込み中…';}
+ else{cnt='（ログインで検証済みサプライヤを表示）';}
+ var div=document.createElement('div');div.id='sf-bridge';
+ div.style.cssText='background:rgba(45,212,170,.06);border:1px solid #2a3f55;border-radius:8px;padding:10px;margin-top:8px';
+ div.innerHTML='<div style="font-size:12px;color:#2dd4aa;font-weight:700;margin-bottom:3px">&#9635; 表面処理「'+esc(w)+'」</div>'+
+  '<div style="font-size:11px;color:#8aa0b5;margin-bottom:8px">'+cnt+'表面処理は<b style="color:#e6eef5">向け先の認証・対応材料・ベーク要否</b>で適否が変わります。専用タブで&#9675;&#9651;&#10005;判定します。</div>'+
+  '<button class="sf-go" onclick="sfJump(\''+key+'\')">&#8594; 「表面処理でしぼる」で詳細に絞る</button>';
+ flowEl.parentNode.insertBefore(div,flowEl.nextSibling);
+}
+
 function buildC(){
  cPick.sort(function(a,b){return (PHORD[C_PHASE[a]]||9)-(PHORD[C_PHASE[b]]||9);});
  var fh='';
