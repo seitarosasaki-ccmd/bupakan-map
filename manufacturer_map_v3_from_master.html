@@ -1199,7 +1199,7 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
       <div class="pw-log-item">
         <div class="pw-log-date">2026-06</div>
         <div class="pw-log-h">表面処理サプライヤの絞り込みを追加</div>
-        <div class="pw-log-b">メーカー選定に「表面処理でしぼる」を追加。処理（めっき／陽極／化成／不動態／塗装／溶射／熱処理／ショットピーニング）×対応材料×向け先（国内一般・海外OEM・Boeing／Airbus）で、Nadcap等の特殊工程認証ゲートと水素脆性除去ベーキングの要否を加味して適合社を〇△×判定。規格番号（AMS／BAC等）からの逆引き、供給リスク（ソールソース）点検にも対応します。</div>
+        <div class="pw-log-b">メーカー選定に「表面処理でしぼる」を追加。処理（めっき／陽極／化成／不動態／塗装／溶射／熱処理／ショットピーニング）×対応材料×向け先（国内一般・海外OEM・Boeing／Airbus）で、Nadcap等の特殊工程認証ゲートと水素脆性除去ベーキングの要否を加味して適合社を〇△×判定。規格番号（AMS／BAC等）からの逆引き、供給リスク（ソールソース）点検にも対応します。さらにワーク寸法（角 X×Y×Z／丸 φ×L）を入力すると、処理槽・炉に入る社かを判定します（寸法は公開のある社のみ）。</div>
       </div>
       <div class="pw-log-item">
         <div class="pw-log-date">2026-06</div>
@@ -7044,6 +7044,44 @@ var SF_SPECDICT={
  "AMS2430":{p:"peen",t:"ショットピーニング"},"AMS2447":{p:"spray",t:"HVOF溶射(WC)"},"AMS2435":{p:"spray",t:"溶射(WC-Co/D-Gun)"},
  "MIL-PRF-23377":{p:"paint",t:"エポキシプライマー"},"MIL-PRF-85285":{p:"paint",t:"ポリウレタントップコート"}
 };
+/* ===== 表面処理 槽/炉サイズ パーサ＋適合判定 2026-06-21 ===== */
+// 表面処理 tank自由文 → 槽/炉寸法パーサ + 適合判定（クライアント側・認証gated）
+var SF_TANK_NOISE=/研削|研磨盤|測定|マシニング|旋盤|旋削|フライス|加工機|加工センタ|試験機|試験器|X線|ＣＴ|CT|DR|kV|ボーリング|発振|焼入軸|焼入機|溶接装置|溶接機|電子ビーム|EBW|圧延|鋳造|プレス機|射出|乾燥機/;
+var SF_BPROC=[['anod',/アルマイト|陽極|アノダイズ|BSAA/],['passiv',/不動態|パッシベ|パシベ/],['conv',/化成|アロジン|クロメート|皮膜|BONDERITE|SurTec/],['spray',/溶射|HVOF|メタリコン|SermeTel/],['paint',/塗装|ブース|プライマー|電着|カチオン/],['peen',/ピーニング/],['heat',/熱処理|真空炉|浸炭|窒化|焼入|焼戻|焼鈍|焼準|HIP|CIP|ホットプレス|時効|溶体化|ろう付|塩浴|ベーキング|乾燥炉|大気炉|アルミ炉/],['plate',/めっき|鍍金|クロム|ニッケル|カドミ|チタカド|亜鉛|錫|スズ|銀|金|銅/]];
+function _sfTNorm(t){return String(t||'').replace(/(\d),(\d)/g,'$1$2').replace(/[０-９]/g,function(d){return String.fromCharCode(d.charCodeAt(0)-0xFEE0);}).replace(/[ＷＨＬＤ]/g,function(d){return String.fromCharCode(d.charCodeAt(0)-0xFEE0);}).replace(/[×✕＊*ｘＸ]/g,'x').replace(/X/g,'x').replace(/[ΦφⲪ]/g,'φ');}
+function _sfTCtxOK(t,idx){return !SF_TANK_NOISE.test(t.slice(Math.max(0,idx-28),idx));}
+function _sfTCtxProc(t,idx){var pre=t.slice(Math.max(0,idx-28),idx);for(var i=0;i<SF_BPROC.length;i++){if(SF_BPROC[i][1].test(pre))return SF_BPROC[i][0];}return null;}
+function parseTanks(raw){
+  var t=_sfTNorm(raw),baths=[],seen={},m;
+  function add(b){var k=b.type+':'+(b.type==='cyl'?(b.dia+'/'+b.len):b.dims.join('/'));if(!seen[k]){seen[k]=1;baths.push(b);}}
+  var reRect=/(\d{2,5})\s*(?:mm)?\s*[WHLDR]?\s*x\s*(?:[WHLD]\s*)?(\d{2,5})\s*(?:mm)?\s*[WHLDR]?\s*x\s*(?:[WHLD]\s*)?(\d{2,5})/gi;
+  while((m=reRect.exec(t))){var a=+m[1],b=+m[2],c=+m[3];if(a>=20&&b>=20&&c>=20&&a<=20000&&b<=20000&&c<=20000&&_sfTCtxOK(t,m.index))add({type:'rect',dims:[a,b,c].sort(function(x,y){return x-y;}),proc:_sfTCtxProc(t,m.index)});}
+  var reCyl=/φ\s*(\d{2,5})\s*(?:x\s*(\d{2,5}))?/gi;
+  while((m=reCyl.exec(t))){var dia=+m[1],len=m[2]?+m[2]:null;if(dia>=20&&dia<=20000&&_sfTCtxOK(t,m.index))add({type:'cyl',dia:dia,len:len,proc:_sfTCtxProc(t,m.index)});}
+  return {baths:baths,unknown:baths.length===0};
+}
+// part: {shape:'kaku',x,y,z} or {shape:'maru',dia,len}
+function _sfFitRR(p,b){if(p[0]<=b[0]&&p[1]<=b[1]&&p[2]<=b[2])return Math.min(b[0]/p[0],b[1]/p[1],b[2]/p[2]);return 0;}
+function _sfFitRcyl(p,dia,len){var cross=Math.sqrt(p[0]*p[0]+p[1]*p[1]),L=len||1e9;if(cross<=dia&&p[2]<=L)return Math.min(dia/cross,L/p[2]);return 0;}
+function _sfFitCylR(D,L,b){var best=0,d=[b[0],b[1],b[2]];for(var k=0;k<3;k++){var o=[];for(var j=0;j<3;j++)if(j!==k)o.push(d[j]);if(D<=o[0]&&D<=o[1]&&L<=d[k])best=Math.max(best,Math.min(o[0]/D,o[1]/D,d[k]/L));}return best;}
+function _sfFitCC(D,L,dia,len){var Lb=len||1e9;if(D<=dia&&L<=Lb)return Math.min(dia/D,Lb/L);return 0;}
+function sizeFit(part,parsed,pk){
+  var isM=part.shape==='maru';
+  var p=isM?null:[+part.x||0,+part.y||0,+part.z||0].sort(function(a,b){return a-b;});
+  var D=isM?(+part.dia||0):0,L=isM?(+part.len||0):0;
+  if(isM?!(D>0&&L>0):!(p[0]>0&&p[2]>0))return {v:'none'};
+  var cand=(parsed.baths||[]).filter(function(b){return !b.proc||b.proc===pk;});
+  if(!cand.length)return {v:'unknown'};
+  var best=null,bestR=0;
+  cand.forEach(function(b){var r=0;
+    if(b.type==='rect')r=isM?_sfFitCylR(D,L,b.dims):_sfFitRR(p,b.dims);
+    else r=isM?_sfFitCC(D,L,b.dia,b.len):_sfFitRcyl(p,b.dia,b.len);
+    if(r>bestR){bestR=r;best=b;}});
+  if(best)return {v:bestR>=1.1?'ok':'tight',bath:best,ratio:bestR};
+  return {v:'toobig'};
+}
+function _bathLabel(b){if(!b)return'';return b.type==='cyl'?('\u03c6'+b.dia+(b.len?'\u00d7'+b.len:'')):b.dims.join('\u00d7');}
+
 function _sfStyle(){ if(_sfStyleDone)return; _sfStyleDone=true;
  var st=document.createElement('style'); st.textContent=
  '.sf-subtabs{display:flex;gap:6px;margin:6px 0 10px;flex-wrap:wrap}'+
@@ -7099,7 +7137,7 @@ function sfCertGate(s,pk,dst){
 }
 function sfBakeNeed(pk,mk){return pk==='plate'&&(mk==='hss'||mk==='ti');}
 function sfCertBadges(s){var b=[],c=s.cert||{};if(c.boeing)b.push('Boeing');if(c.airbus)b.push('Airbus');if(c.cp)b.push('Nadcap CP');if(c.ht)b.push('Nadcap HT');if(c.coat)b.push('Nadcap Coat');if(c.se)b.push('Nadcap SE');if(c.ndt)b.push('Nadcap NDT');if(c.ams2750)b.push('AMS2750');if(c.mil)b.push('MIL');if(c.jis9100)b.push('JIS Q9100');return b;}
-function sfScore(s,pk,mk,dst){
+function sfScore(s,pk,mk,dst,part){
  var reasons=[],warns=[];
  if(!sfHasProc(s,pk))return{v:'ng',reasons:[],warns:[]};
  reasons.push('処理対応');
@@ -7110,6 +7148,7 @@ function sfScore(s,pk,mk,dst){
  reasons.push(g.note);
  if(sfBakeNeed(pk,mk)){if(s.bake){reasons.push('水素脆性除去ベーク対応');}else{v='cond';warns.push('高張力鋼/Ti×めっき→ベーキング必須だが対応未確認');}}
  if(s.clevel&&s.clevel!=='high'){v=(v==='ok')?'cond':v;warns.push('データ確度 '+s.clevel);}
+ if(part){var fit=sizeFit(part,s._baths||(s._baths=parseTanks(s.tank||'')),pk);if(fit.v==='toobig'){reasons.push('ワーク寸法が槽/炉に入らない');return{v:'ng',reasons:reasons,warns:warns};}if(fit.v==='tight'){v=(v==='ok')?'cond':v;warns.push('槽/炉にギリギリ(余裕<10%)');reasons.push('適合槽/炉 '+_bathLabel(fit.bath));}else if(fit.v==='unknown'){v=(v==='ok')?'cond':v;warns.push('この処理の槽/炉サイズ未公開(要問合せ)');}else if(fit.v==='ok'){reasons.push('ワーク寸法OK(適合槽/炉 '+_bathLabel(fit.bath)+')');}}
  return{v:v,reasons:reasons,warns:warns};
 }
 function sfSize(s){var t=(s.tank||'').trim();var unk=!t||/非公開|情報なし|不明|対象外|要確認|寸法不明/.test(t);return '<b>対応サイズ(槽/炉):</b> '+(unk?'<span style="color:#ffb020">未公開（要問合せ）</span>':dvEsc(t));}
@@ -7127,11 +7166,11 @@ function sfHi(oins){try{window.selOinSet=oins&&oins.length?new Set(oins.map(Stri
 function sfClick(host){Array.prototype.forEach.call(host.querySelectorAll('.sf-nm[data-oin]'),function(el){el.onclick=function(){flyToOin(el.getAttribute('data-oin'));};});}
 function sfOpt(arr){return arr.map(function(a){return '<option value="'+a[0]+'">'+a[1]+'</option>';}).join('');}
 function sfRun1(){
- var pk=document.getElementById('sf1p').value,mk=document.getElementById('sf1m').value,dst=document.getElementById('sf1d').value;
- var rows=SURF_ROWS.map(function(s){return{s:s,r:sfScore(s,pk,mk,dst)};}).filter(function(x){return x.r.v!=='ng';});
+ var pk=document.getElementById('sf1p').value,mk=document.getElementById('sf1m').value,dst=document.getElementById('sf1d').value;var part=sfReadPart();
+ var rows=SURF_ROWS.map(function(s){return{s:s,r:sfScore(s,pk,mk,dst,part)};}).filter(function(x){return x.r.v!=='ng';});
  var ng=SURF_ROWS.length-rows.length;var ord={ok:0,cond:1};rows.sort(function(a,b){return ord[a.r.v]-ord[b.r.v];});
  var dn={dom:'国内一般',osea:'海外OEM',boeing:'Boeing',airbus:'Airbus'}[dst];
- var h='<div class="sf-cnt">適合 '+rows.length+' 社（○'+rows.filter(function(x){return x.r.v==='ok';}).length+' / △'+rows.filter(function(x){return x.r.v==='cond';}).length+'）・除外 '+ng+' 社 ｜ 向け先: '+dn+' ｜ <span style="color:#2dd4aa">地図に適合社をハイライト</span></div>';
+ var h='<div class="sf-cnt">適合 '+rows.length+' 社（○'+rows.filter(function(x){return x.r.v==='ok';}).length+' / △'+rows.filter(function(x){return x.r.v==='cond';}).length+'）・除外 '+ng+' 社 ｜ 向け先: '+dn+(part?(' ｜ ワーク '+(part.shape==='kaku'?(part.x+'×'+part.y+'×'+part.z):('φ'+part.dia+'×'+part.len))+'mm判定'):'')+' ｜ <span style="color:#2dd4aa">地図に適合社をハイライト</span></div>';
  if(rows.length<=2&&rows.length>0)h='<div class="sf-risk">⚠ 供給リスク: この条件の対応社が '+rows.length+' 社のみ（ソールソース傾向）</div>'+h;
  var out=document.getElementById('sf1out');out.innerHTML=h+(rows.map(function(x){return sfCard(x.s,x.r);}).join('')||'<div class="sf-cnt">該当社なし</div>');
  sfClick(out);sfHi(rows.map(function(x){return x.s.oin;}));
@@ -7163,7 +7202,7 @@ function sfForm(){
    '<div class="sf-f"><label>処理</label><select id="sf1p">'+sfOpt(SF_PROC)+'</select></div>'+
    '<div class="sf-f"><label>対応材料</label><select id="sf1m"><option value="">指定なし</option>'+sfOpt(SF_MAT)+'</select></div>'+
    '<div class="sf-f"><label>向け先(認証ゲート)</label><select id="sf1d"><option value="dom">国内一般</option><option value="osea">海外OEM(Boeing/Airbus/RR/GE/P&amp;W)</option><option value="boeing">特定: Boeing</option><option value="airbus">特定: Airbus</option></select></div>'+
-   '<button class="sf-go" onclick="sfRun1()">適合社を出す</button></div><div id="sf1out"></div>';
+   '<div class="sf-f"><label>ワーク寸法(任意)</label><select id="sf1shape" onchange="sfShapeDims()"><option value="">指定なし</option><option value="kaku">角 X×Y×Z</option><option value="maru">丸 φ×L</option></select></div>'+'<span id="sf1dims" style="display:flex;gap:5px;align-items:flex-end"></span>'+'<button class="sf-go" onclick="sfRun1()">適合社を出す</button></div><div id="sf1out"></div>';
  if(sfMode===2)return '<div class="sf-frm">'+
    '<div class="sf-f"><label>規格番号(AMS/Boeing BAC/MIL/Airbus/ASTM)</label><input id="sf2spec" list="sf2list" placeholder="例: AMS2700 / BAC5555 / MIL-A-8625" style="min-width:240px"></div>'+
    '<datalist id="sf2list">'+Object.keys(SF_SPECDICT).map(function(k){return '<option value="'+k+'">';}).join('')+'</datalist>'+
@@ -7854,6 +7893,9 @@ function selectProc(w){
 }
 /* 表面処理: inline onclick用グローバル公開 + パターンB(工程フロー内の入口) */
 window.sfRun1=sfRun1;window.sfRun2=sfRun2;window.sfRun3=sfRun3;
+function sfShapeDims(){var s=document.getElementById('sf1shape');if(!s)return;var sh=s.value,el=document.getElementById('sf1dims');if(!el)return;var st='style="width:58px;min-width:0;padding:6px 6px"';if(sh==='kaku')el.innerHTML='<input id="sf1x" type="number" placeholder="X" '+st+'>×<input id="sf1y" type="number" placeholder="Y" '+st+'>×<input id="sf1z" type="number" placeholder="Z" '+st+'><span style="font-size:10px;color:#8aa0b5">mm</span>';else if(sh==='maru')el.innerHTML='<input id="sf1dia" type="number" placeholder="φ" '+st+'>×<input id="sf1len" type="number" placeholder="L" '+st+'><span style="font-size:10px;color:#8aa0b5">mm</span>';else el.innerHTML='';}
+window.sfShapeDims=sfShapeDims;
+function sfReadPart(){var se=document.getElementById('sf1shape');var sh=se?se.value:'';function g(id){var e=document.getElementById(id);return e?(+e.value||0):0;}if(sh==='kaku'){var x=g('sf1x'),y=g('sf1y'),z=g('sf1z');return (x&&y&&z)?{shape:'kaku',x:x,y:y,z:z}:null;}if(sh==='maru'){var d=g('sf1dia'),l=g('sf1len');return (d&&l)?{shape:'maru',dia:d,len:l}:null;}return null;}
 function sfBridgeKey(w){return ({'めっき':'plate','アノダイズ':'anod','化成処理':'conv','パシベート':'passiv','塗装':'paint','ショットピーニング':'peen'})[w]||null;}
 function sfJump(key){sfMode=1;sfPreset=key;setMode('d');}
 window.sfJump=sfJump;
