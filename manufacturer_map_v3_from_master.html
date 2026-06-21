@@ -1236,6 +1236,7 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
   <div class="h-right">
     <span id="trial-badge" style="font-size:10px;color:var(--warn);border:1px solid rgba(255,214,10,.4);background:rgba(255,214,10,.08);border-radius:3px;padding:3px 8px;font-family:'Share Tech Mono',monospace;white-space:nowrap">未ログイン</span>
     <button id="unlock-btn" onclick="unlockPrompt()" style="background:linear-gradient(135deg,var(--accent),#0098c7);color:#06121c;border:none;font-weight:900;font-size:11px;padding:6px 12px;border-radius:4px;cursor:pointer;box-shadow:0 0 10px rgba(0,212,255,.3);white-space:nowrap">🔓 ログイン</button>
+    <button id="logout-btn" onclick="_logout()" style="display:none;background:transparent;color:var(--muted);border:1px solid var(--border);font-size:10px;padding:5px 10px;border-radius:4px;cursor:pointer;white-space:nowrap" title="ログアウトしてお試し表示に戻る">ログアウト</button>
     <div id="active-maker" style="display:none;background:rgba(199,125,255,.12);border:1px solid #c77dff;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:3px;max-width:280px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title=""><span style="color:#c77dff;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:2px;margin-right:6px">SELECTED</span><span id="active-maker-name">—</span></div>
     <div class="h-count"><strong id="shown-count">—</strong>件表示</div>
     <button class="btn-hdr" onclick="flyToKomaki()">東海</button>
@@ -5284,6 +5285,7 @@ function applyUnlockState(){
   document.body.classList.toggle('is-trial',!isUnlocked);
   var tb=document.getElementById('trial-badge');if(tb)tb.style.display=isUnlocked?'none':'';
   var ub=document.getElementById('unlock-btn');if(ub)ub.style.display=isUnlocked?'none':'';
+  var lb=document.getElementById('logout-btn');if(lb)lb.style.display=isUnlocked?'':'none';
   try{if(typeof applyFilters==='function')applyFilters();}catch(e){}
   try{if(typeof activeCard!=='undefined'&&activeCard>=0&&typeof openDrawer==='function')openDrawer(activeCard);}catch(e){}
 }
@@ -5368,6 +5370,12 @@ async function verifyOtp(){
   // 成功時はonAuthStateChangeで自動処理
 }
 function enterTrial(){isUnlocked=false;_dismissPwScreen();applyUnlockState();}
+function _logout(){
+  try{ if(typeof _sb!=='undefined'&&_sb&&_sb.auth) _sb.auth.signOut(); }catch(_e){}
+  try{ sessionStorage.removeItem('mfr_map_v2_auth'); }catch(_e){}
+  isUnlocked=false;
+  try{ location.reload(); }catch(_e){ try{applyUnlockState();}catch(_x){} }
+}
 function unlockPrompt(){
   var s=document.getElementById('pw-screen');
   if(s){
