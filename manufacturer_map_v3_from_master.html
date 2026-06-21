@@ -415,7 +415,7 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
   display:flex;align-items:center;justify-content:center;flex-direction:column}
 #pw-screen.unlocked{animation:pwFade .5s ease forwards;pointer-events:none}
 @keyframes pwFade{to{opacity:0;transform:scale(1.02)}}
-.pw-box{width:340px;max-width:95vw;text-align:center}
+.pw-box{width:340px;max-width:95vw;text-align:center;max-height:92vh;overflow-y:auto}
 .pw-logo{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:5px;color:var(--muted);margin-bottom:24px}
 .pw-title{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:6px;
   color:var(--text);margin-bottom:4px}
@@ -439,6 +439,10 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
 .pw-log-date{display:inline-block;font-family:'Share Tech Mono',monospace;font-size:10px;color:#39ff14;background:rgba(57,255,20,.10);border:1px solid rgba(57,255,20,.3);border-radius:3px;padding:1px 7px;margin-bottom:4px}
 .pw-log-h{font-size:12px;font-weight:700;color:var(--text);margin:3px 0 2px}
 .pw-log-b{font-size:11px;color:var(--muted);line-height:1.65}
+.pw-log-ttl{cursor:pointer;user-select:none}
+.pw-log-ttl::before{content:'▸ '}
+.pw-log:not(.collapsed) .pw-log-ttl::before{content:'▾ '}
+.pw-log.collapsed .pw-log-item{display:none}
 
 /* ── 選択ハイライト ── */
 .company-card.selected {
@@ -1190,8 +1194,13 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
         <button class="pw-trial" onclick="document.getElementById('pw-step-pw').style.display='none';document.getElementById('pw-step-email').style.display='';" style="margin-top:4px;font-size:11px;opacity:.7">← メールでログイン</button>
       </div>
     </div>
-    <div class="pw-log">
-      <div class="pw-log-ttl">▣ 更新履歴 / CHANGELOG</div>
+    <div class="pw-log collapsed" id="pw-log">
+      <div class="pw-log-ttl" onclick="this.parentNode.classList.toggle('collapsed')">更新履歴 / CHANGELOG</div>
+      <div class="pw-log-item">
+        <div class="pw-log-date">2026-06</div>
+        <div class="pw-log-h">表面処理サプライヤの絞り込みを追加</div>
+        <div class="pw-log-b">メーカー選定に「表面処理でしぼる」を追加。処理（めっき／陽極／化成／不動態／塗装／溶射／熱処理／ショットピーニング）×対応材料×向け先（国内一般・海外OEM・Boeing／Airbus）で、Nadcap等の特殊工程認証ゲートと水素脆性除去ベーキングの要否を加味して適合社を〇△×判定。規格番号（AMS／BAC等）からの逆引き、供給リスク（ソールソース）点検にも対応します。</div>
+      </div>
       <div class="pw-log-item">
         <div class="pw-log-date">2026-06</div>
         <div class="pw-log-h">絞り込み／一覧のタブ化・企業情報の拡充・地図操作の改善</div>
@@ -6827,9 +6836,9 @@ fetch('./manufacturers_slim.json')
 <!-- ===== ワーク起点メーカー選定（2026-05-31統合・外部JSON fetch） ===== -->
 <style>
 #wo-fab{display:none !important;position:fixed;right:18px;bottom:18px;z-index:9000;background:#0d1b2a;color:#39ff14;border:1px solid #39ff14;border-radius:24px;padding:10px 16px;font-size:14px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.4);font-family:inherit;}
-#wo-panel{position:fixed;right:18px;bottom:70px;z-index:9000;width:440px;max-height:84vh;overflow:auto;background:#0d1b2a;color:#e6eef5;border:1px solid #2a3f55;border-radius:10px;padding:0 14px 14px;box-shadow:0 4px 24px rgba(0,0,0,.5);font-size:13px;transition:width .18s ease;}
+#wo-panel{position:fixed;right:18px;top:64px;bottom:auto;z-index:9000;width:440px;max-height:calc(100vh - 84px);overflow:auto;background:#0d1b2a;color:#e6eef5;border:1px solid #2a3f55;border-radius:10px;padding:0 14px 14px;box-shadow:0 4px 24px rgba(0,0,0,.5);font-size:13px;transition:width .18s ease;}
 #wo-panel.wo-wide{width:min(92vw,940px);}
-#wo-panel.wo-big{width:96vw;max-height:94vh;right:2vw;bottom:2vh;}
+#wo-panel.wo-big{width:96vw;max-height:94vh;right:2vw;top:2vh;bottom:auto;}
 #wo-panel h3{margin:0;font-size:15px;color:#39ff14;}
 .wo-bar{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:8px;background:#0d1b2a;margin:0 -14px 10px;padding:12px 14px 10px;border-bottom:1px solid #2a3f55;}
 .wo-bar-r{display:flex;gap:6px;align-items:center;flex-shrink:0;}
@@ -7103,6 +7112,7 @@ function sfScore(s,pk,mk,dst){
  if(s.clevel&&s.clevel!=='high'){v=(v==='ok')?'cond':v;warns.push('データ確度 '+s.clevel);}
  return{v:v,reasons:reasons,warns:warns};
 }
+function sfSize(s){var t=(s.tank||'').trim();var unk=!t||/非公開|情報なし|不明|対象外|要確認|寸法不明/.test(t);return '<b>対応サイズ(槽/炉):</b> '+(unk?'<span style="color:#ffb020">未公開（要問合せ）</span>':dvEsc(t));}
 function sfCard(s,res){
  var lab={ok:'○ 推奨',cond:'△ 条件付'}[res.v]||'';var vc={ok:'sf-vok',cond:'sf-vcond'}[res.v]||'';
  var bdg=sfCertBadges(s).map(function(x){return '<span class="sf-bdg'+(/Boeing|Airbus|MIL|AMS2750/.test(x)?' b2':'')+'">'+x+'</span>';}).join('');
@@ -7111,7 +7121,7 @@ function sfCard(s,res){
   (s.verified?' <span class="sf-bdg">✓検証済</span>':'')+
   '<div style="margin-top:4px">'+bdg+'</div><div style="margin-top:3px">'+chips+'</div>'+
   '<div class="sf-why"><b>根拠:</b> '+res.reasons.join(' / ')+(res.warns.length?' ｜ <span class="sf-wn">注意: '+res.warns.join(' / ')+'</span>':'')+
-  (s.tank?'<br><b>槽/炉:</b> '+dvEsc(s.tank):'')+'</div></div>';
+  '<br>'+sfSize(s)+'</div></div>';
 }
 function sfHi(oins){try{window.selOinSet=oins&&oins.length?new Set(oins.map(String)):null;if(typeof applyFilters==='function')applyFilters();}catch(_e){}}
 function sfClick(host){Array.prototype.forEach.call(host.querySelectorAll('.sf-nm[data-oin]'),function(el){el.onclick=function(){flyToOin(el.getAttribute('data-oin'));};});}
@@ -7145,7 +7155,7 @@ function sfRun3(){
  else if(rows.length<=2)h='<div class="sf-risk">⚠ ソールソース: 「'+dvEsc(lab)+'」の対応社は '+rows.length+' 社のみ。供給途絶リスク・代替確保を推奨。</div>';
  else h='<div class="sf-cnt">「'+dvEsc(lab)+'」対応: '+rows.length+' 社 ｜ <span style="color:#2dd4aa">地図にハイライト</span></div>';
  var out=document.getElementById('sf3out');
- out.innerHTML=h+rows.map(function(s){return '<div class="sf-card '+(rows.length<=2?'cond':'ok')+'"><span class="sf-nm" data-oin="'+dvEsc(s.oin)+'">'+dvEsc(s.n)+'</span>'+(s.verified?' <span class="sf-bdg">✓検証済</span>':'')+'<div style="margin-top:4px">'+sfCertBadges(s).map(function(b){return '<span class="sf-bdg">'+b+'</span>';}).join('')+'</div><div class="sf-why">'+(s.proc||[]).slice(0,5).map(dvEsc).join(' / ')+'</div></div>';}).join('');
+ out.innerHTML=h+rows.map(function(s){return '<div class="sf-card '+(rows.length<=2?'cond':'ok')+'"><span class="sf-nm" data-oin="'+dvEsc(s.oin)+'">'+dvEsc(s.n)+'</span>'+(s.verified?' <span class="sf-bdg">✓検証済</span>':'')+'<div style="margin-top:4px">'+sfCertBadges(s).map(function(b){return '<span class="sf-bdg">'+b+'</span>';}).join('')+'</div><div class="sf-why">'+(s.proc||[]).slice(0,5).map(dvEsc).join(' / ')+'<br>'+sfSize(s)+'</div></div>';}).join('');
  sfClick(out);sfHi(rows.map(function(s){return s.oin;}));
 }
 function sfForm(){
