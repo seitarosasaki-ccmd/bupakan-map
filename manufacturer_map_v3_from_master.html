@@ -7002,7 +7002,7 @@ var SHPD={'円筒':'丸物・回転体','角':'角物・板物','複雑':'複雑
 var SELF={'硬さ検査':'自社/検査','外観検査':'自社/検査','膜厚測定':'自社/検査','歪修正':'仕上に内包','ザイグロ前エッチング':'FPIに内包'};
 var aShape='角',aDim={X:300,Y:200,Z:150,D:120,L:400},aLast=null,aMat='不問',aTol=0;
 var cPick=['フライス加工','5軸マシニング加工'],cProc=null;
-var C_PHASE={'鍛造':'一次成形','鋳造':'一次成形','フライス加工':'荒加工','マシニング加工':'仕上加工','5軸マシニング加工':'仕上加工','NC旋盤':'仕上加工','複合旋盤':'仕上加工','研削':'仕上加工','ブローチ加工':'仕上加工','ガンドリル':'仕上加工','BTA加工':'仕上加工','真空熱処理':'熱処理','焼入焼戻':'熱処理','時効処理':'熱処理','化成処理':'表面処理','塗装':'表面処理','アノダイズ':'表面処理','めっき':'表面処理','ショットピーニング':'表面処理','パシベート':'表面処理','浸透探傷検査(FPI)':'検査(探傷)','磁粉探傷検査(MPI)':'検査(探傷)','寸法検査(三次元測定)':'検査(探傷)'};
+var C_PHASE={'鍛造':'一次成形','鋳造':'一次成形','フライス加工':'荒加工','マシニング加工':'仕上加工','5軸マシニング加工':'仕上加工','NC旋盤':'仕上加工','複合旋盤':'仕上加工','研削':'仕上加工','ブローチ加工':'仕上加工','ガンドリル':'仕上加工','BTA加工':'仕上加工','真空熱処理':'熱処理','焼入焼戻':'熱処理','時効処理':'熱処理','析出硬化処理':'熱処理','化成処理':'表面処理','塗装':'表面処理','アノダイズ処理':'表面処理','陽極酸化処理':'表面処理','めっき':'表面処理','ショットピーニング':'表面処理','パシベート処理':'表面処理','黒色酸化処理':'表面処理','パーカー処理':'表面処理','浸透探傷検査(FPI)':'検査(探傷)','磁粉探傷検査(MPI)':'検査(探傷)','寸法検査(三次元測定)':'検査(探傷)'};
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function pcount(w){var d=PI&&PI[w];return d?(d.count||(d.makers?d.makers.length:0)):0;}
@@ -7896,7 +7896,7 @@ window.sfRun1=sfRun1;window.sfRun2=sfRun2;window.sfRun3=sfRun3;
 function sfShapeDims(){var s=document.getElementById('sf1shape');if(!s)return;var sh=s.value,el=document.getElementById('sf1dims');if(!el)return;var st='style="width:58px;min-width:0;padding:6px 6px"';if(sh==='kaku')el.innerHTML='<input id="sf1x" type="number" placeholder="X" '+st+'>×<input id="sf1y" type="number" placeholder="Y" '+st+'>×<input id="sf1z" type="number" placeholder="Z" '+st+'><span style="font-size:10px;color:#8aa0b5">mm</span>';else if(sh==='maru')el.innerHTML='<input id="sf1dia" type="number" placeholder="φ" '+st+'>×<input id="sf1len" type="number" placeholder="L" '+st+'><span style="font-size:10px;color:#8aa0b5">mm</span>';else el.innerHTML='';}
 window.sfShapeDims=sfShapeDims;
 function sfReadPart(){var se=document.getElementById('sf1shape');var sh=se?se.value:'';function g(id){var e=document.getElementById(id);return e?(+e.value||0):0;}if(sh==='kaku'){var x=g('sf1x'),y=g('sf1y'),z=g('sf1z');return (x&&y&&z)?{shape:'kaku',x:x,y:y,z:z}:null;}if(sh==='maru'){var d=g('sf1dia'),l=g('sf1len');return (d&&l)?{shape:'maru',dia:d,len:l}:null;}return null;}
-function sfBridgeKey(w){return ({'めっき':'plate','アノダイズ':'anod','化成処理':'conv','パシベート':'passiv','塗装':'paint','ショットピーニング':'peen'})[w]||null;}
+function sfBridgeKey(w){return ({'めっき':'plate','アノダイズ処理':'anod','陽極酸化処理':'anod','化成処理':'conv','パシベート処理':'passiv','塗装':'paint','ショットピーニング':'peen','パーカー処理':'conv'})[w]||null;}
 function sfJump(key){sfMode=1;sfPreset=key;setMode('d');}
 window.sfJump=sfJump;
 function sfMaybeBridge(w){
