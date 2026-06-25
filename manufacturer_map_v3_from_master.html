@@ -78,6 +78,11 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
 .btn-hdr:hover{background:rgba(0,212,255,0.1);box-shadow:0 0 8px rgba(0,212,255,0.2)}
 .btn-hdr.green{border-color:rgba(57,255,20,.35);color:var(--accent3)}
 .btn-hdr.green:hover{background:rgba(57,255,20,.1)}
+/* ── QUAKE MODE ── */
+#btn-quake.active{background:rgba(220,50,50,.25);box-shadow:0 0 12px rgba(220,50,50,.5)}
+#quake-panel{display:none;position:fixed;bottom:80px;right:10px;z-index:1000;background:rgba(20,20,30,.92);color:#fff;padding:10px;border-radius:6px;width:220px;max-height:200px;overflow-y:auto;font-size:12px;border:1px solid rgba(220,50,50,.35)}
+@keyframes quake-pulse{0%,100%{box-shadow:0 0 6px rgba(220,50,50,.6)}50%{box-shadow:0 0 16px rgba(220,50,50,.9)}}
+#quake-panel{animation:quake-pulse 2s ease-in-out infinite}
 
 /* ── MAIN LAYOUT ── */
 .layout{display:flex;flex:1;overflow:hidden}
@@ -1254,6 +1259,7 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
     <!-- アップロード一旦非表示 2026-06-03 -->
     
     <button class="btn-hdr" id="btn-logistics" onclick="toggleLogisticsMode()" title="物流分析モード（IC・新幹線駅・空港を表示）" style="border-color:rgba(255,153,0,.45);color:#ff9900">🚚 物流</button>
+    <button class="btn-hdr" id="btn-quake" onclick="toggleQuakeMode()" title="最新地震情報をマップに表示（P2P地震情報 60秒更新）" style="border-color:rgba(220,50,50,.45);color:#ef4444">🔴 地震情報</button>
     <button class="btn-hdr selector-btn" id="btn-selector" onclick="var p=document.getElementById('wo-panel');var v=(p.style.display==='none'||!p.style.display);p.style.display=(v?'block':'none');if(v&&typeof map!=='undefined'&&map.invalidateSize){setTimeout(function(){map.invalidateSize();},60);}if(typeof applyFilters==='function')applyFilters();" title="ワーク起点でメーカー選定"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8" r="2" fill="currentColor"/><path d="M8 0v3M8 13v3M0 8h3M13 8h3" stroke="currentColor" stroke-width="1.4"/></svg><span>メーカー選定</span></button>
     <button class="btn-help" onclick="startTutorial(true)" title="操作説明を再表示（?キー）" id="btn-help">?</button>
   </div>
@@ -6776,6 +6782,65 @@ function toggleLogisticsMode(){
 }
 
 // ================================================================
+// 地震モード (P2P地震情報 API)
+// ================================================================
+let quakeMode = false;
+let quakeMarkers = [];
+let quakeCircles = [];
+let quakeTimer = null;
+
+async function fetchQuakeData() {
+  try {
+    const res = await fetch('https://api.p2pquake.net/v2/history?codes=551&limit=5');
+    const data = await res.json();
+    clearQuakeLayers();
+    const panel = document.getElementById('quake-list');
+    if (panel) panel.innerHTML = '';
+    data.forEach(q => {
+      const hy = q.earthquake && q.earthquake.hypocenter;
+      if (!hy || hy.latitude < -100 || hy.longitude < -100) return;
+      const lat = hy.latitude, lng = hy.longitude, mag = hy.magnitude || 0;
+      const depth = hy.depth != null ? hy.depth : '不明';
+      const name = hy.name || '震源地不明';
+      const maxScale = (q.earthquake && q.earthquake.maxScale != null) ? q.earthquake.maxScale : -1;
+      const scaleLabel = maxScale === -1 ? '不明' : (maxScale / 10).toFixed(1);
+      const time = q.time ? new Date(q.time).toLocaleString('ja-JP') : '';
+      const star = L.marker([lat, lng], {
+        icon: L.divIcon({className:'', html:'<div style="font-size:24px;transform:translate(-50%,-50%);filter:drop-shadow(0 0 4px rgba(220,50,50,.8))">★</div>', iconSize:[0,0]})
+      }).addTo(map).bindPopup('<b>'+name+'</b><br>M'+mag+' 深さ'+depth+'km<br>最大震度: '+scaleLabel+'<br>'+time);
+      quakeMarkers.push(star);
+      [[mag*20000,'rgba(220,50,50,0.2)'],[mag*60000,'rgba(230,140,40,0.15)'],[mag*120000,'rgba(230,210,50,0.1)']].forEach(function(rc){
+        var r=rc[0],c=rc[1];
+        if(r>0) quakeCircles.push(L.circle([lat,lng],{radius:r,color:'none',fillColor:c,fillOpacity:1}).addTo(map));
+      });
+      if(panel) panel.innerHTML += '<div style="padding:4px 0;border-bottom:1px solid rgba(255,255,255,.1)"><b>'+name+'</b> M'+mag+'<br><span style="font-size:11px">'+time+' 最大震度'+scaleLabel+'</span></div>';
+    });
+  } catch(e) { console.error('地震API取得失敗', e); }
+}
+
+function clearQuakeLayers() {
+  quakeMarkers.forEach(function(m){map.removeLayer(m);}); quakeMarkers=[];
+  quakeCircles.forEach(function(c){map.removeLayer(c);}); quakeCircles=[];
+}
+
+function toggleQuakeMode() {
+  quakeMode = !quakeMode;
+  const btn = document.getElementById('btn-quake');
+  const panel = document.getElementById('quake-panel');
+  if (quakeMode) {
+    if(btn) btn.classList.add('active');
+    if(panel) panel.style.display='block';
+    fetchQuakeData();
+    quakeTimer = setInterval(fetchQuakeData, 60000);
+  } else {
+    if(btn) btn.classList.remove('active');
+    if(panel) panel.style.display='none';
+    clearQuakeLayers();
+    clearInterval(quakeTimer);
+  }
+}
+
+// ================================================================
 // 初期化実行
 // ================================================================
 var SURF2_BY_MID = {};  // 表面処理v2(companies_detail.surface_json・認証時)
@@ -7959,15 +8024,21 @@ document.getElementById('wo-csv').onclick=function(){
   if(!curProc||!PI[curProc]){alert('工程をクリックして選んでください');return;}
   rows=[['oin','name','工程']];
   pmakers(curProc).forEach(function(m){rows.push([m.oin,m.name||'',curProc]);});
-  fname='process_makers_'+curProc.replace(/[\/\\:*?"<>|]/g,'_')+'.csv';
+  fname='process_makers_'+curProc.replace(/[\/\:*?"<>|]/g,'_')+'.csv';
  }
  var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\r\n');
- var blob=new Blob(['\ufeff'+csv],{type:'text/csv'});
+ var blob=new Blob(['﻿'+csv],{type:'text/csv'});
  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
  a.download=fname;a.click();
 };
 })();
 </script>
+<!-- ===== 地震情報パネル ===== -->
+<div id="quake-panel">
+  <b style="font-size:13px">🔴 最新地震情報</b>
+  <div id="quake-list"></div>
+  <div style="font-size:10px;margin-top:4px;color:#aaa">60秒ごとに自動更新 | P2P地震情報</div>
+</div>
 <!-- ===== 匿名PV/UVビーコン (Supabase pageviews) ／ </body> 直前に挿入 ===== -->
 <script>
 (function () {
