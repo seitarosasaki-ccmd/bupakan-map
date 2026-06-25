@@ -80,7 +80,9 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
 .btn-hdr.green:hover{background:rgba(57,255,20,.1)}
 /* ── QUAKE MODE ── */
 #btn-quake.active{background:rgba(220,50,50,.25);box-shadow:0 0 12px rgba(220,50,50,.5)}
-#quake-panel{display:none;position:fixed;bottom:80px;right:10px;z-index:1000;background:rgba(20,20,30,.92);color:#fff;padding:10px;border-radius:6px;width:220px;max-height:200px;overflow-y:auto;font-size:12px;border:1px solid rgba(220,50,50,.35)}
+#quake-panel{display:none;position:fixed;bottom:80px;right:10px;z-index:1000;background:rgba(20,20,30,.92);color:#fff;padding:10px;border-radius:6px;width:230px;max-height:280px;overflow-y:auto;font-size:12px;border:1px solid rgba(220,50,50,.35)}
+.quake-eq-diamond{font-size:18px;color:#ff9922;filter:drop-shadow(0 0 4px rgba(255,153,34,.7));line-height:1;cursor:pointer}
+.quake-eq-elapsed{font-size:9px;color:#ff9922;font-weight:700;margin-top:2px}
 @keyframes quake-pulse{0%,100%{box-shadow:0 0 6px rgba(220,50,50,.6)}50%{box-shadow:0 0 16px rgba(220,50,50,.9)}}
 #quake-panel{animation:quake-pulse 2s ease-in-out infinite}
 
@@ -6789,38 +6791,191 @@ let quakeMarkers = [];
 let quakeCircles = [];
 let quakeTimer = null;
 
+// M4.5以上のみ最新100件取得してJSでフィルタ
+const QUAKE_API = 'https://api.p2pquake.net/v2/history?codes=551&limit=100';
+
+// 発生からの経過時間
+function quakeElapsed(timeStr) {
+  if (!timeStr) return '';
+  var m = timeStr.match(/(\d{4})\/(\d{2})\/(\d{2})\s(\d{2}):(\d{2})/);
+  if (!m) {
+    // ISO形式も試す
+    var d2 = new Date(timeStr);
+    if (isNaN(d2)) return '';
+    var diff2 = Date.now() - d2.getTime();
+    var mins2 = Math.floor(diff2 / 60000);
+    if (mins2 < 1) return 'たった今';
+    if (mins2 < 60) return mins2 + '分前';
+    var hrs2 = Math.floor(mins2 / 60);
+    if (hrs2 < 24) return hrs2 + '時間前';
+    return Math.floor(hrs2 / 24) + '日前';
+  }
+  var d = new Date(parseInt(m[1]), parseInt(m[2])-1, parseInt(m[3]), parseInt(m[4]), parseInt(m[5]));
+  var diff = Date.now() - d.getTime();
+  var mins = Math.floor(diff / 60000);
+  if (mins < 1) return 'たった今';
+  if (mins < 60) return mins + '分前';
+  var hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + '時間前';
+  return Math.floor(hrs / 24) + '日前';
+}
+
+// localStorage: M5.0以上を7日間保持
+const QUAKE_LS_KEY = 'quake_history';
+const QUAKE_LS_DAYS = 7;
+
+function _quakeTimeMs(timeStr) {
+  if (!timeStr) return 0;
+  var m = timeStr.match(/(\d{4})\/(\d{2})\/(\d{2})\s(\d{2}):(\d{2})/);
+  if (m) return new Date(parseInt(m[1]), parseInt(m[2])-1, parseInt(m[3]), parseInt(m[4]), parseInt(m[5])).getTime();
+  var d = new Date(timeStr);
+  return isNaN(d) ? 0 : d.getTime();
+}
+
+function saveQuakeHistory(rawData) {
+  var cutoff = Date.now() - QUAKE_LS_DAYS * 86400 * 1000;
+  var existing = [];
+  try { existing = JSON.parse(localStorage.getItem(QUAKE_LS_KEY) || '[]'); } catch(e) {}
+  var newEntries = [];
+  rawData.forEach(function(eq) {
+    var hy = eq.earthquake && eq.earthquake.hypocenter;
+    if (!hy || hy.magnitude == null || hy.magnitude < 5.0) return;
+    newEntries.push({
+      time: eq.earthquake.time || eq.time || '',
+      name: hy.name || '不明',
+      magnitude: hy.magnitude,
+      depth: hy.depth,
+      maxScale: eq.earthquake.maxScale,
+      lat: hy.latitude,
+      lng: hy.longitude
+    });
+  });
+  var merged = existing.concat(newEntries);
+  var seen = {};
+  merged = merged.filter(function(e) {
+    if (!e.time || seen[e.time]) return false;
+    seen[e.time] = true;
+    return _quakeTimeMs(e.time) >= cutoff;
+  });
+  merged.sort(function(a, b) { return _quakeTimeMs(b.time) - _quakeTimeMs(a.time); });
+  try { localStorage.setItem(QUAKE_LS_KEY, JSON.stringify(merged)); } catch(e) {}
+}
+
+function loadQuakeHistory() {
+  var cutoff = Date.now() - QUAKE_LS_DAYS * 86400 * 1000;
+  try {
+    return JSON.parse(localStorage.getItem(QUAKE_LS_KEY) || '[]').filter(function(e) {
+      return _quakeTimeMs(e.time) >= cutoff;
+    });
+  } catch(e) { return []; }
+}
+
+// localStorage形式 → APIレスポンス互換形式に変換
+function _histToEq(e) {
+  return {
+    earthquake: {
+      time: e.time,
+      maxScale: e.maxScale,
+      hypocenter: { name: e.name, magnitude: e.magnitude, depth: e.depth, latitude: e.lat, longitude: e.lng }
+    },
+    time: e.time,
+    points: []
+  };
+}
+
 async function fetchQuakeData() {
   try {
-    const res = await fetch('https://api.p2pquake.net/v2/history?codes=551&limit=5');
-    const data = await res.json();
+    const res = await fetch(QUAKE_API);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const raw = await res.json();
+    // M4.5以上のみ・上位30件
+    var data = raw.filter(function(q) {
+      var hy = q.earthquake && q.earthquake.hypocenter;
+      return hy && hy.magnitude >= 4.5;
+    }).slice(0, 30);
+    // M5.0以上をlocalStorageに保存
+    saveQuakeHistory(raw);
     clearQuakeLayers();
-    const panel = document.getElementById('quake-list');
-    if (panel) panel.innerHTML = '';
-    data.forEach(q => {
-      const hy = q.earthquake && q.earthquake.hypocenter;
-      if (!hy || hy.latitude < -100 || hy.longitude < -100) return;
-      const lat = hy.latitude, lng = hy.longitude, mag = hy.magnitude || 0;
-      const depth = hy.depth != null ? hy.depth : '不明';
-      const name = hy.name || '震源地不明';
-      const maxScale = (q.earthquake && q.earthquake.maxScale != null) ? q.earthquake.maxScale : -1;
-      const scaleLabel = maxScale === -1 ? '不明' : (maxScale / 10).toFixed(1);
-      const time = q.time ? new Date(q.time).toLocaleString('ja-JP') : '';
-      const star = L.marker([lat, lng], {
-        icon: L.divIcon({className:'', html:'<div style="font-size:24px;transform:translate(-50%,-50%);filter:drop-shadow(0 0 4px rgba(220,50,50,.8))">★</div>', iconSize:[0,0]})
-      }).addTo(map).bindPopup('<b>'+name+'</b><br>M'+mag+' 深さ'+depth+'km<br>最大震度: '+scaleLabel+'<br>'+time);
-      quakeMarkers.push(star);
-      [[mag*20000,'rgba(220,50,50,0.2)'],[mag*60000,'rgba(230,140,40,0.15)'],[mag*120000,'rgba(230,210,50,0.1)']].forEach(function(rc){
-        var r=rc[0],c=rc[1];
-        if(r>0) quakeCircles.push(L.circle([lat,lng],{radius:r,color:'none',fillColor:c,fillOpacity:1}).addTo(map));
-      });
-      if(panel) panel.innerHTML += '<div style="padding:4px 0;border-bottom:1px solid rgba(255,255,255,.1)"><b>'+name+'</b> M'+mag+'<br><span style="font-size:11px">'+time+' 最大震度'+scaleLabel+'</span></div>';
-    });
-  } catch(e) { console.error('地震API取得失敗', e); }
+    _renderQuakeLayers(data);
+    _renderQuakePanel(data);
+  } catch(e) {
+    console.error('地震API取得失敗', e);
+    var panel = document.getElementById('quake-list');
+    if (panel) panel.innerHTML = '<div style="color:#f87;font-size:10px;padding:6px">取得エラー。再試行中...</div>';
+  }
 }
 
 function clearQuakeLayers() {
-  quakeMarkers.forEach(function(m){map.removeLayer(m);}); quakeMarkers=[];
-  quakeCircles.forEach(function(c){map.removeLayer(c);}); quakeCircles=[];
+  quakeMarkers.forEach(function(m){ try{map.removeLayer(m);}catch(e){} }); quakeMarkers = [];
+  quakeCircles.forEach(function(c){ try{map.removeLayer(c);}catch(e){} }); quakeCircles = [];
+}
+
+function _renderQuakeLayers(data) {
+  data.forEach(function(q) {
+    var hy = q.earthquake && q.earthquake.hypocenter;
+    if (!hy || hy.latitude == null || hy.longitude == null) return;
+    if (hy.latitude < -90 || hy.longitude < -180) return;
+    var lat = hy.latitude, lng = hy.longitude, mag = hy.magnitude || 0;
+    var depth = hy.depth != null ? hy.depth : '不明';
+    var name = hy.name || '震源地不明';
+    var maxScale = (q.earthquake && q.earthquake.maxScale != null) ? q.earthquake.maxScale : -1;
+    var scaleLabel = maxScale === -1 ? '不明' : (maxScale / 10).toFixed(1);
+    var timeStr = q.earthquake && q.earthquake.time ? q.earthquake.time : (q.time || '');
+    var elapsed = quakeElapsed(timeStr);
+    var timeDisp = timeStr ? timeStr.replace(/(\d{4})\/(\d{2})\/(\d{2})\s(\d{2}:\d{2}).*/, '$1-$2-$3 $4') : '';
+    var isBig = mag >= 5.0;
+    var markerHtml, iconSize;
+    if (isBig) {
+      markerHtml = '<div style="font-size:24px;transform:translate(-50%,-50%);filter:drop-shadow(0 0 5px rgba(220,50,50,.9))">★</div>';
+      iconSize = [0, 0];
+    } else {
+      markerHtml = '<div class="quake-eq-diamond" style="transform:translate(-50%,-50%)">◆</div>';
+      iconSize = [0, 0];
+    }
+    var popup = '<b>' + name + '</b><br>M' + mag + ' 深さ' + depth + 'km<br>最大震度: ' + scaleLabel +
+                '<br>' + timeDisp + (elapsed ? ' (' + elapsed + ')' : '');
+    var mk = L.marker([lat, lng], {
+      icon: L.divIcon({className: '', html: markerHtml, iconSize: iconSize}),
+      zIndexOffset: isBig ? 2000 : 1500
+    }).addTo(map).bindPopup(popup);
+    quakeMarkers.push(mk);
+    // 同心円はM5.0以上のみ
+    if (isBig && mag > 0) {
+      [[mag*20000,'rgba(220,50,50,0.18)'],[mag*60000,'rgba(230,140,40,0.12)'],[mag*120000,'rgba(230,210,50,0.07)']].forEach(function(rc) {
+        quakeCircles.push(L.circle([lat, lng], {radius: rc[0], color: 'none', fillColor: rc[1], fillOpacity: 1}).addTo(map));
+      });
+    }
+  });
+}
+
+function _renderQuakePanel(data) {
+  var panel = document.getElementById('quake-list');
+  if (!panel) return;
+  if (!data || !data.length) {
+    panel.innerHTML = '<div style="color:#aaa;font-size:10px;padding:6px">データなし</div>';
+    return;
+  }
+  var list = data.filter(function(q) {
+    var hy = q.earthquake && q.earthquake.hypocenter;
+    return hy && hy.magnitude >= 4.5;
+  }).slice(0, 20);
+  var html = '';
+  list.forEach(function(q) {
+    var hy = q.earthquake && q.earthquake.hypocenter;
+    var name = (hy && hy.name) || '震源地不明';
+    var mag = (hy && hy.magnitude > 0) ? 'M' + hy.magnitude : 'M不明';
+    var maxScale = (q.earthquake && q.earthquake.maxScale != null) ? q.earthquake.maxScale : -1;
+    var scaleLabel = maxScale === -1 ? '不明' : (maxScale / 10).toFixed(1);
+    var timeStr = q.earthquake && q.earthquake.time ? q.earthquake.time : (q.time || '');
+    var timeDisp = timeStr ? timeStr.replace(/(\d{4})\/(\d{2})\/(\d{2})\s(\d{2}:\d{2}).*/, '$1-$2-$3 $4') : '';
+    var elapsed = quakeElapsed(timeStr);
+    html += '<div style="padding:5px 0;border-bottom:1px solid rgba(255,255,255,.1)">' +
+      '<b>' + name + '</b> ' + mag +
+      '<br><span style="font-size:10px;color:#ccc">' + timeDisp + ' 最大震度' + scaleLabel + '</span>' +
+      (elapsed ? '<br><span class="quake-eq-elapsed">' + elapsed + '</span>' : '') +
+      '</div>';
+  });
+  panel.innerHTML = html;
 }
 
 function toggleQuakeMode() {
@@ -6828,13 +6983,20 @@ function toggleQuakeMode() {
   const btn = document.getElementById('btn-quake');
   const panel = document.getElementById('quake-panel');
   if (quakeMode) {
-    if(btn) btn.classList.add('active');
-    if(panel) panel.style.display='block';
+    if (btn) btn.classList.add('active');
+    if (panel) panel.style.display = 'block';
+    // localStorageの過去データを先に表示
+    var hist = loadQuakeHistory();
+    if (hist.length > 0) {
+      var histData = hist.map(_histToEq);
+      _renderQuakeLayers(histData);
+      _renderQuakePanel(histData);
+    }
     fetchQuakeData();
     quakeTimer = setInterval(fetchQuakeData, 60000);
   } else {
-    if(btn) btn.classList.remove('active');
-    if(panel) panel.style.display='none';
+    if (btn) btn.classList.remove('active');
+    if (panel) panel.style.display = 'none';
     clearQuakeLayers();
     clearInterval(quakeTimer);
   }
