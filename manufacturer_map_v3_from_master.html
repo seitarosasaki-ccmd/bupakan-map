@@ -80,11 +80,16 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
 .btn-hdr.green:hover{background:rgba(57,255,20,.1)}
 /* ── QUAKE MODE ── */
 #btn-quake.active{background:rgba(220,50,50,.25);box-shadow:0 0 12px rgba(220,50,50,.5)}
-#quake-panel{display:none;position:fixed;bottom:80px;right:10px;z-index:1000;background:rgba(20,20,30,.92);color:#fff;padding:10px;border-radius:6px;width:230px;max-height:280px;overflow-y:auto;font-size:12px;border:1px solid rgba(220,50,50,.35)}
+#quake-panel{display:none;position:fixed;bottom:80px;right:10px;z-index:1000;background:rgba(20,20,30,.92);color:#fff;padding:10px;border-radius:6px;width:250px;max-height:320px;overflow-y:auto;font-size:12px;border:1px solid rgba(220,50,50,.35)}
 .quake-eq-diamond{font-size:18px;color:#ff9922;filter:drop-shadow(0 0 4px rgba(255,153,34,.7));line-height:1;cursor:pointer}
 .quake-eq-elapsed{font-size:9px;color:#ff9922;font-weight:700;margin-top:2px}
 @keyframes quake-pulse{0%,100%{box-shadow:0 0 6px rgba(220,50,50,.6)}50%{box-shadow:0 0 16px rgba(220,50,50,.9)}}
 #quake-panel{animation:quake-pulse 2s ease-in-out infinite}
+.quake-pin-btn{background:none;border:none;cursor:pointer;padding:1px 3px;font-size:14px;line-height:1;flex-shrink:0;opacity:.5;transition:opacity .15s}
+.quake-pin-btn:hover{opacity:1}
+.quake-item{border-bottom:1px solid rgba(255,255,255,.1);transition:background .15s}
+.quake-item.qsel{background:rgba(220,80,50,.22)!important}
+.quake-ctrl-btn{font-size:10px;padding:2px 7px;border-radius:4px;cursor:pointer;border:1px solid;line-height:1.4}
 
 /* ── MAIN LAYOUT ── */
 .layout{display:flex;flex:1;overflow:hidden}
@@ -6784,12 +6789,15 @@ function toggleLogisticsMode(){
 }
 
 // ================================================================
-// 地震モード (P2P地震情報 API)
+// 地震モード (P2P地震情報 API) — 選択表示式
 // ================================================================
 let quakeMode = false;
-let quakeMarkers = [];
-let quakeCircles = [];
+let quakeMarkers = [];   // 後方互換のために残す
+let quakeCircles = [];   // 後方互換のために残す
 let quakeTimer = null;
+let quakeData = [];                   // 現在のデータ配列
+let quakeItemLayers = [];             // [{markers:[], circles:[]}] per item
+let selectedQuakeSet = new Set();     // 選択中インデックス
 
 // M4.5以上のみ最新100件取得してJSでフィルタ
 const QUAKE_API = 'https://api.p2pquake.net/v2/history?codes=551&limit=100';
@@ -6799,7 +6807,6 @@ function quakeElapsed(timeStr) {
   if (!timeStr) return '';
   var m = timeStr.match(/(\d{4})\/(\d{2})\/(\d{2})\s(\d{2}):(\d{2})/);
   if (!m) {
-    // ISO形式も試す
     var d2 = new Date(timeStr);
     if (isNaN(d2)) return '';
     var diff2 = Date.now() - d2.getTime();
@@ -6883,69 +6890,118 @@ function _histToEq(e) {
   };
 }
 
+// 1件分のLeafletレイヤーを生成（まだ地図には追加しない）
+function _buildQuakeItemLayer(q) {
+  var layers = {markers: [], circles: []};
+  var hy = q.earthquake && q.earthquake.hypocenter;
+  if (!hy || hy.latitude == null || hy.longitude == null) return layers;
+  if (hy.latitude < -90 || hy.longitude < -180) return layers;
+  var lat = hy.latitude, lng = hy.longitude, mag = hy.magnitude || 0;
+  var depth = hy.depth != null ? hy.depth : '不明';
+  var name = hy.name || '震源地不明';
+  var maxScale = (q.earthquake && q.earthquake.maxScale != null) ? q.earthquake.maxScale : -1;
+  var scaleLabel = maxScale === -1 ? '不明' : (maxScale / 10).toFixed(1);
+  var timeStr = q.earthquake && q.earthquake.time ? q.earthquake.time : (q.time || '');
+  var elapsed = quakeElapsed(timeStr);
+  var timeDisp = timeStr ? timeStr.replace(/(\d{4})\/(\d{2})\/(\d{2})\s(\d{2}:\d{2}).*/, '$1-$2-$3 $4') : '';
+  var isBig = mag >= 5.0;
+  var markerHtml = isBig
+    ? '<div style="font-size:24px;transform:translate(-50%,-50%);filter:drop-shadow(0 0 5px rgba(220,50,50,.9))">★</div>'
+    : '<div class="quake-eq-diamond" style="transform:translate(-50%,-50%)">◆</div>';
+  var popup = '<b>' + name + '</b><br>M' + mag + ' 深さ' + depth + 'km<br>最大震度: ' + scaleLabel +
+              '<br>' + timeDisp + (elapsed ? ' (' + elapsed + ')' : '');
+  var mk = L.marker([lat, lng], {
+    icon: L.divIcon({className: '', html: markerHtml, iconSize: [0, 0]}),
+    zIndexOffset: isBig ? 2000 : 1500
+  }).bindPopup(popup);
+  layers.markers.push(mk);
+  if (isBig && mag > 0) {
+    [[mag*20000,'rgba(220,50,50,0.18)'],[mag*60000,'rgba(230,140,40,0.12)'],[mag*120000,'rgba(230,210,50,0.07)']].forEach(function(rc) {
+      layers.circles.push(L.circle([lat, lng], {radius: rc[0], color: 'none', fillColor: rc[1], fillOpacity: 1}));
+    });
+  }
+  return layers;
+}
+
+function _showQuakeIdx(idx) {
+  var lyr = quakeItemLayers[idx];
+  if (!lyr) return;
+  lyr.markers.forEach(function(m){ m.addTo(map); });
+  lyr.circles.forEach(function(c){ c.addTo(map); });
+}
+
+function _hideQuakeIdx(idx) {
+  var lyr = quakeItemLayers[idx];
+  if (!lyr) return;
+  lyr.markers.forEach(function(m){ try{map.removeLayer(m);}catch(e){} });
+  lyr.circles.forEach(function(c){ try{map.removeLayer(c);}catch(e){} });
+}
+
+function toggleQuakeSelection(idx) {
+  if (selectedQuakeSet.has(idx)) {
+    selectedQuakeSet.delete(idx);
+    _hideQuakeIdx(idx);
+  } else {
+    selectedQuakeSet.add(idx);
+    _showQuakeIdx(idx);
+  }
+  _updateQuakePanelHighlight();
+}
+
+function selectAllQuakes() {
+  quakeData.forEach(function(q, i) {
+    if (!selectedQuakeSet.has(i)) {
+      selectedQuakeSet.add(i);
+      _showQuakeIdx(i);
+    }
+  });
+  _updateQuakePanelHighlight();
+}
+
+function clearAllQuakes() {
+  selectedQuakeSet.forEach(function(i){ _hideQuakeIdx(i); });
+  selectedQuakeSet.clear();
+  _updateQuakePanelHighlight();
+}
+
+function _updateQuakePanelHighlight() {
+  document.querySelectorAll('.quake-item').forEach(function(el) {
+    var i = parseInt(el.getAttribute('data-qidx'), 10);
+    var sel = selectedQuakeSet.has(i);
+    el.classList.toggle('qsel', sel);
+    var btn = el.querySelector('.quake-pin-btn');
+    if (btn) { btn.textContent = sel ? '📍✓' : '📍'; btn.style.opacity = sel ? '1' : '0.5'; }
+  });
+}
+
+function clearQuakeLayers() {
+  quakeItemLayers.forEach(function(lyr, i){ _hideQuakeIdx(i); });
+  quakeItemLayers = [];
+  selectedQuakeSet.clear();
+  // 後方互換
+  quakeMarkers.forEach(function(m){ try{map.removeLayer(m);}catch(e){} }); quakeMarkers = [];
+  quakeCircles.forEach(function(c){ try{map.removeLayer(c);}catch(e){} }); quakeCircles = [];
+}
+
 async function fetchQuakeData() {
   try {
     const res = await fetch(QUAKE_API);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const raw = await res.json();
-    // M4.5以上のみ・上位30件
     var data = raw.filter(function(q) {
       var hy = q.earthquake && q.earthquake.hypocenter;
       return hy && hy.magnitude >= 4.5;
     }).slice(0, 30);
-    // M5.0以上をlocalStorageに保存
     saveQuakeHistory(raw);
     clearQuakeLayers();
-    _renderQuakeLayers(data);
+    quakeData = data;
+    quakeItemLayers = data.map(function(q){ return _buildQuakeItemLayer(q); });
     _renderQuakePanel(data);
   } catch(e) {
     console.error('地震API取得失敗', e);
     var panel = document.getElementById('quake-list');
     if (panel) panel.innerHTML = '<div style="color:#f87;font-size:10px;padding:6px">取得エラー。再試行中...</div>';
   }
-}
-
-function clearQuakeLayers() {
-  quakeMarkers.forEach(function(m){ try{map.removeLayer(m);}catch(e){} }); quakeMarkers = [];
-  quakeCircles.forEach(function(c){ try{map.removeLayer(c);}catch(e){} }); quakeCircles = [];
-}
-
-function _renderQuakeLayers(data) {
-  data.forEach(function(q) {
-    var hy = q.earthquake && q.earthquake.hypocenter;
-    if (!hy || hy.latitude == null || hy.longitude == null) return;
-    if (hy.latitude < -90 || hy.longitude < -180) return;
-    var lat = hy.latitude, lng = hy.longitude, mag = hy.magnitude || 0;
-    var depth = hy.depth != null ? hy.depth : '不明';
-    var name = hy.name || '震源地不明';
-    var maxScale = (q.earthquake && q.earthquake.maxScale != null) ? q.earthquake.maxScale : -1;
-    var scaleLabel = maxScale === -1 ? '不明' : (maxScale / 10).toFixed(1);
-    var timeStr = q.earthquake && q.earthquake.time ? q.earthquake.time : (q.time || '');
-    var elapsed = quakeElapsed(timeStr);
-    var timeDisp = timeStr ? timeStr.replace(/(\d{4})\/(\d{2})\/(\d{2})\s(\d{2}:\d{2}).*/, '$1-$2-$3 $4') : '';
-    var isBig = mag >= 5.0;
-    var markerHtml, iconSize;
-    if (isBig) {
-      markerHtml = '<div style="font-size:24px;transform:translate(-50%,-50%);filter:drop-shadow(0 0 5px rgba(220,50,50,.9))">★</div>';
-      iconSize = [0, 0];
-    } else {
-      markerHtml = '<div class="quake-eq-diamond" style="transform:translate(-50%,-50%)">◆</div>';
-      iconSize = [0, 0];
-    }
-    var popup = '<b>' + name + '</b><br>M' + mag + ' 深さ' + depth + 'km<br>最大震度: ' + scaleLabel +
-                '<br>' + timeDisp + (elapsed ? ' (' + elapsed + ')' : '');
-    var mk = L.marker([lat, lng], {
-      icon: L.divIcon({className: '', html: markerHtml, iconSize: iconSize}),
-      zIndexOffset: isBig ? 2000 : 1500
-    }).addTo(map).bindPopup(popup);
-    quakeMarkers.push(mk);
-    // 同心円はM5.0以上のみ
-    if (isBig && mag > 0) {
-      [[mag*20000,'rgba(220,50,50,0.18)'],[mag*60000,'rgba(230,140,40,0.12)'],[mag*120000,'rgba(230,210,50,0.07)']].forEach(function(rc) {
-        quakeCircles.push(L.circle([lat, lng], {radius: rc[0], color: 'none', fillColor: rc[1], fillOpacity: 1}).addTo(map));
-      });
-    }
-  });
 }
 
 function _renderQuakePanel(data) {
@@ -6960,7 +7016,7 @@ function _renderQuakePanel(data) {
     return hy && hy.magnitude >= 4.5;
   }).slice(0, 20);
   var html = '';
-  list.forEach(function(q) {
+  list.forEach(function(q, idx) {
     var hy = q.earthquake && q.earthquake.hypocenter;
     var name = (hy && hy.name) || '震源地不明';
     var mag = (hy && hy.magnitude > 0) ? 'M' + hy.magnitude : 'M不明';
@@ -6969,13 +7025,16 @@ function _renderQuakePanel(data) {
     var timeStr = q.earthquake && q.earthquake.time ? q.earthquake.time : (q.time || '');
     var timeDisp = timeStr ? timeStr.replace(/(\d{4})\/(\d{2})\/(\d{2})\s(\d{2}:\d{2}).*/, '$1-$2-$3 $4') : '';
     var elapsed = quakeElapsed(timeStr);
-    html += '<div style="padding:5px 0;border-bottom:1px solid rgba(255,255,255,.1)">' +
-      '<b>' + name + '</b> ' + mag +
-      '<br><span style="font-size:10px;color:#ccc">' + timeDisp + ' 最大震度' + scaleLabel + '</span>' +
+    html += '<div class="quake-item" data-qidx="' + idx + '" style="padding:5px 0;display:flex;align-items:flex-start;gap:4px">' +
+      '<button class="quake-pin-btn" onclick="toggleQuakeSelection(' + idx + ')" title="地図に表示/非表示">📍</button>' +
+      '<div style="flex:1;min-width:0">' +
+      '<b style="font-size:11px">' + name + '</b> <span style="color:#ff9922">' + mag + '</span>' +
+      '<br><span style="font-size:10px;color:#ccc">' + timeDisp + ' 震度' + scaleLabel + '</span>' +
       (elapsed ? '<br><span class="quake-eq-elapsed">' + elapsed + '</span>' : '') +
-      '</div>';
+      '</div></div>';
   });
   panel.innerHTML = html;
+  _updateQuakePanelHighlight();
 }
 
 function toggleQuakeMode() {
@@ -6985,11 +7044,12 @@ function toggleQuakeMode() {
   if (quakeMode) {
     if (btn) btn.classList.add('active');
     if (panel) panel.style.display = 'block';
-    // localStorageの過去データを先に表示
+    // localStorageの過去データを先に表示（デフォルトは非表示状態）
     var hist = loadQuakeHistory();
     if (hist.length > 0) {
       var histData = hist.map(_histToEq);
-      _renderQuakeLayers(histData);
+      quakeData = histData;
+      quakeItemLayers = histData.map(function(q){ return _buildQuakeItemLayer(q); });
       _renderQuakePanel(histData);
     }
     fetchQuakeData();
@@ -8189,7 +8249,7 @@ document.getElementById('wo-csv').onclick=function(){
   fname='process_makers_'+curProc.replace(/[\/\:*?"<>|]/g,'_')+'.csv';
  }
  var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\r\n');
- var blob=new Blob(['﻿'+csv],{type:'text/csv'});
+ var blob=new Blob(['\ufeff'+csv],{type:'text/csv'});
  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
  a.download=fname;a.click();
 };
@@ -8197,7 +8257,14 @@ document.getElementById('wo-csv').onclick=function(){
 </script>
 <!-- ===== 地震情報パネル ===== -->
 <div id="quake-panel">
-  <b style="font-size:13px">🔴 最新地震情報</b>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:5px">
+    <b style="font-size:13px">🔴 最新地震情報</b>
+    <div style="display:flex;gap:4px">
+      <button class="quake-ctrl-btn" onclick="selectAllQuakes()" style="background:rgba(220,80,50,.3);border-color:rgba(220,80,50,.6);color:#fff">全表示</button>
+      <button class="quake-ctrl-btn" onclick="clearAllQuakes()" style="background:rgba(60,60,60,.4);border-color:rgba(180,180,180,.35);color:#bbb">全クリア</button>
+    </div>
+  </div>
+  <div style="font-size:10px;color:#888;margin-bottom:4px">📍 を押した地震だけ地図に表示</div>
   <div id="quake-list"></div>
   <div style="font-size:10px;margin-top:4px;color:#aaa">60秒ごとに自動更新 | P2P地震情報</div>
 </div>
