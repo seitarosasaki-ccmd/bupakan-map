@@ -5829,7 +5829,14 @@ function companyMatchesSelector(c){
   if(c._dist < S.distMin || c._dist > S.distMax) return false;
   // 認証（certsModeでAND/OR切替）
   if(S.certs.size > 0 || S.certText){
-    const certBlob = ((c.cert||'') + ' ' + (c.certStd||'') + ' ' + (c.note||'')).toLowerCase();
+    // cert_by_oin.json のデータを補完（manufacturers_slim.jsonはcert/certStdを持たないため）
+    const _certEntry = (typeof CERT !== 'undefined' && CERT && c.oin) ? (CERT[c.oin] || null) : null;
+    const certBlob = (
+      (c.cert||'') + ' ' +
+      (c.certStd||'') + ' ' +
+      (c.note||'') + ' ' +
+      (_certEntry && _certEntry.has9100 ? '9100 jis q9100 as9100 en9100' : '')
+    ).toLowerCase();
     let ok = false;
     if(S.certs.size === 0) ok = true; // チップ未指定なら認証チップはパス
     else if(S.certsMode === 'AND'){
@@ -8293,15 +8300,4 @@ document.getElementById('wo-csv').onclick=function(){
         "apikey": SUPABASE_KEY,
         "Authorization": "Bearer " + SUPABASE_KEY,
         "Content-Type": "application/json",
-        "Prefer": "return=minimal"
-      },
-      body: JSON.stringify({ path: location.pathname, visitor_id: vid }),
-      keepalive: true
-    }).catch(function () {});
-  } catch (e) { /* 計測失敗はサイト動作に影響させない */ }
-})();
-</script>
-<!-- ===== /匿名PV/UVビーコン ===== -->
-
-</body>
-</html>
+ 
