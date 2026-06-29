@@ -4122,7 +4122,7 @@ function _mmPanel(){
  p.style.cssText='position:fixed;right:18px;top:64px;z-index:9100;width:320px;background:#0d1b2a;color:#e6eef5;border:1px solid #2a3f55;border-radius:10px;padding:14px;box-shadow:0 4px 24px rgba(0,0,0,.5);font-size:13px;font-family:inherit;display:none';
  p.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b style="color:#2dd4aa">🏭 自社取引先で絞る</b><button onclick="mmClose()" style="background:none;border:none;color:#8aa0b5;font-size:16px;cursor:pointer">✕</button></div>'
   +'<div style="font-size:11px;color:#8aa0b5;line-height:1.6;margin-bottom:8px">取引先リストのCSVを読み込むと、地図を自社の取引先だけに絞ります。<b style="color:#e6eef5">CSVは端末内で処理され外部に送信されません。</b><br>列：社名（必須）／法人番号（あれば精度UP）。</div>'
-  +'<input type="file" id="mm-file" accept=".csv,text/csv" style="font-size:12px;width:100%;margin-bottom:8px">'
+  +'<button onclick="mmDownloadTemplate()" style="width:100%;padding:6px;margin-bottom:6px;background:rgba(45,212,170,.12);border:1px solid #2a3f55;color:#2dd4aa;border-radius:6px;cursor:pointer;font-family:inherit;font-size:12px">\ud83d\udce5 記入例テンプレCSVをダウンロード</button>'+'<div style="font-size:10px;color:#7a8aa0;margin-bottom:8px">例： 社名,法人番号 ／ ○○製作所,（空欄可）。<b style="color:#9fb2c8">Excelは「CSV UTF-8」で保存</b>。</div>'+'<input type="file" id="mm-file" accept=".csv,text/csv" style="font-size:12px;width:100%;margin-bottom:8px">'
   +'<div id="mm-summary" style="font-size:12px;line-height:1.7"></div>'
   +'<label style="display:flex;align-items:center;gap:6px;margin-top:8px;font-size:12px;cursor:pointer"><input type="checkbox" id="mm-toggle" onchange="mmToggle(this.checked)"> 自社取引先のみ表示</label>'
   +'<button onclick="mmClear()" style="margin-top:8px;width:100%;padding:6px;background:transparent;border:1px solid #2a3f55;color:#8aa0b5;border-radius:6px;cursor:pointer;font-family:inherit;font-size:12px">クリア</button>';
@@ -4134,6 +4134,7 @@ function mmOpen(){var p=_mmPanel();p.style.display=(p.style.display==='none'?'bl
 function mmClose(){var p=document.getElementById('mm-panel');if(p)p.style.display='none';}
 function mmToggle(on){myMakerOn=!!on;try{localStorage.setItem('mm_on',on?'1':'0');}catch(e){}if(typeof applyFilters==='function')applyFilters();}
 function mmClear(){myMakerSet=null;myMakerOn=false;try{localStorage.removeItem('mm_oins');localStorage.removeItem('mm_on');}catch(e){}var t=document.getElementById('mm-toggle');if(t)t.checked=false;var s=document.getElementById('mm-summary');if(s)s.innerHTML='';var fi=document.getElementById('mm-file');if(fi)fi.value='';if(typeof applyFilters==='function')applyFilters();}
+function mmDownloadTemplate(){var csv='﻿社名,法人番号\nダイヤモンドエアサービス,6180001051878\n中国化薬,\n（ここに自社の取引先を1社1行・法人番号は空欄可）,\n';var b=new Blob([csv],{type:'text/csv;charset=utf-8'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='取引先テンプレート.csv';document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},0);}
 function _mmRender(total,confirmed,review,none){
  var s=document.getElementById('mm-summary'); if(!s)return;
  var matchedN=myMakerSet?myMakerSet.size:0;
