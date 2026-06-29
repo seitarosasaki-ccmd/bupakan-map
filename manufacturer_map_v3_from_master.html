@@ -8054,7 +8054,7 @@ function _pressTonsFromDevices(devs){
  var best=0,lab='';
  (devs||[]).forEach(function(d){
   if(!d)return;
-  var blob=[d.model,d.name,d.cat,d.proc,d.note,d.maker].filter(Boolean).join(' ').replace(/(\d),(?=\d)/g,'$1');
+  var blob=[d.model,d.name,d.cat,d.proc,d.note,d.maker].filter(Boolean).join(' ').replace(/(\d),(?=\d{3}(?!\d))/g,'$1');  /* カンマ除去は桁区切り(直後3桁ちょうど)のみ。100,80t→列を10080tに誤マージしないため(2026-06-29 光製作所修正) */
   if(!/プレス|press|鍛造|ブランク|曲げ|フリクション|サーボプレス|油圧プレス|ダイクッション/i.test(blob))return;
   if(/ハンマー|hammer/i.test(blob)&&!/プレス|press/i.test(blob))return;
   function setBest(v,d2){if(v>best){best=v;lab=(d2.maker?d2.maker+' ':'')+(d2.model||d2.name||'');}}
