@@ -1272,6 +1272,7 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
     
     <button class="btn-hdr" id="btn-logistics" onclick="toggleLogisticsMode()" title="物流分析モード（IC・新幹線駅・空港を表示）" style="border-color:rgba(255,153,0,.45);color:#ff9900">🚚 物流</button>
     <button class="btn-hdr" id="btn-quake" onclick="toggleQuakeMode()" title="最新地震情報をマップに表示（P2P地震情報 60秒更新）" style="border-color:rgba(220,50,50,.45);color:#ef4444">🔴 地震情報</button>
+    <button class="btn-hdr" id="btn-mymaker" onclick="mmOpen()" title="自社の取引先CSVを読み込み、地図を取引先だけに絞る（端末内処理）" style="border-color:rgba(45,212,170,.5);color:#2dd4aa">🏭 自社取引先</button>
     <button class="btn-hdr selector-btn" id="btn-selector" onclick="var p=document.getElementById('wo-panel');var v=(p.style.display==='none'||!p.style.display);p.style.display=(v?'block':'none');if(v&&typeof map!=='undefined'&&map.invalidateSize){setTimeout(function(){map.invalidateSize();},60);}if(typeof applyFilters==='function')applyFilters();" title="ワーク起点でメーカー選定"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" style="flex-shrink:0"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8" r="2" fill="currentColor"/><path d="M8 0v3M8 13v3M0 8h3M13 8h3" stroke="currentColor" stroke-width="1.4"/></svg><span>メーカー選定</span></button>
     <button class="btn-help" onclick="startTutorial(true)" title="操作説明を再表示（?キー）" id="btn-help">?</button>
   </div>
@@ -3980,6 +3981,7 @@ function getFilteredSorted(_qOv, _qeOv){
     .filter(c=>{
       // ワーク起点選定の結果ハイライト（selOinSet集合があればそのOINのみ表示）
       if(window.selOinSet && window.selOinSet.size && (function(){var _wp=document.getElementById('wo-panel');return _wp && _wp.style.display && _wp.style.display!=='none';})()){ if(!c.oin || !window.selOinSet.has(String(c.oin))) return false; }
+      if(window.myMakerOn && window.myMakerSet && window.myMakerSet.size){ if(!c.oin || !window.myMakerSet.has(String(c.oin))) return false; }
       // 社名・住所・備考・設備テキスト 検索 + alias展開（追加→拡張）
       if(q){
         const nName = normQ(c.name), nAddr = normQ(c.addr);
@@ -4050,6 +4052,102 @@ function getFilteredSorted(_qOv, _qeOv){
       return true;
     })
     .sort((a,b)=>a._dist-b._dist);
+}
+
+/* ===== 自社取引先フィルタ 2026-06-30 (CSVは端末内処理・外部送信なし) ===== */
+var myMakerSet=null, myMakerOn=false;
+var _MMFOLD={'髙':'高','﨑':'崎','德':'徳','濵':'浜','濱':'浜','廣':'広','齋':'斎','齊':'斎','冨':'富','圡':'土','桒':'桑','邊':'辺','邉':'辺','澤':'沢','瀨':'瀬','曻':'昇','槇':'槙','眞':'真','櫻':'桜','嶋':'島'};
+function _mmEsc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function _mmFold(s){s=String(s||'').normalize('NFKC');return s.replace(/[髙﨑德濵濱廣齋齊冨圡桒邊邉澤瀨曻槇眞櫻嶋]/g,function(c){return _MMFOLD[c]||c;});}
+var _MMLEGAL=/株式会社|有限会社|合同会社|合資会社|合名会社|\(株\)|（株）|㈱|\(有\)|（有）|㈲|協同組合|一般社団法人|公益社団法人|一般財団法人/g;
+var _MMSUF=/(工場|事業所|事務所|事業部|事業本部|営業所|営業部|支店|支社|出張所|カンパニー|グループ|本社|本店|プラント|ファクトリー|地域|製造部|生産部|製作所|製造所|製鉄所|センター|研究所|部門|ユニット)/;
+function _mmCore(name){
+ var n=_mmFold(name).replace(/[（(][^)）]*[)）]/g,'').replace(/\s+[A-Za-z0-9].*$/,'').replace(_MMLEGAL,'');
+ var toks=n.split(/[\s　]+/).filter(Boolean);
+ while(toks.length>1 && _MMSUF.test(toks[toks.length-1])) toks.pop();
+ var base=(toks.length?toks.join(''):n).replace(_MMLEGAL,'').replace(/[\s　・,，.\-‐―ｰ]+/g,'');
+ return base.replace(/(事業部|事業本部|事業所|製造部|生産部|部門|ユニット|カンパニー|グループ)$/,'');
+}
+async function _mmHash(num){
+ var d=new TextEncoder().encode('oasis_hb_v1'+String(num).replace(/[^0-9]/g,''));
+ var b=await crypto.subtle.digest('SHA-256',d);
+ return Array.prototype.map.call(new Uint8Array(b),function(x){return ('0'+x.toString(16)).slice(-2);}).join('').slice(0,16);
+}
+function _mmParseCSV(text){
+ var rows=[],f='',row=[],q=false,t=String(text).replace(/\r\n?/g,'\n'),i;
+ for(i=0;i<t.length;i++){var ch=t[i];
+  if(q){ if(ch=='"'){ if(t[i+1]=='"'){f+='"';i++;} else q=false; } else f+=ch; }
+  else { if(ch=='"')q=true; else if(ch==','){row.push(f);f='';} else if(ch=='\n'){row.push(f);rows.push(row);row=[];f='';} else f+=ch; }
+ }
+ if(f!==''||row.length){row.push(f);rows.push(row);}
+ return rows.filter(function(r){return r.some(function(x){return x&&x.trim();});});
+}
+function _mmDetectCols(rows){
+ var h=rows[0]||[],hb=-1,nm=-1;
+ h.forEach(function(v,i){var s=String(v);if(/法人番号|corporate|13桁/i.test(s))hb=i;if(/社名|会社名|取引先|名称|^name$|company/i.test(s))nm=i;});
+ if(hb>=0||nm>=0)return {hb:hb,name:nm>=0?nm:0,hasHeader:true};
+ var r0=rows[0]||[],ghb=-1,gnm=-1;
+ r0.forEach(function(v,i){var s=String(v).replace(/[^0-9]/g,'');if(s.length>=12&&s.length<=13&&ghb<0)ghb=i;if(/[^\x00-\x7F]/.test(String(v))&&gnm<0)gnm=i;});
+ return {hb:ghb,name:gnm>=0?gnm:0,hasHeader:false};
+}
+async function mmRunCSV(text){
+ var rows=_mmParseCSV(text); if(!rows.length){alert('CSVが空です');return;}
+ var col=_mmDetectCols(rows); var data=col.hasHeader?rows.slice(1):rows;
+ var byHbh={},byCore={};
+ (companies||[]).forEach(function(c){
+  var o=String(c.oin);
+  if(c.hbh){(byHbh[c.hbh]=byHbh[c.hbh]||[]).push(o);}
+  var cc=_mmCore(c.name); if(cc){(byCore[cc]=byCore[cc]||[]).push(o);}
+ });
+ var matched=new Set(),confirmed=0,review=[],none=[];
+ for(var k=0;k<data.length;k++){
+  var r=data[k];
+  var hbv=col.hb>=0?String(r[col.hb]||'').replace(/[^0-9]/g,''):'';
+  var nmv=col.name>=0?String(r[col.name]||'').trim():'';
+  if(!hbv && !nmv) continue;
+  var hit=null;
+  if(hbv.length>=12){var h=await _mmHash(hbv); if(byHbh[h])hit=byHbh[h];}
+  if(!hit && nmv){var cc=_mmCore(nmv); if(cc&&byCore[cc])hit=byCore[cc];}
+  if(hit){ if(hit.length===1){matched.add(hit[0]);confirmed++;} else {hit.forEach(function(o){matched.add(o);});review.push(nmv||hbv);} }
+  else none.push(nmv||hbv);
+ }
+ myMakerSet=matched; myMakerOn=true;
+ try{localStorage.setItem('mm_oins',JSON.stringify(Array.from(matched)));localStorage.setItem('mm_on','1');}catch(e){}
+ if(typeof applyFilters==='function')applyFilters();
+ _mmRender(data.length,confirmed,review,none);
+}
+function _mmPanel(){
+ var p=document.getElementById('mm-panel'); if(p)return p;
+ p=document.createElement('div'); p.id='mm-panel';
+ p.style.cssText='position:fixed;right:18px;top:64px;z-index:9100;width:320px;background:#0d1b2a;color:#e6eef5;border:1px solid #2a3f55;border-radius:10px;padding:14px;box-shadow:0 4px 24px rgba(0,0,0,.5);font-size:13px;font-family:inherit;display:none';
+ p.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b style="color:#2dd4aa">🏭 自社取引先で絞る</b><button onclick="mmClose()" style="background:none;border:none;color:#8aa0b5;font-size:16px;cursor:pointer">✕</button></div>'
+  +'<div style="font-size:11px;color:#8aa0b5;line-height:1.6;margin-bottom:8px">取引先リストのCSVを読み込むと、地図を自社の取引先だけに絞ります。<b style="color:#e6eef5">CSVは端末内で処理され外部に送信されません。</b><br>列：社名（必須）／法人番号（あれば精度UP）。</div>'
+  +'<input type="file" id="mm-file" accept=".csv,text/csv" style="font-size:12px;width:100%;margin-bottom:8px">'
+  +'<div id="mm-summary" style="font-size:12px;line-height:1.7"></div>'
+  +'<label style="display:flex;align-items:center;gap:6px;margin-top:8px;font-size:12px;cursor:pointer"><input type="checkbox" id="mm-toggle" onchange="mmToggle(this.checked)"> 自社取引先のみ表示</label>'
+  +'<button onclick="mmClear()" style="margin-top:8px;width:100%;padding:6px;background:transparent;border:1px solid #2a3f55;color:#8aa0b5;border-radius:6px;cursor:pointer;font-family:inherit;font-size:12px">クリア</button>';
+ document.body.appendChild(p);
+ p.querySelector('#mm-file').addEventListener('change',function(e){var f=e.target.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){mmRunCSV(rd.result);};rd.readAsText(f);});
+ return p;
+}
+function mmOpen(){var p=_mmPanel();p.style.display=(p.style.display==='none'?'block':'none');var t=document.getElementById('mm-toggle');if(t)t.checked=myMakerOn;}
+function mmClose(){var p=document.getElementById('mm-panel');if(p)p.style.display='none';}
+function mmToggle(on){myMakerOn=!!on;try{localStorage.setItem('mm_on',on?'1':'0');}catch(e){}if(typeof applyFilters==='function')applyFilters();}
+function mmClear(){myMakerSet=null;myMakerOn=false;try{localStorage.removeItem('mm_oins');localStorage.removeItem('mm_on');}catch(e){}var t=document.getElementById('mm-toggle');if(t)t.checked=false;var s=document.getElementById('mm-summary');if(s)s.innerHTML='';var fi=document.getElementById('mm-file');if(fi)fi.value='';if(typeof applyFilters==='function')applyFilters();}
+function _mmRender(total,confirmed,review,none){
+ var s=document.getElementById('mm-summary'); if(!s)return;
+ var matchedN=myMakerSet?myMakerSet.size:0;
+ var h='<div style="background:rgba(45,212,170,.08);border:1px solid #2a3f55;border-radius:6px;padding:7px 9px">'
+  +'取り込み <b>'+total+'</b>社 → 地図に一致 <b style="color:#2dd4aa">'+matchedN+'</b>社'
+  +'<div style="font-size:11px;color:#8aa0b5;margin-top:3px">確定 '+confirmed+' ・ 要確認(同名複数) '+review.length+' ・ 未一致 '+none.length+'</div></div>';
+ if(none.length)h+='<div style="font-size:10px;color:#7a8aa0;margin-top:6px">未一致: '+none.slice(0,8).map(_mmEsc).join('、')+(none.length>8?' 他':'')+'</div>';
+ s.innerHTML=h;
+ var t=document.getElementById('mm-toggle');if(t)t.checked=myMakerOn;
+}
+function mmRestore(){
+ try{var on=localStorage.getItem('mm_on')==='1';var arr=JSON.parse(localStorage.getItem('mm_oins')||'null');
+  if(arr&&arr.length){myMakerSet=new Set(arr.map(String));myMakerOn=on;if(myMakerOn&&typeof applyFilters==='function')applyFilters();}
+ }catch(e){}
 }
 
 function applyFilters(){
@@ -7131,6 +7229,7 @@ fetch('./manufacturers_slim.json')
     initLegend();
     updateEquipCounts();
     applyFilters();
+    try{if(typeof mmRestore==='function')mmRestore();}catch(_e){}
     setTimeout(()=>startTutorial(false), 600);
     /* deep-link: capability_map等から #oin=<OIN> で該当社のドロワーを開く（2026-06-14追加） */
     (function(){
