@@ -8040,12 +8040,77 @@ function build(){
       build();
      };
     });
-   }else{pi.style.display='none';pi.innerHTML='';}
+   }else if(typeof PRESS_PROCS!=='undefined'&&PRESS_PROCS[curProc]){pi.style.display='none';pi.innerHTML='';buildPressResults(curProc,'wo-prec-results');}else{pi.style.display='none';pi.innerHTML='';var _pr0=document.getElementById('wo-prec-results');if(_pr0){_pr0.style.display='none';_pr0.innerHTML='';}}
   }else{pi.style.display='none';pi.innerHTML='';var pr=document.getElementById('wo-prec-results');if(pr){pr.style.display='none';pr.innerHTML='';} }
  }
 }
 
 /* ===== 工程別精度スケール表示 ===== */
+/* ===== プレス成形能力(トン数) 2026-06-29 / r2: EQUIP_DEV_BY_OINライブ導出 ===== */
+/* 設備データ(EQUIP_DEV_BY_OIN=admin:equip_devices_by_oin.json / 公開:equip_devices_by_mid.json+Supabase認証)から
+   プレス系機種の最大トン数をregex導出。インライン生データを持たない=既存設備配信面と同一露出でガードレール準拠。 */
+var PRESS_PROCS={'プレス成形':1,'曲げ加工':1,'ブランク加工':1};
+function _pressTonsFromDevices(devs){
+ var best=0,lab='';
+ (devs||[]).forEach(function(d){
+  if(!d)return;
+  var blob=[d.model,d.name,d.cat,d.proc,d.note,d.maker].filter(Boolean).join(' ').replace(/(\d),(?=\d)/g,'$1');
+  if(!/プレス|press|鍛造|ブランク|曲げ|フリクション|サーボプレス|油圧プレス|ダイクッション/i.test(blob))return;
+  if(/ハンマー|hammer/i.test(blob)&&!/プレス|press/i.test(blob))return;
+  function setBest(v,d2){if(v>best){best=v;lab=(d2.maker?d2.maker+' ':'')+(d2.model||d2.name||'');}}
+  var man=blob.match(/(\d+(?:\.\d+)?)\s*万\s*(?:トン|t|ton)/i);
+  if(man)setBest(Math.round(parseFloat(man[1])*1e4),d);
+  var s=blob.replace(/(\d+(?:\.\d+)?)\s*万\s*(?:トン|t|ton)/ig,' ');
+  var re=/(\d{1,6})\s*(?:トン|ton|TON|ｔ|[tT](?![A-Za-z0-9]))/g,m;
+  while((m=re.exec(s))){var v=+m[1];if(v>=1&&v<=60000)setBest(v,d);}
+  var rk=/(\d{2,6})\s*kN/ig,mk;
+  while((mk=rk.exec(s))){var vk=Math.round(+mk[1]/9.80665);if(vk>=1&&vk<=60000)setBest(vk,d);}
+ });
+ return best>0?{t:best,m:(lab||'').trim().slice(0,40)}:null;
+}
+function maxPressTons(oin){
+ try{
+  var k=normOin(oin);
+  if(typeof EQUIP_DEV_BY_OIN==='undefined'||!EQUIP_DEV_BY_OIN)return null;
+  var e=EQUIP_DEV_BY_OIN[k];if(!e)return null;
+  var devs=e.devices||(Array.isArray(e)?e:[]);
+  return _pressTonsFromDevices(devs);
+ }catch(e){return null;}
+}
+function _tonColor(t){return t>=2000?{c:'#5ab4ff',b:'rgba(90,180,255,0.18)'}:t>=500?{c:'#4dd4ac',b:'rgba(77,212,172,0.18)'}:t>=100?{c:'#ffb347',b:'rgba(255,179,71,0.18)'}:{c:'#9aa0a8',b:'rgba(154,160,168,0.14)'};}
+function buildPressResults(procName,targetId){
+ var pr=document.getElementById(targetId||'wo-prec-results');if(!pr)return;
+ var makers=pmakers(procName);var ci=coIdx();
+ var rows=makers.map(function(m){
+  var oin=normOin(m.oin);var ce=ci[oin];var co=ce&&ce.c;var pref=(co&&co.pref)||'';
+  var pt=maxPressTons(oin);
+  return {oin:oin,name:m.name||'',pref:pref,t:pt?pt.t:0,mlabel:pt?pt.m:''};
+ }).sort(function(a,b){return b.t-a.t;});
+ if(!rows.length){pr.innerHTML='<div style="font-size:12px;color:#7a8aa0;padding:8px 0">条件に合うメーカーなし</div>';pr.style.display='block';return;}
+ var known=rows.filter(function(r){return r.t>0;}).length;
+ var h='<div style="font-size:12px;color:#8a9ab0;margin-bottom:6px">'+rows.length+'社（'+esc(procName)+'）<span style="color:#5a7090">／成形能力 判明 '+known+'社</span></div>';
+ h+='<table style="width:100%;border-collapse:collapse;font-size:12px">';
+ h+='<thead><tr>';
+ h+='<th style="text-align:left;padding:5px 8px;font-size:10px;color:#5a7090;font-weight:400;border-bottom:1px solid #1e3048">会社名</th>';
+ h+='<th style="text-align:left;padding:5px 8px;font-size:10px;color:#5a7090;font-weight:400;border-bottom:1px solid #1e3048">成形能力</th>';
+ h+='<th style="text-align:left;padding:5px 8px;font-size:10px;color:#5a7090;font-weight:400;border-bottom:1px solid #1e3048">根拠設備</th>';
+ h+='</tr></thead><tbody>';
+ rows.forEach(function(r){
+  var c9b=(typeof CERT!=='undefined'&&CERT&&CERT[r.oin])?'<span class="c9100" style="font-size:10px;border-radius:6px;padding:1px 5px;margin-left:4px">9100</span>':'';
+  var badge,ev;
+  if(r.t>0){var col=_tonColor(r.t);badge='<span style="font-size:11px;font-weight:700;background:'+col.b+';color:'+col.c+';border-radius:6px;padding:1px 7px;white-space:nowrap">'+r.t.toLocaleString()+' t</span>';ev='<span style="font-size:10px;color:#6a8090">'+esc(r.mlabel||'')+'</span>';}
+  else{badge='<span style="font-size:10px;color:#5a7090">— 未登録</span>';ev='<span style="font-size:10px;color:#46566a">設備データ未取得</span>';}
+  h+='<tr style="border-bottom:1px solid #152030">';
+  h+='<td style="padding:7px 8px;vertical-align:top"><div style="font-weight:bold">'+esc(r.name)+c9b+'</div><div style="font-size:10px;color:#5a7090">'+esc(r.pref)+'</div></td>';
+  h+='<td style="padding:7px 8px;vertical-align:top">'+badge+'</td>';
+  h+='<td style="padding:7px 8px;vertical-align:top">'+ev+'</td>';
+  h+='</tr>';
+ });
+ h+='</tbody></table>';
+ h+='<div style="font-size:10px;color:#5a7090;margin-top:5px;line-height:1.5">※成形能力＝保有プレスの最大トン数（設備データから自動抽出）。ワーク投影面積×材料強度に対する能力充足の一次判定に。未登録は設備未取得で能力不明。</div>';
+ pr.innerHTML=h;pr.style.display='block';
+ if(typeof isUnlocked!=='undefined' && !isUnlocked && typeof lockResultRows==='function') lockResultRows(pr,'tbody tr',5,5);
+}
 var PROC_TO_CAT={'研削':'研削','平面研削':'研削','円筒研削':'研削','内面研削':'研削',
  'フライス加工':'MC加工','マシニング加工':'MC加工','5軸マシニング加工':'5軸MC',
  'NC旋盤':'旋削','複合旋盤':'旋削','旋盤加工':'旋削',
@@ -8086,6 +8151,7 @@ var PROC_SCALES={
 var TIER_RANK_P={'超精密':4,'精密':3,'一般精密':2,'一般':1,'不明':0};
 
 function buildPrecResults(cat, sc, procName, precFilter, targetId){
+ if(typeof PRESS_PROCS!=='undefined'&&PRESS_PROCS[procName])return buildPressResults(procName,targetId);
  var pr=document.getElementById(targetId||'wo-prec-results');
  if(!pr)return;
  cat=cat||procName||''; sc=sc||{labels:{},tierMin:{}};
