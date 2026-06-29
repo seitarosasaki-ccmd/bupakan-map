@@ -3952,6 +3952,22 @@ function hexToRgb(hex) {
   return r + ',' + g + ',' + b;
 }
 
+// [BUGFIX 2026-06-29] cert chip filter: slim JSONはshtNadcapHT等のbooleanフィールドを持たない。
+// shtCert/shtNadcapテキストフィールドでテキストマッチングに切り替え。
+function _certKeyCheck(c, k){
+  var ct = (c.shtCert||'').toLowerCase();
+  var nd = (c.shtNadcap||'').toLowerCase();
+  if(k==='shtNadcapHT')   return /nadcap[^;]*\bht\b|\bht\b[^;]*nadcap|heat.treat/i.test(ct) || /\bht\b/.test(nd);
+  if(k==='shtNadcapCP')   return /nadcap[^;]*(cp\b|chemical.?process)|(cp\b|chemical.?process)[^;]*nadcap/i.test(ct) || /(cp\b|chemical.?process)/i.test(nd);
+  if(k==='shtNadcapCoat') return /nadcap[^;]*coat|coat[^;]*nadcap/i.test(ct) || /coat/i.test(nd);
+  if(k==='shtBoeing')     return /boeing/i.test(ct);
+  if(k==='shtAirbus')     return /airbus/i.test(ct);
+  if(k==='shtAms2750')    return /ams.?2750/i.test(ct);
+  if(k==='shtMilSpec')    return /\bmil[-\s_]/i.test(ct);
+  if(k==='jisq9100')      return /jis.?q.?9100|as9100|en9100/i.test(ct) || /9100/.test((c.certStd||''));
+  return c[k]===true; // 将来のbooleanフィールド向けfallback
+}
+
 function getFilteredSorted(_qOv, _qeOv){
   // 社名・住所 検索クエリ取得（追加）
   const q = normQ(_qOv!==undefined?_qOv:document.getElementById('q-search')?.value);
@@ -3989,14 +4005,17 @@ function getFilteredSorted(_qOv, _qeOv){
       if(false && !c.equipId) return false;
       if(false && !(c.equipId || (c.note && c.note.startsWith('[VERIFIED]')))) return false;
       // ワーク寸法フィルター（#10 judgeAと同じ「収まる」基準。寸法未確認の社は除外）
+      // [BUGFIX 2026-06-29] c.maxX/Y/ZはslimJSONに無い→WE変数(work_envelope_by_oin.json)をfallbackに使用
       if(filterWork.on){
         var wx,wy,wz;
         if(filterWork.shape==='kaku'){wx=filterWork.X;wy=filterWork.Y;wz=filterWork.Z;}
         else{wx=filterWork.D;wy=filterWork.D;wz=filterWork.L;}
         if(wx||wy||wz){
-          var cx=(filterWork.shape==='maru'&&c.mdia>0)?c.mdia:c.maxX;
-          var cy=(filterWork.shape==='maru'&&c.mdia>0)?c.mdia:c.maxY;
-          var cz=c.maxZ;
+          var _we=(typeof WE!=='undefined'&&WE)?WE[String(c.oin).replace(/\.0+$/,'')]:null;
+          var _mdia=c.mdia||(_we&&_we.mdia)||0;
+          var cx=(filterWork.shape==='maru'&&_mdia>0)?_mdia:(c.maxX||(_we&&_we.mx)||0);
+          var cy=(filterWork.shape==='maru'&&_mdia>0)?_mdia:(c.maxY||(_we&&_we.my)||0);
+          var cz=c.maxZ||(_we&&_we.mz)||0;
           if(!cx||!cy||!cz) return false;
           if(!(cx>=wx && cy>=wy && cz>=wz)) return false;
         }
@@ -4009,8 +4028,9 @@ function getFilteredSorted(_qOv, _qeOv){
       // Web確認済みのみ
       if(filterWebOnly && !c.isWeb) return false;
       // PATCH:cert-filter-check 認定フィルター（OR結合）
+      // [BUGFIX 2026-06-29] c[k]===trueはslimJSONに無いbooleanフィールドを参照→_certKeyCheckに変更
       if(typeof filterCertKeys !== 'undefined' && filterCertKeys.size > 0) {
-        const ok = [...filterCertKeys].some(k => c[k] === true);
+        const ok = [...filterCertKeys].some(k => _certKeyCheck(c, k));
         if(!ok) return false;
       }
       // PATCH:sel-filter-check 選定パネル: サイズキーワードフィルター
@@ -4020,9 +4040,10 @@ function getFilteredSorted(_qOv, _qeOv){
         if(!_hay.includes(_kw)) return false;
       }
       // 選定パネル: 認定フィルター（AND検索）
+      // [BUGFIX 2026-06-29] c[k]===trueはslimJSONに無い→_certKeyCheckに変更
       if(window.selCerts && window.selCerts.length > 0) {
         var _allOk = window.selCerts.every(function(k){
-          return c[k] === true || (c.shtCerts && c.shtCerts[k]);
+          return _certKeyCheck(c, k) || (c.shtCerts && c.shtCerts[k]);
         });
         if(!_allOk) return false;
       }
@@ -4607,12 +4628,19 @@ function dvDim(d){
   return '<span class="none">— 未確認</span>';
 }
 function dvCertBadges(c){
-  var out=[],v=(c.cert||c.certStd||'')+'';
-  if(/9100/.test(v)) out.push('<span class="dv-cert c9100">JIS Q9100</span>');
+  var out=[],v=(c.cert||c.certStd||c.shtCert||'')+'';
+  if(/9100/.test(v)||(c.shtCert&&/jis.?q.?9100|as9100|en9100/i.test(c.shtCert))) out.push('<span class="dv-cert c9100">JIS Q9100</span>');
   var nd=[];
+  // [BUGFIX 2026-06-29] shtNadcapHT/CP/CoatはslimJSONに無い→shtCertテキストで判定
   if(c.shtNadcapHT)nd.push('HT'); if(c.shtNadcapCP)nd.push('CP'); if(c.shtNadcapCoat)nd.push('Coat');
+  if(!nd.length && (c.shtCert||c.shtNadcap)){
+    var _sc=(c.shtCert||'');
+    if(/nadcap[^;]*\bht\b|\bht\b[^;]*nadcap|heat.treat/i.test(_sc)) nd.push('HT');
+    if(/nadcap[^;]*(cp\b|chemical.?process)|(cp\b|chemical.?process)[^;]*nadcap/i.test(_sc)) nd.push('CP');
+    if(/nadcap[^;]*coat|coat[^;]*nadcap/i.test(_sc)) nd.push('Coat');
+  }
   if(nd.length) nd.forEach(function(x){out.push('<span class="dv-cert cnad">Nadcap '+x+'</span>');});
-  else if(/nadcap/i.test(v)) out.push('<span class="dv-cert cnad">Nadcap</span>');
+  else if(/nadcap/i.test(v)||(c.shtNadcap&&!/^(なし|対象外|該当なし|情報なし|不明)/.test((c.shtNadcap||'').trim())&&(c.shtNadcap||'').trim().length>0)) out.push('<span class="dv-cert cnad">Nadcap</span>');
   return out.join(' ');
 }
 function dvCollectSrc(c,devs){
@@ -5869,7 +5897,8 @@ function companyMatchesSelector(c){
     }
   }
   // hasHp/hasEp
-  if(S.hasHp && !(c.hp || c.url)) return false;
+  // [BUGFIX 2026-06-29] c.hp/c.urlはslimJSONに無い→c.isWebをfallbackに使用
+  if(S.hasHp && !(c.hp || c.url || c.isWeb)) return false;
   if(S.hasEp && !c.ep) return false;
   // サイズ判定（X/Y/Z+材質）
   if(S.sizeX || S.sizeY || S.sizeZ || S.material){
@@ -5944,7 +5973,8 @@ function applySelectorAndClose(){
     SELECTOR_STATE.sizeX || SELECTOR_STATE.sizeY || SELECTOR_STATE.sizeZ || SELECTOR_STATE.material ||
     SELECTOR_STATE.certs.size>0 || SELECTOR_STATE.certText || SELECTOR_STATE.text ||
     SELECTOR_STATE.distMin>0 || SELECTOR_STATE.distMax<2000 ||
-    SELECTOR_STATE.qualities.size>0 || SELECTOR_STATE.hasHp || SELECTOR_STATE.hasEp;
+    SELECTOR_STATE.qualities.size>0 || SELECTOR_STATE.hasHp || SELECTOR_STATE.hasEp ||
+    (SELECTOR_STATE.equipKeywords && SELECTOR_STATE.equipKeywords.size>0);
   SELECTOR_STATE.active = anyFilter;
   document.querySelector('.selector-btn')?.classList.toggle('active', anyFilter);
   closeSelectorModal();
@@ -7074,7 +7104,7 @@ function toggleQuakeMode() {
 var SURF2_BY_MID = {};  // 表面処理v2(companies_detail.surface_json・認証時)
 var EQUIP_DEV_BY_OIN = {};  // 機種別構造化設備データ（equip_devices_by_oin.json）
 fetch('./manufacturers_slim.json')
-  .then(r => { if(!r.ok) throw new Error('manufacturers.json HTTP ' + r.status); return r.json(); })
+  .then(r => { if(!r.ok) throw new Error('manufacturers_slim.json HTTP ' + r.status); return r.json(); })
   .then(data => {
     companies = data;
     companies.forEach(c => { c._dist = Math.round(haversineKm(KOMAKI.lat, KOMAKI.lng, c.lat, c.lng)); });
@@ -7543,7 +7573,14 @@ function coIdx(){
  return _coIdx;
 }
 function kmColor(d){return d==null?'#7a8aa0':d<50?'#39ff14':d<100?'#ffd60a':d<200?'#ff6b35':'#5a7090';}
-function certOf(c){var q=!!(c&&c.certStd&&String(c.certStd).indexOf('9100')>=0);var nd=!!(c&&(c.shtNadcapHT||c.shtNadcapCP||c.shtNadcapCoat));return {q:q,nd:nd};}
+// [BUGFIX 2026-06-29] c.shtNadcapHT/CP/CoatはslimJSONに無い→shtCert/shtNadcapテキストで判定
+function certOf(c){
+  var q=!!(c&&c.certStd&&String(c.certStd).indexOf('9100')>=0);
+  var nd=!!(c&&(c.shtNadcapHT||c.shtNadcapCP||c.shtNadcapCoat||
+    (c.shtCert&&/nadcap/i.test(c.shtCert))||
+    (c.shtNadcap&&!/^(なし|対象外|該当なし|情報なし|不明|取得推進中|未確認)/.test((c.shtNadcap||'').trim())&&(c.shtNadcap||'').trim().length>0)));
+  return {q:q,nd:nd};
+}
 function makerInfo(oin,nameFallback){
  var e=coIdx()[oin];
  if(e){var c=e.c;var ct=certOf(c);return {n:(c.name||nameFallback||oin).replace(/\n/g,' '),p:c.pref||'',d:(typeof c._dist==='number'?c._dist:null),q:ct.q,nd:ct.nd};}
