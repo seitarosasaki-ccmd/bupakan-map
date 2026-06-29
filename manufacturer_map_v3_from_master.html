@@ -4092,7 +4092,7 @@ function _mmDetectCols(rows){
 }
 async function mmRunCSV(text){
  var rows=_mmParseCSV(text); if(!rows.length){alert('CSVが空です');return;}
- var col=_mmDetectCols(rows); var data=col.hasHeader?rows.slice(1):rows;
+ var col=_mmDetectCols(rows); var data=col.hasHeader?rows.slice(1):rows; if(data.length>100000){data=data.slice(0,100000);}
  var byHbh={},byCore={};
  (companies||[]).forEach(function(c){
   var o=String(c.oin);
@@ -4127,7 +4127,7 @@ function _mmPanel(){
   +'<label style="display:flex;align-items:center;gap:6px;margin-top:8px;font-size:12px;cursor:pointer"><input type="checkbox" id="mm-toggle" onchange="mmToggle(this.checked)"> 自社取引先のみ表示</label>'
   +'<button onclick="mmClear()" style="margin-top:8px;width:100%;padding:6px;background:transparent;border:1px solid #2a3f55;color:#8aa0b5;border-radius:6px;cursor:pointer;font-family:inherit;font-size:12px">クリア</button>';
  document.body.appendChild(p);
- p.querySelector('#mm-file').addEventListener('change',function(e){var f=e.target.files[0];if(!f)return;var rd=new FileReader();rd.onload=function(){mmRunCSV(rd.result);};rd.readAsText(f);});
+ p.querySelector('#mm-file').addEventListener('change',function(e){var f=e.target.files[0];if(!f)return;if(f.size>5*1024*1024){alert('CSVが大きすぎます（上限5MB）。取引先リストなら十分なサイズです。');e.target.value='';return;}var rd=new FileReader();rd.onload=function(){mmRunCSV(rd.result);};rd.readAsText(f);});
  return p;
 }
 function mmOpen(){var p=_mmPanel();p.style.display=(p.style.display==='none'?'block':'none');var t=document.getElementById('mm-toggle');if(t)t.checked=myMakerOn;}
