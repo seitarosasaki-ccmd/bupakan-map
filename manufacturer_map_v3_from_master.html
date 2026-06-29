@@ -7111,8 +7111,8 @@ fetch('./manufacturers_slim.json')
     // 設備サイドカー2種を上書きマージ（小ファイル再アップだけで反映＝HTML再生成不要）。
     // equip_text_by_oin.json=表示用要約 / equip_devices_by_oin.json=機種別構造化(正本)。失敗しても非致命。
     return Promise.all([
-      Promise.resolve({}),
-      Promise.resolve({})
+      fetch('./equip_text_by_mid.json').then(r => r.ok ? r.json() : {}).catch(() => ({})),
+      fetch('./equip_devices_by_mid.json').then(r => r.ok ? r.json() : {}).catch(() => ({}))
     ]).then(res => {
       var sc = res[0] || {};
       EQUIP_DEV_BY_OIN = res[1] || {};
