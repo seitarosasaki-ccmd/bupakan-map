@@ -4202,9 +4202,25 @@ function _kakoPanel(){
  p=document.createElement('div');p.id='kako-panel';
  p.style.cssText='position:fixed;right:18px;top:64px;z-index:9100;width:min(94vw,720px);max-height:calc(100vh - 84px);overflow:auto;background:#0d1b2a;color:#e6eef5;border:1px solid #2a3f55;border-radius:10px;padding:12px 14px;box-shadow:0 4px 24px rgba(0,0,0,.5);font-size:13px;font-family:inherit;display:none';
  p.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><b style="color:#2dd4aa">⚙ 加工域マップ（縦横）</b><button onclick="kakoClose()" style="background:none;border:none;color:#8aa0b5;font-size:16px;cursor:pointer">✕</button></div>'
-  +'<div style="display:flex;gap:10px;flex-wrap:wrap"><div id="kako-sysmenu" style="flex:0 0 190px;min-width:170px"></div><div style="flex:1;min-width:300px"><div id="kako-axislabel" style="font-size:11px;color:#8aa0b5;margin-bottom:4px"></div><div id="kako-plot"></div><div id="kako-legend" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:6px;font-size:11px;color:#8aa0b5"></div></div></div>';
+  +'<div style="display:flex;gap:10px;flex-wrap:wrap"><div id="kako-sysmenu" style="flex:0 0 190px;min-width:170px"></div><div style="flex:1;min-width:300px"><div id="kako-axislabel" style="font-size:11px;color:#8aa0b5;margin-bottom:4px"></div><div id="kako-plot"></div><div id="kako-legend" style="display:flex;gap:14px;flex-wrap:wrap;margin-top:6px;font-size:11px;color:#8aa0b5"></div><div id="kako-table"></div></div></div>';
  document.body.appendChild(p);
  return p;
+}
+function _kakoTtShow(e,name,dim,model){
+ var t=document.getElementById('kako-tooltip');
+ if(!t){t=document.createElement('div');t.id='kako-tooltip';
+  t.style.cssText='position:fixed;z-index:99999;background:#0d1b2a;color:#e6eef5;border:1px solid #2dd4aa;border-radius:6px;padding:6px 10px;font-size:12px;pointer-events:none;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.5)';
+  document.body.appendChild(t);}
+ t.innerHTML='<b>'+_mmEsc(name)+'</b> <span style="color:#5dcaa5">'+_mmEsc(dim)+'</span><br><span style="color:#8aa0b5;font-size:11px">'+_mmEsc(model)+'</span>';
+ t.style.display='block';
+ var x=e.clientX+14,y=e.clientY-10;
+ if(x+240>window.innerWidth)x=e.clientX-244;
+ t.style.left=x+'px';t.style.top=y+'px';
+}
+function _kakoTtHide(){var t=document.getElementById('kako-tooltip');if(t)t.style.display='none';}
+function _kakoOpenOin(oin){
+ var e=coIdx()[_kakoNorm(oin)];
+ if(e!=null&&typeof openDrawer==='function'){kakoClose();setTimeout(function(){openDrawer(e.idx);},100);}
 }
 function _kakoMenu(){
  var h='';
@@ -4252,9 +4268,18 @@ function kakoRender(){
  if(work){var wx=sx(work.a),wy=work.b?sy(work.b):B;s+='<rect x="'+L+'" y="'+wy+'" width="'+(wx-L)+'" height="'+(B-wy)+'" fill="#1D9E75" fill-opacity="0.10" stroke="#1D9E75" stroke-dasharray="4 3"/><text x="'+(wx+3)+'" y="'+(wy+10)+'" fill="#5dcaa5" font-size="9">ワーク '+work.a+(work.b?'×'+work.b:'')+'</text>';}
  pts.sort(function(a,b){return (a.self?1:0)-(b.self?1:0);});
  pts.forEach(function(p){var cx=sx(Math.min(p.x,mx)),cy=sy(Math.min(p.y,my));
-  if(p.self)s+='<circle cx="'+cx.toFixed(1)+'" cy="'+cy.toFixed(1)+'" r="5" fill="#1D9E75" stroke="#0d1b2a" stroke-width="1.5"><title>'+_mmEsc(p.name)+' ('+p.x+(p.y?'×'+p.y:'')+') '+_mmEsc(p.m||'')+'</title></circle>';
-  else s+='<circle cx="'+cx.toFixed(1)+'" cy="'+cy.toFixed(1)+'" r="3.3" fill="#5a7090"><title>'+_mmEsc(p.name)+' ('+p.x+(p.y?'×'+p.y:'')+') '+_mmEsc(p.m||'')+'</title></circle>';});
+  var _dim=p.x+(p.y?'\u00d7'+p.y:'');var _an=String(p.name).replace(/&/g,'&amp;').replace(/"/g,'&quot;');var _am=String(p.m||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+  var _ev=' data-oin="'+p.oin+'" data-nm="'+_an+'" data-dim="'+_dim+'" data-md="'+_am+'" onmouseover="_kakoTtShow(event,this.dataset.nm,this.dataset.dim,this.dataset.md)" onmouseleave="_kakoTtHide()" onclick="_kakoOpenOin(this.dataset.oin)" style="cursor:pointer"';
+  if(p.self)s+='<circle cx="'+cx.toFixed(1)+'" cy="'+cy.toFixed(1)+'" r="5" fill="#1D9E75" stroke="#0d1b2a" stroke-width="1.5"'+_ev+'><title>'+_mmEsc(p.name)+' ('+_dim+') '+_mmEsc(p.m||'')+'</title></circle>';
+  else s+='<circle cx="'+cx.toFixed(1)+'" cy="'+cy.toFixed(1)+'" r="3.3" fill="#5a7090"'+_ev+'><title>'+_mmEsc(p.name)+' ('+_dim+') '+_mmEsc(p.m||'')+'</title></circle>';});
  s+='</svg>';plot.innerHTML=s;
+ // テーブル生成
+ var _tbl=document.getElementById('kako-table');
+ if(_tbl){var _th='<div style="margin-top:10px"><div style="font-size:11px;color:#5a7090;margin-bottom:4px">プロット一覧（'+pts.length+'社）</div><div style="max-height:180px;overflow-y:auto"><table style="width:100%;border-collapse:collapse;font-size:11px"><thead><tr style="color:#5a7090;border-bottom:1px solid #2a3f55"><th style="text-align:left;padding:3px 6px;white-space:nowrap">社名</th><th style="padding:3px 6px;white-space:nowrap">加工域(mm)</th><th style="text-align:left;padding:3px 6px;white-space:nowrap">機種名</th></tr></thead><tbody>';
+ var _pts2=pts.slice().sort(function(a,b){return b.a-a.a;});
+ _pts2.forEach(function(p2){var _d2=p2.x+(p2.y?'\u00d7'+p2.y:'');_th+='<tr data-oin="'+p2.oin+'" style="border-bottom:1px solid #16263a;cursor:pointer" onclick="_kakoOpenOin(this.dataset.oin)"><td style="padding:4px 6px;color:#cfe;white-space:nowrap;overflow:hidden;max-width:160px;text-overflow:ellipsis">'+_mmEsc(p2.name)+'</td><td style="padding:4px 6px;text-align:center;color:#5dcaa5;white-space:nowrap">'+_d2+'</td><td style="padding:4px 6px;color:#8aa0b5;white-space:nowrap;overflow:hidden;max-width:140px;text-overflow:ellipsis">'+_mmEsc(p2.m||'-')+'</td></tr>';});
+ _tbl.innerHTML=_th+'</tbody></table></div></div>';
+ _tbl.querySelectorAll('tr[data-oin]').forEach(function(tr){tr.addEventListener('mouseover',function(){this.style.background='#1a2f45';});tr.addEventListener('mouseleave',function(){this.style.background='';});});}
  var lg=document.getElementById('kako-legend');
  if(lg)lg.innerHTML='<span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#1D9E75"></span> 自社取引先</span><span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#5a7090"></span> その他</span>'+(work?'<span><span style="display:inline-block;width:11px;height:8px;border:1px dashed #1D9E75"></span> ワーク寸法</span>':'')+'<span style="color:#5a7090">点ホバーで社名・型番</span>';
 }
@@ -7541,7 +7566,7 @@ function normOin(o){return String(o).replace(/\.0+$/,'');}
 function pmakers(w){var d=PI&&PI[w];return d&&d.makers?d.makers.map(function(m){return {oin:normOin(m.oin),name:m.name};}):[];}
 
 var fb=document.getElementById('wo-fab');
-fb.onclick=function(){var p=document.getElementById('wo-panel');p.style.display=(p.style.display==='none'?'block':'none');};
+fb.onclick=function(){var p=document.getElementById('wo-panel');var opening=p.style.display==='none';p.style.display=(opening?'block':'none');if(opening){window.selOinSet=null;if(typeof applyFilters==='function')applyFilters();}};
 document.getElementById('wo-close').onclick=function(){var p=document.getElementById('wo-panel');if(p.classList.contains('wo-big')){setBig(false);return;}p.style.display='none';if(typeof applyFilters==='function')applyFilters();};
 
 Array.prototype.forEach.call(document.querySelectorAll('.wo-tab'),function(t){t.onclick=function(){setMode(t.getAttribute('data-mode'));};});
@@ -8585,6 +8610,7 @@ document.getElementById('wo-csv').onclick=function(){
   <div id="quake-list"></div>
   <div style="font-size:10px;margin-top:4px;color:#aaa">60秒ごとに自動更新 | P2P地震情報</div>
 </div>
+
 <!-- ===== 匿名PV/UVビーコン (Supabase pageviews) ／ </body> 直前に挿入 ===== -->
 <script>
 (function () {
