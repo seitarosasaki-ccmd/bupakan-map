@@ -4219,8 +4219,8 @@ function _kakoTtShow(e,name,dim,model){
 }
 function _kakoTtHide(){var t=document.getElementById('kako-tooltip');if(t)t.style.display='none';}
 function _kakoOpenOin(oin){
- var e=coIdx()[_kakoNorm(oin)];
- if(e!=null&&typeof openDrawer==='function'){kakoClose();setTimeout(function(){openDrawer(e.idx);},100);}
+ var n=_kakoNorm(oin);
+ for(var _i=0;_i<companies.length;_i++){if(_kakoNorm(companies[_i].oin)===n){if(typeof openDrawer==='function'){kakoClose();(function(idx){setTimeout(function(){openDrawer(idx);},100);}(_i));}return;}}
 }
 function _kakoMenu(){
  var h='';
