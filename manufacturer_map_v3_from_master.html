@@ -5583,6 +5583,7 @@ function applyUnlockState(){
   var lb=document.getElementById('logout-btn');if(lb)lb.style.display=isUnlocked?'':'none';
   try{if(typeof applyFilters==='function')applyFilters();}catch(e){}
   try{if(typeof activeCard!=='undefined'&&activeCard>=0&&typeof openDrawer==='function')openDrawer(activeCard);}catch(e){}
+  try{if(isUnlocked&&typeof loadEquipBulkSb==='function')loadEquipBulkSb();}catch(e){}
 }
 
 // セッション確認＋変更リスナー
@@ -5610,6 +5611,28 @@ var _otpEmail='';
   }
 })();
 function _demoSbLogin(){try{if(typeof _sb!=='undefined'&&_sb&&_sb.auth&&_sb.auth.signInWithPassword){_sb.auth.signInWithPassword({email:'demo@oasis-map.com',password:'bupakan'}).then(function(r){try{if(r&&r.data&&r.data.user){_sbUser=r.data.user;if(typeof activeCard!=='undefined'&&activeCard!=null&&typeof renderDrawer==='function'&&typeof companies!=='undefined'&&companies[activeCard])openDrawerByIndex&&openDrawerByIndex(activeCard);}}catch(_x){}}).catch(function(){});}}catch(_e){}}
+function loadEquipBulkSb(){
+  if(!IS_PUBLIC_BUILD) return; if(window._equipBulkLoaded) return;
+  if(typeof _sb==='undefined'||!_sb||typeof isUnlocked==='undefined'||!isUnlocked) return;
+  (async function(){
+    try{
+      var all=[],from=0,page=1000;
+      while(true){
+        var r=await _sb.from('equip_devices').select('mid,proc,maker,model,count,shape,x,y,z,dia,len,materials,note,conf,src').range(from,from+page-1);
+        if(r.error||!r.data||!r.data.length) break;
+        all=all.concat(r.data);
+        if(r.data.length<page) break; from+=page;
+      }
+      if(!all.length){ try{var r2=await fetch('./equip_devices_by_mid.json'); if(r2&&r2.ok){var j=await r2.json(); if(j&&Object.keys(j).length){EQUIP_DEV_BY_OIN=j; try{if(typeof updateEquipCounts==='function')updateEquipCounts();}catch(e){} try{if(typeof applyFilters==='function')applyFilters();}catch(e){}}}}catch(_f){} return; }
+      var byMid={};
+      all.forEach(function(d){var k=d.mid; if(!k) return; (byMid[k]=byMid[k]||{devices:[]}).devices.push(d);});
+      EQUIP_DEV_BY_OIN=byMid; window._equipBulkLoaded=true;
+      try{if(typeof updateEquipCounts==='function')updateEquipCounts();}catch(e){}
+      try{if(typeof applyFilters==='function')applyFilters();}catch(e){}
+      try{var kp=document.getElementById('kako-panel'); if(kp&&kp.style.display&&kp.style.display!=='none'&&typeof kakoRender==='function')kakoRender();}catch(e){}
+    }catch(_e){}
+  })();
+}
 async function checkPw(){
   const v=(document.getElementById('pw-pw-input')||{}).value||'';
   const e=document.getElementById('pw-pw-error');
@@ -7334,6 +7357,7 @@ function toggleQuakeMode() {
 // 初期化実行
 // ================================================================
 var SURF2_BY_MID = {};  // 表面処理v2(companies_detail.surface_json・認証時)
+var IS_PUBLIC_BUILD=true; /* generate_betaで公開はtrueに反転 */
 var EQUIP_DEV_BY_OIN = {};  // 機種別構造化設備データ（equip_devices_by_oin.json）
 fetch('./manufacturers_slim.json')
   .then(r => { if(!r.ok) throw new Error('manufacturers_slim.json HTTP ' + r.status); return r.json(); })
@@ -7343,8 +7367,8 @@ fetch('./manufacturers_slim.json')
     // 設備サイドカー2種を上書きマージ（小ファイル再アップだけで反映＝HTML再生成不要）。
     // equip_text_by_oin.json=表示用要約 / equip_devices_by_oin.json=機種別構造化(正本)。失敗しても非致命。
     return Promise.all([
-      fetch('./equip_text_by_mid.json').then(r => r.ok ? r.json() : {}).catch(() => ({})),
-      fetch('./equip_devices_by_mid.json').then(r => r.ok ? r.json() : {}).catch(() => ({}))
+      ((IS_PUBLIC_BUILD&&!isUnlocked)?Promise.resolve({}):fetch('./equip_text_by_mid.json').then(r => r.ok ? r.json() : {}).catch(() => ({}))),
+      ((IS_PUBLIC_BUILD&&!isUnlocked)?Promise.resolve({}):fetch('./equip_devices_by_mid.json').then(r => r.ok ? r.json() : {}).catch(() => ({})))
     ]).then(res => {
       var sc = res[0] || {};
       EQUIP_DEV_BY_OIN = res[1] || {};
