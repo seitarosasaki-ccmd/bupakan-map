@@ -290,6 +290,16 @@ header::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px
 .dv-cf-high{background:rgba(57,255,20,.16);color:var(--ok)}.dv-cf-mid{background:rgba(0,212,255,.14);color:var(--accent)}.dv-cf-low{background:rgba(255,179,0,.14);color:var(--warn)}
 .dv-srclink{color:var(--accent);text-decoration:none}
 .dv-matrow{margin-top:9px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.ejv2-box{border:1px dashed var(--accent);border-radius:8px;padding:8px 10px;margin:8px 0;background:rgba(0,212,255,.04)}
+.ejv2-t{font-size:10px;color:var(--accent);font-weight:700;margin-bottom:6px;letter-spacing:1px}
+.ejv2-sum{font-size:11px;margin-top:6px}
+.ejv2-sum b{color:var(--accent3)}
+.ejv2-jd{font-weight:700;font-size:13px}
+.ejv2-ok{color:var(--accent3)}
+.ejv2-cond{color:var(--warn)}
+.ejv2-ng{color:#ff5a5a}
+.ejv2-na{color:#5a7090}
+.ejv2-jm{font-size:9px;color:var(--muted)}
 .dv-matlab{font-size:10px;color:var(--muted)}
 .dv-chip{font-size:10px;background:rgba(57,255,20,.08);color:#9fe1cb;border:1px solid rgba(57,255,20,.25);border-radius:10px;padding:1px 8px}
 .dv-surf td{padding:5px 5px 5px 0;border-bottom:1px solid #16202f;font-size:11px}
@@ -1765,7 +1775,7 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
 // ================================================================
 // 企業規模・副業データ（設備DB保有11社）
 // ================================================================
-const CORP_DATA = {};
+const CORP_DATA = {}; /* B2統合2026-07-06: 旧equipId系61社データは _legacy_equipid_inline_20260706.js に退避 */
 
 // ================================================================
 // 全社の資本金・売上・副業データ（company_info.csv から自動注入）
@@ -3462,34 +3472,7 @@ const OASIS_CATEGORY_COLORS = {
 // 業種チップ表示順（本人使用頻度順：加工系を前・商社/物流を後ろ）。フィルタ・カウントはこの配列を「含む」基準で判定。
 const GYOSHU_ORDER = ["機械加工","表面処理","熱処理","鍛造・鋳造","板金・プレス","溶接・接合","塗装","複合材・FRP","機体・構造部品製造","エンジン・動力","ベアリング・精密部品","スプリング・ワイヤ","ファスナー・締結部品","シール・ゴム・樹脂","内装・シート・シール","素材・材料","航空電子（アビオニクス）","電子・電気機器","計測・試験機器","非破壊検査","油圧・空圧・流体","エンジニアリング・設計","ソフトウェア・IT","MRO（整備・修理・オーバーホール）","商社・販売","物流","その他・総合"];
 
-// 設備DBキー（equipment_selector.htmlと対応）
-const EQUIP_IDS = ['heiwa','kondo','mizuno','ikex','apc','wada','tenryu','tamagawa','aero_inc','shimada','hikari','ohori','nabtesco','khi_gifu','daido_metal','daido_cast','ntn','sinfonia','kimura','kapp','karumo','ticon'];
-
-// 設備DB（equipment_selector.htmlからコピー/参照）
-const EQUIP_DB = {
-  heiwa:    { label:'平和産業', count:10 },
-  kondo:    { label:'近藤機械', count:9  },
-  mizuno:   { label:'水野金属', count:15 },
-  ikex:     { label:'IKEX工業', count:8  },
-  apc:      { label:'APC AERO', count:5  },
-  wada:     { label:'和田航空', count:3  },
-  tenryu:   { label:'天龍エアロ',count:3  },
-  tamagawa: { label:'玉川工業', count:14 },
-  aero_inc: { label:'エアロ社', count:5  },
-  shimada:  { label:'シマダ機工',count:6  },
-  hikari:    { label:'光製作所',    count:6  },
-  ohori:     { label:'大堀研磨',    count:5  },
-  nabtesco:  { label:'ナブテスコ',  count:3  },
-  khi_gifu:  { label:'川重岐阜',    count:3  },
-  daido_metal:{ label:'大同メタル', count:2  },
-  daido_cast:{ label:'大同精密鋳造',count:3  },
-  ntn:       { label:'NTN桑名',     count:3  },
-  sinfonia:  { label:'シンフォニア', count:2  },
-  kimura:    { label:'木村鋳造所',   count:4  },
-  kapp:      { label:'川西航空機器', count:3  },
-  karumo:    { label:'カルモ鋳工',   count:2  },
-  ticon:      { label:'ティコン',     count:3  },
-};
+/* B2統合2026-07-06: EQUIP_IDS/EQUIP_DB撤去(退避済) */
 
 // 小牧拠点座標
 const KOMAKI = { lat: 35.294, lng: 136.970 };
@@ -3520,6 +3503,9 @@ function buildPopupHtml(c) {
 }
 
 let companies = [];
+/* ===== B2統合(2026-07-06): 設備参照はEQUIP_DEV_BY_OIN(正本)一本化。旧equipId系(EQUIP_DEVICES/EQUIP_DB/CORP_DATA)は退避・撤去 ===== */
+function equipDevsOf(c){try{if(typeof EQUIP_DEV_BY_OIN==='undefined'||!EQUIP_DEV_BY_OIN||!c||c.oin==null)return [];var e=EQUIP_DEV_BY_OIN[String(c.oin).replace(/\.0+$/,'')];if(!e)return [];return e.devices||(Array.isArray(e)?e:[]);}catch(_e){return [];}}
+function hasEquipDevs(c){return equipDevsOf(c).length>0;}
 
 const LATEST_RESEARCH = {};
 
@@ -4005,8 +3991,6 @@ function getFilteredSorted(_qOv, _qeOv){
       // 距離
       if(filterDist>0 && c._dist>filterDist) return false;
       // 設備データ有無
-      if(false && !c.equipId) return false;
-      if(false && !(c.equipId || (c.note && c.note.startsWith('[VERIFIED]')))) return false;
       // ワーク寸法フィルター（#10 judgeAと同じ「収まる」基準。寸法未確認の社は除外）
       // [BUGFIX 2026-06-29] c.maxX/Y/ZはslimJSONに無い→WE変数(work_envelope_by_oin.json)をfallbackに使用
       if(filterWork.on){
@@ -4420,7 +4404,7 @@ function renderAll(filtered){
   filtered.forEach((c,idx)=>{
     const mainCat = c.cats[0]||'other';
     const color = CATEGORIES[mainCat]?.color||'#3a86ff';
-    const hasEquip = !!c.equipId;
+    const hasEquip = hasEquipDevs(c);
     const origIdx=_ciMap.get(c); /*PERF: companies.indexOf O(n^2)解消*/
 
     // カード
@@ -4604,8 +4588,8 @@ function setEquipState(state){
   applyFilters();
 }
 function updateEquipCounts(){
-  const detail = companies.filter(c=>c.equipId).length;
-  const researched = companies.filter(c=>c.equipId || (c.note && c.note.startsWith('[VERIFIED]'))).length;
+  const detail = companies.filter(c=>hasEquipDevs(c)).length;
+  const researched = companies.filter(c=>hasEquipDevs(c) || (c.note && c.note.startsWith('[VERIFIED]'))).length;
   const dEl = document.getElementById('equip-detail-cnt');
   const rEl = document.getElementById('equip-research-cnt');
   if(dEl) dEl.textContent = `(${detail})`;
@@ -4661,7 +4645,7 @@ function updateSelBar(){
 function clearSelection(){
   selectedIdxs.forEach(idx=>{
     const m=leafletMarkers[idx];
-    if(m){const c=companies[idx];const mainCat=c.cats[0]||'other';const col=CATEGORIES[mainCat]?.color||'#3a86ff';const hasEquip=!!c.equipId;m.setIcon(L.divIcon({className:'',html:makePinSvg(col,hasEquip),iconSize:[28,36],iconAnchor:[14,34],popupAnchor:[0,-36]}));m.setZIndexOffset(0);/*PATCH:setZIndex-clear*/}
+    if(m){const c=companies[idx];const mainCat=c.cats[0]||'other';const col=CATEGORIES[mainCat]?.color||'#3a86ff';const hasEquip=hasEquipDevs(c);m.setIcon(L.divIcon({className:'',html:makePinSvg(col,hasEquip),iconSize:[28,36],iconAnchor:[14,34],popupAnchor:[0,-36]}));m.setZIndexOffset(0);/*PATCH:setZIndex-clear*/}
     const card=document.getElementById('card-'+idx);if(card)card.classList.remove('selected');
   });
   selectedIdxs.clear();
@@ -4676,7 +4660,7 @@ function toggleSelect(idx){
   const card=document.getElementById('card-'+idx);
   if(selectedIdxs.has(idx)){
     selectedIdxs.delete(idx);
-    if(m){m.setIcon(L.divIcon({className:'',html:makePinSvg(col,!!c.equipId),iconSize:[28,36],iconAnchor:[14,34],popupAnchor:[0,-36]}));m.setZIndexOffset(0);/*PATCH:setZIndex-deselect*/m.getElement()&&(m.getElement().style.animation='');}
+    if(m){m.setIcon(L.divIcon({className:'',html:makePinSvg(col,hasEquipDevs(c)),iconSize:[28,36],iconAnchor:[14,34],popupAnchor:[0,-36]}));m.setZIndexOffset(0);/*PATCH:setZIndex-deselect*/m.getElement()&&(m.getElement().style.animation='');}
     if(card)card.classList.remove('selected');
   } else {
     selectedIdxs.add(idx);
@@ -4891,6 +4875,91 @@ function _equipTeaser(c){
     +'<div style="font-size:10px;color:var(--muted);margin-top:4px;line-height:1.6">機種別の型番・台数・対応ワーク寸法・材料・出典をデータベースに収録。ログイン（無料）で全件表示。</div>'
     +'</div>';
 }
+
+/* ===== B2統合(2026-07-06): ワーク寸法○△×実機判定 v2（旧renderEquipSection後継・EQUIP_DEV_BY_OIN基準） =====
+   規則: ×=判明能力を超過 / △=一部軸未収録or材料記載なし / ○=全指定軸が能力内。余裕%=最も厳しい軸。
+   旋盤系(dia/len)はdia>=max(X,Y)・len>=Z。切削系はX/Y回転許容。材料はmaterials出典ベースで×断定はしない。 */
+function _ejv2State(){
+  function n(id){var v=parseFloat((document.getElementById(id)||{}).value);return (isFinite(v)&&v>0)?v:0;}
+  return {x:n('ejv2-x'),y:n('ejv2-y'),z:n('ejv2-z'),mat:((document.getElementById('ejv2-mat')||{}).value||'')};
+}
+function _ejv2Judge(d,S){
+  if(!S||(!S.x&&!S.y&&!S.z&&!S.mat))return null;
+  var sizeSpec=(S.x||S.y||S.z),margins=[],unknown=false,over=false;
+  if(sizeSpec){
+    if(d.dia!=null||d.len!=null){
+      var xy=Math.max(S.x||0,S.y||0);
+      if(xy){ if(d.dia!=null){ if(xy>d.dia)over=true; else margins.push((d.dia-xy)/d.dia); } else unknown=true; }
+      if(S.z){ var L=(d.len!=null?d.len:d.z); if(L!=null){ if(S.z>L)over=true; else margins.push((L-S.z)/L); } else unknown=true; }
+    } else if(d.x!=null||d.y!=null||d.z!=null){
+      var mA=[],mB=[],mZ=[],uA={f:false},uB={f:false},uZ={f:false};
+      function ax(inp,cap,ms,u){ if(!inp)return true; if(cap==null){u.f=true;return true;} if(inp>cap)return false; ms.push((cap-inp)/cap); return true; }
+      var fitsA=ax(S.x,d.x,mA,uA)&&ax(S.y,d.y,mA,uA);
+      var fitsB=ax(S.x,d.y,mB,uB)&&ax(S.y,d.x,mB,uB);
+      var zok=ax(S.z,d.z,mZ,uZ);
+      if(!zok)over=true;
+      else if(!fitsA&&!fitsB)over=true;
+      else { if(fitsA){margins=margins.concat(mA);if(uA.f)unknown=true;} else {margins=margins.concat(mB);if(uB.f)unknown=true;} margins=margins.concat(mZ); if(uZ.f)unknown=true; }
+    } else unknown=true;
+  }
+  var matNote=null;
+  if(S.mat){
+    var ms=d.materials||[];
+    if(!ms.length)matNote='材料データなし';
+    else if(ms.some(function(x){x=String(x);return x.indexOf(S.mat)>=0||S.mat.indexOf(x)>=0;}))matNote='ok';
+    else matNote='材料記載なし';
+  }
+  var r={cls:'na',mark:'—',note:[],margin:null};
+  if(over){r.cls='ng';r.mark='×';r.note.push('寸法超過');}
+  else if(sizeSpec&&unknown){r.cls='cond';r.mark='△';r.note.push('寸法一部未収録');}
+  else if(sizeSpec){r.cls='ok';r.mark='○';}
+  if(matNote&&matNote!=='ok'){ if(r.cls!=='ng'){r.cls='cond';r.mark='△';} r.note.push(matNote); }
+  else if(matNote==='ok'&&!sizeSpec){r.cls='ok';r.mark='○';r.note.push('材料記載あり');}
+  if(r.cls==='ok'&&margins.length)r.margin=Math.round(Math.min.apply(null,margins)*100);
+  return r;
+}
+function _ejv2Rows(devs,S){
+  var res=devs.map(function(d){return {d:d,j:_ejv2Judge(d,S)};});
+  var active=res.some(function(r){return r.j;});
+  if(active){var o={ok:0,cond:1,na:2,ng:3};res=res.slice().sort(function(a,b){return (a.j?o[a.j.cls]:2)-(b.j?o[b.j.cls]:2);});}
+  return res.map(function(r){
+    var d=r.d,j=r.j;
+    var cf=(d.conf||'mid'),cfc=cf==='high'?'dv-cf-high':(cf==='low'?'dv-cf-low':'dv-cf-mid');
+    var s0=(d.src&&d.src[0])?d.src[0]:'';
+    var link=s0?(' <a class="dv-srclink" href="'+dvEsc(s0)+'" target="_blank" rel="noopener noreferrer" title="'+dvEsc(s0)+'">↗</a>'):'';
+    var jcell=j?('<span class="ejv2-jd ejv2-'+j.cls+'">'+j.mark+'</span>'+(j.margin!=null?' <span class="ejv2-jm">余裕'+j.margin+'%</span>':'')+(j.note.length?'<div class="ejv2-jm">'+j.note.join('・')+'</div>':'')):'<span class="ejv2-jm">—</span>';
+    return '<tr'+((j&&j.cls==='ng')?' style="opacity:.45"':'')+'><td class="dv-proc">'+hlText(dvEsc(d.proc||'—'),_kwEquip())+'</td>'
+        +'<td><span class="dv-maker">'+hlText(dvEsc(d.maker||'—'),_kwEquip())+'</span>'+(d.model?'<br><span class="dv-model">'+hlText(dvEsc(d.model),_kwEquip())+'</span>':'')+'</td>'
+        +'<td class="dv-cnt">'+dvEsc(d.count!=null?d.count:'—')+'</td>'
+        +'<td class="dv-dim">'+dvDim(d)+'</td>'
+        +'<td><span class="dv-cf '+cfc+'">'+cf+'</span>'+link+'</td>'
+        +'<td>'+jcell+'</td></tr>';
+  }).join('');
+}
+function _ejv2Sum(devs,S){
+  if(!S||(!S.x&&!S.y&&!S.z&&!S.mat))return '';
+  var ok=0,cond=0,ng=0,best=null;
+  devs.forEach(function(d){var j=_ejv2Judge(d,S);if(!j)return;
+    if(j.cls==='ok'){ok++;if(j.margin!=null&&(!best||j.margin>best.margin))best={margin:j.margin,d:d};}
+    else if(j.cls==='cond')cond++;else if(j.cls==='ng')ng++;});
+  return '判定: <b>○ '+ok+'機</b> ／ △ '+cond+'機 ／ × '+ng+'機'+(best?(' — 最有力: '+dvEsc((best.d.maker?best.d.maker+' ':'')+(best.d.model||best.d.proc||''))+'（余裕'+best.margin+'%）'):'');
+}
+function _ejv2Box(oin,devs){
+  var S=_ejv2State();
+  return '<div class="ejv2-box"><div class="ejv2-t">ワーク寸法・材料で実機判定</div>'
+    +'<input class="sf-inp" type="number" id="ejv2-x" placeholder="X幅 mm" min="0" value="'+(S.x||'')+'" oninput="ejv2Update(\''+oin+'\')">'
+    +'<input class="sf-inp" type="number" id="ejv2-y" placeholder="Y奥行 mm" min="0" value="'+(S.y||'')+'" oninput="ejv2Update(\''+oin+'\')">'
+    +'<input class="sf-inp" type="number" id="ejv2-z" placeholder="Z高さ mm" min="0" value="'+(S.z||'')+'" oninput="ejv2Update(\''+oin+'\')">'
+    +' <select class="sf-mat" id="ejv2-mat" onchange="ejv2Update(\''+oin+'\')"><option value="">— 材料 —</option>'+MAT_LIST.map(function(m){return '<option'+(m===S.mat?' selected':'')+'>'+m+'</option>';}).join('')+'</select>'
+    +'<div class="ejv2-sum" id="ejv2-sum">'+_ejv2Sum(devs,S)+'</div></div>';
+}
+function ejv2Update(oin){
+  var e=(typeof EQUIP_DEV_BY_OIN!=='undefined'&&EQUIP_DEV_BY_OIN)?EQUIP_DEV_BY_OIN[String(oin).replace(/\.0+$/,'')]:null;
+  var devs=e?(e.devices||(Array.isArray(e)?e:[])):[];
+  var S=_ejv2State();
+  var tb=document.getElementById('ejv2-tbody'); if(tb)tb.innerHTML=_ejv2Rows(devs,S);
+  var sm=document.getElementById('ejv2-sum'); if(sm)sm.innerHTML=_ejv2Sum(devs,S);
+}
 function buildEquipV2(c){
   var oin=dvNorm(c.oin);
   var dev=(EQUIP_DEV_BY_OIN&&EQUIP_DEV_BY_OIN[oin])?EQUIP_DEV_BY_OIN[oin]:null;
@@ -4902,18 +4971,10 @@ function buildEquipV2(c){
       +(srcUrls.length?'<span class="dv-badge dv-srcn">出典 '+srcUrls.length+'</span>':'')
       +(certs?'<span style="margin-left:auto">'+certs+'</span>':'')+'</div>';
   if(devs.length){
-    html+='<table class="dv-tbl"><tr><th>種類</th><th>メーカー / 型番</th><th style="text-align:center">台数</th><th>最大ワーク寸法</th><th>確度</th></tr>';
-    devs.forEach(function(d){
-      var cf=(d.conf||'mid'),cfc=cf==='high'?'dv-cf-high':(cf==='low'?'dv-cf-low':'dv-cf-mid');
-      var s0=(d.src&&d.src[0])?d.src[0]:'';
-      var link=s0?(' <a class="dv-srclink" href="'+dvEsc(s0)+'" target="_blank" rel="noopener noreferrer" title="'+dvEsc(s0)+'">↗</a>'):'';
-      html+='<tr><td class="dv-proc">'+hlText(dvEsc(d.proc||'—'),_kwEquip())+'</td>'
-          +'<td><span class="dv-maker">'+hlText(dvEsc(d.maker||'—'),_kwEquip())+'</span>'+(d.model?'<br><span class="dv-model">'+hlText(dvEsc(d.model),_kwEquip())+'</span>':'')+'</td>'
-          +'<td class="dv-cnt">'+dvEsc(d.count!=null?d.count:'—')+'</td>'
-          +'<td class="dv-dim">'+dvDim(d)+'</td>'
-          +'<td><span class="dv-cf '+cfc+'">'+cf+'</span>'+link+'</td></tr>';
-    });
-    html+='</table>';
+    html+=_ejv2Box(oin,devs);
+    html+='<table class="dv-tbl"><tr><th>種類</th><th>メーカー / 型番</th><th style="text-align:center">台数</th><th>最大ワーク寸法</th><th>確度</th><th>判定</th></tr><tbody id="ejv2-tbody">';
+    html+=_ejv2Rows(devs,_ejv2State());
+    html+='</tbody></table>';
     var mats={}; devs.forEach(function(d){(d.materials||[]).forEach(function(m){if(m)mats[m]=1;});});
     var matList=Object.keys(mats);
     if(!matList.length&&c.materialText) matList=(''+c.materialText).split(/[;,、\/／\s]+/).filter(Boolean).slice(0,8);
@@ -5027,7 +5088,7 @@ function renderDrawer(c){
 
   let xyzBanner = '';
   try {
-    if(!c.equipId && (c.maxX || c.maxY || c.maxZ)){
+    if(!hasEquipDevs(c) && (c.maxX || c.maxY || c.maxZ)){
       const parts = [];
       if(c.maxX) parts.push('X:'+c.maxX+'mm');
       if(c.maxY) parts.push('Y:'+c.maxY+'mm');
@@ -5071,10 +5132,10 @@ function renderDrawer(c){
   const bizBadge=bizVal?`<div class="info-row"><span class="info-key">業種</span><span class="info-val" style="font-size:10px">${bizVal}</span></div>`:'';
 
   // 設備件数（詳細DB未収録の場合にサマリ表示）
-  const equipCountBadge=(c.equipCount&&!c.equipId)?`<div class="info-row"><span class="info-key">設備調査</span><span class="info-val" style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent3)">${c.equipCount}件収集済み</span></div>`:'';
+  const equipCountBadge=(c.equipCount&&!hasEquipDevs(c))?`<div class="info-row"><span class="info-key">設備調査</span><span class="info-val" style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--accent3)">${c.equipCount}件収集済み</span></div>`:'';
 
   // 設備テキストサマリ（登録社の設備テキスト）
-  const equipTextBadge=(c.equipText&&!c.equipId)?`<div style="margin:6px 0;padding:6px 10px;background:rgba(57,255,20,0.04);border-left:2px solid var(--accent3)40;font-size:10px;color:var(--muted);line-height:1.7">${c.equipText}</div>`:'';
+  const equipTextBadge=(c.equipText&&!hasEquipDevs(c))?`<div style="margin:6px 0;padding:6px 10px;background:rgba(57,255,20,0.04);border-left:2px solid var(--accent3)40;font-size:10px;color:var(--muted);line-height:1.7">${c.equipText}</div>`:'';
 
   // 備考（調査メモ） - VERIFIED/CATEGORY ONLY/NO INFOバッジを分離してハイライト
   let noteBadge='';
@@ -5129,11 +5190,7 @@ function renderDrawer(c){
   if(_sv2) html += _sv2;
   else if(!isUnlocked && c.hasSurf) html += ddLock(_surfTeaser(c),'表面処理','処理/認証/槽/処理液/試験/出典',74);
 
-  // 設備サイズ判定UI（お試し時は精密判定をロック）
-  if(c.equipId && EQUIP_DB[c.equipId]){
-    var _eqs = renderEquipSection(c);
-    html += (isUnlocked || !_eqs.trim()) ? _eqs : ddLock(_eqs,'ワーク寸法の精密判定','○△×・余裕%・最大対応寸法',86);
-  }
+  // (B2統合2026-07-06: 旧equipId判定UIは buildEquipV2 の判定列へ統合)
 
 
   // （旧 SCHEDULED DATA 生ログ表示は buildEquipV2 の機種テーブル＋表面処理＋出典に統合済みのため廃止）
@@ -5198,7 +5255,7 @@ function getSimilar(targetIdx, n=3){
 // ================================================================
 function renderCorpSection(c) {
   // CORP_DATA (22社の詳細) を最優先、なければ COMPANY_INFO (CSV由来 約900社) にフォールバック
-  let d = c.equipId ? CORP_DATA[c.equipId] : null;
+  let d = null; /* B2統合: 旧CORP_DATA(equipIdキー)撤去 */
   if(!d && typeof COMPANY_INFO !== 'undefined') {
     d = (c.oin && COMPANY_INFO['OIN_'+c.oin]) || null;
   }
@@ -5265,54 +5322,11 @@ function renderCorpSection(c) {
 // ================================================================
 // 設備セクション描画
 // ================================================================
-const EQUIP_DEVICES = {};
+const EQUIP_DEVICES = {}; /* B2統合2026-07-06: 旧73社インラインは退避済。実データはEQUIP_DEV_BY_OIN(正本equip_devices_by_oin.json) */
 
 const MAT_LIST=['アルミ合金','チタン合金','ニッケル超合金','ステンレス','炭素鋼・合金鋼','工具鋼（焼入れ前）','工具鋼（焼入れ後）','超硬合金','CFRP（複合材）','GFRP（ガラス繊維複合材）'];
 
-function renderEquipSection(c){
-  const devs=EQUIP_DEVICES[c.equipId]||[];
-  return `
-    <div class="size-filter">
-      <span class="sf-label">サイズで設備を絞り込む</span>
-      <div class="sf-row">
-        <input class="sf-inp" type="number" id="dr-ix" placeholder="X幅 mm" min="0" oninput="updateEquipJudge('${c.equipId}')">
-        <input class="sf-inp" type="number" id="dr-iy" placeholder="Y奥行 mm" min="0" oninput="updateEquipJudge('${c.equipId}')">
-        <input class="sf-inp" type="number" id="dr-iz" placeholder="Z高さ mm" min="0" oninput="updateEquipJudge('${c.equipId}')">
-      </div>
-      <select class="sf-mat" id="dr-imat" onchange="updateEquipJudge('${c.equipId}')">
-        <option value="">— 素材を選択 —</option>
-        ${MAT_LIST.map(m=>`<option>${m}</option>`).join('')}
-      </select>
-    </div>
-    <div class="equip-head">
-      <span class="equip-title">設備一覧</span>
-      <span class="equip-count">${devs.length}件</span>
-    </div>
-    <table class="equip-table" id="equip-tbl-${c.equipId}">
-      <thead><tr>
-        <th>設備区分</th><th>加工範囲 X×Y×Z</th><th>推奨素材</th><th>判定</th><th>型番</th>
-      </tr></thead>
-      <tbody id="equip-tbody-${c.equipId}">
-        ${devs.map(d=>equipRow(d,'na','na','na','na')).join('')}
-      </tbody>
-    </table>`;
-}
-
-function equipRow(d,vx,vy,vz,vm){
-  const sizeStr=d.x!=null?`${d.x}×${d.y??'—'}×${(d.z??'∞')}`:'—';
-  const overall=vm==='na'?'na':(['na','ng'].includes(vx)||['na','ng'].includes(vy)||['na','ng'].includes(vz))?
-    ((['na','ng'].includes(vx)&&vx!=='na')||(['na','ng'].includes(vy)&&vy!=='na')||(['na','ng'].includes(vz)&&vz!=='na'))?'ng':'na':
-    vm==='ok'?'ok':vm==='cond'?'cond':'ng';
-  const verdictLabel={ok:'✔ 推奨',cond:'△ 条件付',ng:'✘ 不適合',na:'—'}[overall];
-  const verdictCls={ok:'v-ok',cond:'v-cond',ng:'v-ng',na:'v-na'}[overall];
-  return `<tr>
-    <td><span class="e-cat">${hlText(d.cat,_kwEquip())}</span><div style="font-size:10px;color:var(--text);margin-top:2px">${hlText(d.name,_kwEquip())}</div></td>
-    <td><span class="e-size">${sizeStr}</span></td>
-    <td><span style="font-size:9px;color:var(--muted);line-height:1.6">${d.ok.slice(0,3).join('、')}${d.ok.length>3?'…':''}</span></td>
-    <td><span class="e-verdict ${verdictCls}">${verdictLabel}</span></td>
-    <td><!-- PATCH:e-model-highlight --><div class="e-model">${highlightDims(hlText(d.model||"",_kwEquip()))}</div></td>
-  </tr>`;
-}
+/* B2統合2026-07-06: renderEquipSection/equipRow撤去(判定はejv2系へ) */
 
 // PATCH:highlightDims
 function highlightDims(text) {
@@ -5321,22 +5335,7 @@ function highlightDims(text) {
     '<span style="color:#00d4ff;font-weight:600;">$1</span>');
 }
 
-function updateEquipJudge(equipId){
-  const devs=EQUIP_DEVICES[equipId]||[];
-  const ix=document.getElementById('dr-ix')?.value||'';
-  const iy=document.getElementById('dr-iy')?.value||'';
-  const iz=document.getElementById('dr-iz')?.value||'';
-  const im=document.getElementById('dr-imat')?.value||'';
-  const tbody=document.getElementById(`equip-tbody-${equipId}`);
-  if(!tbody) return;
-  tbody.innerHTML=devs.map(d=>{
-    const vx=axCheck(ix,d.x),vy=axCheck(iy,d.y),vz=axCheck(iz,d.z);
-    const vm=matCheck(im,d);
-    return equipRow(d,vx,vy,vz,vm);
-  }).join('');
-}
-function axCheck(v,max){if(v===''||isNaN(+v))return'na';if(max==null)return'ok';return+v<=max?'ok':'ng';}
-function matCheck(m,d){if(!m)return'na';if(d.ok.includes(m))return'ok';if(d.cond?.includes(m))return'cond';if(d.ng?.includes(m))return'ng';return'na';}
+/* B2統合2026-07-06: updateEquipJudge/axCheck/matCheck撤去 */
 
 // ================================================================
 // 追加モーダル
@@ -6090,9 +6089,10 @@ function companyMatchesSelector(c){
       ks.forEach(k=>allKs.push(k.toLowerCase()));
     }
     let anyHit = false;
-    if(c.equipId && typeof EQUIP_DEVICES!=='undefined' && EQUIP_DEVICES[c.equipId]){
-      for(const d of EQUIP_DEVICES[c.equipId]){
-        const blob = ((d.cat||'') + ' ' + (d.name||'') + ' ' + (d.model||'')).toLowerCase();
+    { /* B2統合: 実機(EQUIP_DEV_BY_OIN)照合 */
+      const _eds = equipDevsOf(c);
+      for(const d of _eds){
+        const blob = ((d.proc||'') + ' ' + (d.maker||'') + ' ' + (d.model||'') + ' ' + (d.note||'')).toLowerCase();
         for(const k of allKs){
           if(blob.includes(k)){anyHit=true;break}
         }
@@ -6140,7 +6140,7 @@ function companyMatchesSelector(c){
   if(S.qualities.size > 0){
     function checkQuality(q){
 
-      if(q==='EQUIP_DB') return !!(c.equipId && (typeof EQUIP_DEVICES==='undefined' || EQUIP_DEVICES[c.equipId]));
+      if(q==='EQUIP_DB') return hasEquipDevs(c); /* B2統合 */
       return !!(c.note && c.note.startsWith('['+q+']'));
     }
     if(S.qualitiesMode === 'AND'){
@@ -6155,9 +6155,27 @@ function companyMatchesSelector(c){
   // [BUGFIX 2026-06-29] c.hp/c.urlはslimJSONに無い→c.isWebをfallbackに使用
   if(S.hasHp && !(c.hp || c.url || c.isWeb)) return false;
   if(S.hasEp && !c.ep) return false;
-  // サイズ判定（X/Y/Z+材質）
+  // サイズ判定（X/Y/Z+材質） B2統合2026-07-06: まず実機(EQUIP_DEV_BY_OIN)単位で照合、通らなければスカラー(maxX/Y/Z・炉槽)で救済(欠測の偽陰性防止)
   if(S.sizeX || S.sizeY || S.sizeZ || S.material){
-    if(!c.equipId){
+    const _eds = equipDevsOf(c);
+    let devHit = false;
+    for(const d of _eds){
+      let dx=d.x, dy=d.y, dz=d.z;
+      if(dx==null && dy==null && d.dia!=null){ dx=d.dia; dy=d.dia; }
+      if(dz==null && d.len!=null) dz=d.len;
+      /* 指定軸のうち最低1軸は実測でクリア必須(全軸不明の実機を素通りさせない)。部分欠測は寛容 */
+      let known=0;
+      if(S.sizeX!=null && dx!=null){ if(dx<S.sizeX) continue; known++; }
+      if(S.sizeY!=null && dy!=null){ if(dy<S.sizeY) continue; known++; }
+      if(S.sizeZ!=null && dz!=null){ if(dz<S.sizeZ) continue; known++; }
+      if((S.sizeX!=null||S.sizeY!=null||S.sizeZ!=null) && known===0) continue;
+      if(S.material){
+        const _ms=d.materials||[];
+        if(_ms.length && !_ms.some(m=>{m=String(m);return m.indexOf(S.material)>=0||S.material.indexOf(m)>=0;})) continue;
+      }
+      devHit = true; break;
+    }
+    if(!devHit){
       // 🆕 加工XYZ または 炉/槽XYZ どちらか満たせば通過
       const mX = Math.max(c.maxX||0, c.fX||0);
       const mY = Math.max(c.maxY||0, c.fY||0);
@@ -6169,28 +6187,6 @@ function companyMatchesSelector(c){
       if(ok && S.material){ if(!c.materialText || c.materialText.indexOf(S.material)<0) ok=false; }
       return ok;
     }
-    if(typeof EQUIP_DEVICES === 'undefined' || !EQUIP_DEVICES[c.equipId]) return false;
-    const devs = EQUIP_DEVICES[c.equipId];
-    let any = false;
-    for(const d of devs){
-      // サイズチェック（指定があり、設備のXYZがnullなら通過、数値なら以上必要）
-      if(S.sizeX != null && d.x != null && d.x < S.sizeX) continue;
-      if(S.sizeY != null && d.y != null && d.y < S.sizeY) continue;
-      if(S.sizeZ != null && d.z != null && d.z < S.sizeZ) continue;
-      // 素材チェック
-      if(S.material){
-        const okList = d.ok || [];
-        const condList = d.cond || [];
-        const ngList = d.ng || [];
-        if(ngList.includes(S.material)) continue;
-        if(S.judgeMode.has('ok') && okList.includes(S.material)){ any = true; break; }
-        if(S.judgeMode.has('cond') && condList.includes(S.material)){ any = true; break; }
-        if(!S.judgeMode.has('ok') && !S.judgeMode.has('cond')) continue;
-      } else {
-        any = true; break;
-      }
-    }
-    if(!any) return false;
   }
   return true;
 }
@@ -6922,12 +6918,11 @@ function _wzMaxXYZ(c){
     if(c.maxZ && c.maxZ>mx) mx = c.maxZ;
     if(mx>0) return mx;
   }
-  if(!c.equipId || typeof EQUIP_DEVICES==='undefined' || !EQUIP_DEVICES[c.equipId]) return 0;
+  const _eds = equipDevsOf(c); /* B2統合 */
+  if(!_eds.length) return 0;
   let mx = 0;
-  for(const d of EQUIP_DEVICES[c.equipId]){
-    if(d.x!=null && d.x>mx) mx=d.x;
-    if(d.y!=null && d.y>mx) mx=d.y;
-    if(d.z!=null && d.z>mx) mx=d.z;
+  for(const d of _eds){
+    [d.x,d.y,d.z,d.dia,d.len].forEach(v=>{ if(v!=null && v>mx) mx=v; });
   }
   return mx;
 }
