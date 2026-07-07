@@ -5617,15 +5617,15 @@ function loadEquipBulkSb(){
     try{
       var all=[],from=0,page=1000;
       while(true){
-        var r=await _sb.from('equip_devices').select('mid,proc,maker,model,count,shape,x,y,z,dia,len,materials,note,conf,src').range(from,from+page-1);
+        var r=await _sb.from('equip_devices').select('mid,oin,proc,maker,model,count,shape,x,y,z,dia,len,materials,note,conf,src').range(from,from+page-1);
         if(r.error||!r.data||!r.data.length) break;
         all=all.concat(r.data);
         if(r.data.length<page) break; from+=page;
       }
       if(!all.length) return;
-      var byMid={};
-      all.forEach(function(d){var k=d.mid; if(!k) return; (byMid[k]=byMid[k]||{devices:[]}).devices.push(d);});
-      EQUIP_DEV_BY_OIN=byMid; window._equipBulkLoaded=true;
+      var byOin={};
+      all.forEach(function(d){var k=d.oin?String(d.oin).replace(/\.0+$/,''):null; if(!k) return; (byOin[k]=byOin[k]||{devices:[]}).devices.push(d);});
+      EQUIP_DEV_BY_OIN=byOin; window._equipBulkLoaded=true;
       try{if(typeof updateEquipCounts==='function')updateEquipCounts();}catch(e){}
       try{if(typeof applyFilters==='function')applyFilters();}catch(e){}
       try{var kp=document.getElementById('kako-panel'); if(kp&&kp.style.display&&kp.style.display!=='none'&&typeof kakoRender==='function')kakoRender();}catch(e){}
