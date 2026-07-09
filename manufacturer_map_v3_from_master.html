@@ -5628,6 +5628,9 @@ function loadEquipBulkSb(){
       EQUIP_DEV_BY_OIN=byOin; window._equipBulkLoaded=true;
       try{if(typeof updateEquipCounts==='function')updateEquipCounts();}catch(e){}
       try{if(typeof applyFilters==='function')applyFilters();}catch(e){}
+      /* RACE-FIX: 設備データロード完了後、WOパネル(evalA等)と選定バーを再描画 */
+      try{if(typeof window._woRefreshIfOpen==='function')window._woRefreshIfOpen();}catch(e){}
+      try{if(typeof updateSelectorBar==='function')updateSelectorBar();}catch(e){}
       try{var kp=document.getElementById('kako-panel'); if(kp&&kp.style.display&&kp.style.display!=='none'&&typeof kakoRender==='function')kakoRender();}catch(e){}
     }catch(_e){}
   })();
@@ -8613,6 +8616,18 @@ document.getElementById('wo-csv').onclick=function(){
  var blob=new Blob(['﻿'+csv],{type:'text/csv'});
  var a=document.createElement('a');a.href=URL.createObjectURL(blob);
  a.download=fname;a.click();
+};
+/* RACE-FIX: loadEquipBulkSb完了後にWOパネルを再描画するためのフック。
+   mode/evalA等はIIFEスコープ内のため、window経由で外部公開する。 */
+window._woRefreshIfOpen = function(){
+  var p=document.getElementById('wo-panel');
+  if(!p || p.style.display==='none' || !p.style.display) return;
+  try{
+    if(mode==='a' && typeof evalA==='function') evalA();
+    else if(mode==='b' && typeof build==='function') build();
+    else if(mode==='c' && typeof buildC==='function') buildC();
+    /* mode='d' は表面処理でSupabase依存なし・再描画不要 */
+  }catch(_e){}
 };
 })();
 </script>
