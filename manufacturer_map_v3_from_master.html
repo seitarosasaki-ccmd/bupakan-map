@@ -1451,13 +1451,13 @@ const _sb=window.supabase?supabase.createClient(_SB_URL,_SB_KEY):null;
         <button id="work-shape-maru" class="work-shape-btn" onclick="setWorkShape('maru')">丸物</button>
       </div>
       <div id="work-kaku-inputs" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
-        <label class="work-dim"><span>X (mm)</span><input type="number" id="work-X" min="0" placeholder="0" oninput="onWorkInput()"/></label>
-        <label class="work-dim"><span>Y (mm)</span><input type="number" id="work-Y" min="0" placeholder="0" oninput="onWorkInput()"/></label>
-        <label class="work-dim"><span>Z (mm)</span><input type="number" id="work-Z" min="0" placeholder="0" oninput="onWorkInput()"/></label>
+        <label class="work-dim"><span>X (mm)</span><input type="text" inputmode="numeric" pattern="[0-9]*" id="work-X" placeholder="0" oninput="onWorkInput()"/></label>
+        <label class="work-dim"><span>Y (mm)</span><input type="text" inputmode="numeric" pattern="[0-9]*" id="work-Y" placeholder="0" oninput="onWorkInput()"/></label>
+        <label class="work-dim"><span>Z (mm)</span><input type="text" inputmode="numeric" pattern="[0-9]*" id="work-Z" placeholder="0" oninput="onWorkInput()"/></label>
       </div>
       <div id="work-maru-inputs" style="display:none;grid-template-columns:1fr 1fr;gap:6px">
-        <label class="work-dim"><span>φ (mm)</span><input type="number" id="work-D" min="0" placeholder="0" oninput="onWorkInput()"/></label>
-        <label class="work-dim"><span>L (mm)</span><input type="number" id="work-L" min="0" placeholder="0" oninput="onWorkInput()"/></label>
+        <label class="work-dim"><span>φ (mm)</span><input type="text" inputmode="numeric" pattern="[0-9]*" id="work-D" placeholder="0" oninput="onWorkInput()"/></label>
+        <label class="work-dim"><span>L (mm)</span><input type="text" inputmode="numeric" pattern="[0-9]*" id="work-L" placeholder="0" oninput="onWorkInput()"/></label>
       </div>
       <div style="font-size:9px;color:var(--muted);margin-top:6px;line-height:1.5">寸法を入力すると、収まる設備を持つメーカーのみ表示します（寸法未確認の社は除外）。基準は選定#10と同一。</div>
       </div>
@@ -4556,13 +4556,14 @@ function setWorkShape(s){
   onWorkInput();
 }
 function onWorkInput(){
-  function gv(id){var e=document.getElementById(id);return e?(+e.value||0):0;}
+  function gv(id){var e=document.getElementById(id);return e?(parseFloat(e.value)||0):0;}
   filterWork.X=gv('work-X');filterWork.Y=gv('work-Y');filterWork.Z=gv('work-Z');
   filterWork.D=gv('work-D');filterWork.L=gv('work-L');
   var anyK=(filterWork.shape==='kaku'&&(filterWork.X||filterWork.Y||filterWork.Z));
   var anyM=(filterWork.shape==='maru'&&(filterWork.D||filterWork.L));
   filterWork.on=!!(anyK||anyM);
-  applyFilters();
+  clearTimeout(window._workInputTimer);
+  window._workInputTimer=setTimeout(applyFilters,250);
 }
 function showFpTab(t){
   var f=(t==='filter');
@@ -4947,9 +4948,9 @@ function _ejv2Sum(devs,S){
 function _ejv2Box(oin,devs){
   var S=_ejv2State();
   return '<div class="ejv2-box"><div class="ejv2-t">ワーク寸法・材料で実機判定</div>'
-    +'<input class="sf-inp" type="number" id="ejv2-x" placeholder="X幅 mm" min="0" value="'+(S.x||'')+'" oninput="ejv2Update(\''+oin+'\')">'
-    +'<input class="sf-inp" type="number" id="ejv2-y" placeholder="Y奥行 mm" min="0" value="'+(S.y||'')+'" oninput="ejv2Update(\''+oin+'\')">'
-    +'<input class="sf-inp" type="number" id="ejv2-z" placeholder="Z高さ mm" min="0" value="'+(S.z||'')+'" oninput="ejv2Update(\''+oin+'\')">'
+    +'<input class="sf-inp" type="text" inputmode="numeric" pattern="[0-9]*" id="ejv2-x" placeholder="X幅 mm" value="'+(S.x||'')+'" oninput="ejv2Update(\''+oin+'\')">'
+    +'<input class="sf-inp" type="text" inputmode="numeric" pattern="[0-9]*" id="ejv2-y" placeholder="Y奥行 mm" value="'+(S.y||'')+'" oninput="ejv2Update(\''+oin+'\')">'
+    +'<input class="sf-inp" type="text" inputmode="numeric" pattern="[0-9]*" id="ejv2-z" placeholder="Z高さ mm" value="'+(S.z||'')+'" oninput="ejv2Update(\''+oin+'\')">'
     +' <select class="sf-mat" id="ejv2-mat" onchange="ejv2Update(\''+oin+'\')"><option value="">— 材料 —</option>'+MAT_LIST.map(function(m){return '<option'+(m===S.mat?' selected':'')+'>'+m+'</option>';}).join('')+'</select>'
     +'<div class="ejv2-sum" id="ejv2-sum">'+_ejv2Sum(devs,S)+'</div></div>';
 }
@@ -6738,9 +6739,9 @@ function wzRenderStep2(){
     <div class="wz-sec">
       <div class="wz-sec-head">${cat==='heat'?'炉/槽/ブースサイズ':cat==='meas'?'測定範囲':cat==='forge'?'鋳物/部品寸法':'ワーク寸法（最大）'}（mm）<span style="font-size:9px;color:var(--muted);margin-left:8px">※ Enterまたは別欄移動で反映</span></div>
       <div class="wz-size-row">
-        <input class="wz-size-input" type="number" placeholder="X 幅" value="${SELECTOR_STATE.sizeX||''}" onchange="SELECTOR_STATE.sizeX=this.value?+this.value:null;wzRender()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}">
-        <input class="wz-size-input" type="number" placeholder="Y 奥" value="${SELECTOR_STATE.sizeY||''}" onchange="SELECTOR_STATE.sizeY=this.value?+this.value:null;wzRender()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}">
-        <input class="wz-size-input" type="number" placeholder="Z 高" value="${SELECTOR_STATE.sizeZ||''}" onchange="SELECTOR_STATE.sizeZ=this.value?+this.value:null;wzRender()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}">
+        <input class="wz-size-input" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="X 幅" value="${SELECTOR_STATE.sizeX||''}" onchange="SELECTOR_STATE.sizeX=this.value?+this.value:null;wzRender()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}">
+        <input class="wz-size-input" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Y 奥" value="${SELECTOR_STATE.sizeY||''}" onchange="SELECTOR_STATE.sizeY=this.value?+this.value:null;wzRender()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}">
+        <input class="wz-size-input" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Z 高" value="${SELECTOR_STATE.sizeZ||''}" onchange="SELECTOR_STATE.sizeZ=this.value?+this.value:null;wzRender()" onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur()}">
       </div>
     </div>`;
   }
@@ -7939,15 +7940,15 @@ function buildA(){
  chips('wo-a-mat',['不問','アルミ','ステンレス','チタン','耐熱合金','銅系','鋼','樹脂'],aMat,function(v){aMat=v;evalA();});
  var dh,hint;
  if(aShape==='角'){
-  dh='<span style="font-size:12px;color:#9fb2c8">X</span><input class="wo-num" id="wo-X" type="number" value="'+aDim.X+'"> <span style="font-size:12px;color:#9fb2c8">Y</span><input class="wo-num" id="wo-Y" type="number" value="'+aDim.Y+'"> <span style="font-size:12px;color:#9fb2c8">Z</span><input class="wo-num" id="wo-Z" type="number" value="'+aDim.Z+'"> <span style="font-size:11px;color:#7a8aa0">mm</span>';
+  dh='<span style="font-size:12px;color:#9fb2c8">X</span><input class="wo-num" id="wo-X" type="text" inputmode="numeric" pattern="[0-9]*" value="'+aDim.X+'"> <span style="font-size:12px;color:#9fb2c8">Y</span><input class="wo-num" id="wo-Y" type="text" inputmode="numeric" pattern="[0-9]*" value="'+aDim.Y+'"> <span style="font-size:12px;color:#9fb2c8">Z</span><input class="wo-num" id="wo-Z" type="text" inputmode="numeric" pattern="[0-9]*" value="'+aDim.Z+'"> <span style="font-size:11px;color:#7a8aa0">mm</span>';
   hint='角物・板物。X×Y×Z（外形の最大寸法）を入力。';
  }else{
-  dh='<span style="font-size:12px;color:#9fb2c8">φ</span><input class="wo-num" id="wo-D" type="number" value="'+aDim.D+'"> <span style="font-size:12px;color:#9fb2c8">L</span><input class="wo-num" id="wo-L" type="number" value="'+aDim.L+'"> <span style="font-size:11px;color:#7a8aa0">mm</span>';
+  dh='<span style="font-size:12px;color:#9fb2c8">φ</span><input class="wo-num" id="wo-D" type="text" inputmode="numeric" pattern="[0-9]*" value="'+aDim.D+'"> <span style="font-size:12px;color:#9fb2c8">L</span><input class="wo-num" id="wo-L" type="text" inputmode="numeric" pattern="[0-9]*" value="'+aDim.L+'"> <span style="font-size:11px;color:#7a8aa0">mm</span>';
   hint='丸物・回転体。φ（最大径）× L（長さ）を入力。';
  }
  document.getElementById('wo-a-dims').innerHTML=dh;
  document.getElementById('wo-a-hint').textContent=hint;
- ['X','Y','Z','D','L'].forEach(function(k){var el=document.getElementById('wo-'+k);if(el)el.oninput=function(){aDim[k]=+el.value||0;evalA();};});
+ ['X','Y','Z','D','L'].forEach(function(k){var el=document.getElementById('wo-'+k);if(el)el.oninput=function(){aDim[k]=parseFloat(el.value)||0;clearTimeout(window._woDimTimer);window._woDimTimer=setTimeout(evalA,250);};});
  evalA();
 }
 /* ③材料適合注記・④公差→設備精度tier変換 (2026-06-10) */
@@ -8224,7 +8225,7 @@ function renderAPrecFilter(){
   h+='<button style="padding:2px 10px;border-radius:12px;border:1px solid '+(on?'#5dcaa5':'#2a3f55')+';background:'+(on?'rgba(93,202,165,0.12)':'transparent')+';color:'+(on?'#5dcaa5':'#8a9ab0')+';font-size:11px;cursor:pointer;font-family:inherit" data-apf="'+fv[0]+'">'+fv[1]+'</button>';
  });
  h+='<span style="font-size:11px;color:#7a8aa0;white-space:nowrap;margin-left:8px">要求公差 ±</span>'
-  +'<input id="wo-a-tol" type="number" step="0.001" min="0" placeholder="0.01" value="'+(aTol>0?aTol:'')+'" style="width:64px;background:#16283a;border:1px solid #2a3f55;color:#cfe0ee;border-radius:4px;padding:2px 6px;font-family:monospace;font-size:11px">'
+  +'<input id="wo-a-tol" type="number" inputmode="decimal" step="0.001" min="0" placeholder="0.01" value="'+(aTol>0?aTol:'')+'" style="width:64px;background:#16283a;border:1px solid #2a3f55;color:#cfe0ee;border-radius:4px;padding:2px 6px;font-family:monospace;font-size:11px">'
   +'<span style="font-size:11px;color:#7a8aa0">mm</span>'
   +'<span id="wo-a-tol-info" style="font-size:11px;color:#5dcaa5;margin-left:4px">'+_aTolLabel(aTol)+'</span>';
  h+='</div>';
@@ -8544,7 +8545,7 @@ function selectProc(w){
 }
 /* 表面処理: inline onclick用グローバル公開 + パターンB(工程フロー内の入口) */
 window.sfRun1=sfRun1;window.sfRun2=sfRun2;window.sfRun3=sfRun3;
-function sfShapeDims(){var s=document.getElementById('sf1shape');if(!s)return;var sh=s.value,el=document.getElementById('sf1dims');if(!el)return;var st='style="width:58px;min-width:0;padding:6px 6px"';if(sh==='kaku')el.innerHTML='<input id="sf1x" type="number" placeholder="X" '+st+'>×<input id="sf1y" type="number" placeholder="Y" '+st+'>×<input id="sf1z" type="number" placeholder="Z" '+st+'><span style="font-size:10px;color:#8aa0b5">mm</span>';else if(sh==='maru')el.innerHTML='<input id="sf1dia" type="number" placeholder="φ" '+st+'>×<input id="sf1len" type="number" placeholder="L" '+st+'><span style="font-size:10px;color:#8aa0b5">mm</span>';else el.innerHTML='';}
+function sfShapeDims(){var s=document.getElementById('sf1shape');if(!s)return;var sh=s.value,el=document.getElementById('sf1dims');if(!el)return;var st='style="width:58px;min-width:0;padding:6px 6px"';if(sh==='kaku')el.innerHTML='<input id="sf1x" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="X" '+st+'>×<input id="sf1y" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Y" '+st+'>×<input id="sf1z" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Z" '+st+'><span style="font-size:10px;color:#8aa0b5">mm</span>';else if(sh==='maru')el.innerHTML='<input id="sf1dia" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="φ" '+st+'>×<input id="sf1len" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="L" '+st+'><span style="font-size:10px;color:#8aa0b5">mm</span>';else el.innerHTML='';}
 window.sfShapeDims=sfShapeDims;
 function sfReadPart(){var se=document.getElementById('sf1shape');var sh=se?se.value:'';function g(id){var e=document.getElementById(id);return e?(+e.value||0):0;}if(sh==='kaku'){var x=g('sf1x'),y=g('sf1y'),z=g('sf1z');return (x&&y&&z)?{shape:'kaku',x:x,y:y,z:z}:null;}if(sh==='maru'){var d=g('sf1dia'),l=g('sf1len');return (d&&l)?{shape:'maru',dia:d,len:l}:null;}return null;}
 function sfBridgeKey(w){return ({'めっき':'plate','アノダイズ処理':'anod','陽極酸化処理':'anod','化成処理':'conv','パシベート処理':'passiv','塗装':'paint','ショットピーニング':'peen','パーカー処理':'conv'})[w]||null;}
