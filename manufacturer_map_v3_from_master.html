@@ -8653,7 +8653,9 @@ window._woRefreshIfOpen = function(){
     if(mode==='a' && typeof evalA==='function') evalA();
     else if(mode==='b' && typeof build==='function') build();
     else if(mode==='c' && typeof buildC==='function') buildC();
-    /* mode='d' は表面処理でSupabase依存なし・再描画不要 */
+    /* BUGFIX 2026-07-31: mode='d'(表面処理)はcompanies_detail.surface_json=Supabase依存。
+       「Supabase依存なし」は誤認で、解錠前に開いていると🔒表示のまま固着していた。 */
+    else if(mode==='d' && typeof sfRenderBody==='function') sfRenderBody();
   }catch(_e){}
 };
 })();
