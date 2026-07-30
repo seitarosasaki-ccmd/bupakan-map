@@ -5584,6 +5584,7 @@ function applyUnlockState(){
   try{if(typeof applyFilters==='function')applyFilters();}catch(e){}
   try{if(typeof activeCard!=='undefined'&&activeCard>=0&&typeof openDrawer==='function')openDrawer(activeCard);}catch(e){}
   try{if(isUnlocked&&typeof loadEquipBulkSb==='function')loadEquipBulkSb();}catch(e){}
+  try{if(isUnlocked&&typeof loadEquipTextSc==='function')loadEquipTextSc();}catch(e){} /* BUGFIX 2026-07-30: 解錠後のequipText再取得 */
 }
 
 // セッション確認＋変更リスナー
@@ -5611,6 +5612,31 @@ var _otpEmail='';
   }
 })();
 function _demoSbLogin(){try{if(typeof _sb!=='undefined'&&_sb&&_sb.auth&&_sb.auth.signInWithPassword){_sb.auth.signInWithPassword({email:'demo@oasis-map.com',password:'bupakan'}).then(function(r){try{if(r&&r.data&&r.data.user){_sbUser=r.data.user;if(typeof activeCard!=='undefined'&&activeCard!=null&&typeof renderDrawer==='function'&&typeof companies!=='undefined'&&companies[activeCard])openDrawerByIndex&&openDrawerByIndex(activeCard);}}catch(_x){}}).catch(function(){});}}catch(_e){}}
+/* ===== BUGFIX 2026-07-30: equipText 解錠後ロード =====
+   公開ビルドは init 時点で isUnlocked=false のため equip_text の fetch を握り潰しており、
+   解錠後に取り直す経路が存在しなかった。結果 companies[].equipText が全社空のまま固定され、
+   左上検索(q-search / q-equip)の設備語照合と、メーカー選定の設備キーワード条件が常時0件になっていた。
+   解錠時に一度だけ取得し、companies へマージした上で件数表示・絞り込み・WOパネルを再描画する。 */
+function loadEquipTextSc(){
+  if(typeof IS_PUBLIC_BUILD!=='undefined' && !IS_PUBLIC_BUILD) return; /* adminはinitで取得済 */
+  if(window._equipTextLoaded) return;
+  if(typeof isUnlocked==='undefined' || !isUnlocked) return;
+  if(typeof companies==='undefined' || !companies || !companies.length) return; /* companies未着なら次の呼出に委ねる */
+  window._equipTextLoaded = true;
+  fetch('./equip_text_by_mid.json').then(function(r){ return r.ok ? r.json() : {}; }).catch(function(){ return {}; })
+    .then(function(sc){
+      if(!sc || !Object.keys(sc).length){ window._equipTextLoaded = false; return; } /* 空応答は再試行余地を残す */
+      companies.forEach(function(c){
+        var k = String(c.oin).replace(/\.0+$/,'');
+        var t = sc[k]; if(!t) return;
+        c.equipText = (typeof t === 'string') ? t : ((t && (t.equipText || t.text)) || '');
+      });
+      try{ if(typeof updateEquipCounts==='function') updateEquipCounts(); }catch(e){}
+      try{ if(typeof applyFilters==='function') applyFilters(); }catch(e){}
+      try{ if(typeof window._woRefreshIfOpen==='function') window._woRefreshIfOpen(); }catch(e){}
+      try{ if(typeof updateSelectorBar==='function') updateSelectorBar(); }catch(e){}
+    });
+}
 function loadEquipBulkSb(){
   if(!IS_PUBLIC_BUILD) return; if(window._equipBulkLoaded) return;
   if(typeof _sb==='undefined'||!_sb||typeof isUnlocked==='undefined'||!isUnlocked) return;
