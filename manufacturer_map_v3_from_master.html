@@ -5572,7 +5572,7 @@ function flyToJapan(){  map.flyToBounds([[26.0,127.5],[45.3,145.5]],{duration:.8
 // ── Supabase 認証 ─────────────────────────────────────────────────────────
 let isUnlocked=sessionStorage.getItem('mfr_map_v2_auth')==='1';
 let _sbUser=null;
-const PW='bupakan';const SK='mfr_map_v2_auth';
+const SK='mfr_map_v2_auth'; /* 2026-09-24: パスワードはHTMLに置かない。照合はSupabase側(demoアカウント)で行う */
 
 function _dismissPwScreen(){var s=document.getElementById('pw-screen');if(s){s.classList.add('unlocked');setTimeout(function(){if(s)s.style.display='none';},520);}}
 function applyUnlockState(){
@@ -5608,10 +5608,19 @@ var _otpEmail='';
 (function(){
   if(location.hash.startsWith('#pw=')){
     var _h=decodeURIComponent(location.hash.slice(4));
-    if(_h===PW){sessionStorage.setItem('mfr_map_v2_auth','1');isUnlocked=true;_demoSbLogin();history.replaceState(null,null,location.pathname+location.search);}
+    history.replaceState(null,null,location.pathname+location.search);
+    _demoSbLogin(_h).then(function(ok){if(ok){sessionStorage.setItem('mfr_map_v2_auth','1');isUnlocked=true;applyUnlockState();_dismissPwScreen();}});
   }
 })();
-function _demoSbLogin(){try{if(typeof _sb!=='undefined'&&_sb&&_sb.auth&&_sb.auth.signInWithPassword){_sb.auth.signInWithPassword({email:'demo@oasis-map.com',password:'bupakan'}).then(function(r){try{if(r&&r.data&&r.data.user){_sbUser=r.data.user;if(typeof activeCard!=='undefined'&&activeCard!=null&&typeof renderDrawer==='function'&&typeof companies!=='undefined'&&companies[activeCard])openDrawerByIndex&&openDrawerByIndex(activeCard);}}catch(_x){}}).catch(function(){});}}catch(_e){}}
+function _demoSbLogin(pw){
+  /* 入力値をdemoアカウントのパスワードとしてSupabaseで照合。成功でtrue */
+  try{
+    if(typeof _sb==='undefined'||!_sb||!_sb.auth||!_sb.auth.signInWithPassword||!pw) return Promise.resolve(false);
+    return _sb.auth.signInWithPassword({email:'demo@oasis-map.com',password:pw}).then(function(r){
+      if(r&&r.data&&r.data.user){_sbUser=r.data.user;return true;} return false;
+    }).catch(function(){return false;});
+  }catch(_e){return Promise.resolve(false);}
+}
 /* ===== BUGFIX 2026-07-30: equipText 解錠後ロード =====
    公開ビルドは init 時点で isUnlocked=false のため equip_text の fetch を握り潰しており、
    解錠後に取り直す経路が存在しなかった。結果 companies[].equipText が全社空のまま固定され、
@@ -5665,13 +5674,17 @@ function loadEquipBulkSb(){
 async function checkPw(){
   const v=(document.getElementById('pw-pw-input')||{}).value||'';
   const e=document.getElementById('pw-pw-error');
-  if(v===PW){
+  if(e)e.textContent='';
+  const ok=v?await _demoSbLogin(v):false;
+  if(ok){
     sessionStorage.setItem('mfr_map_v2_auth','1');
     isUnlocked=true;
-    _demoSbLogin();
     applyUnlockState();
-    _dismissPwScreen();
-    setTimeout(function(){try{startTutorial(false);}catch(e){}},1100);
+    var _ps=document.getElementById('pw-screen');
+    if(!(_ps&&_ps.classList.contains('unlocked'))){ /* onAuthStateChange側で処理済みなら重複させない */
+      _dismissPwScreen();
+      setTimeout(function(){try{startTutorial(false);}catch(e){}},1100);
+    }
   } else {
     const i=document.getElementById('pw-pw-input');
     if(e)e.textContent='パスワードが違います';
@@ -5743,17 +5756,15 @@ document.addEventListener('keydown',function(e){
 // ================================================================
 // CSVエクスポート（パスワード保護）
 // ================================================================
-const CSV_PW = 'bupakan';  // 企業データダウンロード用パスワード（初回ログインと同じ）
+/* 2026-09-24: CSVはログイン済み利用者のみ。パスワードの画面側照合は廃止 */
 function exportCSV() {
   if (!companies || companies.length === 0) {
     alert('エクスポートするデータがありません');
     return;
   }
-  // パスワード認証
-  const pw = prompt('🔒 企業データダウンロード\n\nパスワードを入力してください:');
-  if (pw === null) return;  // キャンセル
-  if (pw !== CSV_PW) {
-    alert('❌ パスワードが違います。\nダウンロードを中止しました。');
+  // ログイン確認
+  if (!isUnlocked) {
+    alert('企業データのダウンロードにはログインが必要です。');
     return;
   }
   
@@ -7387,7 +7398,7 @@ var EQUIP_DEV_BY_OIN = {};  // 機種別構造化設備データ（equip_devices
 fetch('./manufacturers_slim.json')
   .then(r => { if(!r.ok) throw new Error('manufacturers_slim.json HTTP ' + r.status); return r.json(); })
   .then(data => {
-    companies = data;
+    companies = data.filter(c => !c.dup_of); /* dup_of=二重採番の従OIN(r52確定)を地図から抑制。データは温存 */
     companies.forEach(c => { c._dist = Math.round(haversineKm(KOMAKI.lat, KOMAKI.lng, c.lat, c.lng)); });
     // 設備サイドカー2種を上書きマージ（小ファイル再アップだけで反映＝HTML再生成不要）。
     // equip_text_by_oin.json=表示用要約 / equip_devices_by_oin.json=機種別構造化(正本)。失敗しても非致命。
@@ -8674,7 +8685,7 @@ window._woRefreshIfOpen = function(){
   <div style="font-size:10px;margin-top:4px;color:#aaa">60秒ごとに自動更新 | P2P地震情報</div>
 </div>
 
-<!-- ===== 匿名PV/UVビーコン (Supabase pageviews) ／ </body> 直前に挿入 ===== -->
+<!-- ===== 匿名PV/UVビーコン v2(流入元付き) (Supabase pageviews) ／ </body> 直前に挿入 ===== -->
 <script>
 (function () {
   try {
@@ -8688,6 +8699,22 @@ window._woRefreshIfOpen = function(){
         : (Date.now().toString(36) + Math.random().toString(36).slice(2));
       localStorage.setItem("vid", vid);
     }
+    // 流入元: 参照元はホスト名のみ保存（URL全体・クエリは保存しない）。同一サイト内遷移はnull
+    var refHost = null;
+    try {
+      if (document.referrer) {
+        var h = new URL(document.referrer).hostname;
+        if (h && h !== location.hostname) refHost = h.slice(0, 200);
+      }
+    } catch (e) {}
+    var qs = new URLSearchParams(location.search);
+    function utm(k) { var v = qs.get(k); return v ? v.slice(0, 100) : null; }
+    // 入口判定: タブセッション内の最初のPVのみtrue
+    var isEntry = true;
+    try {
+      isEntry = !sessionStorage.getItem("pv_s");
+      sessionStorage.setItem("pv_s", "1");
+    } catch (e) {}
     fetch(SUPABASE_URL + "/rest/v1/pageviews", {
       method: "POST",
       headers: {
@@ -8696,7 +8723,15 @@ window._woRefreshIfOpen = function(){
         "Content-Type": "application/json",
         "Prefer": "return=minimal"
       },
-      body: JSON.stringify({ path: location.pathname, visitor_id: vid }),
+      body: JSON.stringify({
+        path: location.pathname,
+        visitor_id: vid,
+        ref_host: refHost,
+        utm_source: utm("utm_source"),
+        utm_medium: utm("utm_medium"),
+        utm_campaign: utm("utm_campaign"),
+        is_entry: isEntry
+      }),
       keepalive: true
     }).catch(function () {});
   } catch (e) { /* 計測失敗はサイト動作に影響させない */ }
