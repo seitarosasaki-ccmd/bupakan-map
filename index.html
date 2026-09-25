@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>メーカーマップ</title>
+<meta name="description" content="JIS Q 9100 認証を保有する国内航空宇宙サプライヤーを地図上で探索できるメーカーマップです。">
+<link rel="canonical" href="https://oasis-map.com/manufacturer_map_v3_from_master.html">
+<meta http-equiv="refresh" content="3; url=/manufacturer_map_v3_from_master.html">
+<style>body{margin:0;font-family:system-ui,-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;background:#0f172a;color:#e2e8f0;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:16px;box-sizing:border-box}a{color:#fbbf24}</style>
+</head>
+<body>
+<p>メーカーマップへ移動しています。自動で切り替わらない場合は<a href="/manufacturer_map_v3_from_master.html">こちら</a>をご利用ください。</p>
+<!-- ===== 匿名PV/UVビーコン v2(流入元付き) (Supabase pageviews) ／ </body> 直前に挿入 ===== -->
+<script>
+(function () {
+  try {
+    var SUPABASE_URL = "https://rvmdfzjnzaxtuzkfsids.supabase.co";
+    var SUPABASE_KEY = "sb_publishable_OCeAoJsRPtP-OoDn4TIRjQ_jgD8Pn-7"; // publishable(=anon相当)。insert専用RLSなので公開可
+    // UV用の永続ランダムID（Cookie不使用・PIIなし）
+    var vid = localStorage.getItem("vid");
+    if (!vid) {
+      vid = (window.crypto && crypto.randomUUID)
+        ? crypto.randomUUID()
+        : (Date.now().toString(36) + Math.random().toString(36).slice(2));
+      localStorage.setItem("vid", vid);
+    }
+    // 流入元: 参照元はホスト名のみ保存（URL全体・クエリは保存しない）。同一サイト内遷移はnull
+    var refHost = null;
+    try {
+      if (document.referrer) {
+        var h = new URL(document.referrer).hostname;
+        if (h && h !== location.hostname) refHost = h.slice(0, 200);
+      }
+    } catch (e) {}
+    var qs = new URLSearchParams(location.search);
+    function utm(k) { var v = qs.get(k); return v ? v.slice(0, 100) : null; }
+    // 入口判定: タブセッション内の最初のPVのみtrue
+    var isEntry = true;
+    try {
+      isEntry = !sessionStorage.getItem("pv_s");
+      sessionStorage.setItem("pv_s", "1");
+    } catch (e) {}
+    fetch(SUPABASE_URL + "/rest/v1/pageviews", {
+      method: "POST",
+      headers: {
+        "apikey": SUPABASE_KEY,
+        "Authorization": "Bearer " + SUPABASE_KEY,
+        "Content-Type": "application/json",
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify({
+        path: location.pathname,
+        visitor_id: vid,
+        ref_host: refHost,
+        utm_source: utm("utm_source"),
+        utm_medium: utm("utm_medium"),
+        utm_campaign: utm("utm_campaign"),
+        is_entry: isEntry
+      }),
+      keepalive: true
+    }).catch(function () {});
+  } catch (e) { /* 計測失敗はサイト動作に影響させない */ }
+})();
+</script>
+<!-- ===== /匿名PV/UVビーコン ===== -->
+
+<script>
+(function(){ try{ location.replace('/manufacturer_map_v3_from_master.html' + location.search + location.hash); }catch(e){} })();
+</script>
+</body>
+</html>

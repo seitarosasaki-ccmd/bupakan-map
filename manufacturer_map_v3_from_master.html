@@ -5631,8 +5631,21 @@ function loadEquipTextSc(){
   if(window._equipTextLoaded) return;
   if(typeof isUnlocked==='undefined' || !isUnlocked) return;
   if(typeof companies==='undefined' || !companies || !companies.length) return; /* companies未着なら次の呼出に委ねる */
+  if(typeof _sb==='undefined' || !_sb) return;
   window._equipTextLoaded = true;
-  fetch('./equip_text_by_mid.json').then(function(r){ return r.ok ? r.json() : {}; }).catch(function(){ return {}; })
+  /* 2026-09-24: 静的ファイル(equip_text_by_mid.json)の公開を廃止し、Supabase認証の奥(companies_detail.equip_text, midキー)から取得する */
+  (async function(){
+    var sc = {}, from = 0, page = 1000;
+    try{
+      while(true){
+        var r = await _sb.from('companies_detail').select('mid,equip_text').not('equip_text','is',null).range(from, from+page-1);
+        if(r.error || !r.data || !r.data.length) break;
+        r.data.forEach(function(d){ if(d.mid && d.equip_text) sc[d.mid] = d.equip_text; });
+        if(r.data.length < page) break; from += page;
+      }
+    }catch(e){}
+    return sc;
+  })()
     .then(function(sc){
       if(!sc || !Object.keys(sc).length){ window._equipTextLoaded = false; return; } /* 空応答は再試行余地を残す */
       companies.forEach(function(c){
